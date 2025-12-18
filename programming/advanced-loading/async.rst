@@ -16,22 +16,21 @@ application freezes for longer periods of time.
    The following example demonstrates the naive way to load the scene models:
 
    .. code-block:: python
+      base = ShowBase()
 
-      class Game(ShowBase):
-          def __init__(self):
-              ShowBase.__init__(self)
+      def load_scene(self):
+         text = OnscreenText("Loading…")
 
-              self.load_scene()
+         terrain_model = loader.load_model("terrain")
+         terrain_model.reparent_to(render)
+         city_model = loader.load_model("city")
+         city_model.reparent_to(render)
 
-          def load_scene(self):
-              text = OnscreenText("Loading…")
+         text.destroy()
 
-              self.terrain_model = loader.load_model("terrain")
-              self.terrain_model.reparent_to(render)
-              self.city_model = loader.load_model("city")
-              self.city_model.reparent_to(render)
+      load_scene()
+      base.run()
 
-              text.destroy()
 
    You may notice that the "Loading" screen will never appear, because Panda3D
    never gets a chance to render it! We could force Panda3D to render a frame
@@ -71,38 +70,40 @@ ways of doing so.
    The following example shows how to use this feature.
 
    .. code-block:: python
+      base = ShowBase()
 
-      class Game(ShowBase):
-          def __init__(self):
-              ShowBase.__init__(self)
 
-              self.accept('escape', self.quit)
-
+      class AsyncLoader:
+         def __init__(self):
               self.load_request = None
               self.start_loading()
 
-          def start_loading(self):
-              self.loading_text = OnscreenText("Loading…")
+         def start_loading(self):
+            self.loading_text = OnscreenText("Loading…")
+            self.load_request = loader.load_model(["terrain", "city"], callback=self.finish_loading)
 
-              self.load_request = loader.load_model(["terrain", "city"], callback=self.finish_loading)
+         def finish_loading(models):
+            # Get rid of temporary objects
+            self.load_request = None
+            self.loading_text.destroy()
+            del loading_text
 
-          def finish_loading(self, models):
-              # Get rid of temporary objects
-              self.load_request = None
-              self.loading_text.destroy()
-              del self.loading_text
+            # Process the models that finished loading
+            self.terrain_model, self.city_model = models
 
-              # Process the models that finished loading
-              self.terrain_model, self.city_model = models
+            self.terrain_model.reparent_to(base.render)
+            self.city_model.reparent_to(base.render)
 
-              self.terrain_model.reparent_to(render)
-              self.city_model.reparent_to(render)
+         def quit(self):
+            if self.load_request:
+               self.load_request.cancel()
+            sys.exit()
 
-          def quit(self):
-              if self.load_request:
-                  self.load_request.cancel()
 
-              sys.exit()
+      async_loader = AsyncLoader()
+      base.accept('escape', async_loader.quit)
+      base.run()
+
 
 Loading in a coroutine
 ----------------------
@@ -138,30 +139,25 @@ Loading in a coroutine
    more straightforward code:
 
    .. code-block:: python
+      base = ShowBase()
 
-      class Game(ShowBase):
-          def __init__(self):
-              ShowBase.__init__(self)
+      async def load_scene():
+         text = OnscreenText("Loading…")
 
-              self.accept('escape', self.quit)
+         # Load the models in the background, each time suspending this
+         # method until they are done
+         terrain_model = await loader.load_model("terrain", blocking=False)
+         city_model = await loader.load_model("city", blocking=False)
 
-              self.task_mgr.add(self.load_scene())
+         terrain_model.reparent_to(base.render)
+         city_model.reparent_to(base.render)
 
-          async def load_scene(self):
-              text = OnscreenText("Loading…")
+         text.destroy()
 
-              # Load the models in the background, each time suspending this
-              # method until they are done
-              self.terrain_model = await loader.load_model("terrain", blocking=False)
-              self.city_model = await loader.load_model("city", blocking=False)
+      base.accept("escape", sys.quit)
+      base.task_mgr.add(load_scene())
+      base.run()
 
-              self.terrain_model.reparent_to(render)
-              self.city_model.reparent_to(render)
-
-              text.destroy()
-
-          def quit(self):
-              sys.exit()
 
 .. only:: cpp
 
