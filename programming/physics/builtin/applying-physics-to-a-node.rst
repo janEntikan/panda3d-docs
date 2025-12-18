@@ -15,20 +15,20 @@ necessary to transform from the ActorNode's coordinates to the coordinates of
 the force's source.
 
 To add a force to a physical object, add the force using either the
-addLinearForce method (for translational forces) or the addAngularForce method
+add_linear_force method (for translational forces) or the add_angular_force method
 (for rotational forces):
 
 .. code-block:: python
 
-   actorNode.addLinearForce(pusherForce)
-   actorNode.addAngularForce(spinnerForce)
+   actor_node.add_linear_force(pusher_force)
+   actor_node.add_angular_force(spinner_force)
 
 Conversely, forces can be removed using the corresponding remove calls:
 
 .. code-block:: python
 
-   actorNode.removeLinearForce(pusherForce)
-   actorNode.removeAngularForce(spinnerForce)
+   actor_node.remove_linear_force(pusher_force)
+   actor_node.remove_angular_force(spinner_force)
 
 By default, linear forces don't factor in the mass of the object upon which
 they act (meaning they are more like accelerations). To factor in the mass of
@@ -37,7 +37,7 @@ mass-dependent calculations:
 
 .. code-block:: python
 
-   pusherForce.setMassDependent(1)
+   pusher_force.set_mass_dependent(1)
 
 Example 1: Gravity
 ------------------
@@ -46,16 +46,16 @@ To apply a gravitational pull to the "jetpack guy" from the previous example:
 
 .. code-block:: python
 
-   gravityFN=ForceNode('world-forces')
-   gravityFNP=render.attachNewNode(gravityFN)
-   gravityForce=LinearVectorForce(0,0,-9.81) #gravity acceleration
-   gravityFN.addForce(gravityForce)
+   gravity_fn=ForceNode('world-forces')
+   gravity_fnp=render.attach_new_node(gravity_fn)
+   gravity_force=LinearVectorForce(0,0,-9.81) #gravity acceleration
+   gravity_fn.add_force(gravity_force)
 
-   base.physicsMgr.addLinearForce(gravityForce)
+   base.physics_mgr.add_linear_force(gravity_force)
 
 Since the gravitational force is relative to the entire world (and shouldn't
 change if, for example, the jetpack guy tumbles head-over-heels), the
-gravityForce vector was added to a ForceNode attached to render. So regardless
+gravity_force vector was added to a ForceNode attached to render. So regardless
 of the orientation of the NodePath controlled by an, the force will always pull
 towards the bottom of the scene.
 
@@ -74,18 +74,18 @@ ForceNode alters the effect:
 .. code-block:: python
 
    thruster=NodePath("thruster") # make a thruster for the jetpack
-   thruster.reparentTo(jetpackGuy)
-   thruster.setPos(0,-2,3)
+   thruster.reparent_to(jetpack_guy)
+   thruster.set_pos(0,-2,3)
 
-   thrusterFN=ForceNode('jetpackGuy-thruster') # Attach a thruster force
-   thrusterFNP=thruster.attachNewNode(thrusterFN)
-   thrusterForce=LinearVectorForce(0,0,4000)
-   thrusterForce.setMassDependent(1)
-   thrusterFN.addForce(thrusterForce)
+   thruster_fn=ForceNode('jetpack_guy-thruster') # Attach a thruster force
+   thruster_fnp=thruster.attach_new_node(thruster_fn)
+   thruster_force=LinearVectorForce(0,0,4000)
+   thruster_force.set_mass_dependent(1)
+   thruster_fn.add_force(thruster_force)
 
-   an.getPhysical(0).addLinearForce(thrusterForce)
+   an.get_physical(0).add_linear_force(thruster_force)
 
-   thruster.setP(-45) # bend the thruster nozzle out at 45 degrees
+   thruster.set_p(-45) # bend the thruster nozzle out at 45 degrees
 
 When this force is applied to the jetpack guy, it will push upwards and
 forwards. If the thruster's pitch and roll were controlled (say, by a
@@ -94,5 +94,5 @@ and roll values; the ForceNode would inherit the orientation of the thruster
 and automatically change the direction it pushes.
 
 The effect that this thruster force has upon the jetpack guy should be
-dependent upon the mass of the system, so the setMassDependent call is used to
+dependent upon the mass of the system, so the set_mass_dependent call is used to
 factor mass into the acceleration analysis.

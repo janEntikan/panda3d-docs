@@ -24,22 +24,22 @@ DirectScrollBar
    and relief control the look of the trough. You can control the look of the
    thumb by prefixing each of these parameters with the prefix "thumb\_", e.g.
    ``thumb_frameSize``; similarly, you can control the look of the two scroll
-   buttons by prefixing these with "incButton\_" and "decButton\_". You can
+   buttons by prefixing these with "inc_button\_" and "dec_button\_". You can
    retrieve or set the current position of the thumb with
-   ``myScrollBar['value']``.
+   ``my_scroll_bar['value']``.
 
    =========================================================================== ============================================================================================================================================================================================ =================================================
    Keyword                                                                     Definition                                                                                                                                                                                   Value
    =========================================================================== ============================================================================================================================================================================================ =================================================
    value                                                                       Initial position of the thumb                                                                                                                                                                Default is 0
    range                                                                       The (min, max) range of the thumb                                                                                                                                                            Default is (0, 1)
-   pageSize                                                                    The amount to jump the thumb when the user clicks left or right, (up or down if the scrollbar is vertical), of the thumb; this also controls the width of the thumb when resizeThumb is True Default is 0.1
-   scrollSize                                                                  The amount to move the thumb when the user clicks once on either scroll button                                                                                                               Default is 0.01
+   page_size                                                                    The amount to jump the thumb when the user clicks left or right, (up or down if the scrollbar is vertical), of the thumb; this also controls the width of the thumb when resize_thumb is True Default is 0.1
+   scroll_size                                                                  The amount to move the thumb when the user clicks once on either scroll button                                                                                                               Default is 0.01
    orientation                                                                 The orientation of the scroll bar                                                                                                                                                            DGG.HORIZONTAL or DGG.VERTICAL
-   manageButtons                                                               Whether to automatically adjust the buttons when the scroll bar’s frame is changed                                                                                                           True or False
-   resizeThumb                                                                 Whether to adjust the width of the thumb to reflect the ratio of pageSize to the overall range; requires manageButtons to be True as well                                                    True or False
+   manage_buttons                                                               Whether to automatically adjust the buttons when the scroll bar’s frame is changed                                                                                                           True or False
+   resize_thumb                                                                 Whether to adjust the width of the thumb to reflect the ratio of page_size to the overall range; requires manage_buttons to be True as well                                                    True or False
    command                                                                     Function called when the position of the thumb changes (takes no arguments)                                                                                                                  Function
-   extraArgs                                                                   Extra arguments to the function specified in command                                                                                                                                         [Extra Arguments]
+   extra_args                                                                   Extra arguments to the function specified in command                                                                                                                                         [Extra Arguments]
    thumb_geom, thumb_relief, thumb_text, thumb_frameSize, etc.                 Parameters to control the look of the thumb                                                                                                                                                  Any parameters appropriate to :ref:`directbutton`
    incButton_geom, incButton_relief, incButton_text, incButton_frameSize, etc. Parameters to control the look of the lower or right scroll button                                                                                                                           Any parameters appropriate to :ref:`directbutton`
    decButton_geom, decButton_relief, decButton_text, decButton_frameSize, etc. Parameters to control the look of the upper or left scroll button                                                                                                                            Any parameters appropriate to :ref:`directbutton`
@@ -51,8 +51,8 @@ DirectScrollBar
 
       from direct.gui.DirectGui import DirectScrollBar
 
-      mybar = DirectScrollBar(range=(0, 100), value=50, pageSize=3, orientation= DGG.VERTICAL)
-      mybar.setPos(-1, 0, -0.5)
+      mybar = DirectScrollBar(range=(0, 100), value=50, page_size=3, orientation= DGG.VERTICAL)
+      mybar.set_pos(-1, 0, -0.5)
 
    This will give you a scrollbar at the lower left side of the screen. If you
    want to parent the scrollbar to a determined frame, you add the keyword
@@ -60,5 +60,5 @@ DirectScrollBar
 
    .. code-block:: python
 
-      mybar = DirectScrollBar(parent=myframe, range=(0,100), value=50, pageSize=3, orientation= DGG.VERTICAL)
-      mybar.setPos(-1, 0, -0.5)
+      mybar = DirectScrollBar(parent=myframe, range=(0,100), value=50, page_size=3, orientation= DGG.VERTICAL)
+      mybar.set_pos(-1, 0, -0.5)

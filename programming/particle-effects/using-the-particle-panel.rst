@@ -186,7 +186,7 @@ as being smaller than a pixel.
 
 4.3 – 4.4) Initial sparkle radius and final sparkle radius
 
-4.5) Whether or not sparkle is always of radius birthRadius
+4.5) Whether or not sparkle is always of radius birth_radius
 
 5. SpriteParticleRender
 
@@ -225,7 +225,7 @@ appropriately.
 then the the values between Initial X/Y and Final X/Y will be interpolated
 over particle's life.
 
-5.2.7) If animAngle is false: counter-clockwise Z rotation of all sprites
+5.2.7) If anim_angle is false: counter-clockwise Z rotation of all sprites
 
 |Ppanel14.png|
 
@@ -248,7 +248,7 @@ for falling particles used in a snow effect.
 
 Note: There isn't an option in the Particle Panel to set what the individual
 particles should be relative to. If you want to set that explicitly, use the
-``renderParent`` argument in the ``start()`` call in your code. You will find
+``render_parent`` argument in the ``start()`` call in your code. You will find
 this useful for particle effects on moving objects, or for example rain and
 snow.
 

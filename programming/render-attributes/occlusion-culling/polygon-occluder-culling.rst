@@ -22,8 +22,8 @@ as this defines which way the normal of the polygon is facing.
 
       occluder = OccluderNode('my occluder', Point3(0, 0, 0), Point3(1, 0, 0),
                                              Point3(1, 1, 0), Point3(0, 1, 0))
-      occluder_nodepath = render.attachNewNode(occluder)
-      render.setOccluder(occluder_nodepath)
+      occluder_nodepath = render.attach_new_node(occluder)
+      render.set_occluder(occluder_nodepath)
 
 .. only:: cpp
 

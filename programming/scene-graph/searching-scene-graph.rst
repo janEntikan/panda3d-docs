@@ -14,13 +14,13 @@ First, and most useful, is the :meth:`~.NodePath.ls()` command:
 
    .. code-block:: python
 
-      myNodePath.ls()
+      my_node_path.ls()
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      myNodePath.ls();
+      my_node_path.ls();
 
 This simply lists all of the children of the indicated NodePath, along with all
 of their children, and so on until the entire subgraph is printed out. It also
@@ -96,15 +96,15 @@ NodePaths found, shortest first.
 
    .. code-block:: python
 
-      myNodePath.find("<Path>")
-      myNodePath.findAllMatches("<Path>")
+      my_node_path.find("<Path>")
+      my_node_path.find_all_matches("<Path>")
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      myNodePath.find("<Path>");
-      myNodePath.find_all_matches("<Path>");
+      my_node_path.find("<Path>");
+      my_node_path.find_all_matches("<Path>");
 
 Some examples:
 
@@ -112,13 +112,13 @@ Some examples:
 
    .. code-block:: python
 
-      myNodePath.find("house/door")
+      my_node_path.find("house/door")
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      myNodePath.find("house/door");
+      my_node_path.find("house/door");
 
 This will look for a node named "door", which is a child of a node named
 "house", which is a child of the starting path.
@@ -127,13 +127,13 @@ This will look for a node named "door", which is a child of a node named
 
    .. code-block:: python
 
-      myNodePath.find("**/red*")
+      my_node_path.find("**/red*")
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      myNodePath.find("**/red*");
+      my_node_path.find("**/red*");
 
 This will look for any node anywhere in the tree (below the starting path) with
 a name that begins with "red".
@@ -142,16 +142,16 @@ a name that begins with "red".
 
    .. code-block:: python
 
-      shipNP.findAllMatches("**/=type=weaponMount")
+      ship_np.find_all_matches("**/=type=weapon_mount")
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      shipNP.findAllMatches("**/=type=weaponMount");
+      ship_np.find_all_matches("**/=type=weapon_mount");
 
-This will search shipNP recursively using tag/value. Tag name is "type" and
-tag value is "weaponMount". All matches found will be returned.
+This will search ship_np recursively using tag/value. Tag name is "type" and
+tag value is "weapon_mount". All matches found will be returned.
 
 In addition there are also the methods :meth:`~.NodePath.get_parent()` and
 :meth:`~.NodePath.get_children()`. :meth:`~.NodePath.get_parent()` returns the
@@ -164,14 +164,14 @@ children of the current node as a :class:`~.NodePathCollection`.
 
    .. code-block:: python
 
-      for child in myNodePath.getChildren():
+      for child in my_node_path.get_children():
           print(child)
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      NodePathCollection children = myNodePath.get_children();
+      NodePathCollection children = my_node_path.get_children();
       for (int i = 0; i < children.size(); ++i) {
           std::cout << children[i] << "\n";
       }

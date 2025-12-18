@@ -44,16 +44,16 @@ Frames are numbered beginning at 0.
 
 Posing an actor to a frame doesn't automatically specify the start frame of the
 next starting animation. Instead, if you don't want to start at the first frame,
-you can specify these using the optional parameters ``fromFrame`` and
-``toFrame`` to the methods :py:meth:`~direct.actor.Actor.Actor.play()` and
+you can specify these using the optional parameters ``from_frame`` and
+``to_frame`` to the methods :py:meth:`~direct.actor.Actor.Actor.play()` and
 :py:meth:`~direct.actor.Actor.Actor.loop()`:
 
 .. only:: python
 
    .. code-block:: python
 
-      actor.play('Animation Name', fromFrame=10)
-      actor.loop('Animation Name', fromFrame=24, toFrame=36)
+      actor.play('Animation Name', from_frame=10)
+      actor.loop('Animation Name', from_frame=24, to_frame=36)
 
 However, the loop method does have another optional parameter called
 ``restart``, which is 1 by default, meaning the animation will restart from the
@@ -65,7 +65,7 @@ the current frame:
    .. code-block:: python
 
       actor.pose('Animation Name', 30)
-      actor.loop('Animation Name', restart=0, fromFrame=24, toFrame=36)
+      actor.loop('Animation Name', restart=0, from_frame=24, to_frame=36)
 
 You can get more information about an animation with these functions:
 
@@ -73,9 +73,9 @@ You can get more information about an animation with these functions:
 
    .. code-block:: python
 
-      print(actor.getNumFrames('Animation Name')) # returns the total number of frames in the animation
-      print(actor.getCurrentAnim()) # returns a string containing the name of the current playing animation
-      print(actor.getCurrentFrame('Animation Name')) # returns the current frame of the animation.
+      print(actor.get_num_frames('Animation Name')) # returns the total number of frames in the animation
+      print(actor.get_current_anim()) # returns a string containing the name of the current playing animation
+      print(actor.get_current_frame('Animation Name')) # returns the current frame of the animation.
 
 AnimControl
 -----------
@@ -88,21 +88,21 @@ control functions over a certain animation in a separate class.
 
    .. code-block:: python
 
-      myAnimControl = actor.getAnimControl('Animation Name') #get the AnimControl
+      my_anim_control = actor.get_anim_control('Animation Name') #get the AnimControl
 
-      myAnimControl.isPlaying() #returns a boolean whether the animation is playing or not
-      myAnimControl.getFrame() #returns the current frame number
-      myAnimControl #returns the speed of the animation, in frames per second
-      myAnimControl.getFullFframe() #returns a floating-point frame number exceeding the framecount. Not recommended.
-      myAnimControl.getFullFrame() #returns an integer frame number exceeding the framecount. Not recommended.
-      myAnimControl.getNextFrame() #returns the number of the next frame on the queue.
-      myAnimControl.getNumFrames() #returns the total number of frames
-      myAnimControl.getPlayRate() #returns the playrate. explained further below
-      myAnimControl.loop() #starts playing the animation in a loop
-      myAnimControl.play() #starts playing the animation
-      myAnimControl.pose(frame) #poses at frame frame
-      myAnimControl.setPlayRate(rate) #sets the playrate. explained further below
-      myAnimControl.stop() #stops the animation
+      my_anim_control.is_playing() #returns a boolean whether the animation is playing or not
+      my_anim_control.get_frame() #returns the current frame number
+      my_anim_control #returns the speed of the animation, in frames per second
+      my_anim_control.get_full_fframe() #returns a floating-point frame number exceeding the framecount. Not recommended.
+      my_anim_control.get_full_frame() #returns an integer frame number exceeding the framecount. Not recommended.
+      my_anim_control.get_next_frame() #returns the number of the next frame on the queue.
+      my_anim_control.get_num_frames() #returns the total number of frames
+      my_anim_control.get_play_rate() #returns the playrate. explained further below
+      my_anim_control.loop() #starts playing the animation in a loop
+      my_anim_control.play() #starts playing the animation
+      my_anim_control.pose(frame) #poses at frame frame
+      my_anim_control.set_play_rate(rate) #sets the playrate. explained further below
+      my_anim_control.stop() #stops the animation
 
 Play rate
 ---------
@@ -118,7 +118,7 @@ play an animation backwards by specifying a negative play rate, for instance
 
    .. code-block:: python
 
-      actor.setPlayRate(newPlayRate, 'Animation Name')
+      actor.set_play_rate(new_play_rate, 'Animation Name')
 
 Blending
 --------
@@ -133,21 +133,21 @@ entire body. If you want to play one animation on, say, the left arm, while a
 different animation is playing on the legs, then you need to use half-body
 animation, which is different from blending.
 
-To use blending, you must first call ``enableBlend()`` to activate the blending
+To use blending, you must first call ``enable_blend()`` to activate the blending
 mode and indicate your intention to play multiple animations at once. While the
 actor is in blend mode, playing a new animation does not automatically stop the
 previously playing animation. Also, while in blend mode, you must explicitly
 specify how much each animation contributes to the overall effect, with the
-``setControlEffect()`` method (the default for each animation is 0.0, or no
+``set_control_effect()`` method (the default for each animation is 0.0, or no
 contribution). For example:
 
 .. only:: python
 
    .. code-block:: python
 
-      actor.enableBlend()
-      actor.setControlEffect('animation1', 0.2)
-      actor.setControlEffect('animation2', 0.8)
+      actor.enable_blend()
+      actor.set_control_effect('animation1', 0.2)
+      actor.set_control_effect('animation2', 0.8)
       actor.loop('animation1')
       actor.loop('animation2')
 
@@ -174,13 +174,13 @@ in blend mode. When not in blend mode, actor.stop() will always stop whatever
 animation is currently playing, regardless of the animation name you specify.
 
 When you are done using blending and want to return to the normal mode of only
-playing one animation at a time, call ``disableBlend()``:
+playing one animation at a time, call ``disable_blend()``:
 
 .. only:: python
 
    .. code-block:: python
 
-      actor.disableBlend()
+      actor.disable_blend()
 
 Half-body animation
 -------------------
@@ -188,22 +188,22 @@ Half-body animation
 If you want different parts of your actor to play separate animations without
 blending them together you have to create subparts. Each of these can then play
 one animation without influencing the others.
-Call :py:meth:`actor.makeSubpart() <direct.actor.Actor.Actor.makeSubpart>` with
+Call :py:meth:`actor.make_subpart() <direct.actor.Actor.Actor.make_subpart>` with
 the desired name, a list of joints to be included and a list of joints to be
 excluded in the subpart. Inclusion / exclusion will descend attached joints.
 Exclude always overrides include.
 
 .. code-block:: python
 
-   actor.makeSubpart("legs", ["Left Thigh", "Right Thigh"])
-   actor.makeSubpart("torso", ["Head"], ["Left Thigh", "Right Thigh"])
+   actor.make_subpart("legs", ["Left Thigh", "Right Thigh"])
+   actor.make_subpart("torso", ["Head"], ["Left Thigh", "Right Thigh"])
 
 If you want to play an animation on a subpart make sure to pass the name.
 
 .. code-block:: python
 
-   actor.loop("walk", partName="legs")
-   actor.loop("reload", partName="torso")
+   actor.loop("walk", part_name="legs")
+   actor.loop("reload", part_name="torso")
 
 Interpolation
 -------------
@@ -219,8 +219,8 @@ add the following lines to your code
 
    .. code-block:: python
 
-      from panda3d.core import loadPrcFileData
-      loadPrcFileData("", "interpolate-frames 1")
+      from panda3d.core import load_prc_file_data
+      load_prc_file_data("", "interpolate-frames 1")
 
 From the FAQ:
 

@@ -21,15 +21,15 @@ application freezes for longer periods of time.
           def __init__(self):
               ShowBase.__init__(self)
 
-              self.loadScene()
+              self.load_scene()
 
-          def loadScene(self):
+          def load_scene(self):
               text = OnscreenText("Loading…")
 
-              self.terrainModel = loader.loadModel("terrain")
-              self.terrainModel.reparentTo(render)
-              self.cityModel = loader.loadModel("city")
-              self.cityModel.reparentTo(render)
+              self.terrain_model = loader.load_model("terrain")
+              self.terrain_model.reparent_to(render)
+              self.city_model = loader.load_model("city")
+              self.city_model.reparent_to(render)
 
               text.destroy()
 
@@ -52,10 +52,10 @@ ways of doing so.
    ---------------------
 
    One of the ways to achieve asynchronous loading is with the callback argument
-   to :py:meth:`loader.loadModel() <direct.showbase.Loader.Loader.loadModel>`.
+   to :py:meth:`loader.load_model() <direct.showbase.Loader.Loader.load_model>`.
    If callback is not None, then the model load will be performed
    asynchronously.
-   In this case, :py:meth:`~direct.showbase.Loader.Loader.loadModel()` will
+   In this case, :py:meth:`~direct.showbase.Loader.Loader.load_model()` will
    initiate a background load and return immediately. The return value will be
    an object that you may call ``.cancel()`` on to cancel the asynchronous
    request. At some later point, when the requested model(s) have finished
@@ -78,29 +78,29 @@ ways of doing so.
 
               self.accept('escape', self.quit)
 
-              self.loadRequest = None
-              self.startLoading()
+              self.load_request = None
+              self.start_loading()
 
-          def startLoading(self):
-              self.loadingText = OnscreenText("Loading…")
+          def start_loading(self):
+              self.loading_text = OnscreenText("Loading…")
 
-              self.loadRequest = loader.loadModel(["terrain", "city"], callback=self.finishLoading)
+              self.load_request = loader.load_model(["terrain", "city"], callback=self.finish_loading)
 
-          def finishLoading(self, models):
+          def finish_loading(self, models):
               # Get rid of temporary objects
-              self.loadRequest = None
-              self.loadingText.destroy()
-              del self.loadingText
+              self.load_request = None
+              self.loading_text.destroy()
+              del self.loading_text
 
               # Process the models that finished loading
-              self.terrainModel, self.cityModel = models
+              self.terrain_model, self.city_model = models
 
-              self.terrainModel.reparentTo(render)
-              self.cityModel.reparentTo(render)
+              self.terrain_model.reparent_to(render)
+              self.city_model.reparent_to(render)
 
           def quit(self):
-              if self.loadRequest:
-                  self.loadRequest.cancel()
+              if self.load_request:
+                  self.load_request.cancel()
 
               sys.exit()
 
@@ -145,18 +145,18 @@ Loading in a coroutine
 
               self.accept('escape', self.quit)
 
-              self.taskMgr.add(self.loadScene())
+              self.task_mgr.add(self.load_scene())
 
-          async def loadScene(self):
+          async def load_scene(self):
               text = OnscreenText("Loading…")
 
               # Load the models in the background, each time suspending this
               # method until they are done
-              self.terrainModel = await loader.loadModel("terrain", blocking=False)
-              self.cityModel = await loader.loadModel("city", blocking=False)
+              self.terrain_model = await loader.load_model("terrain", blocking=False)
+              self.city_model = await loader.load_model("city", blocking=False)
 
-              self.terrainModel.reparentTo(render)
-              self.cityModel.reparentTo(render)
+              self.terrain_model.reparent_to(render)
+              self.city_model.reparent_to(render)
 
               text.destroy()
 

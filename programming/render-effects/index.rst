@@ -59,13 +59,13 @@ objects, choose the appropriate place in the scene graph.
 
    .. code-block:: python
 
-      nodePath.node().setEffect(<Render Effect>)
+      node_path.node().set_effect(<Render Effect>)
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      nodePath.node()->set_effect(<Render Effect>);
+      node_path.node()->set_effect(<Render Effect>);
 
 .. toctree::
    :maxdepth: 2

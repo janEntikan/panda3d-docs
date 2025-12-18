@@ -42,7 +42,7 @@ If you want to prepare to read assets from a Multifile directly, you can
       from panda3d.core import VirtualFileSystem
       from panda3d.core import Multifile
       from panda3d.core import Filename
-      vfs = VirtualFileSystem.getGlobalPtr()
+      vfs = VirtualFileSystem.get_global_ptr()
       vfs.mount(Filename("foo.mf"), ".", VirtualFileSystem.MFReadOnly)
 
 .. only:: cpp
@@ -73,7 +73,7 @@ Or, equivalently, write this code at startup:
    .. code-block:: python
 
       vfs.mount(VirtualFileMountHTTP('http://myserver/mydir'), '/mydir', 0)
-      getModelPath().appendDirectory('/mydir')
+      get_model_path().append_directory('/mydir')
 
 .. only:: cpp
 
@@ -89,8 +89,8 @@ Or, equivalently, write this code at startup:
 
    .. code-block:: python
 
-      model = loader.loadModel('models/myfile.bam')
-      texture = loader.loadTexture('maps/mytexture.png')
+      model = loader.load_model('models/myfile.bam')
+      texture = loader.load_texture('maps/mytexture.png')
 
 If you want to prepare for reading and writing assets to a Multifile do the
 following.
@@ -104,9 +104,9 @@ following.
       from panda3d.core import Filename
 
       mf = Multifile()
-      mf.openReadWrite("models.mf")
+      mf.open_read_write("models.mf")
 
-      vfs = VirtualFileSystem.getGlobalPtr()
+      vfs = VirtualFileSystem.get_global_ptr()
       if vfs.mount(mf, ".", VirtualFileSystem.MFReadOnly):
           print('mounted')
 
@@ -135,9 +135,9 @@ any python code. E.g. "mysys/memfdir/mfbar2.txt"
       from panda3d.core import Filename
 
       mf = Multifile()
-      mf.openReadWrite("models.mf")
+      mf.open_read_write("models.mf")
 
-      vfs = VirtualFileSystem.getGlobalPtr()
+      vfs = VirtualFileSystem.get_global_ptr()
       if vfs.mount(mf, "mysys", VirtualFileSystem.MFReadOnly):
           print('mounted')
 
@@ -175,7 +175,7 @@ class and calling the :meth:`~.Multifile.open_read()` method:
       from panda3d.core import Multifile
 
       mf = Multifile()
-      mf.openRead("foo.mf")
+      mf.open_read("foo.mf")
 
 .. only:: cpp
 
@@ -210,7 +210,7 @@ disk first, here's an example on how to mount them:
       mf = Multifile()
       #... now do something with mf
 
-      vfs = VirtualFileSystem.getGlobalPtr()
+      vfs = VirtualFileSystem.get_global_ptr()
       vfs.mount(mf, ".", VirtualFileSystem.MFReadOnly)
 
 .. only:: cpp
@@ -248,43 +248,43 @@ Here are a few examples of working with subfiles:
       m = Multifile()
 
       # Add an existing real os file with compression level 6
-      m.openReadWrite("foo.mf")
-      m.addSubfile("bar.txt", Filename("/tmp/bar.txt"), 6)
+      m.open_read_write("foo.mf")
+      m.add_subfile("bar.txt", Filename("/tmp/bar.txt"), 6)
       m.flush()
 
       # Destroy the contents of the multifile
       # Add an existing real os file to be the first multifile
-      m.openWrite("foo.mf")
-      m.addSubfile("bar.txt", Filename("/tmp/bar.txt"), 6)
+      m.open_write("foo.mf")
+      m.add_subfile("bar.txt", Filename("/tmp/bar.txt"), 6)
       m.flush()
 
       # Permanently re-order in ascending order the
       # directories and files in the multifile
-      m.openReadWrite("foo.mf")
+      m.open_read_write("foo.mf")
       m.repack()
       m.flush()
 
       # Open a multifile and replace the contents of the mulifile file
       # with new contents
       m = Multifile()
-      m.openReadWrite("foo.mf")
-      m.updateSubfile("bar.txt", Filename("/tmp/bar2.txt"), 9)
+      m.open_read_write("foo.mf")
+      m.update_subfile("bar.txt", Filename("/tmp/bar2.txt"), 9)
       m.flush()
 
       # Open a multifile and extract all files smaller than 3kb
       # New real os files are created with the contents of the multifile data
       m = Multifile()
-      m.openRead("foo.mf")
-      for i in range(m.getNumSubfiles()):
-          if m.getSubfileLength(i) < 3 * 1024:
-              m.extractSubfile(i, Filename("/tmp/" + m.getSubfileName(i)))
+      m.open_read("foo.mf")
+      for i in range(m.get_num_subfiles()):
+          if m.get_subfile_length(i) < 3 * 1024:
+              m.extract_subfile(i, Filename("/tmp/" + m.get_subfile_name(i)))
 
       # Find, print and remove a file named bar.txt
-      barIdx = m.findSubfile("bar.txt")
-      if barIdx != -1:
+      bar_idx = m.find_subfile("bar.txt")
+      if bar_idx != -1:
           # It returns -1 if it doesn't exist
-          print(m.readSubfile(barIdx))
-          m.removeSubfile(barIdx)
+          print(m.read_subfile(bar_idx))
+          m.remove_subfile(bar_idx)
       m.flush()
 
       m.close()
@@ -299,7 +299,7 @@ Here are a few examples of working with subfiles:
       os.write((char*)&stuff, sizeof(stuff));
 
       PT(Multifile) mf = new Multifile();
-      mf->open_write(fileName);
+      mf->open_write(file_name);
       mf->add_subfile("foo.mf", &is,6);
       mf->flush();
       mf->close();
@@ -311,7 +311,7 @@ use it similar to other model loading methods.
 
    .. code-block:: python
 
-      nodepath = loader.loadModel("foo/bar")
+      nodepath = loader.load_model("foo/bar")
 
 Stream-Based
 ------------
@@ -335,7 +335,7 @@ In the game, from the multifile models.mf, load the .ttf file.
 
    .. code-block:: python
 
-      font = loader.loadFont("models/arial.ttf")
+      font = loader.load_font("models/arial.ttf")
 
 .. only:: cpp
 
@@ -369,12 +369,12 @@ This code creates a multifile and adds an encrypted file to it:
    .. code-block:: python
 
       m = Multifile()
-      m.openReadWrite("foo.mf")
-      m.setEncryptionFlag(True)
-      m.setEncryptionPassword("foobar")
+      m.open_read_write("foo.mf")
+      m.set_encryption_flag(True)
+      m.set_encryption_password("foobar")
 
       # Add a new file to the multifile
-      m.addSubfile("bar.txt", Filename("/tmp/bar.txt"), 1)
+      m.add_subfile("bar.txt", Filename("/tmp/bar.txt"), 1)
       m.flush()
       m.close()
 
@@ -399,11 +399,11 @@ You can read encrypted multifiles the same way:
    .. code-block:: python
 
       m = Multifile()
-      m.openRead("foo.mf")
-      m.setEncryptionFlag(True)
-      m.setEncryptionPassword("foobar")
+      m.open_read("foo.mf")
+      m.set_encryption_flag(True)
+      m.set_encryption_password("foobar")
       # Prints the contents of the multifile
-      print(m.readSubfile("bar.txt"))
+      print(m.read_subfile("bar.txt"))
 
 .. only:: cpp
 
@@ -428,12 +428,12 @@ mounting of the file using the following code.
 
       from panda3d.core import Multifile
       mf = Multifile()
-      mf.openRead("models.mf")
-      mf.setEncryptionFlag(True)
-      mf.setEncryptionPassword("mypass")
+      mf.open_read("models.mf")
+      mf.set_encryption_flag(True)
+      mf.set_encryption_password("mypass")
 
       from panda3d.core import VirtualFileSystem
-      vfs = VirtualFileSystem.getGlobalPtr()
+      vfs = VirtualFileSystem.get_global_ptr()
       if vfs.mount(mf, ".", VirtualFileSystem.MFReadOnly):
           print('mounted')
 
@@ -470,7 +470,7 @@ system, pass the password as parameter to the
    .. code-block:: python
 
       from panda3d.core import VirtualFileSystem, Filename
-      vfs = VirtualFileSystem.getGlobalPtr()
+      vfs = VirtualFileSystem.get_global_ptr()
       vfs.mount(Filename("foo.mf"), ".", vfs.MFReadOnly, "foobar")
 
 .. only:: cpp

@@ -51,9 +51,9 @@ really sure that your game will run on any platform out-of-the-box:
 .. code-block:: python
 
    try:
-       import cVersionOfModule
+       import c_version_of_module
    except ImportError:
-       import pythonVersionOfModule
+       import python_version_of_module
 
 Then the game will use the Python version of the module if the C++ version
 will fail to load. Your game will use the slow Python version in that case,

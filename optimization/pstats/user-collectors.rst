@@ -67,29 +67,29 @@ can be used below, as below:
    from panda3d.core import PStatCollector
 
    def pstat(func):
-       collectorName = "Debug:%s" % func.__name__
+       collector_name = "Debug:%s" % func.__name__
 
        if hasattr(base, 'custom_collectors'):
-           if collectorName in base.custom_collectors.keys():
-               pstat = base.custom_collectors[collectorName]
+           if collector_name in base.custom_collectors.keys():
+               pstat = base.custom_collectors[collector_name]
            else:
-               base.custom_collectors[collectorName] = PStatCollector(collectorName)
-               pstat = base.custom_collectors[collectorName]
+               base.custom_collectors[collector_name] = PStatCollector(collector_name)
+               pstat = base.custom_collectors[collector_name]
        else:
            base.custom_collectors = {}
-           base.custom_collectors[collectorName] = PStatCollector(collectorName)
-           pstat = base.custom_collectors[collectorName]
+           base.custom_collectors[collector_name] = PStatCollector(collector_name)
+           pstat = base.custom_collectors[collector_name]
 
-       def doPstat(*args, **kargs):
+       def do_pstat(*args, **kargs):
            pstat.start()
            returned = func(*args, **kargs)
            pstat.stop()
            return returned
 
-       doPstat.__name__ = func.__name__
-       doPstat.__dict__ = func.__dict__
-       doPstat.__doc__ = func.__doc__
-       return doPstat
+       do_pstat.__name__ = func.__name__
+       do_pstat.__dict__ = func.__dict__
+       do_pstat.__doc__ = func.__doc__
+       return do_pstat
 
 To use it, either save the function to a file and import it into the script you
 wish to debug. Then use it as a decorator on the function you wish to time. A
@@ -101,5 +101,5 @@ child.
    from pstat_debug import pstat
 
    @pstat
-   def myLongRunFunction():
+   def my_long_run_function():
        """ This function does something long """

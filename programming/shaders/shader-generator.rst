@@ -42,7 +42,7 @@ do this is:
 
    .. code-block:: python
 
-      nodepath.setShaderAuto()
+      nodepath.set_shader_auto()
 
 .. only:: cpp
 
@@ -59,7 +59,7 @@ game, using this call:
 
    .. code-block:: python
 
-      render.setShaderAuto()
+      render.set_shader_auto()
 
 .. only:: cpp
 

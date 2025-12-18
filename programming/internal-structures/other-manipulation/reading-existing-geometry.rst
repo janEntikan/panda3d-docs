@@ -33,20 +33,20 @@ to do this is to walk through all the GeomNodes like this:
 
    .. code-block:: python
 
-      geomNodeCollection = model.findAllMatches('**/+GeomNode')
-      for nodePath in geomNodeCollection:
-          geomNode = nodePath.node()
-          processGeomNode(geomNode)
+      geom_node_collection = model.find_all_matches('**/+GeomNode')
+      for node_path in geom_node_collection:
+          geom_node = node_path.node()
+          process_geom_node(geom_node)
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      NodePathCollection geomNodeCollection = model.find_all_matches("**/+GeomNode");
+      NodePathCollection geom_node_collection = model.find_all_matches("**/+GeomNode");
 
-      for (size_t i = 0; i < geomNodeCollection.get_num_paths(); ++i) {
-        PT(GeomNode) g = DCAST(GeomNode, geomNodeCollection.get_path(i).node());
-        processGeomNode(g);
+      for (size_t i = 0; i < geom_node_collection.get_num_paths(); ++i) {
+        PT(GeomNode) g = DCAST(GeomNode, geom_node_collection.get_path(i).node());
+        process_geom_node(g);
       }
 
 Once you have a particular GeomNode, you must walk through the list of
@@ -58,94 +58,94 @@ backfacing, etc.).
 
    .. code-block:: python
 
-      def processGeomNode(geomNode):
-          for i in range(geomNode.getNumGeoms()):
-              geom = geomNode.getGeom(i)
-              state = geomNode.getGeomState(i)
+      def process_geom_node(geom_node):
+          for i in range(geom_node.get_num_geoms()):
+              geom = geom_node.get_geom(i)
+              state = geom_node.get_geom_state(i)
               print(geom)
               print(state)
-              processGeom(geom)
+              process_geom(geom)
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      void processGeomNode(GeomNode *geomnode) {
+      void process_geom_node(GeomNode *geomnode) {
         for (size_t j = 0; j < geomnode->get_num_geoms(); ++j) {
           PT(Geom) geom = geomnode->get_geom(j);
           geom->write(nout); // Outputs basic info on the geom
           geomnode->get_geom_state(j)->write(nout); // Basic renderstate info
-          processGeom(geom);
+          process_geom(geom);
         }
       }
 
-Note that geomNode.getGeom() is only appropriate if you will be reading, but not
+Note that geom_node.get_geom() is only appropriate if you will be reading, but not
 modifying, the data. If you intend to modify the geom data in any way (including
 any nested data like vertices or primitives), you should use
-geomNode.modifyGeom() instead.
+geom_node.modify_geom() instead.
 
 Each Geom has an associated :ref:`geomvertexdata`, and one or more
 :ref:`GeomPrimitives <geomprimitive>`. Some GeomVertexData objects may be shared
-by more than one Geom, especially if you have used flattenStrong() to optimize a
+by more than one Geom, especially if you have used flatten_strong() to optimize a
 model.
 
 .. only:: python
 
    .. code-block:: python
 
-      def processGeom(geom):
-          vdata = geom.getVertexData()
+      def process_geom(geom):
+          vdata = geom.get_vertex_data()
           print(vdata)
-          processVertexData(vdata)
-          for i in range(geom.getNumPrimitives()):
-              prim = geom.getPrimitive(i)
+          process_vertex_data(vdata)
+          for i in range(geom.get_num_primitives()):
+              prim = geom.get_primitive(i)
               print(prim)
-              processPrimitive(prim, vdata)
+              process_primitive(prim, vdata)
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      void processGeom(Geom *geom) {
+      void process_geom(Geom *geom) {
         PT(GeomVertexData) vdata = geom->get_vertex_data();
         vdata->write(nout);
-        processVertexData(vdata);
+        process_vertex_data(vdata);
         for (size_t i = 0; i < geom.get_num_primitives(); ++i) {
           PT(GeomPrimitive) prim = geom->get_primitive(i);
           prim->write(nout,0);
-          processPrimitive(prim, vdata);
+          process_primitive(prim, vdata);
         }
       }
 
 As above, get_vertex_data() is only appropriate if you will only be reading,
-but not modifying, the vertex data. Similarly, getPrimitive() is appropriate
+but not modifying, the vertex data. Similarly, get_primitive() is appropriate
 only if you will not be modifying the primitive index array. If you intend to
-modify either one, use modifyVertexData() or modifyPrimitive(), respectively.
+modify either one, use modify_vertex_data() or modify_primitive(), respectively.
 
 You can use the
 :ref:`GeomVertexReader <more-about-geomvertexreader-geomvertexwriter-and-geomvertexrewriter>`
 class to examine the vertex data. You should create a GeomVertexReader for
 each column of the data you intend to read. It is up to you to ensure that a
 given column exists in the vertex data before you attempt to read it (you can
-use vdata.hasColumn() to test this).
+use vdata.has_column() to test this).
 
 .. only:: python
 
    .. code-block:: python
 
-      def processVertexData(vdata):
+      def process_vertex_data(vdata):
           vertex = GeomVertexReader(vdata, 'vertex')
           texcoord = GeomVertexReader(vdata, 'texcoord')
-          while not vertex.isAtEnd():
-              v = vertex.getData3()
-              t = texcoord.getData2()
+          while not vertex.is_at_end():
+              v = vertex.get_data3()
+              t = texcoord.get_data2()
               print("v = %s, t = %s" % (repr(v), repr(t)))
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      void processVertexData(const GeomVertexData *vdata) {
+      void process_vertex_data(const GeomVertexData *vdata) {
         GeomVertexReader vertex(vdata, "vertex");
         GeomVertexReader texcoord(vdata, "texcoord");
         while (!vertex.is_at_end()) {
@@ -160,8 +160,8 @@ the primitive type it is; but all GeomPrimitive classes have the same common
 interface to walk through the list of vertices referenced by the primitives
 stored within the class.
 
-You can use the setRow() method of GeomVertexReader to set the reader to a
-particular vertex. This affects the next call to getData(). In this way, you
+You can use the set_row() method of GeomVertexReader to set the reader to a
+particular vertex. This affects the next call to get_data(). In this way, you
 can extract the vertex data for the vertices in the order that the primitive
 references them (instead of in order from the beginning to the end of the
 vertex table, as above).
@@ -170,25 +170,25 @@ vertex table, as above).
 
    .. code-block:: python
 
-      def processPrimitive(prim, vdata):
+      def process_primitive(prim, vdata):
           vertex = GeomVertexReader(vdata, 'vertex')
 
           prim = prim.decompose()
 
-          for p in range(prim.getNumPrimitives()):
-              s = prim.getPrimitiveStart(p)
-              e = prim.getPrimitiveEnd(p)
+          for p in range(prim.get_num_primitives()):
+              s = prim.get_primitive_start(p)
+              e = prim.get_primitive_end(p)
               for i in range(s, e):
-                  vi = prim.getVertex(i)
-                  vertex.setRow(vi)
-                  v = vertex.getData3()
+                  vi = prim.get_vertex(i)
+                  vertex.set_row(vi)
+                  v = vertex.get_data3()
                   print("prim %s has vertex %s: %s" % (p, vi, repr(v)))
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      void processPrimitive(const GeomPrimitive *orig_prim, const GeomVertexData *vdata) {
+      void process_primitive(const GeomPrimitive *orig_prim, const GeomVertexData *vdata) {
         GeomVertexReader vertex(vdata, "vertex");
 
         CPT(GeomPrimitive) prim = orig_prim->decompose();

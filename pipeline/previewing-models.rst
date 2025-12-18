@@ -10,14 +10,14 @@ to create a Panda3D program. Pview is accessed through a command prompt.
 To view a model that has been converted to an egg or bam file, type the
 following::
 
-   pview modelFile.egg
+   pview model_file.egg
 
 To view a character model with animations, simply add the name of the file with
 the animation.
 
 ::
 
-   pview modelFile.egg animationFile.egg
+   pview model_file.egg animation_file.egg
 
 Here's an example based on the panda model distributed with panda source.
 

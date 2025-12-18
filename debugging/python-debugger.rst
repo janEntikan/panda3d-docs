@@ -19,7 +19,7 @@ Panda3D this requires a little explanation. Panda3D programs typically have a
 command called ``base.run()`` to start rendering, so here's one way to start an
 interactive session. On the command prompt type::
 
-   python -i myPandaFile.py
+   python -i my_panda_file.py
 
 After Panda3D has loaded, make sure the command window has focus and type
 Ctrl-C. This will show a python prompt like so:

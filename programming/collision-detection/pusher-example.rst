@@ -19,50 +19,50 @@ Pusher Example
       ShowBase()
 
       # Initialize the collision traverser.
-      base.cTrav = CollisionTraverser()
+      base.c_trav = CollisionTraverser()
 
       # Initialize the Pusher collision handler.
       pusher = CollisionHandlerPusher()
 
       # Load a model.
-      smiley = loader.loadModel('smiley')
+      smiley = loader.load_model('smiley')
       # Reparent the model to the camera so we can move it.
-      smiley.reparentTo(camera)
+      smiley.reparent_to(camera)
       # Set the initial position of the model in the scene.
-      smiley.setPos(0, 25.5, 0.5)
+      smiley.set_pos(0, 25.5, 0.5)
 
       # Create a collision node for this object.
-      cNode = CollisionNode('smiley')
+      c_node = CollisionNode('smiley')
       # Attach a collision sphere solid to the collision node.
-      cNode.addSolid(CollisionSphere(0, 0, 0, 1.1))
+      c_node.add_solid(CollisionSphere(0, 0, 0, 1.1))
       # Attach the collision node to the object's model.
-      smileyC = smiley.attachNewNode(cNode)
+      smiley_c = smiley.attach_new_node(c_node)
       # Set the object's collision node to render as visible.
-      smileyC.show()
+      smiley_c.show()
 
       # Load another model.
-      frowney = loader.loadModel('frowney')
+      frowney = loader.load_model('frowney')
       # Reparent the model to render.
-      frowney.reparentTo(render)
+      frowney.reparent_to(render)
       # Set the position of the model in the scene.
-      frowney.setPos(5, 25, 0)
+      frowney.set_pos(5, 25, 0)
 
       # Create a collision node for this object.
-      cNode = CollisionNode('frowney')
+      c_node = CollisionNode('frowney')
       # Attach a collision sphere solid to the collision node.
-      cNode.addSolid(CollisionSphere(0, 0, 0, 1.1))
+      c_node.add_solid(CollisionSphere(0, 0, 0, 1.1))
       # Attach the collision node to the object's model.
-      frowneyC = frowney.attachNewNode(cNode)
+      frowney_c = frowney.attach_new_node(c_node)
       # Set the object's collision node to render as visible.
-      frowneyC.show()
+      frowney_c.show()
 
       # Add the Pusher collision handler to the collision traverser.
-      base.cTrav.addCollider(frowneyC, pusher)
+      base.c_trav.add_collider(frowney_c, pusher)
       # Add the 'frowney' collision node to the Pusher collision handler.
-      pusher.addCollider(frowneyC, frowney, base.drive.node())
+      pusher.add_collider(frowney_c, frowney, base.drive.node())
 
       # Have the 'smiley' sphere moving to help show what is happening.
-      frowney.posInterval(5, Point3(5, 25, 0), startPos=Point3(-5, 25, 0), fluid=1).loop()
+      frowney.pos_interval(5, Point3(5, 25, 0), start_pos=Point3(-5, 25, 0), fluid=1).loop()
 
       # Run the scene. Move around with the mouse to see how the moving sphere changes
       # course to avoid the one attached to the camera.

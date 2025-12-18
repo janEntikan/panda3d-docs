@@ -15,10 +15,10 @@ disable the camera control task and then the camera will move as expected.
 
 .. code-block:: python
 
-   base.disableMouse()
+   base.disable_mouse()
 
 The ShowBase class contains some handy methods to allow the user control over
-the camera. The :py:meth:`~direct.showbase.ShowBase.ShowBase.useDrive()` command
+the camera. The :py:meth:`~direct.showbase.ShowBase.ShowBase.use_drive()` command
 enables keyboard and mouse control. Both control systems move only on the x
 and y axes, so moving up and down along the z axis is impossible with these
 systems.
@@ -35,8 +35,8 @@ that allows control based on trackball mice.
 
 .. code-block:: python
 
-   base.useDrive()
-   base.useTrackball()
+   base.use_drive()
+   base.use_trackball()
 
 ShowBase also provides the method
 :py:meth:`~direct.showbase.ShowBase.ShowBase.oobe()` to give you to control

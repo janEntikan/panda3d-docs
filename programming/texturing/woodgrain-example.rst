@@ -23,9 +23,9 @@ seed value of 0 tells the noise function to use a random seed.
 
 The table_size is 256 by default.
 
-PerlinNoise3( scaleX, scaleY, scaleZ, table_size, seed)
+PerlinNoise3( scale_x, scale_y, scale_z, table_size, seed)
 
-PerlinNoise2( scaleX, scaleY, table_size, seed)
+PerlinNoise2( scale_x, scale_y, table_size, seed)
 
 PerlinNoise( table_size, seed )
 

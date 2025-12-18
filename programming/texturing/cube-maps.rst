@@ -68,7 +68,7 @@ way you load a 3-D texture:
 
 .. code-block:: python
 
-   tex = loader.loadCubeMap('cubemap_#.png')
+   tex = loader.load_cube_map('cubemap_#.png')
 
 As with a 3-D texture, the hash mark ("#") in the filename will be filled in
 with the image sequence number, which in the case of a cube map will be a digit

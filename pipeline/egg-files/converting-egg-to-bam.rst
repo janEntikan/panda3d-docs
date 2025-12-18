@@ -27,7 +27,7 @@ complain if the textures aren't present. You must install the textures (into
 your model path) before you convert the bam file. You can run the egg2bam
 program as follows::
 
-   egg2bam -ps rel -o bamFileName.bam eggFileName.egg
+   egg2bam -ps rel -o bam_file_name.bam egg_file_name.egg
 
 Here, "-ps rel" means to record the textures in the bam filename relative to the
 filename itself; if you use this option, you should ensure that you do not move

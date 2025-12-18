@@ -17,15 +17,15 @@ Two of the most common changes are position and orientation.
 
    .. code-block:: python
 
-      myNodePath.setPos(X, Y, Z)
-      myNodePath.setHpr(Yaw, Pitch, Roll)
+      my_node_path.set_pos(X, Y, Z)
+      my_node_path.set_hpr(Yaw, Pitch, Roll)
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      myNodePath.set_pos(X, Y, Z);
-      myNodePath.set_hpr(Yaw, Pitch, Roll);
+      my_node_path.set_pos(X, Y, Z);
+      my_node_path.set_hpr(Yaw, Pitch, Roll);
 
 By default in Panda3D, the X axis points to the right, the Y axis is forward,
 and Z is up. An object's rotation is usually described using Euler angles called
@@ -41,13 +41,13 @@ x, y, and z.
 
    .. code-block:: python
 
-      myNodePath.setScale(S)
+      my_node_path.set_scale(S)
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      myNodePath.set_scale(S);
+      my_node_path.set_scale(S);
 
 Sometimes it is convenient to adjust a single component individually:
 
@@ -55,29 +55,29 @@ Sometimes it is convenient to adjust a single component individually:
 
    .. code-block:: python
 
-      myNodePath.setX(X)
-      myNodePath.setY(Y)
-      myNodePath.setZ(Z)
-      myNodePath.setH(H)
-      myNodePath.setP(P)
-      myNodePath.setR(R)
-      myNodePath.setSx(SX)
-      myNodePath.setSy(SY)
-      myNodePath.setSz(SZ)
+      my_node_path.set_x(X)
+      my_node_path.set_y(Y)
+      my_node_path.set_z(Z)
+      my_node_path.set_h(H)
+      my_node_path.set_p(P)
+      my_node_path.set_r(R)
+      my_node_path.set_sx(SX)
+      my_node_path.set_sy(SY)
+      my_node_path.set_sz(SZ)
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      myNodePath.set_x(X);
-      myNodePath.set_y(Y);
-      myNodePath.set_z(Z);
-      myNodePath.set_h(H);
-      myNodePath.set_p(P);
-      myNodePath.set_r(R);
-      myNodePath.set_sx(SX);
-      myNodePath.set_sy(SY);
-      myNodePath.set_sz(SZ);
+      my_node_path.set_x(X);
+      my_node_path.set_y(Y);
+      my_node_path.set_z(Z);
+      my_node_path.set_h(H);
+      my_node_path.set_p(P);
+      my_node_path.set_r(R);
+      my_node_path.set_sx(SX);
+      my_node_path.set_sy(SY);
+      my_node_path.set_sz(SZ);
 
 Or all at the same time:
 
@@ -85,13 +85,13 @@ Or all at the same time:
 
    .. code-block:: python
 
-      myNodePath.setPosHprScale(X, Y, Z, H, P, R, SX, SY, SZ)
+      my_node_path.set_pos_hpr_scale(X, Y, Z, H, P, R, SX, SY, SZ)
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      myNodePath.set_pos_hpr_scale(X, Y, Z, H, P, R, SX, SY, SZ);
+      my_node_path.set_pos_hpr_scale(X, Y, Z, H, P, R, SX, SY, SZ);
 
 You can also query the current transform information for any of the above:
 
@@ -99,19 +99,19 @@ You can also query the current transform information for any of the above:
 
    .. code-block:: python
 
-      myNodePath.getPos()
-      myNodePath.getX()
-      myNodePath.getY()
-      myNodePath.getZ()
+      my_node_path.get_pos()
+      my_node_path.get_x()
+      my_node_path.get_y()
+      my_node_path.get_z()
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      myNodePath.get_pos();
-      myNodePath.get_x();
-      myNodePath.get_y();
-      myNodePath.get_z();
+      my_node_path.get_pos();
+      my_node_path.get_x();
+      my_node_path.get_y();
+      my_node_path.get_z();
 
 As a more advanced feature, you may also set or query the position (or any of
 the above transform properties) of a particular NodePath with respect to another
@@ -121,22 +121,22 @@ one. To do this, specify the relative NodePath as the first parameter:
 
    .. code-block:: python
 
-      myNodePath.setPos(otherNodePath, X, Y, Z)
-      myNodePath.getPos(otherNodePath)
+      my_node_path.set_pos(other_node_path, X, Y, Z)
+      my_node_path.get_pos(other_node_path)
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      myNodePath.set_pos(otherNodePath, X, Y, Z);
-      myNodePath.get_pos(otherNodePath);
+      my_node_path.set_pos(other_node_path, X, Y, Z);
+      my_node_path.get_pos(other_node_path);
 
 Putting a NodePath as the first parameter to any of the transform setters or
 getters makes it a relative operation. The above :meth:`~.NodePath.set_pos()`
-means to set myNodePath to the position (X, Y, Z), relative to otherNodePath--
-that is, the position myNodePath would be in if it were a child of otherNodePath
+means to set my_node_path to the position (X, Y, Z), relative to other_node_path--
+that is, the position my_node_path would be in if it were a child of other_node_path
 and its position were set to (X, Y, Z). The :meth:`~.NodePath.get_pos()` call
-returns the position myNodePath would have if it were a child of otherNodePath.
+returns the position my_node_path would have if it were a child of other_node_path.
 
 It is also important to note that you can use the NodePath in its own relative
 sets and gets. This may be helpful in situations where you are concerned with
@@ -146,15 +146,15 @@ distances. For example:
 
    .. code-block:: python
 
-      # Move myNodePath 3 units forward in the x
-      myNodePath.setPos(myNodePath, 3, 0, 0)
+      # Move my_node_path 3 units forward in the x
+      my_node_path.set_pos(my_node_path, 3, 0, 0)
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      // Move myNodePath 3 units forward in the x
-      myNodePath.set_pos(myNodePath, 3, 0, 0);
+      // Move my_node_path 3 units forward in the x
+      my_node_path.set_pos(my_node_path, 3, 0, 0);
 
 These relative sets and gets are a very powerful feature of Panda's scene graph,
 but they can also be confusing; don't worry if it doesn't make sense right now.
@@ -169,13 +169,13 @@ generated with the +Y axis forward, so this doesn't necessarily make a model
 
    .. code-block:: python
 
-      myNodePath.lookAt(otherObject)
+      my_node_path.look_at(other_object)
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      myNodePath.look_at(otherObject);
+      my_node_path.look_at(other_object);
 
 .. only:: python
 
@@ -186,7 +186,7 @@ generated with the +Y axis forward, so this doesn't necessarily make a model
 
       .. code-block:: python
 
-         myNodePath.place()
+         my_node_path.place()
 
 Changing the Parent
 -------------------
@@ -199,13 +199,13 @@ under render for viewing:
 
    .. code-block:: python
 
-      myModel.reparentTo(render)
+      my_model.reparent_to(render)
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      myModel.reparent_to(window->get_render());
+      my_model.reparent_to(window->get_render());
 
 As you become more comfortable with scene graph operations, you may find
 yourself taking more and more advantage of a deeply nested scene graph, and you
@@ -217,17 +217,17 @@ several models together:
 
    .. code-block:: python
 
-      dummyNode = render.attachNewNode("Dummy Node Name")
-      myModel.reparentTo(dummyNode)
-      myOtherModel.reparentTo(dummyNode)
+      dummy_node = render.attach_new_node("Dummy Node Name")
+      my_model.reparent_to(dummy_node)
+      my_other_model.reparent_to(dummy_node)
 
 .. only:: cpp
 
    .. code-block:: cpp
 
       NodePath dummy_node = window->get_render().attach_new_node("Dummy Node Name");
-      myModel.reparent_to(dummy_node);
-      myOtherModel.reparent_to(dummy_node);
+      my_model.reparent_to(dummy_node);
+      my_other_model.reparent_to(dummy_node);
 
 Since a node inherits its position information from its parent node, when you
 reparent a node in the scene graph you might inadvertently change its position
@@ -238,17 +238,17 @@ in the world. If you need to avoid this, you can use a special variant on
 
    .. code-block:: python
 
-      myModel.wrtReparentTo(newParent)
+      my_model.wrt_reparent_to(new_parent)
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      myModel.wrt_reparent_to(new_parent);
+      my_model.wrt_reparent_to(new_parent);
 
 The "wrt" prefix stands for "with respect to". This special method works like
 :meth:`~.NodePath.reparent_to()`, except that it automatically recomputes the
-local transform on myModel to compensate for the change in transform under the
+local transform on my_model to compensate for the change in transform under the
 new parent, so that the node ends up in the same position relative to the world.
 
 Note that the computation required to perform
@@ -272,13 +272,13 @@ numbers from 0 to 1, 0 being black, 1 being white.
 
    .. code-block:: python
 
-      myNodePath.setColor(R, G, B, A)
+      my_node_path.set_color(R, G, B, A)
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      myNodePath.set_color(R, G, B, A);
+      my_node_path.set_color(R, G, B, A);
 
 If models have textures, they may not be distinguishable or even visible at
 certain color settings. Setting the color to white may restore the visibility of
@@ -288,13 +288,13 @@ the texture, but it is better to simply clear the current color settings.
 
    .. code-block:: python
 
-      myNodePath.clearColor()
+      my_node_path.clear_color()
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      myNodePath.clear_color();
+      my_node_path.clear_color();
 
 Note the fourth component of color is alpha. This is usually used to indicate
 transparency, and it is usually 1.0 to indicate the object is not transparent.
@@ -306,13 +306,13 @@ enable transparency:
 
    .. code-block:: python
 
-      myNodePath.setTransparency(TransparencyAttrib.MAlpha)
+      my_node_path.set_transparency(TransparencyAttrib.MAlpha)
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      myNodePath.set_transparency(TransparencyAttrib::M_alpha);
+      my_node_path.set_transparency(TransparencyAttrib::M_alpha);
 
 The parameter to :meth:`~.NodePath.set_transparency()` is usually
 ``TransparencyAttrib.M_alpha``, which is ordinary transparency. You can also
@@ -333,13 +333,13 @@ indicated color values by the object's existing color:
 
    .. code-block:: python
 
-      myNodePath.setColorScale(R, G, B, A)
+      my_node_path.set_color_scale(R, G, B, A)
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      myNodePath.set_color_scale(R, G, B, A);
+      my_node_path.set_color_scale(R, G, B, A);
 
 One use of :meth:`~.NodePath.set_color_scale()` is to apply it at the top of the
 scene graph (e.g. render) to darken the entire scene uniformly, for instance to
@@ -352,13 +352,13 @@ affecting the other color components:
 
    .. code-block:: python
 
-      myNodePath.setAlphaScale(SA)
+      my_node_path.set_alpha_scale(SA)
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      myNodePath.set_alpha_scale(SA);
+      my_node_path.set_alpha_scale(SA);
 
 Hiding and Showing
 ------------------
@@ -370,15 +370,15 @@ To temporarily prevent an object from being drawn on all cameras, use
 
    .. code-block:: python
 
-      myNodePath.hide()
-      myNodePath.show()
+      my_node_path.hide()
+      my_node_path.show()
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      myNodePath.hide();
-      myNodePath.show();
+      my_node_path.hide();
+      my_node_path.show();
 
 If you want to hide an object for one camera but not another, you can use the
 :meth:`~.NodePath.hide()` and :meth:`~.NodePath.show()` commands in conjunction
@@ -388,11 +388,11 @@ with the :meth:`.Camera.set_camera_mask()` function:
 
    .. code-block:: python
 
-      camera1.node().setCameraMask(BitMask32.bit(0))
-      camera2.node().setCameraMask(BitMask32.bit(1))
-      myNodePath.hide(BitMask32.bit(0))
-      myNodePath.show(BitMask32.bit(1))
-      # Now myNodePath will only be shown on camera2...
+      camera1.node().set_camera_mask(BitMask32.bit(0))
+      camera2.node().set_camera_mask(BitMask32.bit(1))
+      my_node_path.hide(BitMask32.bit(0))
+      my_node_path.show(BitMask32.bit(1))
+      # Now my_node_path will only be shown on camera2...
 
 .. only:: cpp
 
@@ -400,9 +400,9 @@ with the :meth:`.Camera.set_camera_mask()` function:
 
       camera1.node()->set_camera_mask(BitMask32::bit(0));
       camera2.node()->set_camera_mask(BitMask32::bit(1));
-      myNodePath.hide(BitMask32::bit(0));
-      myNodePath.show(BitMask32::bit(1));
-      // Now myNodePath will only be shown on camera2...
+      my_node_path.hide(BitMask32::bit(0));
+      my_node_path.show(BitMask32::bit(1));
+      // Now my_node_path will only be shown on camera2...
 
 Please note that using hide/show without an argument will mess up any hide/shows
 with the argument (show(bit) will not undo a hide()...) To hide an object from
@@ -435,13 +435,13 @@ pairs. For example:
 
    .. code-block:: python
 
-      myNodePath.setTag("Key", "value")
+      my_node_path.set_tag("Key", "value")
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      myNodePath.set_tag("Key", "value");
+      my_node_path.set_tag("Key", "value");
 
 .. only:: python
 
@@ -459,13 +459,13 @@ the node. Use it only when you have no further use for the node:
 
    .. code-block:: python
 
-      myModel.removeNode()
+      my_model.remove_node()
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      myModel.remove_node();
+      my_model.remove_node();
 
 Please note, however, that this does not really do much more than just calling
 :meth:`~.NodePath.detach_node()` followed by dropping the `myModel` variable.
@@ -477,7 +477,7 @@ the following code:
 
    .. code-block:: python
 
-      ModelPool.releaseModel("path/to/model.egg")
+      ModelPool.release_model("path/to/model.egg")
 
 .. only:: cpp
 

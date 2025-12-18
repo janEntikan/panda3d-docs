@@ -41,7 +41,7 @@ Intervals, you can easily assemble complex scripts from the basic atoms.
 
    .. code-block:: python
 
-      from direct.interval.IntervalManager import ivalMgr
+      from direct.interval.IntervalManager import ival_mgr
 
 .. only:: cpp
 
@@ -71,13 +71,13 @@ To start an Interval playing, use one of the following:
 .. code-block:: python
 
    interval.start()
-   interval.start(startT, endT, playRate)
+   interval.start(start_t, end_t, play_rate)
    interval.loop()
-   interval.loop(startT, endT, playRate)
+   interval.loop(start_t, end_t, play_rate)
 
-The three parameters are optional. The startTime and endTime parameters define
+The three parameters are optional. The start_time and end_time parameters define
 the subset of the interval to play; these should be given as times in seconds,
-measured from the start of the interval. The playRate, if specified, allows you
+measured from the start of the interval. The play_rate, if specified, allows you
 play the interval slower or faster than real time; the default is 1.0, to play
 at real time.
 
@@ -107,7 +107,7 @@ And you can jump around in time within an interval:
 
 .. code-block:: python
 
-   interval.setT(time)
+   interval.set_t(time)
 
 This causes the interval to move to the given time, in seconds since the
 beginning of the interval. The interval will perform all of the actions between
@@ -120,7 +120,7 @@ reset its state to the previous state. In some cases this may not be possible
 
 .. code-block:: python
 
-   interval.setPlayRate(playRate)
+   interval.set_play_rate(play_rate)
 
 With this you can change the play rate of the interval when it is already
 running.
@@ -129,31 +129,31 @@ Finally, there are a handful of handy query methods:
 
 .. code-block:: python
 
-   interval.getDuration()
+   interval.get_duration()
 
 Returns the length of the interval in seconds.
 
 .. code-block:: python
 
-   interval.getT()
+   interval.get_t()
 
 Returns the current elapsed time within the interval, since the beginning of the
 interval.
 
 .. code-block:: python
 
-   interval.isPlaying()
+   interval.is_playing()
 
 Returns true if the interval is currently playing, or false if it was not
 started, has already finished, or has been explicitly paused or finished.
 
 .. code-block:: python
 
-   interval.isStopped()
+   interval.is_stopped()
 
 Returns true if the interval has not been started, has already played to its
 completion, or has been explicitly stopped via finish(). This is not quite the
-same this as ``(not interval.isPlaying())``, since it does not return true for a
+same this as ``(not interval.is_playing())``, since it does not return true for a
 paused interval.
 
 Table of Contents

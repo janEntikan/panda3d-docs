@@ -18,38 +18,38 @@ information using the following methods:
 
 .. only:: python
 
-   entry.getFromNodePath()
+   entry.get_from_node_path()
       Returns the NodePath of the “from” object. This NodePath will contain a
       CollisionNode.
 
-   entry.getIntoNodePath()
+   entry.get_into_node_path()
       Returns the NodePath of the “into” object. This NodePath will contain a
       CollisionNode, or if the collision was made with visible geometry, a
       GeomNode.
 
-   entry.getFrom()
+   entry.get_from()
       Returns the actual CollisionSolid of the “from” object. This is useful if
       there were more than one CollisionSolid in the “from” CollisionNode.
 
-   entry.getInto()
+   entry.get_into()
       Returns the actual CollisionSolid of the “into” object. However, if the
       collision was made with visible geometry, there is no CollisionSolid, and
       this will be an invalid call.
 
-   entry.hasInto()
+   entry.has_into()
       Returns true if the collision was made into a CollisionSolid as opposed to
       visible geometry, and thus the above call will be valid.
 
-   entry.getSurfacePoint(nodePath)
+   entry.get_surface_point(node_path)
       Returns the 3-D point of the collision, in the coordinate space of the
       supplied NodePath. This point will usually be on the surface of the “into”
       object.
 
-   entry.getSurfaceNormal(nodePath)
+   entry.get_surface_normal(node_path)
       Returns the 3-D surface normal of the “into” object at the point of the
       collision, in the coordinate space of the supplied NodePath.
 
-   entry.getInteriorPoint(nodePath)
+   entry.get_interior_point(node_path)
       Returns the 3-D point, within the interior of the “into” object, that
       represents the depth to which the “from” object has penetrated.
 
@@ -77,16 +77,16 @@ information using the following methods:
       Returns true if the collision was made into a CollisionSolid as opposed to
       visible geometry, and thus the above call will be valid.
 
-   entry->get_surface_point(nodePath)
+   entry->get_surface_point(node_path)
       Returns the 3-D point of the collision, in the coordinate space of the
       supplied NodePath. This point will usually be on the surface of the “into”
       object.
 
-   entry->get_surface_normal(nodePath)
+   entry->get_surface_normal(node_path)
       Returns the 3-D surface normal of the “into” object at the point of the
       collision, in the coordinate space of the supplied NodePath.
 
-   entry->get_interior_point(nodePath)
+   entry->get_interior_point(node_path)
       Returns the 3-D point, within the interior of the “into” object, that
       represents the depth to which the “from” object has penetrated.
 
@@ -100,13 +100,13 @@ object, use:
 
    .. code-block:: python
 
-      point = collisionEntry.getSurfacePoint(collisionEntry.getIntoNodePath())
+      point = collision_entry.get_surface_point(collision_entry.get_into_node_path())
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      point = collisionEntry->get_surface_point(collisionEntry->get_into_node_path());
+      point = collision_entry->get_surface_point(collision_entry->get_into_node_path());
 
 If you wanted to put an axis at the point of the collision to visualize it,
 you might do something like this:
@@ -115,9 +115,9 @@ you might do something like this:
 
    .. code-block:: python
 
-      axis = loader.loadModel('zup-axis.egg')
-      axis.reparentTo(render)
-      point = collisionEntry.getSurfacePoint(render)
-      normal = collisionEntry.getSurfaceNormal(render)
-      axis.setPos(point)
-      axis.lookAt(point + normal)
+      axis = loader.load_model('zup-axis.egg')
+      axis.reparent_to(render)
+      point = collision_entry.get_surface_point(render)
+      normal = collision_entry.get_surface_normal(render)
+      axis.set_pos(point)
+      axis.look_at(point + normal)

@@ -54,13 +54,13 @@ that contains your geometry.
 
 .. code-block:: python
 
-   myPanda = loader.loadModel("panda")
+   my_panda = loader.load_model("panda")
 
    # do some fancy calculations on the normals, or texture coordinates that you
    # dont want to do at runtime
 
    # Save your new custom Panda
-   myPanda.writeBamFile("customPanda.bam")
+   my_panda.write_bam_file("custom_panda.bam")
 
 The Egg Interface
 -----------------
@@ -80,52 +80,52 @@ separate the polygons into different groups. Here is an example:
 .. code-block:: python
 
    from panda3d.core import Point3D, deg2Rad, NodePath, Filename, CSZupRight
-   from panda3d.egg import EggPolygon, EggVertexPool, EggData, EggVertex, loadEggData, EggCoordinateSystem
+   from panda3d.egg import EggPolygon, EggVertexPool, EggData, EggVertex, load_egg_data, EggCoordinateSystem
    import math
 
    ...
 
-   def makeWedge(angleDegrees = 360, numSteps = 16):
+   def make_wedge(angle_degrees = 360, num_steps = 16):
 
        z_up = EggCoordinateSystem()
-       z_up.setValue(CSZupRight)
+       z_up.set_value(CSZupRight)
 
        data = EggData()
-       data.addChild(z_up)
+       data.add_child(z_up)
 
        vp = EggVertexPool('fan')
-       data.addChild(vp)
+       data.add_child(vp)
 
        poly = EggPolygon()
-       data.addChild(poly)
+       data.add_child(poly)
 
        v = EggVertex()
-       v.setPos(Point3D(0, 0, 0))
-       poly.addVertex(vp.addVertex(v))
+       v.set_pos(Point3D(0, 0, 0))
+       poly.add_vertex(vp.add_vertex(v))
 
-       angleRadians = deg2Rad(angleDegrees)
+       angle_radians = deg2Rad(angle_degrees)
 
-       for i in range(numSteps + 1):
-           a = angleRadians * i / numSteps
+       for i in range(num_steps + 1):
+           a = angle_radians * i / num_steps
            y = math.sin(a)
            x = math.cos(a)
 
            v = EggVertex()
-           v.setPos(Point3D(x, 0, y))
-           poly.addVertex(vp.addVertex(v))
+           v.set_pos(Point3D(x, 0, y))
+           poly.add_vertex(vp.add_vertex(v))
 
        return data
    ...
 
    # Creating egg data
-   data = makeWedge()
+   data = make_wedge()
 
    # To write the egg file to disk, use this:
-   data.writeEgg(Filename("wedge.egg"))
+   data.write_egg(Filename("wedge.egg"))
 
    # To load the egg file and render it immediately, use this:
-   model = NodePath(loadEggData(data))
-   model.reparentTo(render)
+   model = NodePath(load_egg_data(data))
+   model.reparent_to(render)
 
 
 See the generated API documentation of :mod:`panda3d.egg` for more complete

@@ -9,8 +9,8 @@ particle renderers have the following parameters:
 
 ============ ===================================== =======================================================
 **Variable** **Definition**                        **Values**
-alphaMode    Alpha setting over particle lifetime  PR_ALPHA_NONE, PR_ALPHA_OUT, PR_ALPHA_IN, PR_ALPHA_USER
-userAlpha    Alpha value for ALPHA_USER alpha mode Boolean
+alpha_mode    Alpha setting over particle lifetime  PR_ALPHA_NONE, PR_ALPHA_OUT, PR_ALPHA_IN, PR_ALPHA_USER
+user_alpha    Alpha value for ALPHA_USER alpha mode Boolean
 ============ ===================================== =======================================================
 
 
@@ -25,11 +25,11 @@ Renders particles as pixel points.
 
 ============ ============================================================= ================================
 **Variable** **Definition**                                                **Values**
-pointSize    Width and height of points, in pixels                         [0, infinity)
-startColor   Starting color                                                (r, g, b, a)
-endColor     Ending color                                                  (r, g, b, a)
-blendType    How the particles blend from the start color to the end color ONE_COLOR, BLEND_LIFE, BLEND_VEL
-blendMethod  Interpolation method between colors                           LINEAR, CUBIC
+point_size    Width and height of points, in pixels                         [0, infinity)
+start_color   Starting color                                                (r, g, b, a)
+end_color     Ending color                                                  (r, g, b, a)
+blend_type    How the particles blend from the start color to the end color ONE_COLOR, BLEND_LIFE, BLEND_VEL
+blend_method  Interpolation method between colors                           LINEAR, CUBIC
 ============ ============================================================= ================================
 
 
@@ -50,8 +50,8 @@ position.
 
 ============ ===================== ============
 **Variable** **Definition**        **Values**
-headColor    Color of leading end  (r, g, b, a)
-tailColor    Color of trailing end (r, g, b, a)
+head_color    Color of leading end  (r, g, b, a)
+tail_color    Color of trailing end (r, g, b, a)
 ============ ===================== ============
 
 
@@ -65,11 +65,11 @@ as being smaller than a pixel.
 
 ============ ====================================================== ===============
 **Variable** **Definition**                                         **Values**
-centerColor  Color of center                                        (r, g, b, a)
-edgeColor    Color of edge                                          (r, g, b, a)
-birthRadius  Initial sparkle radius                                 [0, infinity)
-deathRadius  Final sparkle radius                                   [0, infinity)
-lifeScale    Whether or not sparkle is always of radius birthRadius NO_SCALE, SCALE
+center_color  Color of center                                        (r, g, b, a)
+edge_color    Color of edge                                          (r, g, b, a)
+birth_radius  Initial sparkle radius                                 [0, infinity)
+death_radius  Final sparkle radius                                   [0, infinity)
+life_scale    Whether or not sparkle is always of radius birth_radius NO_SCALE, SCALE
 ============ ====================================================== ===============
 
 
@@ -84,16 +84,16 @@ always facing the user.
 **Variable**     **Definition**                                                            **Values**
 texture          Panda texture object to use as the sprite image                           (r, g, b, a)
 color            Color                                                                     (r, g, b, a)
-xScaleFlag       If true, x scale is interpolated over particle’s life                     Boolean
-yScaleFlag       If true, y scale is interpolated over particle’s life                     Boolean
-animAngleFlag    If true, particles are set to spin on the Z axis                          Boolean
+x_scale_flag       If true, x scale is interpolated over particle’s life                     Boolean
+y_scale_flag       If true, y scale is interpolated over particle’s life                     Boolean
+anim_angle_flag    If true, particles are set to spin on the Z axis                          Boolean
 initial_X_Scale  Initial x scaling factor                                                  [0, infinity)
 final_X_Scale    Final x scaling factor                                                    [0, infinity)
 initial_Y_Scale  Initial y scaling factor                                                  [0, infinity)
 final_Y_Scale    Final y scaling factor                                                    [0, infinity)
-nonAnimatedTheta If false, sets the counterclockwise Z rotation of all sprites, in degrees Boolean
-alphaBlendMethod Sets the interpolation blend method                                       LINEAR, CUBIC
-alphaDisable     If true, alpha blending is disabled                                       Boolean
+non_animated_theta If false, sets the counterclockwise Z rotation of all sprites, in degrees Boolean
+alpha_blend_method Sets the interpolation blend method                                       LINEAR, CUBIC
+alpha_disable     If true, alpha blending is disabled                                       Boolean
 ================ ========================================================================= =============
 
 
@@ -105,5 +105,5 @@ Renders particles as full 3D objects. This requires a geometry node.
 
 ============ =========================== ==========
 **Variable** **Definition**              **Values**
-geomNode     A geometry scene graph node
+geom_node     A geometry scene graph node
 ============ =========================== ==========

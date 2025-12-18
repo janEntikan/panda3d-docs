@@ -33,17 +33,17 @@ snippet shows how to do this:
 
       from panda3d.bullet import BulletDebugNode
 
-      debugNode = BulletDebugNode('Debug')
-      debugNode.showWireframe(True)
-      debugNode.showConstraints(True)
-      debugNode.showBoundingBoxes(False)
-      debugNode.showNormals(False)
-      debugNP = render.attachNewNode(debugNode)
-      debugNP.show()
+      debug_node = BulletDebugNode('Debug')
+      debug_node.show_wireframe(True)
+      debug_node.show_constraints(True)
+      debug_node.show_bounding_boxes(False)
+      debug_node.show_normals(False)
+      debug_np = render.attach_new_node(debug_node)
+      debug_np.show()
 
       world = BulletWorld()
-      world.setGravity(Vec3(0, 0, -9.81))
-      world.setDebugNode(debugNP.node())
+      world.set_gravity(Vec3(0, 0, -9.81))
+      world.set_debug_node(debug_np.node())
 
 .. only:: cpp
 
@@ -96,13 +96,13 @@ F1 key:
       from direct.showbase.DirectObject import DirectObject
 
       o = DirectObject()
-      o.accept('f1', toggleDebug)
+      o.accept('f1', toggle_debug)
 
-      def toggleDebug():
-          if debugNP.isHidden():
-              debugNP.show()
+      def toggle_debug():
+          if debug_np.is_hidden():
+              debug_np.show()
           else:
-              debugNP.hide()
+              debug_np.hide()
 
 .. only:: cpp
 
@@ -125,17 +125,17 @@ F1 key:
       // Compiling and Linking documentation and notes are not
       // covered in this file, check manual for mor information.
 
-      #include "pandaFramework.h"
-      #include "windowFramework.h"
-      #include "nodePath.h"
-      #include "clockObject.h"
+      #include "panda_framework.h"
+      #include "window_framework.h"
+      #include "node_path.h"
+      #include "clock_object.h"
 
-      #include "asyncTask.h"
+      #include "async_task.h"
 
-      #include "bulletWorld.h"
-      #include "bulletDebugNode.h"
-      #include "bulletPlaneShape.h"
-      #include "bulletBoxShape.h"
+      #include "bullet_world.h"
+      #include "bullet_debug_node.h"
+      #include "bullet_plane_shape.h"
+      #include "bullet_box_shape.h"
 
       int main(int argc, char *argv[]) {
         // All variables.

@@ -32,14 +32,14 @@ DirectGUI
    middle mouse button to move around widgets, and resize them while holding the
    control key; this is very useful to lay a screen out during development. If
    you need to turn this ability off for an individual object, set its
-   ``enableEdit`` keyword parameter to False.
+   ``enable_edit`` keyword parameter to False.
 
    All of the DirectGui objects are constructed in a similar way:
 
    .. code-block:: python
 
       from direct.gui.DirectGui import *
-      myObject = Directxxxxxx(keyword=value, keyword=value, ...)
+      my_object = Directxxxxxx(keyword=value, keyword=value, ...)
 
    Each DirectGui object may contain any of four fundamental pieces that
    determine its appearance. There may be an optional text, an optional geom, an
@@ -79,17 +79,17 @@ DirectGUI
    altogether (this is commonly done when you have specified your own geom
    object with the ``geom`` keyword).
 
-   The overall size of the DirectGui object is controlled with the ``frameSize``
+   The overall size of the DirectGui object is controlled with the ``frame_size``
    keyword. This is a four-tuple of floating-point numbers of the form (left,
    right, bottom, top), which specifies the bounding box region of the DirectGui
    object. That is, the lower-left corner will be at position (left, 0, bottom),
    and the upper-right will be at (right, 0, top). Note that these values
-   represent coordinates from the origin of the frame. Setting the frameSize to
+   represent coordinates from the origin of the frame. Setting the frame_size to
    (-0.1, 0.1, -0.1, 0.1), for instance, will create a box, 0.2 units wide and
    0.2 units in height, with 0,0 being the center of the frame located at
    ``pos`` on the screen.
 
-   The ``frameSize`` keyword is optional. If you omit it, the default frameSize
+   The ``frame_size`` keyword is optional. If you omit it, the default frame_size
    is computed based on the bounding box of the text, geom, and/or image that
    you have specified.
 
@@ -108,12 +108,12 @@ DirectGUI
    text_roll         Rotation of the displayed text                                                                                                                                                                                   Number
    text_scale        Scale of the displayed text                                                                                                                                                                                      (sx,sz)
    text\_\*           Parameters to control the appearance of the text                                                                                                                                                                 Any keyword parameter appropriate to :ref:`onscreentext`.
-   frameSize         Size of the object                                                                                                                                                                                               (Left,Right,Bottom,Top)
-   frameVisibleScale Relative scale of the visible frame to its clickable bounds. Useful for creating things like the paging region of a slider, which is visibly smaller than the acceptable click region (the height of the thumb). (hscale, vscale)
-   frameColor        Color of the object’s **frame**                                                                                                                                                                                  (R,G,B,A)
+   frame_size         Size of the object                                                                                                                                                                                               (Left,Right,Bottom,Top)
+   frame_visible_scale Relative scale of the visible frame to its clickable bounds. Useful for creating things like the paging region of a slider, which is visibly smaller than the acceptable click region (the height of the thumb). (hscale, vscale)
+   frame_color        Color of the object’s **frame**                                                                                                                                                                                  (R,G,B,A)
    relief            Relief appearance of the **frame**                                                                                                                                                                               SUNKEN, RAISED, GROOVE, RIDGE, FLAT, or None
-   invertedFrames    If true, switches the meaning of SUNKEN and RAISED                                                                                                                                                               0 or 1
-   borderWidth       If relief is SUNKEN, RAISED, GROOVE, or RIDGE, changes the size of the bevel                                                                                                                                     (Width,Height)
+   inverted_frames    If true, switches the meaning of SUNKEN and RAISED                                                                                                                                                               0 or 1
+   border_width       If relief is SUNKEN, RAISED, GROOVE, or RIDGE, changes the size of the bevel                                                                                                                                     (Width,Height)
    image             An **image** to be displayed on the object                                                                                                                                                                       image filename or Texture object
    image_pos         Position of the displayed image                                                                                                                                                                                  (x,y,z)
    image_hpr         Rotation of the displayed image                                                                                                                                                                                  (h,p,r)
@@ -126,14 +126,14 @@ DirectGUI
    pos               Position of the object                                                                                                                                                                                           (X,Y,Z)
    hpr               Orientation of the object                                                                                                                                                                                        (H,P,R)
    scale             Scale of the object                                                                                                                                                                                              Number
-   pad               When frameSize is omitted, this determines the extra space around the **geom** or **text**\ ’s bounding box by which to expand the default **frame**                                                             (Width,Height)
+   pad               When frame_size is omitted, this determines the extra space around the **geom** or **text**\ ’s bounding box by which to expand the default **frame**                                                             (Width,Height)
    state             The initial state of the object                                                                                                                                                                                  NORMAL or DISABLED
-   frameTexture      Texture applied directly to the generated **frame**                                                                                                                                                              image filename or Texture object
-   enableEdit        Affects direct-gui-edit functionality                                                                                                                                                                            0 or 1
-   suppressKeys      If 1, suppresses triggers of global keyboard-related Panda events (not part of the GUI system)                                                                                                                   0 or 1
-   suppressMouse     If 1, suppresses triggers of global mouse-related Panda events (e.g. camera controls)                                                                                                                            0 or 1
-   sortOrder         Specifies render order for overlapping objects. Higher numbers are drawn in front of lower numbers.                                                                                                              Number
-   textMayChange     Whether the text of an object can be changed after creation                                                                                                                                                      0 or 1
+   frame_texture      Texture applied directly to the generated **frame**                                                                                                                                                              image filename or Texture object
+   enable_edit        Affects direct-gui-edit functionality                                                                                                                                                                            0 or 1
+   suppress_keys      If 1, suppresses triggers of global keyboard-related Panda events (not part of the GUI system)                                                                                                                   0 or 1
+   suppress_mouse     If 1, suppresses triggers of global mouse-related Panda events (e.g. camera controls)                                                                                                                            0 or 1
+   sort_order         Specifies render order for overlapping objects. Higher numbers are drawn in front of lower numbers.                                                                                                              Number
+   text_may_change     Whether the text of an object can be changed after creation                                                                                                                                                      0 or 1
    ================= ================================================================================================================================================================================================================ =========================================================
 
    Remember that the axes for Panda3D use x for left and right, y for in and out
@@ -145,7 +145,7 @@ DirectGUI
 
    .. code-block:: python
 
-      myDirectObject['keyword'] = value
+      my_direct_object['keyword'] = value
 
    Most properties can be updated in this way, although position and other
    transform-related values cannot be updated via the keyword parameters--
@@ -159,7 +159,7 @@ DirectGUI
 
    .. code-block:: python
 
-      myDirectObject.resetFrameSize()
+      my_direct_object.reset_frame_size()
 
    If you don't do this, you may find, for example, that a button isn't
    clickable because it believes it has a zero-width frame.
@@ -168,9 +168,9 @@ DirectGUI
 
    .. code-block:: python
 
-      myDirectObject.destroy()
+      my_direct_object.destroy()
 
-   It is not sufficient to simply call :meth:`~.NodePath.removeNode()`, since
+   It is not sufficient to simply call :meth:`~.NodePath.remove_node()`, since
    the DirectGUI system adds a number of messenger hooks that need to be cleaned
    up. However, if you have a hierarchy of DirectGUI objects, for instance a
    number of buttons parented to a frame, it is sufficient to call destroy()
@@ -191,7 +191,7 @@ DirectGUI
 
    .. code-block:: cpp
 
-      #include "pgButton.h"
+      #include "pg_button.h"
 
    with PGButton you can create a freely definable clickable button.
 
@@ -239,7 +239,7 @@ DirectGUI
 
    .. code-block:: cpp
 
-      #include "pgSliderBar.h"
+      #include "pg_slider_bar.h"
 
    A simple sliderbar.
 

@@ -89,7 +89,7 @@ Particle Effects
    -  :class:`.TangentRingEmitter`
 
    Each emitter is declared in a separate .h file with the same name as the
-   emitter. For example: ArcEmitter is declared in arcEmitter.h
+   emitter. For example: ArcEmitter is declared in arc_emitter.h
 
    .. code-block:: cpp
 
@@ -120,7 +120,7 @@ Particle Effects
 
    Each renderer is declared in a separate .h file with the same name as the
    renderer. For example: GeomParticleRenderer is declared in
-   geomParticleRenderer.h
+   geom_particle_renderer.h
 
    .. code-block:: cpp
 

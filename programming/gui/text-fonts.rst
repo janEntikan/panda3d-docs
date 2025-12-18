@@ -15,7 +15,7 @@ that is supported by FreeType, directly:
 
    .. code-block:: python
 
-      font = loader.loadFont('arial.ttf')
+      font = loader.load_font('arial.ttf')
 
 .. only:: cpp
 
@@ -39,7 +39,7 @@ associated texture file that can then be loaded as if it were a font:
 
    .. code-block:: python
 
-      font = loader.loadFont('arial.egg')
+      font = loader.load_font('arial.egg')
 
 .. only:: cpp
 
@@ -85,7 +85,7 @@ class :class:`~panda3d.core.DynamicTextFont`, e.g.:
 
    .. code-block:: python
 
-      font.setPixelsPerUnit(60)
+      font.set_pixels_per_unit(60)
 
 .. only:: cpp
 
@@ -117,7 +117,7 @@ To do so you can use the method
 
    .. code-block:: python
 
-      font.setPageSize(512, 512)
+      font.set_page_size(512, 512)
 
 .. only:: cpp
 
@@ -145,7 +145,7 @@ thick, polygonal characters.
 
    .. code-block:: python
 
-      font.setRenderMode(TextFont.RMSolid)
+      font.set_render_mode(TextFont.RMSolid)
 
 .. only:: cpp
 

@@ -155,8 +155,8 @@ that node for the given amount of work groups.
       # Assign the shader and the shader inputs.
       shader = Shader.load_compute(Shader.SL_GLSL, "compute_shader.glsl")
       node_path.set_shader(shader)
-      node_path.set_shader_input("fromTex", myTex1)
-      node_path.set_shader_input("toTex", myTex2)
+      node_path.set_shader_input("fromTex", my_tex1)
+      node_path.set_shader_input("toTex", my_tex2)
 
 .. only:: cpp
 
@@ -174,8 +174,8 @@ that node for the given amount of work groups.
       // Assign the shader and the shader inputs.
       PT(Shader) shader = Shader::load_compute(Shader::SL_GLSL, "compute_shader.glsl");
       node_path.set_shader(shader);
-      node_path.set_shader_input("fromTex", myTex1);
-      node_path.set_shader_input("toTex", myTex2);
+      node_path.set_shader_input("fromTex", my_tex1);
+      node_path.set_shader_input("toTex", my_tex2);
 
 The ordering of nodes becomes especially important; you may not want a
 procedural texture to be rendered on another node before it is first generated
@@ -201,14 +201,14 @@ compute shader:
       shader = Shader.load_compute(Shader.SL_GLSL, "compute_shader.glsl")
       dummy = NodePath("dummy")
       dummy.set_shader(shader)
-      dummy.set_shader_input("fromTex", myTex1)
-      dummy.set_shader_input("toTex", myTex2)
+      dummy.set_shader_input("fromTex", my_tex1)
+      dummy.set_shader_input("toTex", my_tex2)
 
       # Retrieve the underlying ShaderAttrib
       sattr = dummy.get_attrib(ShaderAttrib)
 
       # Dispatch the compute shader, right now!
-      base.graphicsEngine.dispatch_compute((32, 32, 1), sattr, base.win.get_gsg())
+      base.graphics_engine.dispatch_compute((32, 32, 1), sattr, base.win.get_gsg())
 
 .. only:: cpp
 
@@ -218,8 +218,8 @@ compute shader:
       PT(Shader) shader = Shader::load_compute(Shader::SL_GLSL, "compute_shader.glsl");
       NodePath dummy("dummy");
       dummy.set_shader(shader);
-      dummy.set_shader_input("fromTex", myTex1);
-      dummy.set_shader_input("toTex", myTex2);
+      dummy.set_shader_input("fromTex", my_tex1);
+      dummy.set_shader_input("toTex", my_tex2);
 
       // Retrieve the underlying ShaderAttrib
       CPT(ShaderAttrib) sattr = DCAST(ShaderAttrib,

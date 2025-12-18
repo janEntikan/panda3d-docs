@@ -18,17 +18,17 @@ NodePath that will create one for you:
 
    .. code-block:: python
 
-      myNodePath.setBillboardAxis()
-      myNodePath.setBillboardPointWorld()
-      myNodePath.setBillboardPointEye()
+      my_node_path.set_billboard_axis()
+      my_node_path.set_billboard_point_world()
+      my_node_path.set_billboard_point_eye()
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      myNodePath.set_billboard_axis();
-      myNodePath.set_billboard_point_world();
-      myNodePath.set_billboard_point_eye();
+      my_node_path.set_billboard_axis();
+      my_node_path.set_billboard_point_world();
+      my_node_path.set_billboard_point_eye();
 
 Each of the above calls is mutually exclusive; there can be only one kind of
 billboard effect on a node at any given time. To undo a billboard effect, use:
@@ -37,13 +37,13 @@ billboard effect on a node at any given time. To undo a billboard effect, use:
 
    .. code-block:: python
 
-      myNodePath.clearBillboard()
+      my_node_path.clear_billboard()
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      myNodePath.clear_billboard();
+      my_node_path.clear_billboard();
 
 The most common billboard type is an axial billboard, created by the
 :meth:`~.NodePath.set_billboard_axis()` method. This kind of billboard is
@@ -70,22 +70,22 @@ scene. For example:
    .. code-block:: python
 
       # Make it appear as though it is 10 units in front of the camera
-      myNodePath.setBillboardPointEye(-10, fixed_depth=True)
+      my_node_path.set_billboard_point_eye(-10, fixed_depth=True)
 
-      myNodePath.setBin("fixed", 0)
-      myNodePath.setDepthWrite(False)
-      myNodePath.setDepthTest(False)
+      my_node_path.set_bin("fixed", 0)
+      my_node_path.set_depth_write(False)
+      my_node_path.set_depth_test(False)
 
 .. only:: cpp
 
    .. code-block:: cpp
 
       // Make it appear as though it is 10 units in front of the camera
-      myNodePath.set_billboard_point_eye(-10, true);
+      my_node_path.set_billboard_point_eye(-10, true);
 
-      myNodePath.set_bin("fixed", 0);
-      myNodePath.set_depth_write(false);
-      myNodePath.set_depth_test(false);
+      my_node_path.set_bin("fixed", 0);
+      my_node_path.set_depth_write(false);
+      my_node_path.set_depth_test(false);
 
 There are several more options available on a BillboardEffect, but these are
 rarely used. If you need to take advantage of any of these more esoteric
@@ -94,12 +94,12 @@ yourself:
 
 .. code-block:: python
 
-   myEffect = BillboardEffect.make(
-       upVector=vec3,
-       eyeRelative=bool,
-       axialRotate=bool,
+   my_effect = BillboardEffect.make(
+       up_vector=vec3,
+       eye_relative=bool,
+       axial_rotate=bool,
        offset=float,
-       lookAt=nodepath,
-       lookAtPoint=point3
+       look_at=nodepath,
+       look_at_point=point3
    )
-   myNodePath.node().setEffect(myEffect)
+   my_node_path.node().set_effect(my_effect)

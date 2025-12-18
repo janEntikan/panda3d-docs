@@ -14,7 +14,7 @@ Setup
 
 The following code snippet shows how to setup an gas-filled soft body. Instead
 of defining the triangle mesh ourselves we use the convenience method
-``makeEllipsoid``, which returns a ready-to-use soft body with the shape of an
+``make_ellipsoid``, which returns a ready-to-use soft body with the shape of an
 ellipsoid. The last parameter to this convenience method is the "resolution" of
 the ellipsoid. The soft body will have more faces if raising this value.
 Increasing the value will make the soft body more realistic, but it also
@@ -25,29 +25,29 @@ requires more performance to simulate the soft body.
    .. code-block:: python
 
       # Soft body world information
-      info = world.getWorldInfo()
-      info.setAirDensity(1.2)
-      info.setWaterDensity(0)
-      info.setWaterOffset(0)
-      info.setWaterNormal(Vec3(0, 0, 0))
+      info = world.get_world_info()
+      info.set_air_density(1.2)
+      info.set_water_density(0)
+      info.set_water_offset(0)
+      info.set_water_normal(Vec3(0, 0, 0))
 
       # Softbody
       center = Point3(0, 0, 0)
       radius = Vec3(1, 1, 1) * 1.5
 
-      bodyNode = BulletSoftBodyNode.makeEllipsoid(info, center, radius, 128)
-      bodyNode.setName('Ellipsoid')
-      bodyNode.getMaterial(0).setLinearStiffness(0.1)
-      bodyNode.getCfg().setDynamicFrictionCoefficient(1)
-      bodyNode.getCfg().setDampingCoefficient(0.001)
-      bodyNode.getCfg().setPressureCoefficient(1500)
-      bodyNode.setTotalMass(30, True)
-      bodyNode.setPose(True, False)
+      body_node = BulletSoftBodyNode.make_ellipsoid(info, center, radius, 128)
+      body_node.set_name('Ellipsoid')
+      body_node.get_material(0).set_linear_stiffness(0.1)
+      body_node.get_cfg().set_dynamic_friction_coefficient(1)
+      body_node.get_cfg().set_damping_coefficient(0.001)
+      body_node.get_cfg().set_pressure_coefficient(1500)
+      body_node.set_total_mass(30, True)
+      body_node.set_pose(True, False)
 
-      bodyNP = render.attachNewNode(bodyNode)
-      bodyNP.setPos(15, 0, 12)
-      bodyNP.setH(90.0)
-      world.attachSoftBody(bodyNP.node())
+      body_np = render.attach_new_node(body_node)
+      body_np.set_pos(15, 0, 12)
+      body_np.set_h(90.0)
+      world.attach_soft_body(body_np.node())
 
 .. only:: cpp
 
@@ -88,12 +88,12 @@ geometry two-sided, since the inside of the closed mesh is usually not visible.
       from panda3d.core import GeomVertexFormat
       from panda3d.bullet import BulletHelper
 
-      fmt = GeomVertexFormat.getV3n3t2()
-      geom = BulletHelper.makeGeomFromFaces(bodyNode, fmt)
-      bodyNode.linkGeom(geom)
-      visNode = GeomNode('EllipsoidVisual')
-      visNode.addGeom(geom)
-      visNP = bodyNP.attachNewNode(visNode)
+      fmt = GeomVertexFormat.get_v3n3t2()
+      geom = BulletHelper.make_geom_from_faces(body_node, fmt)
+      body_node.link_geom(geom)
+      vis_node = GeomNode('EllipsoidVisual')
+      vis_node.add_geom(geom)
+      vis_np = body_np.attach_new_node(vis_node)
 
 .. only:: cpp
 

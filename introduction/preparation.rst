@@ -122,9 +122,11 @@ between C++ information and Python information.
 
       While many resources for Panda3D are written with Python users in mind, in
       many cases the code can be fairly easily translated to C++. Of particular
-      note is the fact that sample code in Python may use the ``camelCase()``
+      note is the fact that sample code in Python used to be the ``CamelCase()``
       naming convention for methods, which is not available in the C++ API.
-      You will need to translate these to the equivalent ``snake_case()`` names.
+      You needed to translate these to the equivalent ``snake_case()`` names. 
+	  Starting from 1.11 all the python samples have been converted to 
+      ``snake_case()``
 
       Any Python classes in the :mod:`panda3d` package are also available in the
       C++ API, whereas Python classes in the :mod:`direct` package are not.

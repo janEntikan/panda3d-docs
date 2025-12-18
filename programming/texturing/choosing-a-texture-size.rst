@@ -46,7 +46,7 @@ instead, use:
 
 in your config file.
 
-It will then be up to your code to apply ``texture.getTexScale()`` where needed.
+It will then be up to your code to apply ``texture.get_tex_scale()`` where needed.
 This mode does, of course, prevent using repeated textures.
 
 Although you usually shouldn't use non power-of-two textures, for some things
@@ -81,8 +81,8 @@ you need to know how big those black bars are:
 
 .. code-block:: python
 
-   padx = texture.getPadXSize()
-   pady = texture.getPadYSize()
+   padx = texture.get_pad_x_size()
+   pady = texture.get_pad_y_size()
 
 Panda3D only uses padded textures in a few very special cases: 1. When playing
 a non-power-of-two movie. 2. When using render-to-texture, and a

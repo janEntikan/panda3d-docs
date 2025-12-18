@@ -31,10 +31,10 @@ This allows the class to inherit the messaging API and thus listen for events.
 
 .. code-block:: python
 
-   class myClassName(DirectObject.DirectObject):
+   class my_class_name(DirectObject.DirectObject):
 
 The sample below creates a class that can listen for events. The "accept"
-function notifies panda that the printHello method is an event handler for the
+function notifies panda that the print_hello method is an event handler for the
 mouse1 event. The "accept" function and the various event names will be
 explained in detail later.
 
@@ -42,9 +42,9 @@ explained in detail later.
 
    class Hello(DirectObject.DirectObject):
        def __init__(self):
-           self.accept('mouse1', self.printHello)
+           self.accept('mouse1', self.print_hello)
 
-       def printHello(self):
+       def print_hello(self):
            print('Hello!')
 
    h = Hello()
@@ -64,16 +64,16 @@ variable the class is associated with should be used.
 
 .. code-block:: python
 
-   myDirectObject.accept('Event Name', myDirectObjectMethod)
-   myDirectObject.acceptOnce('Event Name', myDirectObjectMethod)
+   my_direct_object.accept('Event Name', my_direct_object_method)
+   my_direct_object.accept_once('Event Name', my_direct_object_method)
 
 Specific events may be ignored, so that no message is sent. Also, all events
 coming from an object may be ignored.
 
 .. code-block:: python
 
-   myDirectObject.ignore('Event Name')
-   myDirectObject.ignoreAll()
+   my_direct_object.ignore('Event Name')
+   my_direct_object.ignore_all()
 
 Finally, there are some useful utility functions for debugging. The messenger
 typically does not print out when every event occurs. Toggling verbose mode will
@@ -85,7 +85,7 @@ the clear method will start the messenger over with a clear dictionary.
 
 .. code-block:: python
 
-   messenger.toggleVerbose()
+   messenger.toggle_verbose()
    print(messenger)
    messenger.clear()
 
@@ -148,7 +148,7 @@ object that would handle the event had been deleted.
 
 One solution (patterned after other parts of the Panda3D architecture) is to
 define a "destroy" method for any custom classes you create, which calls
-"ignoreAll" to unregister from the event-handler system.
+"ignore_all" to unregister from the event-handler system.
 
 .. code-block:: python
 
@@ -165,7 +165,7 @@ define a "destroy" method for any custom classes you create, which calls
 
        # function to get rid of me
        def destroy(self):
-           self.ignoreAll()
+           self.ignore_all()
 
    foo = Test()  # create our test object
    foo.destroy() # get rid of our test object

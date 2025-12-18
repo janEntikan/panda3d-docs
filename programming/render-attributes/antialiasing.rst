@@ -19,23 +19,23 @@ one of the following variants:
 
    .. code-block:: python
 
-      np.setAntialias(AntialiasAttrib.MNone)
-      np.setAntialias(AntialiasAttrib.MPoint)
-      np.setAntialias(AntialiasAttrib.MLine)
-      np.setAntialias(AntialiasAttrib.MPolygon)
-      np.setAntialias(AntialiasAttrib.MMultisample)
-      np.setAntialias(AntialiasAttrib.MAuto)
+      np.set_antialias(AntialiasAttrib.MNone)
+      np.set_antialias(AntialiasAttrib.MPoint)
+      np.set_antialias(AntialiasAttrib.MLine)
+      np.set_antialias(AntialiasAttrib.MPolygon)
+      np.set_antialias(AntialiasAttrib.MMultisample)
+      np.set_antialias(AntialiasAttrib.MAuto)
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      nodePath.set_antialias(AntialiasAttrib::M_none);
-      nodePath.set_antialias(AntialiasAttrib::M_point);
-      nodePath.set_antialias(AntialiasAttrib::M_line);
-      nodePath.set_antialias(AntialiasAttrib::M_polygon);
-      nodePath.set_antialias(AntialiasAttrib::M_multisample);
-      nodePath.set_antialias(AntialiasAttrib::M_auto);
+      node_path.set_antialias(AntialiasAttrib::M_none);
+      node_path.set_antialias(AntialiasAttrib::M_point);
+      node_path.set_antialias(AntialiasAttrib::M_line);
+      node_path.set_antialias(AntialiasAttrib::M_polygon);
+      node_path.set_antialias(AntialiasAttrib::M_multisample);
+      node_path.set_antialias(AntialiasAttrib::M_auto);
 
 In general, when rendering polygonal models, multisample antialiasing looks
 best. However, when rendering lines and points, it usually looks better to
@@ -47,7 +47,7 @@ question. Thus, if you want to enable antialiasing on the whole scene, just use:
 
    .. code-block:: python
 
-      render.setAntialias(AntialiasAttrib.MAuto)
+      render.set_antialias(AntialiasAttrib.MAuto)
 
 .. only:: cpp
 

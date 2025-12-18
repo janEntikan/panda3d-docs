@@ -21,20 +21,20 @@ A simple example of such a dc file may look as follows.
    import DGameObject/AI
    import AIDGameObject/AI
 
-   struct gameDataModel {
+   struct game_data_model {
      string value_a;
      uint8 value_b;
      int8 value_c/100;
    }
 
    dclass DGameObject: DistributedObject {
-     sendGameData(gameDataModel data) p2p;
+     send_game_data(game_data_model data) p2p;
    };
 
    dclass AIDGameObject: DistributedObject {
-     setAnounceGenerate(string helloMsg) broadcast ram;
-     messageRoundtripToAI(gameDataModel data) p2p;
-     messageRoundtripToClient(gameDataModel data) p2p;
+     set_anounce_generate(string hello_msg) broadcast ram;
+     message_roundtrip_to_ai(game_data_model data) p2p;
+     message_roundtrip_to_client(game_data_model data) p2p;
    }
 
 Keywords
@@ -94,7 +94,7 @@ For example, taking the dc representation of an Avatar class as defined here…
 
    import Avatar
    dclass Avatar {
-     setName(string n) required;
+     set_name(string n) required;
    }
 
 …we get this Python class:
@@ -102,17 +102,17 @@ For example, taking the dc representation of an Avatar class as defined here…
 .. code-block:: python
 
    class Avatar:
-       def getName(self):
+       def get_name(self):
            return self.name
 
-       def setName(self, name):
+       def set_name(self, name):
            self.name = name
 
        def d_setName(self, name):
-           self.sendUpdate("setName", [name])
+           self.send_update("set_name", [name])
 
        def b_setName(self, name):
-           self.setName(name)
+           self.set_name(name)
            self.d_setName(name)
 
 Note if, for example, the name value gets changed locally after generation of
@@ -139,10 +139,10 @@ The /AI can also be used for module/filenames like this.
 
 .. code-block:: cpp
 
-   from someManager.DSomeManager/AI import DSomeManager/AI
+   from some_manager.DSomeManager/AI import DSomeManager/AI
 
-This will import the DSomeManager class from ``someManager.DSomeManager.py``
-and DSomeManagerAI from ``someManager.DsomeManagerAI.py``.
+This will import the DSomeManager class from ``some_manager.DSomeManager.py``
+and DSomeManagerAI from ``some_manager.DsomeManagerAI.py``.
 
 Variables
 ---------
@@ -177,7 +177,7 @@ Structs
    struct BarrierData {
      uint16 context;
      string name;
-     uint32 avIds[];
+     uint32 av_ids[];
    };
 
 You can define C-style structs in addition to the dclass (defined below). This
@@ -213,7 +213,7 @@ or set on a value, you can use it like this:
 .. code-block:: cpp
 
    dclass Foo{
-     setHam(int16(1-1000,2001-3000))
+     set_ham(int16(1-1000,2001-3000))
    }
 
 This will only allow numbers from 1-1000 and 2001-3000. This can also be used in
@@ -232,30 +232,30 @@ of DistributedObject. Multiple inheritance is also allowed.
 
 .. code-block:: cpp
 
-   setX(int16 / 10) broadcast ram;
-   setY(int16 / 10) broadcast ram;
-   setZ(int16 / 10) broadcast ram;
+   set_x(int16 / 10) broadcast ram;
+   set_y(int16 / 10) broadcast ram;
+   set_z(int16 / 10) broadcast ram;
 
 Here are three function definitions. When a DistributedNode receives a message
-with the name "setX", :meth:`.DistributedNode.setX()` will be called and the
+with the name "set_x", :meth:`.DistributedNode.set_x()` will be called and the
 values passed to the function.
 
 Syntax:
-functionName(container variable1 <, container variable 2,...>) <parameters>;
+function_name(container variable1 <, container variable 2,...>) <parameters>;
 
 .. code-block:: python
 
-   setH(int16 % 360 / 10) broadcast ram;
-   setP(int16 % 360 / 10) broadcast ram;
-   setR(int16 % 360 / 10) broadcast ram;
+   set_h(int16 % 360 / 10) broadcast ram;
+   set_p(int16 % 360 / 10) broadcast ram;
+   set_r(int16 % 360 / 10) broadcast ram;
 
-   setPos: setX, setY, setZ;
-   setHpr: setH, setP, setR;
-   setPosHpr: setX, setY, setZ, setH, setP, setR;
-   setXY: setX, setY;
-   setXZ: setX, setZ;
-   setXYH: setX, setY, setH;
-   setXYZH: setX, setY, setZ, setH;
+   set_pos: set_x, set_y, set_z;
+   set_hpr: set_h, set_p, set_r;
+   set_pos_hpr: set_x, set_y, set_z, set_h, set_p, set_r;
+   set_xy: set_x, set_y;
+   set_xz: set_x, set_z;
+   set_xyh: set_x, set_y, set_h;
+   set_xyzh: set_x, set_y, set_z, set_h;
 
-These messages are composed of previously defined messages. The message "setPos"
-will contain the message "setX", "setY", "setZ" and their appropriate values.
+These messages are composed of previously defined messages. The message "set_pos"
+will contain the message "set_x", "set_y", "set_z" and their appropriate values.

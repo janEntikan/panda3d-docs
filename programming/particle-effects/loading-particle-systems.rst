@@ -9,7 +9,7 @@ you'll need to tell Panda3D to enable particles:
 
 .. code-block:: python
 
-   base.enableParticles()
+   base.enable_particles()
 
 This function tells Panda3D to enable its built-in physics engine which is also
 used by particles.
@@ -26,21 +26,21 @@ file.
 .. code-block:: python
 
    p = ParticleEffect()
-   p.loadConfig(filename)
+   p.load_config(filename)
 
 To start the ParticleEffect, do this:
 
 .. code-block:: python
 
-   p.start(parent = render, renderParent = render)
+   p.start(parent = render, render_parent = render)
 
 ``start()`` takes two arguments: ``parent`` is the node the particles will be
-"birth-relative" to. ``renderParent`` is the node level the particles will be
+"birth-relative" to. ``render_parent`` is the node level the particles will be
 rendered at. If you want your particles to spawn from your node, but not follow
-it around, set ``renderParent`` to something else like ``render``.
+it around, set ``render_parent`` to something else like ``render``.
 
 ParticleEffect inherits from NodePath, so you can use NodePath methods like
-``setPos()`` on it.
+``set_pos()`` on it.
 
 To reset the ParticleEffect, use:
 
@@ -63,9 +63,9 @@ To completely remove the ParticleEffect, use:
 Note that ``cleanup()`` calls ``disable()`` internally, so you don't need to
 call it yourself before calling ``cleanup()``
 
-Like ``loadConfig()``, you can use ``saveConfig()`` to save the ParticleEffect
+Like ``load_config()``, you can use ``save_config()`` to save the ParticleEffect
 to a particle configuration file (\*.ptf):
 
 .. code-block:: python
 
-   p.saveConfig(filename)
+   p.save_config(filename)

@@ -178,13 +178,13 @@ Running your Program
 
    .. code-block:: python
 
-      pandaInc = '/usr/include/panda3d'
-      pandaLib = '/usr/lib/panda3d'
+      panda_inc = '/usr/include/panda3d'
+      panda_lib = '/usr/lib/panda3d'
 
       Program('filename.cpp',
-          CCFLAGS=['-fPIC', '-O2', '-std=gnu++11'],
-          CPPPATH=[pandaInc],
-          LIBPATH=pandaLib,
+          CCFLAGS=['-f_pic', '-O2', '-std=gnu++11'],
+          CPPPATH=[panda_inc],
+          LIBPATH=panda_lib,
           LIBS=[
               'libp3framework',
               'libpanda',

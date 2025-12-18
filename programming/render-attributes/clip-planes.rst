@@ -74,7 +74,7 @@ any node on which the clipping should take effect:
 
    .. code-block:: python
 
-      render.setClipPlane(plane_np)
+      render.set_clip_plane(plane_np)
 
 .. only:: cpp
 
@@ -97,21 +97,21 @@ node's render state.
 
       base = ShowBase()
 
-      teapot = loader.loadModel("models/teapot")
-      teapot.setScale(10)
-      teapot.reparentTo(render)
+      teapot = loader.load_model("models/teapot")
+      teapot.set_scale(10)
+      teapot.reparent_to(render)
 
       plane1 = Plane((0, 0, 1), (0, 0, 5))
-      plane1_np = render.attachNewNode(PlaneNode("plane1", plane1))
+      plane1_np = render.attach_new_node(PlaneNode("plane1", plane1))
       plane1_np.show()
-      teapot.setClipPlane(plane1_np)
+      teapot.set_clip_plane(plane1_np)
 
       plane2 = Plane((1, 0, 0), (-10, 0, 0))
-      plane2_np = render.attachNewNode(PlaneNode("plane2", plane2))
+      plane2_np = render.attach_new_node(PlaneNode("plane2", plane2))
       plane2_np.show()
-      teapot.setClipPlane(plane2_np)
+      teapot.set_clip_plane(plane2_np)
 
-      base.cam.setPos(10, -200, 30)
+      base.cam.set_pos(10, -200, 30)
       base.run()
 
 .. note::

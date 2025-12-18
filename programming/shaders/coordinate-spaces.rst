@@ -54,15 +54,15 @@ are 7x7 possible matrices, of which 7 are the identity matrix.
 ======================== =========================== ======================== ====================
 Desired Matrix           Source                      Syntax                   GLSL input
 ======================== =========================== ======================== ====================
-The Modelview Matrix     gsg.getInternalTransform()  trans_model_to_apiview   p3d_ModelViewMatrix
-The Projection Matrix    gsg.getProjectionMat()      trans_apiview_to_apiclip p3d_ProjectionMatrix
-the DirectX world matrix model.getNetTransform()     trans_model_to_world     p3d_ModelMatrix
-the DirectX view matrix  scene.getCsWorldTransform() trans_world_to_apiview   p3d_ViewMatrix
-\                        scene.getCameraTransform()  trans_view_to_world
-\                        scene.getWorldTransform()   trans_world_to_view
-\                        gsg.getExternalTransform()  trans_model_to_view
-\                        gsg.getCsTransform()        trans_view_to_apiview
-\                        gsg.getInvCsTransform()     trans_apiview_to_view
+The Modelview Matrix     gsg.get_internal_transform()  trans_model_to_apiview   p3d_ModelViewMatrix
+The Projection Matrix    gsg.get_projection_mat()      trans_apiview_to_apiclip p3d_ProjectionMatrix
+the DirectX world matrix model.get_net_transform()     trans_model_to_world     p3d_ModelMatrix
+the DirectX view matrix  scene.get_cs_world_transform() trans_world_to_apiview   p3d_ViewMatrix
+\                        scene.get_camera_transform()  trans_view_to_world
+\                        scene.get_world_transform()   trans_world_to_view
+\                        gsg.get_external_transform()  trans_model_to_view
+\                        gsg.get_cs_transform()        trans_view_to_apiview
+\                        gsg.get_inv_cs_transform()     trans_apiview_to_view
 ======================== =========================== ======================== ====================
 
 A note about GLSL inputs
@@ -105,8 +105,8 @@ shader subsystem using :meth:`.NodePath.set_shader_input()`:
 
    .. code-block:: python
 
-      myhouse = loader.loadModel("myhouse")
-      render.setShaderInput("myhouse", myhouse)
+      myhouse = loader.load_model("myhouse")
+      render.set_shader_input("myhouse", myhouse)
 
 .. only:: cpp
 
@@ -135,7 +135,7 @@ particularly useful when doing shadow mapping:
 
    .. code-block:: python
 
-      render.setShaderInput("shadowcam", shadowcam)
+      render.set_shader_input("shadowcam", shadowcam)
 
 .. only:: cpp
 

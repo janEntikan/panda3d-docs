@@ -12,10 +12,10 @@ Here is an example of a custom class:
 
    class MyClass:
        def __init__(self):
-           myVar1 = 10
-           myVar2 = 20
-       def myMethod(self):
-           return (self.myVar1, self.myVar2)
+           my_var1 = 10
+           my_var2 = 20
+       def my_method(self):
+           return (self.my_var1, self.my_var2)
 
 From Panda3D 1.6 Game Engine Beginner's Guide:
 
@@ -63,11 +63,11 @@ custom class instance is properly garbage collected.
    task.done. This is the most reliable way to stop them and clear the reference
    to the custom class in the task manager.
 
-6. If the custom class inherits from DirectObject, call ``self.ignoreAll()``–
+6. If the custom class inherits from DirectObject, call ``self.ignore_all()``–
    Panda3D’s message system will also retain a reference to the custom class if
    it is set up to receive messages. To be on the safe side, every class that
    inherits from DirectObject and will be deleted during run time should call
-   ``self.ignoreAll()`` to tell the message system that the class is no longer
+   ``self.ignore_all()`` to tell the message system that the class is no longer
    listening to messages. That will remove the reference.
 
 7. Remove all direct references to the custom class instance – Naturally, the

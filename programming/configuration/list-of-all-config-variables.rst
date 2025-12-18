@@ -12,8 +12,8 @@ using this code:
 
    .. code-block:: python
 
-      ConfigVariableManager.getGlobalPtr().listVariables()
-      ConfigVariableManager.getGlobalPtr.listDynamicVariables()
+      ConfigVariableManager.get_global_ptr().list_variables()
+      ConfigVariableManager.get_global_ptr.list_dynamic_variables()
 
 .. only:: cpp
 

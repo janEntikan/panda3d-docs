@@ -19,11 +19,11 @@ settings have to be done. The following code will create rectangular path with
 
       from panda3d.bullet import BulletSoftBodyNode
 
-      info = self.world.getWorldInfo()
-      info.setAirDensity(1.2)
-      info.setWaterDensity(0)
-      info.setWaterOffset(0)
-      info.setWaterNormal(Vec3(0, 0, 0))
+      info = self.world.get_world_info()
+      info.set_air_density(1.2)
+      info.set_water_density(0)
+      info.set_water_offset(0)
+      info.set_water_normal(Vec3(0, 0, 0))
 
       resx = 31
       resy = 31
@@ -36,16 +36,16 @@ settings have to be done. The following code will create rectangular path with
       fixeds = 1+2+4+8
       gendiags = True
 
-      bodyNode = BulletSoftBodyNode.makePatch(info, p00, p10, p01, p11, resx, resy, fixeds, gendiags)
+      body_node = BulletSoftBodyNode.make_patch(info, p00, p10, p01, p11, resx, resy, fixeds, gendiags)
 
-      material = bodyNode.appendMaterial()
-      material.setLinearStiffness(0.4)
-      bodyNode.generateBendingConstraints(2, material)
+      material = body_node.append_material()
+      material.set_linear_stiffness(0.4)
+      body_node.generate_bending_constraints(2, material)
 
-      bodyNode.setTotalMass(50.0)
-      bodyNode.getShape(0).setMargin(0.5)
-      bodyNP = self.worldNP.attachNewNode(bodyNode)
-      world.attachSoftBody(bodyNode)
+      body_node.set_total_mass(50.0)
+      body_node.get_shape(0).set_margin(0.5)
+      body_np = self.world_np.attach_new_node(body_node)
+      world.attach_soft_body(body_node)
 
 .. only:: cpp
 
@@ -63,7 +63,7 @@ and third corner (diagonal) we would set the value to 1+8=9, and to not attach
 it at all we would set it to 0.
 
 Now we can create the soft body node using the factory method
-``makePatch``. The following
+``make_patch``. The following
 configuration differs from what we have seen for soft body ropes.
 
 -  First we create an additional material attached to the soft body. Initially
@@ -91,12 +91,12 @@ snippet shows how use this helper method.
       from panda3d.core import GeomVertexFormat
       from panda3d.bulletimport BulletHelper
 
-      fmt = GeomVertexFormat.getV3n3t2()
-      geom = BulletHelper.makeGeomFromFaces(bodyNode, fmt, True)
-      bodyNode.linkGeom(geom)
-      visNode = GeomNode('')
-      visNode.addGeom(geom)
-      visNP = bodyNP.attachNewNode(visNode)
+      fmt = GeomVertexFormat.get_v3n3t2()
+      geom = BulletHelper.make_geom_from_faces(body_node, fmt, True)
+      body_node.link_geom(geom)
+      vis_node = GeomNode('')
+      vis_node.add_geom(geom)
+      vis_np = body_np.attach_new_node(vis_node)
 
 .. only:: cpp
 
@@ -104,7 +104,7 @@ snippet shows how use this helper method.
 
       TODO
 
-The third parameter to ``makeGeomFromFaces``
+The third parameter to ``make_geom_from_faces``
 is set to ``True``, making the
 created geometry be two-sided. If set to
 ``False`` we would get a
@@ -119,9 +119,9 @@ following code shows a convenience method which will do this for us.
 
    .. code-block:: python
 
-      tex = loader.loadTexture('models/panda.jpg')
-      visNP.setTexture(tex)
-      BulletHelper.makeTexcoordsForPatch(geom, resx, resy)
+      tex = loader.load_texture('models/panda.jpg')
+      vis_np.set_texture(tex)
+      BulletHelper.make_texcoords_for_patch(geom, resx, resy)
 
 .. only:: cpp
 

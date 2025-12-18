@@ -8,7 +8,7 @@ the :class:`.TimeManager`. This object, when created is also propagated to the
 clients if they define interest in the specific zone the manager has been
 created in.
 
-Clients may also simply access the time manager from the timeManager variable
+Clients may also simply access the time manager from the time_manager variable
 defined in the CR when it has been created on the AI and the client has stated
 interest in the zone the time manager lives in.
 
@@ -18,6 +18,6 @@ DirectObject.
 
 .. code-block:: python
 
-   self.timeManager = self.createDistributedObject(
-       className = 'TimeManagerAI',
-       zoneId = 1)
+   self.time_manager = self.create_distributed_object(
+       class_name = 'TimeManagerAI',
+       zone_id = 1)

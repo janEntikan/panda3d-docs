@@ -13,10 +13,10 @@ the :meth:`.NodePath.set_fog` method:
 
    .. code-block:: python
 
-      myFog = Fog("Fog Name")
-      myFog.setColor(R, G, B)
-      myFog.setExpDensity(Float 0 to 1)
-      render.setFog(myFog)
+      my_fog = Fog("Fog Name")
+      my_fog.set_color(R, G, B)
+      my_fog.set_exp_density(Float 0 to 1)
+      render.set_fog(my_fog)
 
 .. only:: cpp
 
@@ -48,7 +48,7 @@ To remove the fog attribute later, use the :meth:`~.NodePath.clear_fog` method:
 
    .. code-block:: python
 
-      render.clearFog()
+      render.clear_fog()
 
 .. only:: cpp
 
@@ -63,13 +63,13 @@ to match the fog:
 
    .. code-block:: python
 
-      base.setBackgroundColor(myFogColor)
+      base.set_background_color(my_fog_color)
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      window->get_display_region_3d()->set_clear_color(myFogColor);
+      window->get_display_region_3d()->set_clear_color(my_fog_color);
 
 Fog Modes
 ---------
@@ -103,7 +103,7 @@ Linear Fog
 This is the default mode. In this mode the position and orientation of a
 :class:`.Fog` node are important.
 A linear-mode :class:`.Fog` node must first be parented into the scene graph,
-then activated by calling :meth:`set_fog(fogNode) <.NodePath.set_fog>` on some
+then activated by calling :meth:`set_fog(fog_node) <.NodePath.set_fog>` on some
 :class:`.NodePath` in the scene graph.
 
 Setup a linear fog node at the origin:
@@ -114,11 +114,11 @@ Setup a linear fog node at the origin:
 
       color = (0.5, 0.8, 0.8)
       linfog = Fog("A linear-mode Fog node")
-      linfog.setColor(*color)
-      linfog.setLinearRange(0, 320)
-      linfog.setLinearFallback(45, 160, 320)
-      render.attachNewNode(linfog)
-      render.setFog(linfog)
+      linfog.set_color(*color)
+      linfog.set_linear_range(0, 320)
+      linfog.set_linear_fallback(45, 160, 320)
+      render.attach_new_node(linfog)
+      render.set_fog(linfog)
 
 .. only:: cpp
 
@@ -197,10 +197,10 @@ wide exponential fog:
 
       color = (0.5, 0.8, 0.8)
       expfog = Fog("Scene-wide exponential Fog object")
-      expfog.setColor(*color)
-      expfog.setExpDensity(0.005)
-      render.setFog(expfog)
-      base.setBackgroundColor(*color)
+      expfog.set_color(*color)
+      expfog.set_exp_density(0.005)
+      render.set_fog(expfog)
+      base.set_background_color(*color)
 
 .. only:: cpp
 
@@ -229,7 +229,7 @@ The exponential fog effect can be turned off again using
 
    .. code-block:: python
 
-      render.clearFog()
+      render.clear_fog()
 
 .. only:: cpp
 

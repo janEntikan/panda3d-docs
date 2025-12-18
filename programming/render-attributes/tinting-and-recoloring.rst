@@ -41,13 +41,13 @@ specified by the model loader.
 
    .. code-block:: python
 
-      nodePath.setColor(r, g, b, a)
+      node_path.set_color(r, g, b, a)
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      nodePath.set_color(r, g, b, a);
+      node_path.set_color(r, g, b, a);
 
 Again, this is an override. If the model already had vertex colors, these will
 disappear: the :meth:`~.NodePath.set_color()` method is replacing those colors
@@ -65,19 +65,19 @@ Tinting the Model
 -----------------
 
 Sometimes, you don't want to replace the existing color; sometimes, you want to
-tint the existing colors. For this, you need setColorScale:
+tint the existing colors. For this, you need set_color_scale:
 
 .. only:: python
 
    .. code-block:: python
 
-      nodePath.setColorScale(r, g, b, a)
+      node_path.set_color_scale(r, g, b, a)
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      nodePath.set_color_scale(r, g, b, a);
+      node_path.set_color_scale(r, g, b, a);
 
 This color will be modulated (multiplied) with the existing color.
 
@@ -98,25 +98,25 @@ colors and no texture:
    from panda3d.core import ColorAttrib
 
    # Load three copies of Nik's dragon, which has vertex colors.
-   model1 = loader.loadModel("nik-dragon")
-   model2 = loader.loadModel("nik-dragon")
-   model3 = loader.loadModel("nik-dragon")
+   model1 = loader.load_model("nik-dragon")
+   model2 = loader.load_model("nik-dragon")
+   model3 = loader.load_model("nik-dragon")
 
    # Put them in the scene.
-   model1.reparentTo(render)
-   model2.reparentTo(render)
-   model3.reparentTo(render)
+   model1.reparent_to(render)
+   model2.reparent_to(render)
+   model3.reparent_to(render)
 
    # Arrange them left-to-right
-   model1.setPos(-10,50,0)
-   model2.setPos(  0,50,0)
-   model3.setPos( 10,50,0)
+   model1.set_pos(-10,50,0)
+   model2.set_pos(  0,50,0)
+   model3.set_pos( 10,50,0)
 
    # Model 1 will be left alone, so you can see the original.
    # Model 2 will be recolored light blue.
    # Model 3 will be tinted light blue.
-   model2.setColor(0.6, 0.6, 1.0, 1.0)
-   model3.setColorScale(0.6, 0.6, 1.0, 1.0)
+   model2.set_color(0.6, 0.6, 1.0, 1.0)
+   model3.set_color_scale(0.6, 0.6, 1.0, 1.0)
 
    base.run()
 
@@ -126,9 +126,9 @@ This produces the following output:
 
 The model on the left is the original, unaltered model. Nik has used vertex
 colors throughout. The yellow of the belly, the black eyes, the red mouth, these
-are all vertex colors. The one in the middle has been ``setColor`` ed to a
-medium-blue color. As you can see, the ``setColor`` completely replaces the
-vertex colors. The one on the right bas been ``setColorScale`` ed to the same
+are all vertex colors. The one in the middle has been ``set_color`` ed to a
+medium-blue color. As you can see, the ``set_color`` completely replaces the
+vertex colors. The one on the right bas been ``set_color_scale`` ed to the same
 medium-blue color, but this only tints the model.
 
 A Note about Color Spaces
@@ -150,7 +150,7 @@ function:
 
    .. code-block:: python
 
-      model1.setColor(LColor(0.6, 0.5, 0.3, 1) ** 2.2)
+      model1.set_color(LColor(0.6, 0.5, 0.3, 1) ** 2.2)
 
 .. only:: cpp
 
@@ -167,7 +167,7 @@ For example, to apply the ``#51C2C6`` color, you can do as follows:
 
       from panda3d.core import decode_sRGB_float
 
-      model1.setColor(
+      model1.set_color(
          decode_sRGB_float(0x51),
          decode_sRGB_float(0xC2),
          decode_sRGB_float(0xC6),

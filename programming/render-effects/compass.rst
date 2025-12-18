@@ -28,13 +28,13 @@ infinite) bounding volume on the effect node.
 
    .. code-block:: python
 
-      nodePath.setCompass()
+      node_path.set_compass()
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      nodePath.set_compass();
+      node_path.set_compass();
 
 If a :class:`.NodePath` is supplied to the :meth:`~.NodePath.set_compass()`
 call, it indicates the node to which the rotation will be kept relative (which

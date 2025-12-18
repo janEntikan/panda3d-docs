@@ -13,19 +13,19 @@ Simple FSM Usage
    or punctuation marks; by Panda3D convention, state names should begin with a
    capital letter. An FSM is always in exactly one state a time; the name of the
    current state in stored in ``fsm.state``. When it transitions from one state
-   to another, it first calls ``exitOldState()``, and then it calls
-   ``enterNewState()``, where OldState is the name of the previous state, and
+   to another, it first calls ``exit_old_state()``, and then it calls
+   ``enter_new_state()``, where OldState is the name of the previous state, and
    NewState is the name of the state it is entering. While it is making this
    transition, the FSM is not technically in either state, and ``fsm.state``
    will be None--but you can find both old and new state names in
-   ``fsm.oldState`` and ``fsm.newState``, respectively.
+   ``fsm.old_state`` and ``fsm.new_state``, respectively.
 
    To define a possible state for an FSM, you only need to define an
-   ``enterStateName()`` and/or ``exitStateName()`` method on your class, where
+   ``enter_state_name()`` and/or ``exit_state_name()`` method on your class, where
    StateName is the name of the state you would like to define. The
-   ``enterStateName()`` method should perform all the necessary action for
-   entering your new state, and the corresponding ``exitStateName()`` method
-   should generally undo everything that was done in ``enterStateName()``, so
+   ``enter_state_name()`` method should perform all the necessary action for
+   entering your new state, and the corresponding ``exit_state_name()`` method
+   should generally undo everything that was done in ``enter_state_name()``, so
    that the world is returned to a neutral state.
 
    An FSM starts and finishes in the state named "Off". When the FSM is created,
@@ -37,13 +37,13 @@ Simple FSM Usage
    :py:meth:`fsm.request('StateName') <direct.fsm.FSM.FSM.request>`, where
    StateName is the state you would like it to transition to.
 
-   Arguments to enterStateName methods
+   Arguments to enter_state_name methods
    -----------------------------------
 
-   Normally, both ``enterStateName()`` and ``exitStateName()`` take no arguments
+   Normally, both ``enter_state_name()`` and ``exit_state_name()`` take no arguments
    (other than self). However, if your FSM requires some information before it
    can transition to a particular state, you can define any arguments you like
-   to the enterStateName method for that state; these arguments should be passed
+   to the enter_state_name method for that state; these arguments should be passed
    in to the ``request()`` call, following the state name.
 
    .. code-block:: python
@@ -52,21 +52,21 @@ Simple FSM Usage
 
       class AvatarFSM(FSM):
 
-          def enterWalk(self, speed, doorMask):
-              avatar.setPlayRate(speed, 'walk')
+          def enter_walk(self, speed, door_mask):
+              avatar.set_play_rate(speed, 'walk')
               avatar.loop('walk')
-              footstepsSound.play()
-              enableDoorCollisions(doorMask)
+              footsteps_sound.play()
+              enable_door_collisions(door_mask)
 
-          def exitWalk(self):
+          def exit_walk(self):
               avatar.stop()
-              footstepsSound.stop()
-              disableDoorCollisions()
+              footsteps_sound.stop()
+              disable_door_collisions()
 
-      myfsm = AvatarFSM('myAvatar')
+      myfsm = AvatarFSM('my_avatar')
       myfsm.request('Walk', 1.0, BitMask32.bit(2))
 
-   Note that the exitStateName method must always take no arguments.
+   Note that the exit_state_name method must always take no arguments.
 
    Allowed and disallowed state transitions
    ----------------------------------------
@@ -98,19 +98,19 @@ Simple FSM Usage
    in state 'Walk', that's a bug; you might prefer to have the FSM throw an
    exception, so you can find this bug.
 
-   To enforce this, you can store ``self.defaultTransitions`` in the FSM's
+   To enforce this, you can store ``self.default_transitions`` in the FSM's
    ``__init__()`` method. This should be a map of allowed transitions from each
    state. That is, each key of the map is a state name; for that key, the value
    is a list of allowed transitions from the indicated state. Any transition not
-   listed in defaultTransitions is considered invalid. For example:
+   listed in default_transitions is considered invalid. For example:
 
    .. code-block:: python
 
       class AvatarFSM(FSM):
 
           def __init__(self):
-              FSM.__init__(self, 'myAvatar')
-              self.defaultTransitions = {
+              FSM.__init__(self, 'my_avatar')
+              self.default_transitions = {
                   'Walk' : [ 'Walk2Swim' ],
                   'Walk2Swim' : [ 'Swim' ],
                   'Swim' : [ 'Swim2Walk', 'Drowning' ],
@@ -118,7 +118,7 @@ Simple FSM Usage
                   'Drowning' : [ ],
               }
 
-   If you do not assign anything to ``self.defaultTransitions()``, then all
+   If you do not assign anything to ``self.default_transitions()``, then all
    transitions are legal. However, if you do assign a map like the above, then
    requesting a transition that is not listed in the map will raise the
    exception :py:exc:`FSM.RequestDenied <direct.fsm.FSM.RequestDenied>`.

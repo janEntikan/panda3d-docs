@@ -122,7 +122,7 @@ the drawing commands from two frames ago, and you can't reliably interrupt this
 without taking a big performance hit. So this means that OpenGL callbacks and
 the like have to be sensitive to the threaded nature of the graphics pipeline.
 (This is why Panda's interface to the graphics window requires an indirect call:
-base.win.requestProperties(), rather than base.win.setProperties(). It's
+base.win.request_properties(), rather than base.win.set_properties(). It's
 necessary because the property-change request must be handled by the draw
 thread.)
 

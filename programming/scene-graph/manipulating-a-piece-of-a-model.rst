@@ -45,7 +45,7 @@ labeled:
 
 .. code-block:: bash
 
-   egg-optchar -d outputDir -flag Sphere01=theHead modelFile.egg anim1.egg anim2.egg
+   egg-optchar -d output_dir -flag Sphere01=the_head model_file.egg anim1.egg anim2.egg
 
 Note that you must always supply the model file(s) and all of its animation
 files to egg-optchar at the same time. This is so it can examine all of the
@@ -62,13 +62,13 @@ you can obtain a pointer to it using the :meth:`~.NodePath.find()` method:
 
    .. code-block:: python
 
-      myModelsHead = myModel.find("**/theHead")
+      my_models_head = my_model.find("**/the_head")
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      NodePath myModelsHead = myModel.find("**/theHead");
+      NodePath my_models_head = my_model.find("**/the_head");
 
 With this NodePath, you can manipulate the head separately from the rest of the
 model. For example, you can move the piece using :meth:`~.NodePath.set_pos()`,

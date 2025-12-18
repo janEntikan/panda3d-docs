@@ -12,11 +12,11 @@ particular emitter. All emitters have a number of common parameters.
 
 ==================== ================================================ ==================================
 **Variable**         **Definition**                                   **Values**
-emissionType         Emission mode                                    ET_EXPLICIT, ET_RADIATE, ET_CUSTOM
-explicitLaunchVector Initial velocity in explicit mode                (x, y, z)
-radiateOrigin        Point particles launch away from in radiate mode (x, y, z)
+emission_type         Emission mode                                    ET_EXPLICIT, ET_RADIATE, ET_CUSTOM
+explicit_launch_vector Initial velocity in explicit mode                (x, y, z)
+radiate_origin        Point particles launch away from in radiate mode (x, y, z)
 amplitude            Launch velocity multiplier                       (-infinity, infinity)
-amplitudeSpeed       Spread for launch velocity multiplier            [0, infinity)
+amplitude_speed       Spread for launch velocity multiplier            [0, infinity)
 ==================== ================================================ ==================================
 
 
@@ -29,8 +29,8 @@ BoxEmitter
 
 ============ ============================ ==========
 **Variable** **Definition**               **Values**
-minBound     Minimum point for box volume (x, y, z)
-maxBound     Maximum point for box volume (x, y, z)
+min_bound     Minimum point for box volume (x, y, z)
+max_bound     Maximum point for box volume (x, y, z)
 ============ ============================ ==========
 
 
@@ -43,11 +43,11 @@ DiscEmitter
 ============== ===================================================== =====================
 **Variable**   **Definition**                                        **Values**
 radius         Radius of disc                                        [0, infinity)
-outerAngle     Particle launch angle at edge of disc                 [0, 360]
-innterAngle    Particle launch angle at center of disc               [0, 360]
-outerMagnitude Launch velocity multiplier at edge of disc            (-infinity, infinity)
-innerMagnitude Launch velocity multiplier at center of disc          (-infinity, infinity)
-cubicLerping   Whether or not magnitude/angle interpolation is cubic Boolean
+outer_angle     Particle launch angle at edge of disc                 [0, 360]
+innter_angle    Particle launch angle at center of disc               [0, 360]
+outer_magnitude Launch velocity multiplier at edge of disc            (-infinity, infinity)
+inner_magnitude Launch velocity multiplier at center of disc          (-infinity, infinity)
+cubic_lerping   Whether or not magnitude/angle interpolation is cubic Boolean
 ============== ===================================================== =====================
 
 
@@ -72,8 +72,8 @@ RectangleEmitter
 
 ============ =============================== ==========
 **Variable** **Definition**                  **Values**
-minBound     2D point defining the rectangle (x, z)
-maxBound     2D point defining the rectangle (x, z)
+min_bound     2D point defining the rectangle (x, z)
+max_bound     2D point defining the rectangle (x, z)
 ============ =============================== ==========
 
 

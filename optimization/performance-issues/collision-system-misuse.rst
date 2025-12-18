@@ -46,7 +46,7 @@ parent node, and only proceed to test the child nodes if this passes.
 
    .. code-block:: python
 
-      model.subdivideCollisions(4)
+      model.subdivide_collisions(4)
 
    The argument is the number of solids to put in the leaves of the hierarchy.
    You can experiment with this number to find the value that gives the best

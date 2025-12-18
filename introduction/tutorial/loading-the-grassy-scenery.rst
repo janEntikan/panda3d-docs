@@ -48,8 +48,8 @@ Update your code as follows:
       :language: python
       :linenos:
 
-   The ShowBase procedure :py:meth:`loader.loadModel()
-   <direct.showbase.Loader.Loader.loadModel>` loads the specified file, in this
+   The ShowBase procedure :py:meth:`loader.load_model()
+   <direct.showbase.Loader.Loader.load_model>` loads the specified file, in this
    case the environment.egg file in the models folder. The return value is an
    object of the :class:`.NodePath` class, effectively a pointer to the model.
    Note that :ref:`filename-syntax` uses the forward-slash, even under Windows.

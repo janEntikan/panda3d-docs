@@ -10,8 +10,8 @@ Usage
 
 .. code-block:: python
 
-   myMovieTexture = loader.loadTexture("myMovie.avi")
-   myObject.setTexture(myMovieTexture)
+   my_movie_texture = loader.load_texture("my_movie.avi")
+   my_object.set_texture(my_movie_texture)
 
 The movie subsystem is implemented using FFMPEG. Therefore, it supports all of
 the formats that FFMPEG supports. The functions to control the movie are as
@@ -21,26 +21,26 @@ follows:
 
    movie.play()
    movie.stop()
-   movie.setTime(t)
-   movie.getTime()
-   movie.setLoopCount(n)
-   movie.getLoopCount()
-   movie.setPlayRate(speed)
-   movie.getPlayRate()
-   movie.isPlaying()
+   movie.set_time(t)
+   movie.get_time()
+   movie.set_loop_count(n)
+   movie.get_loop_count()
+   movie.set_play_rate(speed)
+   movie.get_play_rate()
+   movie.is_playing()
 
 If you want to hear the movie's audio as well, you need to load it twice: once
 as a texture, and once as a sound file:
 
 .. code-block:: python
 
-   mySound = loader.loadSfx("myMovie.avi")
+   my_sound = loader.load_sfx("my_movie.avi")
 
 Then, you can synchronize the video to the audio:
 
 .. code-block:: python
 
-   myMovieTexture.synchronizeTo(mySound)
+   my_movie_texture.synchronize_to(my_sound)
 
 From that point forward, playing the audio will cause the texture to update.
 This is more accurate than synchronizing the video manually.

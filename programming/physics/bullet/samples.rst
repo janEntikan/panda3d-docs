@@ -25,40 +25,40 @@ Stack of cubes falling on top of each other:
       from panda3d.bullet import BulletRigidBodyNode
       from panda3d.bullet import BulletBoxShape
 
-      base.cam.setPos(10, -30, 20)
-      base.cam.lookAt(0, 0, 5)
+      base.cam.set_pos(10, -30, 20)
+      base.cam.look_at(0, 0, 5)
 
       # World
       world = BulletWorld()
-      world.setGravity(Vec3(0, 0, -9.81))
+      world.set_gravity(Vec3(0, 0, -9.81))
 
       # Plane
       shape = BulletPlaneShape(Vec3(0, 0, 1), 1)
       node = BulletRigidBodyNode('Ground')
-      node.addShape(shape)
-      np = render.attachNewNode(node)
-      np.setPos(0, 0, -2)
-      world.attachRigidBody(node)
+      node.add_shape(shape)
+      np = render.attach_new_node(node)
+      np.set_pos(0, 0, -2)
+      world.attach_rigid_body(node)
 
       # Boxes
-      model = loader.loadModel('models/box.egg')
-      model.setPos(-0.5, -0.5, -0.5)
-      model.flattenLight()
+      model = loader.load_model('models/box.egg')
+      model.set_pos(-0.5, -0.5, -0.5)
+      model.flatten_light()
       shape = BulletBoxShape(Vec3(0.5, 0.5, 0.5))
       for i in range(10):
           node = BulletRigidBodyNode('Box')
-          node.setMass(1.0)
-          node.addShape(shape)
-          np = render.attachNewNode(node)
-          np.setPos(0, 0, 2+i*2)
-          world.attachRigidBody(node)
-          model.copyTo(np)
+          node.set_mass(1.0)
+          node.add_shape(shape)
+          np = render.attach_new_node(node)
+          np.set_pos(0, 0, 2+i*2)
+          world.attach_rigid_body(node)
+          model.copy_to(np)
 
       # Update
       def update(task):
         dt = base.clock.dt
-        world.doPhysics(dt)
+        world.do_physics(dt)
         return task.cont
 
-      taskMgr.add(update, 'update')
+      task_mgr.add(update, 'update')
       base.run()

@@ -35,7 +35,7 @@ your graphics card will impose some limit on the number it can render on any one
 node. Modern graphics cards will typically have a limit of 4 or 8 textures at
 once; some older cards can only do 2, and some very old cards have a limit of 1
 (only one texture at a time). You can find out the multitexture limit on your
-particular card with the call :meth:`base.win.getGsg().get_max_texture_stages()
+particular card with the call :meth:`base.win.get_gsg().get_max_texture_stages()
 <.GraphicsStateGuardian.get_max_texture_stages>`.
 
 Remember, however, that this limit only restricts the number of different
@@ -51,11 +51,11 @@ textures will still be in effect:
 
 .. code-block:: python
 
-   smiley = loader.loadModel('smiley.egg')
-   smiley.reparentTo(render)
-   tex = loader.loadTexture('maps/noise.rgb')
+   smiley = loader.load_model('smiley.egg')
+   smiley.reparent_to(render)
+   tex = loader.load_texture('maps/noise.rgb')
    ts = TextureStage('ts')
-   smiley.setTexture(ts, tex)
+   smiley.set_texture(ts, tex)
 
 Note that we can create a new TextureStage object on the fly; the only parameter
 required to the TextureStage parameter is a name, which is significant only to
@@ -75,7 +75,7 @@ To undo a previous call to add a texture, use:
 
    .. code-block:: python
 
-      smiley.clearTexture(ts)
+      smiley.clear_texture(ts)
 
 .. only:: cpp
 
@@ -90,7 +90,7 @@ may simply use:
 
    .. code-block:: python
 
-      smiley.clearTexture()
+      smiley.clear_texture()
 
 .. only:: cpp
 

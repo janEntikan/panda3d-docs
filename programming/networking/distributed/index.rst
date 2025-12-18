@@ -24,7 +24,7 @@ up whenever you stumble upon one, we'll list them here.
    DOG
       Distributed Object Global
 
-   doId
+   do_id
       Distributed Object Identifier
 
    AI

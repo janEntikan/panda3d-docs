@@ -20,7 +20,7 @@ sparks, fire, smoke, and steam to name a few. Particle effect systems are very
 complicated. It's not likely that you would be able to create any good systems
 just by reading a list of available parameters. You need to be able to see and
 manipulate the systems to really get results. Fortunately, there is a tool built
-into Panda for visualizing particle effects. particlePanelLoader.py contains the
+into Panda for visualizing particle effects. particle_panel_loader.py contains the
 code needed to run the Particle Panel. Run it, and you should see a black screen
 with a default particle effect, and a second window listing the parameters for
 that effect.
@@ -45,7 +45,7 @@ inspiration. The Panel does need some improvements because it is somewhat buggy.
 It can crash, especially when dragged around, and forgets some settings when
 they are saved out to a ptf. It forgets to include the extension of the texture
 for a SpriteRenderer, so you need to open the file by hand and correct the
-loader.loadTexture command or it will not load. It also forgets to record the
+loader.load_texture command or it will not load. It also forgets to record the
 axis masks on forces.
 
 .. rubric:: Back to the List of Sample Programs:

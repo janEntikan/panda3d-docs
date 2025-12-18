@@ -95,7 +95,7 @@ Things that don't matter as much, but will give programmers warm-fuzzies
 
 Programmers live in a world where names and naming conventions are incredibly
 important. Nothing makes them happier than when the names of art assets fit in
-well with their code. Common naming conventions are: mixedCaseNames,
+well with their code. Common naming conventions are: snake_case_names,
 CapitalizedMixedCaseNames, names_with_underscores, names-with-hyphens. Pick
 one and stick with it.
 

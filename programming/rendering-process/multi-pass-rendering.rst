@@ -29,17 +29,17 @@ changed/overridden after the :class:`.Camera` has been put on a scene.
 
    .. code-block:: python
 
-      # This makes everything drawn by the default camera use myNodePath's
+      # This makes everything drawn by the default camera use my_node_path's
       # RenderState.
-      base.cam.node().setInitialState(myNodePath.getState())
+      base.cam.node().set_initial_state(my_node_path.get_state())
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      // This makes everything drawn by the default camera use myNodePath's
+      // This makes everything drawn by the default camera use my_node_path's
       // RenderState.
-      window->get_camera(0)->set_initial_state(myNodePath.get_state());
+      window->get_camera(0)->set_initial_state(my_node_path.get_state());
 
 You may, however, want more control over what :class:`.RenderState` gets
 assigned to each node in the scene. You can do this using the :class:`.Camera`
@@ -55,33 +55,33 @@ named ``key``, it is assigned whatever state is associated with ``value``.
    .. code-block:: python
 
       # Assume we have Shader instances toon_shader and blur_shader
-      # and we have a Camera whose NodePath is myCamera
+      # and we have a Camera whose NodePath is my_camera
 
       # Create a temporary node in order to create a usable RenderState.
       tempnode = NodePath("temp node")
-      tempnode.setShader(toon_shader)
-      base.cam.setTagStateKey("Toon Shading")
-      base.cam.setTagState("True", tempnode.getState())
+      tempnode.set_shader(toon_shader)
+      base.cam.set_tag_state_key("Toon Shading")
+      base.cam.set_tag_state("True", tempnode.get_state())
 
       tempnode = NodePath("temp node")
-      tempnode.setShader(blur_shader)
-      myCamera.node().setTagStateKey("Blur Shading")
-      myCamera.node().setTagState("True", tempnode.getState())
+      tempnode.set_shader(blur_shader)
+      my_camera.node().set_tag_state_key("Blur Shading")
+      my_camera.node().set_tag_state("True", tempnode.get_state())
 
-      # this makes myNodePath and its children get toonShaded
+      # this makes my_node_path and its children get toon_shaded
       # when rendered by the default camera
-      myNodePath.setTag("Toon Shading", "True")
+      my_node_path.set_tag("Toon Shading", "True")
       # ....
-      # now if you want myNodePath to be blurred when seen by myCamera,
+      # now if you want my_node_path to be blurred when seen by my_camera,
       # it's as easy as adding a tag
-      myNodePath.setTag("Blur Shading", "True")
+      my_node_path.set_tag("Blur Shading", "True")
 
 .. only:: cpp
 
    .. code-block:: cpp
 
       // Assume we have Shader instances toon_shader and blur_shader
-      // and we have a Camera whose NodePath is myCamera
+      // and we have a Camera whose NodePath is my_camera
 
       // Create a temporary node in order to create a usable RenderState.
       NodePath tempnode("temp node");
@@ -91,16 +91,16 @@ named ``key``, it is assigned whatever state is associated with ``value``.
 
       NodePath tempnode("temp node");
       tempnode.set_shader(blur_shader);
-      ((Camera *)myCamera.node())->set_tag_state_key("Blur Shading");
-      ((Camera *)myCamera.node())->set_tag_state("True", tempnode.get_state());
+      ((Camera *)my_camera.node())->set_tag_state_key("Blur Shading");
+      ((Camera *)my_camera.node())->set_tag_state("True", tempnode.get_state());
 
-      // this makes myNodePath and its children get toonShaded
+      // this makes my_node_path and its children get toon_shaded
       // when rendered by the default camera
-      myNodePath.set_tag("Toon Shading", "True");
+      my_node_path.set_tag("Toon Shading", "True");
       // ....
-      // now if you want myNodePath to be blurred when seen by myCamera,
+      // now if you want my_node_path to be blurred when seen by my_camera,
       // it's as easy as adding a tag
-      myNodePath.set_tag("Blur Shading", "True");
+      my_node_path.set_tag("Blur Shading", "True");
 
 For a full guide about Multi-Pass rendering in Panda3D, please read the
 `Howto on Multipass Rendering <https://raw.githubusercontent.com/panda3d/panda3d/master/panda/src/doc/howto.use_multipass.txt>`__

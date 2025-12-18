@@ -12,19 +12,19 @@ Just as with a sphere map, you can have Panda3D generate a cube map for you:
 
 .. code-block:: python
 
-   scene = loader.loadModel('bvw-f2004--streetscene/street-scene.egg')
-   scene.reparentTo(render)
-   scene.setZ(-2)
-   base.saveCubeMap('streetscene_cube_#.jpg', size = 256)
+   scene = loader.load_model('bvw-f2004--streetscene/street-scene.egg')
+   scene.reparent_to(render)
+   scene.set_z(-2)
+   base.save_cube_map('streetscene_cube_#.jpg', size = 256)
 
 With the cube map saved out as above, you could apply it as an environment map
 to the teapot like this:
 
 .. code-block:: python
 
-   tex = loader.loadCubeMap('streetscene_cube_#.jpg')
-   teapot.setTexGen(TextureStage.getDefault(), TexGenAttrib.MEyeCubeMap)
-   teapot.setTexture(tex)
+   tex = loader.load_cube_map('streetscene_cube_#.jpg')
+   teapot.set_tex_gen(TextureStage.get_default(), TexGenAttrib.MEyeCubeMap)
+   teapot.set_texture(tex)
 
 And the result looks very similar to the sphere map:
 
@@ -42,9 +42,9 @@ variation:
 
 .. code-block:: python
 
-   tex = loader.loadCubeMap('streetscene_cube_#.jpg')
-   teapot.setTexGen(TextureStage.getDefault(), TexGenAttrib.MWorldCubeMap)
-   teapot.setTexture(tex)
+   tex = loader.load_cube_map('streetscene_cube_#.jpg')
+   teapot.set_tex_gen(TextureStage.get_default(), TexGenAttrib.MWorldCubeMap)
+   teapot.set_texture(tex)
 
 By changing ``MEyeCubeMap`` to ``MWorldCubeMap``, we have indicated that we
 would like this cube map to vary its point-of-view as the camera moves. Now the

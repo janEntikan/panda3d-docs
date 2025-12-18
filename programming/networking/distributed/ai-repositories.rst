@@ -22,13 +22,13 @@ AI repository is nothing else than a client.
 
    ClientRepository.__init__(
        self,
-       dcFileNames = dcFileNames,
-       dcSuffix = 'AI',
-       threadedNet = True)
+       dc_file_names = dc_file_names,
+       dc_suffix = 'AI',
+       threaded_net = True)
 
 The setup is quite similar to the one of a normal client repository which we
 will take a look at in the next sections. The main difference is that for an AI
-repository we pass the dcSuffix = ‘AI’ to the :class:`.ClientRepository`
+repository we pass the dc_suffix = ‘AI’ to the :class:`.ClientRepository`
 initialization.
 This makes sure that the correct definitions of the DC definition file will be
 used. Another method that should be specifically defined in an AI Repository is
@@ -36,8 +36,8 @@ the following.
 
 .. code-block:: python
 
-   def deallocateChannel(self, doID):
-       print("Client left us: ", doID)
+   def deallocate_channel(self, do_id):
+       print("Client left us: ", do_id)
 
 This function will be called whenever a client has disconnected and gives us
 the chance to react to its disconnection.

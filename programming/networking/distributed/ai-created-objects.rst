@@ -15,14 +15,14 @@ An example for creating an AI object directly on the AI server follows.
 
 .. code-block:: python
 
-   self.gameDistObjectAI = self.createDistributedObject(
-       className = 'DGameObjectAI',
-       zoneId = 2)
+   self.game_dist_object_ai = self.create_distributed_object(
+       class_name = 'DGameObjectAI',
+       zone_id = 2)
 
 For a client to know when such an object has been manifested locally, the
 distributed object class (without the AI postfix) can overwrite the
 :meth:`~direct.distributed.DistributedObject.DistributedObject.announceGenerate()` method
 of :class:`.DistributedObject`. This method is called whenever the object has been
 created and is ready for further processing on the client. In this method, you
-can for example send the :term:`doId` with a custom event or simply store some
+can for example send the :term:`do_id` with a custom event or simply store some
 information in the client repository to later ease the access to those objects.

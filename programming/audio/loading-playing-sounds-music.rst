@@ -26,7 +26,7 @@ Loading a Sound
    .. code-block:: python
 
       base = ShowBase()
-      mySound = base.loader.loadSfx("path/to/sound_file.ogg")
+      my_sound = base.loader.load_sfx("path/to/sound_file.ogg")
 
 .. only:: cpp
 
@@ -37,7 +37,7 @@ Loading a Sound
    .. code-block:: cpp
 
       PT(AudioManager) AM = AudioManager::create_AudioManager();
-      PT(AudioSound) mySound = AM->get_sound("path/to/sound_file.ogg") ;
+      PT(AudioSound) my_sound = AM->get_sound("path/to/sound_file.ogg") ;
 
 These will return an object of the type :class:`.AudioSound`. It is necessary to
 put the extension in the sound filename.
@@ -51,13 +51,13 @@ To play sounds you can do the following:
 
    .. code-block:: python
 
-      mySound.play()
+      my_sound.play()
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      mySound->play();
+      my_sound->play();
 
 To stop a sound:
 
@@ -65,13 +65,13 @@ To stop a sound:
 
    .. code-block:: python
 
-      mySound.stop()
+      my_sound.stop()
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      mySound->stop();
+      my_sound->stop();
 
 Querying Sound Status
 ~~~~~~~~~~~~~~~~~~~~~
@@ -82,13 +82,13 @@ To check the status of a sound, call :meth:`~.AudioSound.status()`:
 
    .. code-block:: python
 
-      status = mySound.status()
+      status = my_sound.status()
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      mySound->status();
+      my_sound->status();
 
 :meth:`~.AudioSound.status()` returns a constant depending on the status of the
 sound:
@@ -108,8 +108,8 @@ AudioSound.PLAYING The sound is currently playing.
 
    .. code-block:: python
 
-      if mySound.status() == mySound.PLAYING:
-          mySound.stop()
+      if my_sound.status() == my_sound.PLAYING:
+          my_sound.stop()
 
 Setting Volume
 ~~~~~~~~~~~~~~
@@ -120,13 +120,13 @@ The volume can be set between 0 and 1 and will linearly scale between these.
 
    .. code-block:: python
 
-      mySound.setVolume(0.5)
+      my_sound.set_volume(0.5)
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      mySound->set_volume(0.5);
+      my_sound->set_volume(0.5);
 
 Panning a Sound
 ~~~~~~~~~~~~~~~
@@ -138,13 +138,13 @@ left is -1.0 and hard right is 1.0.
 
    .. code-block:: python
 
-      mySound.setBalance(-0.5)
+      my_sound.set_balance(-0.5)
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      mySound->set_balance(-0.5);
+      my_sound->set_balance(-0.5);
 
 .. only:: python
 
@@ -155,7 +155,7 @@ left is -1.0 and hard right is 1.0.
 
       .. code-block:: python
 
-         base.sfxManagerList[n].update()
+         base.sfx_manager_list[n].update()
 
       This is because the :meth:`~.AudioManager.update()` command is called
       every frame to reset a sound's channel. In interactive mode, however,

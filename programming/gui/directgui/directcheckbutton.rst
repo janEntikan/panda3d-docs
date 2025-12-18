@@ -11,19 +11,19 @@ buttons, except that the text area and box area can be modified separately.
 Keyword        Definition                                                                         Value
 ============== ================================================================================== ========================
 text_scale     Scale of the displayed text                                                        (sx,sz)
-indicatorValue The initial boolean state of the checkbox                                          0 or 1
-boxImage       Image on the checkbox                                                              Image Path
-boxImageColor  Color of the image on the box                                                      (R,G,B,A)
-boxImageScale  Scale of the displayed image                                                       Number
-boxPlacement   Position of the box relative to the text area                                      ‘left’,’right’
-boxRelief      Relief appearance of the checkbox                                                  DGG.SUNKEN or DGG.RAISED
-boxBorder      Size of the border around the box                                                  Number
+indicator_value The initial boolean state of the checkbox                                          0 or 1
+box_image       Image on the checkbox                                                              Image Path
+box_image_color  Color of the image on the box                                                      (R,G,B,A)
+box_image_scale  Scale of the displayed image                                                       Number
+box_placement   Position of the box relative to the text area                                      ‘left’,’right’
+box_relief      Relief appearance of the checkbox                                                  DGG.SUNKEN or DGG.RAISED
+box_border      Size of the border around the box                                                  Number
 command        Command the button performs when clicked(0 or 1 is passed, depending on the state) Function
-extraArgs      Extra arguments to the function specified in command                               [Extra Arguments]
-commandButtons Which mouse button must be clicked to do the command                               LMB, MMB, or RMB
-rolloverSound  The sound made when the cursor rolls over the button                               Sound File Path
-clickSound     The sound made when the cursor clicks on the button                                Sound File Path
-pressEffect    Whether or not the button sinks in when clicked                                    <0 or 1>
+extra_args      Extra arguments to the function specified in command                               [Extra Arguments]
+command_buttons Which mouse button must be clicked to do the command                               LMB, MMB, or RMB
+rollover_sound  The sound made when the cursor rolls over the button                               Sound File Path
+click_sound     The sound made when the cursor clicks on the button                                Sound File Path
+press_effect    Whether or not the button sinks in when clicked                                    <0 or 1>
 ============== ================================================================================== ========================
 
 Example
@@ -38,36 +38,36 @@ Example
 
    # Add some text
    bk_text = "This is my Demo"
-   textObject = OnscreenText(text=bk_text, pos=(0.95,-0.95), scale=0.07,
+   text_object = OnscreenText(text=bk_text, pos=(0.95,-0.95), scale=0.07,
                              fg=(1, 0.5, 0.5, 1), align=TextNode.ACenter,
-                             mayChange=1)
+                             may_change=1)
 
    # Callback function to set  text
-   def setText(status):
+   def set_text(status):
        if status:
            bk_text = "Checkbox Selected"
        else:
            bk_text = "Checkbox Not Selected"
-   textObject.setText(bk_text)
+   text_object.set_text(bk_text)
 
    # Add button
-   b = DirectCheckButton(text = "CheckButton" ,scale=.05,command=setText)
+   b = DirectCheckButton(text = "CheckButton" ,scale=.05,command=set_text)
 
    # Run the tutorial
    base.run()
 
-Programmatically changing the indicatorValue
+Programmatically changing the indicator_value
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If you programmatically want to change the checkbutton's indicatorValue, you need
-to call ``setIndicatorValue`` afterwards to update the checkbutton, like:
+If you programmatically want to change the checkbutton's indicator_value, you need
+to call ``set_indicator_value`` afterwards to update the checkbutton, like:
 
 .. code-block:: python
 
-   b["indicatorValue"] = True
-   b.setIndicatorValue()
+   b["indicator_value"] = True
+   b.set_indicator_value()
 
-boxImage and other box\* keywords
+box_image and other box\* keywords
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Just as DirectButton may be passed a 4-tuple of values to be used in the four
@@ -79,4 +79,4 @@ images for the unchecked and checked states:
 
 .. code-block:: python
 
-   boxImage = ("pathToDisabledImage.jpg", "pathToEnabled.jpg", None)
+   box_image = ("path_to_disabled_image.jpg", "path_to_enabled.jpg", None)

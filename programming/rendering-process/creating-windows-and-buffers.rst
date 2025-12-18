@@ -3,7 +3,7 @@
 Creating Windows and Buffers
 ============================
 
-Although Panda does provide the convenience function :meth:`base.openWindow()`
+Although Panda does provide the convenience function :meth:`base.open_window()`
 to create a new window, this function does a lot of things automatically for you
 and therefore takes away a lot of control. The following discussion will focus
 instead on creating a window using the low-level interface, in order provide a
@@ -12,7 +12,7 @@ clearer understanding of the actual class relationships.
 In order to create a window, you will first need a :class:`.GraphicsEngine` and
 a :class:`.GraphicsPipe` object. Both of these were discussed in more detail in
 previous pages. Panda will typically create both of these for you at startup,
-and store them in ``base.graphicsEngine`` and ``base.pipe``, respectively.
+and store them in ``base.graphics_engine`` and ``base.pipe``, respectively.
 
 You will also need to create a :class:`.FrameBufferProperties` object. This
 defines important properties such as the number of bits you wish to allocate for
@@ -42,7 +42,7 @@ object that simply requests a buffer of size W×H.
 Once you have all of these objects, you can create a new window or buffer using
 the call :meth:`.GraphicsEngine.make_output()`. This is the fundamental method
 for creating a new :class:`.GraphicsOutput`; all of the other convenience
-functions like :py:meth:`base.openWindow()` or :meth:`win.make_texture_buffer()
+functions like :py:meth:`base.open_window()` or :meth:`win.make_texture_buffer()
 <.GraphicsOutput.make_texture_buffer>` eventually funnel down into this call.
 This method accepts several parameters:
 
@@ -50,7 +50,7 @@ This method accepts several parameters:
 
    .. code-block:: python
 
-      base.graphicsEngine.makeOutput(pipe, name, sort, fb_prop, win_prop, flags, gsg, host)
+      base.graphics_engine.make_output(pipe, name, sort, fb_prop, win_prop, flags, gsg, host)
 
 .. only:: cpp
 
@@ -93,7 +93,7 @@ flags
 gsg
    This parameter is optional, but if provided, it is a GSG to share with other
    windows or buffers. You can get the GSG from an existing window or buffer
-   with win.getGsg(). If you omit this parameter, a new GSG will be created.
+   with win.get_gsg(). If you omit this parameter, a new GSG will be created.
 
 host
    This parameter is optional, but if provided, it is an already-existing host

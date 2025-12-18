@@ -35,9 +35,9 @@ For instance, if you want to copy the (X, Y) position of each vertex to its
       texcoord = GeomVertexWriter(vdata, 'texcoord')
       vertex = GeomVertexReader(vdata, 'vertex')
 
-      while not vertex.isAtEnd():
-          v = vertex.getData3()
-          texcoord.setData2(v[0], v[1])
+      while not vertex.is_at_end():
+          v = vertex.get_data3()
+          texcoord.set_data2(v[0], v[1])
 
 .. only:: cpp
 

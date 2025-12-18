@@ -92,9 +92,9 @@ you want in front:
 
    .. code-block:: python
 
-      model.setBin("fixed", 0)
-      model.setDepthTest(False)
-      model.setDepthWrite(False)
+      model.set_bin("fixed", 0)
+      model.set_depth_test(False)
+      model.set_depth_write(False)
 
 .. only:: cpp
 

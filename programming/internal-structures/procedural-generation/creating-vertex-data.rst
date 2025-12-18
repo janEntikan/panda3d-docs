@@ -68,7 +68,7 @@ rows.
 
    .. code-block:: python
 
-      vdata.setNumRows(4)
+      vdata.set_num_rows(4)
 
 .. only:: cpp
 
@@ -104,31 +104,31 @@ doesn't exist, but it will be an error if you later attempt to use it to add
 data.
 
 To add data, you can now iterate through your vertices and call one of the
-addData methods on each GeomVertexWriter.
+add_data methods on each GeomVertexWriter.
 
 .. only:: python
 
    .. code-block:: python
 
-      vertex.addData3(1, 0, 0)
-      normal.addData3(0, 0, 1)
-      color.addData4(0, 0, 1, 1)
-      texcoord.addData2(1, 0)
+      vertex.add_data3(1, 0, 0)
+      normal.add_data3(0, 0, 1)
+      color.add_data4(0, 0, 1, 1)
+      texcoord.add_data2(1, 0)
 
-      vertex.addData3(1, 1, 0)
-      normal.addData3(0, 0, 1)
-      color.addData4(0, 0, 1, 1)
-      texcoord.addData2(1, 1)
+      vertex.add_data3(1, 1, 0)
+      normal.add_data3(0, 0, 1)
+      color.add_data4(0, 0, 1, 1)
+      texcoord.add_data2(1, 1)
 
-      vertex.addData3(0, 1, 0)
-      normal.addData3(0, 0, 1)
-      color.addData4(0, 0, 1, 1)
-      texcoord.addData2(0, 1)
+      vertex.add_data3(0, 1, 0)
+      normal.add_data3(0, 0, 1)
+      color.add_data4(0, 0, 1, 1)
+      texcoord.add_data2(0, 1)
 
-      vertex.addData3(0, 0, 0)
-      normal.addData3(0, 0, 1)
-      color.addData4(0, 0, 1, 1)
-      texcoord.addData2(0, 0)
+      vertex.add_data3(0, 0, 0)
+      normal.add_data3(0, 0, 1)
+      color.add_data4(0, 0, 1, 1)
+      texcoord.add_data2(0, 0)
 
 .. only:: cpp
 
@@ -154,7 +154,7 @@ addData methods on each GeomVertexWriter.
       color.add_data4(0, 0, 1, 1);
       texcoord.add_data2(0, 0);
 
-Each call to addData() adds a new row (vertex) to the vertex data, if there is
+Each call to add_data() adds a new row (vertex) to the vertex data, if there is
 not already one there. The above sample code creates the following data table:
 
 == ========= ========= ============ ========
@@ -171,4 +171,4 @@ GeomVertexWriter maintains its own counter of its current row. This means you
 must fill in the data for every row of each column, even if you don't care about
 writing the data for some particular column on certain rows. For instance, even
 if you want to allow the default color for vertex 1 and 2, you must still call
-color.addData4() four times, in order to fill in the color value for vertex 3.
+color.add_data4() four times, in order to fill in the color value for vertex 3.

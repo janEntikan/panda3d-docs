@@ -20,20 +20,20 @@ formatting properties such as alignment and wordwrap.
 
 .. code-block:: python
 
-   tpRed = TextProperties()
-   tpRed.setTextColor(1, 0, 0, 1)
-   tpSlant = TextProperties()
-   tpSlant.setSlant(0.3)
-   tpRoman = TextProperties()
-   tpRoman.setFont(cmr12)
+   tp_red = TextProperties()
+   tp_red.set_text_color(1, 0, 0, 1)
+   tp_slant = TextProperties()
+   tp_slant.set_slant(0.3)
+   tp_roman = TextProperties()
+   tp_roman.set_font(cmr12)
 
 You can set as many or as few different attributes on any one TextProperties
 object as you like. Only the attributes you specify will be applied to the text
 string; any attributes you don't mention will remain unchanged when you apply
-the TextProperties. In the above example, applying the tpRed structure to a
+the TextProperties. In the above example, applying the tp_red structure to a
 particular text string will only change the text color to red; other properties,
 such as slant, shadow, and font, will remain whatever they were previously.
-Similarly for tpSlant, which only changes the slant, and tpRoman, which only
+Similarly for tp_slant, which only changes the slant, and tp_roman, which only
 changes the font.
 
 Registering the new TextProperties objects
@@ -43,16 +43,16 @@ You will need a pointer to the global :class:`.TextPropertiesManager` object:
 
 .. code-block:: python
 
-   tpMgr = TextPropertiesManager.getGlobalPtr()
+   tp_mgr = TextPropertiesManager.get_global_ptr()
 
 After you have created your TextProperties objects, you must register each one
 with the TextPropertiesManager, under a unique name:
 
 .. code-block:: python
 
-   tpMgr.setProperties("red", tpRed)
-   tpMgr.setProperties("slant", tpSlant)
-   tpMgr.setProperties("roman", tpRoman)
+   tp_mgr.set_properties("red", tp_red)
+   tp_mgr.set_properties("slant", tp_slant)
+   tp_mgr.set_properties("roman", tp_roman)
 
 Referencing the TextProperties in text strings
 ----------------------------------------------
@@ -61,10 +61,10 @@ Now you're ready to put the special characters in your text string to activate
 these mode changes. To do this, you will use the special character '\\1', or the
 ASCII 0x01 character. You use the \\1 character twice, as a kind of quotation
 mark before and after the name you have used above to register your
-TextProperties object, e.g. '\\1red\\1' to activate tpRed, or '\\1slant\\1' to
-activate tpSlant.
+TextProperties object, e.g. '\\1red\\1' to activate tp_red, or '\\1slant\\1' to
+activate tp_slant.
 
-The sequence '\\1red\\1' acts as a push operation. It applies tpRed to the
+The sequence '\\1red\\1' acts as a push operation. It applies tp_red to the
 current text properties, but also remembers the previous properties. To go back
 to the previous properties, use the character '\\2' by itself. You can nest
 property changes like this; each '\\2' will undo the most recent '\\1name\\1'
@@ -74,7 +74,7 @@ The following text string:
 
 .. code-block:: python
 
-   text.setText("Every day in \1slant\1every way\2 I'm \1red\1getting "
+   text.set_text("Every day in \1slant\1every way\2 I'm \1red\1getting "
                 "\1roman\1better \1slant\1and\2 better.\2\2")
 
 Looks like this:

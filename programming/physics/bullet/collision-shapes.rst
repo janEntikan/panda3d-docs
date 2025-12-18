@@ -214,11 +214,11 @@ before mentioned table.
       shape4 = BulletBoxShape((0.1, 0.1, 0.5))
       shape5 = BulletBoxShape((0.1, 0.1, 0.5))
 
-      bodyNP.node().addShape(shape1, TransformState.makePos(Point3(0, 0, 0.1)))
-      bodyNP.node().addShape(shape2, TransformState.makePos(Point3(-1, -1, -0.5)))
-      bodyNP.node().addShape(shape3, TransformState.makePos(Point3(-1, 1, -0.5)))
-      bodyNP.node().addShape(shape4, TransformState.makePos(Point3(1, -1, -0.5)))
-      bodyNP.node().addShape(shape5, TransformState.makePos(Point3(1, 1, -0.5)))
+      body_np.node().add_shape(shape1, TransformState.make_pos(Point3(0, 0, 0.1)))
+      body_np.node().add_shape(shape2, TransformState.make_pos(Point3(-1, -1, -0.5)))
+      body_np.node().add_shape(shape3, TransformState.make_pos(Point3(-1, 1, -0.5)))
+      body_np.node().add_shape(shape4, TransformState.make_pos(Point3(1, -1, -0.5)))
+      body_np.node().add_shape(shape5, TransformState.make_pos(Point3(1, 1, -0.5)))
 
 .. only:: cpp
 
@@ -256,15 +256,15 @@ Convex hull shapes can be created is several ways:
 
       # Add each vertex separately
       shape1 = BulletConvexHullShape()
-      shape1.addPoint(Point3(1, 1, 2))
-      shape1.addPoint(Point3(0, 0, 0))
-      shape1.addPoint(Point3(2, 0, 0))
-      shape1.addPoint(Point3(0, 2, 0))
-      shape1.addPoint(Point3(2, 2, 0))
+      shape1.add_point(Point3(1, 1, 2))
+      shape1.add_point(Point3(0, 0, 0))
+      shape1.add_point(Point3(2, 0, 0))
+      shape1.add_point(Point3(0, 2, 0))
+      shape1.add_point(Point3(2, 2, 0))
 
       # Add several vertices with a single call
       shape2 = BulletConvexHullShape()
-      shape2.addArray([
+      shape2.add_array([
          Point3(1, 1, 2),
          Point3(0, 0, 0),
          Point3(2, 0, 0),
@@ -273,11 +273,11 @@ Convex hull shapes can be created is several ways:
       ])
 
       # Add all vertices which can be found in a Geom object
-      geomNodes = loader.loadModel(path).findAllMatches('**/+GeomNode')
-      geomNode = geomNodes.getPath(0).node()
-      geom = geomNode.getGeom(0)
+      geom_nodes = loader.load_model(path).find_all_matches('**/+GeomNode')
+      geom_node = geom_nodes.get_path(0).node()
+      geom = geom_node.get_geom(0)
       shape3 = BulletConvexHullShape()
-      shape3.addGeom(geom)
+      shape3.add_geom(geom)
 
 .. only:: cpp
 
@@ -318,8 +318,8 @@ triangles.
       p2 = Point3(10, -10, 0)
       p3 = Point3(10, 10, 0)
       mesh = BulletTriangleMesh()
-      mesh.addTriangle(p0, p1, p2)
-      mesh.addTriangle(p1, p2, p3)
+      mesh.add_triangle(p0, p1, p2)
+      mesh.add_triangle(p1, p2, p3)
       shape = BulletTriangleMeshShape(mesh, dynamic=False)
 
 .. only:: cpp
@@ -351,7 +351,7 @@ contain only triangles; for example, it can contain triangle strips too.
 
       from panda3d.bullet import BulletTriangleMesh
       mesh = BulletTriangleMesh()
-      mesh.addGeom(geom)
+      mesh.add_geom(geom)
 
 .. only:: cpp
 
@@ -408,12 +408,12 @@ the visible geometry.
    .. code-block:: python
 
       from panda3d.core import Filename
-      offset = img.getXSize() / 2.0 - 0.5
+      offset = img.get_x_size() / 2.0 - 0.5
       terrain = GeoMipTerrain('terrain')
-      terrain.setHeightfield(img)
-      terrainNP = terrain.getRoot()
-      terrainNP.setSz(height)
-      terrainNP.setPos(-offset, -offset, -height / 2.0)
+      terrain.set_heightfield(img)
+      terrain_np = terrain.get_root()
+      terrain_np.set_sz(height)
+      terrain_np.set_pos(-offset, -offset, -height / 2.0)
 
 .. only:: cpp
 

@@ -30,29 +30,29 @@ vehicle constructor.
 
       # Chassis body
       shape = BulletBoxShape(Vec3(0.7, 1.5, 0.5))
-      ts = TransformState.makePos(Point3(0, 0, 0.5))
+      ts = TransformState.make_pos(Point3(0, 0, 0.5))
 
-      chassisNP = render.attachNewNode(BulletRigidBodyNode('Vehicle'))
-      chassisNP.node().addShape(shape, ts)
-      chassisNP.setPos(0, 0, 1)
-      chassisNP.node().setMass(800.0)
-      chassisNP.node().setDeactivationEnabled(False)
+      chassis_np = render.attach_new_node(BulletRigidBodyNode('Vehicle'))
+      chassis_np.node().add_shape(shape, ts)
+      chassis_np.set_pos(0, 0, 1)
+      chassis_np.node().set_mass(800.0)
+      chassis_np.node().set_deactivation_enabled(False)
 
-      world.attachRigidBody(chassisNP.node())
+      world.attach_rigid_body(chassis_np.node())
 
       # Chassis geometry
-      loader.loadModel('path/to/model').reparentTo(chassisNP)
+      loader.load_model('path/to/model').reparent_to(chassis_np)
 
       # Vehicle
-      vehicle = BulletVehicle(world, chassisNP.node())
-      vehicle.setCoordinateSystem(ZUp)
-      world.attachVehicle(vehicle)
+      vehicle = BulletVehicle(world, chassis_np.node())
+      vehicle.set_coordinate_system(ZUp)
+      world.attach_vehicle(vehicle)
 
 Wheels
 ------
 
 Once we have created the chassis and the vehicle we can add wheels to the
-vehicle. We can create a new wheel using the ``createWheel`` factory method of
+vehicle. We can create a new wheel using the ``create_wheel`` factory method of
 the previously created vehicle. Once created we still have to configure the
 wheel, that is set friction parameters, offset of the wheel hub with respect to
 the chassis, axle direction and so on.
@@ -64,25 +64,25 @@ the chassis, axle direction and so on.
 
    .. code-block:: python
 
-      wheelNP = loader.loadModel('path/to/model')
-      wheelNP.reparentTo(render)
+      wheel_np = loader.load_model('path/to/model')
+      wheel_np.reparent_to(render)
 
-      wheel = vehicle.createWheel()
+      wheel = vehicle.create_wheel()
 
-      wheel.setNode(wheelNP.node())
-      wheel.setChassisConnectionPointCs(Point3(0.8, 1.1, 0.3))
-      wheel.setFrontWheel(True)
+      wheel.set_node(wheel_np.node())
+      wheel.set_chassis_connection_point_cs(Point3(0.8, 1.1, 0.3))
+      wheel.set_front_wheel(True)
 
-      wheel.setWheelDirectionCs(Vec3(0, 0, -1))
-      wheel.setWheelAxleCs(Vec3(1, 0, 0))
-      wheel.setWheelRadius(0.25)
-      wheel.setMaxSuspensionTravelCm(40.0)
+      wheel.set_wheel_direction_cs(Vec3(0, 0, -1))
+      wheel.set_wheel_axle_cs(Vec3(1, 0, 0))
+      wheel.set_wheel_radius(0.25)
+      wheel.set_max_suspension_travel_cm(40.0)
 
-      wheel.setSuspensionStiffness(40.0)
-      wheel.setWheelsDampingRelaxation(2.3)
-      wheel.setWheelsDampingCompression(4.4)
-      wheel.setFrictionSlip(100.0)
-      wheel.setRollInfluence(0.1)
+      wheel.set_suspension_stiffness(40.0)
+      wheel.set_wheels_damping_relaxation(2.3)
+      wheel.set_wheels_damping_compression(4.4)
+      wheel.set_friction_slip(100.0)
+      wheel.set_roll_influence(0.1)
 
 Steering and Engine/Brake
 -------------------------
@@ -90,12 +90,12 @@ Steering and Engine/Brake
 Finally we need to control steering and engine/brakes. This is best done using a
 task, and keeping the current steering angle around somewhere in a variable.
 
-Here we use a very simple model of controlling the steering angle. If 'turnLeft'
-or 'turnRight' keys are pressed the steering angle will increase/decrease at a
+Here we use a very simple model of controlling the steering angle. If 'turn_left'
+or 'turn_right' keys are pressed the steering angle will increase/decrease at a
 constant rate, until a maximum steering angle is achieved. No relaxation is
 applied. Therefor we also define constants for the maximum steering angle (here:
-steeringClamp) and the rate at which the steering angle increases/decreases
-(here: steeringIncrement).
+steering_clamp) and the rate at which the steering angle increases/decreases
+(here: steering_increment).
 
 The engine force and brake model shown is very simple too. If 'forward' is
 pressed then the engine force will be the maximum engine force, otherwise engine
@@ -116,38 +116,38 @@ simulated.
 
       # Steering info
       steering = 0.0            # degree
-      steeringClamp = 45.0      # degree
-      steeringIncrement = 120.0 # degree per second
+      steering_clamp = 45.0      # degree
+      steering_increment = 120.0 # degree per second
 
       # Process input
-      engineForce = 0.0
-      brakeForce = 0.0
+      engine_force = 0.0
+      brake_force = 0.0
 
-      if inputState.isSet('forward'):
-          engineForce = 1000.0
-          brakeForce = 0.0
+      if input_state.is_set('forward'):
+          engine_force = 1000.0
+          brake_force = 0.0
 
-      if inputState.isSet('reverse'):
-          engineForce = 0.0
-          brakeForce = 100.0
+      if input_state.is_set('reverse'):
+          engine_force = 0.0
+          brake_force = 100.0
 
-      if inputState.isSet('turnLeft'):
-          steering += dt * steeringIncrement
-          steering = min(steering, steeringClamp)
+      if input_state.is_set('turn_left'):
+          steering += dt * steering_increment
+          steering = min(steering, steering_clamp)
 
-      if inputState.isSet('turnRight'):
-          steering -= dt * steeringIncrement
-          steering = max(steering, -steeringClamp)
+      if input_state.is_set('turn_right'):
+          steering -= dt * steering_increment
+          steering = max(steering, -steering_clamp)
 
       # Apply steering to front wheels
-      vehicle.setSteeringValue(steering, 0)
-      vehicle.setSteeringValue(steering, 1)
+      vehicle.set_steering_value(steering, 0)
+      vehicle.set_steering_value(steering, 1)
 
       # Apply engine and brake to rear wheels
-      vehicle.applyEngineForce(engineForce, 2)
-      vehicle.applyEngineForce(engineForce, 3)
-      vehicle.setBrake(brakeForce, 2)
-      vehicle.setBrake(brakeForce, 3)
+      vehicle.apply_engine_force(engine_force, 2)
+      vehicle.apply_engine_force(engine_force, 3)
+      vehicle.set_brake(brake_force, 2)
+      vehicle.set_brake(brake_force, 3)
 
 More realistic control models can be invented, in order to meet the control
 requirements of individual driving games. For example:

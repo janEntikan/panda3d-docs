@@ -20,7 +20,7 @@ through the list using :meth:`queue.entries <.CollisionHandlerQueue.entries>`:
    .. code-block:: python
 
       queue = CollisionHandlerQueue()
-      traverser.addCollider(fromObject, queue)
+      traverser.add_collider(from_object, queue)
       traverser.traverse(render)
 
       for entry in queue.entries:
@@ -32,7 +32,7 @@ through the list using :meth:`queue.entries <.CollisionHandlerQueue.entries>`:
 
       PT(CollisionHandlerQueue) queue = new CollisionHandlerQueue;
       CollisionTraverser traverser;
-      traverser.add_collider(fromObject, queue);
+      traverser.add_collider(from_object, queue);
       traverser.traverse(get_render());
 
       for (int i = 0; i < queue->get_num_entries(); ++i) {
@@ -67,9 +67,9 @@ specify. For instance:
 
    .. code-block:: python
 
-      handler.addInPattern('%fn-into-%in')
-      handler.addAgainPattern('%fn-again-%in')
-      handler.addOutPattern('%fn-out-%in')
+      handler.add_in_pattern('%fn-into-%in')
+      handler.add_again_pattern('%fn-again-%in')
+      handler.add_out_pattern('%fn-out-%in')
 
 .. only:: cpp
 
@@ -111,9 +111,9 @@ should receive one parameter (in addition to self, if it is a method): the
 
       class MyObject(DirectObject.DirectObject):
           def __init__(self):
-              self.accept('car-into-rail', handleRailCollision)
+              self.accept('car-into-rail', handle_rail_collision)
 
-          def handleRailCollision(self, entry):
+          def handle_rail_collision(self, entry):
               print(entry)
 
 Note that all of the following versions of CollisionHandler also inherit from
@@ -141,23 +141,23 @@ CollisionNode is set up as a child of the node that is actually moving.
 
    .. code-block:: python
 
-      smiley = loader.loadModel('smiley.egg')
-      fromObject = smiley.attachNewNode(CollisionNode('colNode'))
-      fromObject.node().addSolid(CollisionSphere(0, 0, 0, 1))
+      smiley = loader.load_model('smiley.egg')
+      from_object = smiley.attach_new_node(CollisionNode('col_node'))
+      from_object.node().add_solid(CollisionSphere(0, 0, 0, 1))
 
       pusher = CollisionHandlerPusher()
-      pusher.addCollider(fromObject, smiley)
+      pusher.add_collider(from_object, smiley)
 
 .. only:: cpp
 
    .. code-block:: cpp
 
       smiley = window->load_model(framework.get_models(), "smiley.egg");
-      fromObject = smiley.attach_new_node(new CollisionNode("colNode"));
-      fromObject->add_solid(new CollisionSphere(0, 0, 0, 1));
+      from_object = smiley.attach_new_node(new CollisionNode("col_node"));
+      from_object->add_solid(new CollisionSphere(0, 0, 0, 1));
 
       PT(CollisionHandlerPusher) pusher = new CollisionHandlerPusher;
-      pusher->add_collider(fromObject, smiley);
+      pusher->add_collider(from_object, smiley);
 
 Don't be confused by the call to
 :meth:`pusher.add_collider() <.CollisionHandlerPusher.add_collider>`; it looks a
@@ -170,14 +170,14 @@ the traverser:
 
    .. code-block:: python
 
-      traverser.addCollider(fromObject, pusher)
-      smiley.setPos(x, y, 0)
+      traverser.add_collider(from_object, pusher)
+      smiley.set_pos(x, y, 0)
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      traverser.add_collider(fromObject, pusher);
+      traverser.add_collider(from_object, pusher);
       smiley.set_pos(x, y, 0);
 
 If you are using Panda's drive mode to move the camera around (or some other
@@ -189,21 +189,21 @@ call:
 
    .. code-block:: python
 
-      fromObject = base.camera.attachNewNode(CollisionNode('colNode'))
-      fromObject.node().addSolid(CollisionSphere(0, 0, 0, 1))
+      from_object = base.camera.attach_new_node(CollisionNode('col_node'))
+      from_object.node().add_solid(CollisionSphere(0, 0, 0, 1))
 
       pusher = CollisionHandlerPusher()
-      pusher.addCollider(fromObject, base.camera, base.drive.node())
+      pusher.add_collider(from_object, base.camera, base.drive.node())
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      fromObject = cam.attach_new_node(new CollisionNode("colNode"))
-      fromObject.node()->add_solid(new CollisionSphere(0, 0, 0, 1));
+      from_object = cam.attach_new_node(new CollisionNode("col_node"))
+      from_object.node()->add_solid(new CollisionSphere(0, 0, 0, 1));
 
       PT(CollisionHandlerPusher) pusher = new CollisionHandlerPusher;
-      pusher.add_collider(fromObject, cam);
+      pusher.add_collider(from_object, cam);
 
 PhysicsCollisionHandler
 -----------------------
@@ -219,23 +219,23 @@ physics system.
 
    .. code-block:: python
 
-      anp = render.attachNewNode(ActorNode('actor'))
-      fromObject = anp.attachNewNode(CollisionNode('colNode'))
-      fromObject.node().addSolid(CollisionSphere(0, 0, 0, 1))
+      anp = render.attach_new_node(ActorNode('actor'))
+      from_object = anp.attach_new_node(CollisionNode('col_node'))
+      from_object.node().add_solid(CollisionSphere(0, 0, 0, 1))
 
       pusher = PhysicsCollisionHandler()
-      pusher.addCollider(fromObject, anp)
+      pusher.add_collider(from_object, anp)
 
 .. only:: cpp
 
    .. code-block:: cpp
 
       anp = window->get_render().attach_new_node(new ActorNode("actor"));
-      fromObject = anp.attach_new_node(new CollisionNode("colNode"));
-      fromObject.node()->add_solid(new CollisionSphere(0, 0, 0, 1))
+      from_object = anp.attach_new_node(new CollisionNode("col_node"));
+      from_object.node()->add_solid(new CollisionSphere(0, 0, 0, 1))
 
       PT(PhysicsCollisionHandler) pusher = new PhysicsCollisionHandler;
-      pusher->add_collider(fromObject, anp);
+      pusher->add_collider(from_object, anp);
 
 Whenever you have an ActorNode that you want to respond to collisions, we
 recommend that you use a PhysicsCollisionHandler rather than an ordinary
@@ -266,23 +266,23 @@ over uneven terrain, without having to set up a complicated physics simulation
 
    .. code-block:: python
 
-      smiley = loader.loadModel('smiley.egg')
-      fromObject = smiley.attachNewNode(CollisionNode('colNode'))
-      fromObject.node().addSolid(CollisionRay(0, 0, 0, 0, 0, -1))
+      smiley = loader.load_model('smiley.egg')
+      from_object = smiley.attach_new_node(CollisionNode('col_node'))
+      from_object.node().add_solid(CollisionRay(0, 0, 0, 0, 0, -1))
 
       lifter = CollisionHandlerFloor()
-      lifter.addCollider(fromObject, smiley)
+      lifter.add_collider(from_object, smiley)
 
 .. only:: cpp
 
    .. code-block:: cpp
 
       smiley = window->load_model(framework.get_models(), "smiley.egg");
-      fromObject = smiley.attach_new_node(new CollisionNode("colNode"));
-      fromObject.node()->add_solid(new CollisionRay(0, 0, 0, 0, 0, -1));
+      from_object = smiley.attach_new_node(new CollisionNode("col_node"));
+      from_object.node()->add_solid(new CollisionRay(0, 0, 0, 0, 0, -1));
 
       PT(CollisionHandlerFloor) lifter = new CollisionHandlerFloor;
-      lifter->add_collider(fromObject, smiley);
+      lifter->add_collider(from_object, smiley);
 
 CollisionHandlerGravity
 -----------------------

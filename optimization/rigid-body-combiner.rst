@@ -52,16 +52,16 @@ lighting.
 
       rbc = RigidBodyCombiner("rbc")
       rbcnp = NodePath(rbc)
-      rbcnp.reparentTo(render)
+      rbcnp.reparent_to(render)
 
       for i in range(200):
           pos = Vec3(random.uniform(-100, 100),
                      random.uniform(-100, 100),
                      random.uniform(-100, 100))
 
-          f = loader.loadModel("box.egg")
-          f.setPos(pos)
-          f.reparentTo(rbcnp)
+          f = loader.load_model("box.egg")
+          f.set_pos(pos)
+          f.reparent_to(rbcnp)
 
       rbc.collect()
       base.run()

@@ -55,7 +55,7 @@ Just like the already existing keyboard support, you can catch button events
 of each device connected to your system. Unlike keyboard button events, each
 device will send its button events with a specific prefix. These prefixes need
 to be set by the developer when a device is attached for usage, which can be
-done with a call to ``self.attachInputDevice(device, prefix="[your-prefix]")``.
+done with a call to ``self.attach_input_device(device, prefix="[your-prefix]")``.
 The device that needs to be passed to this function can be obtained using
 :meth:`self.devices.get_devices() <.InputDeviceManager.get_devices>`, which will
 give you all devices of a given device class.
@@ -75,8 +75,8 @@ Here we'll check for the right thumbstick to be pressed
 
 .. code-block:: python
 
-   gamepad = base.devices.getDevices(InputDevice.DeviceClass.gamepad)[0]
-   right_stick = gamepad.findButton("rstick")
+   gamepad = base.devices.get_devices(InputDevice.DeviceClass.gamepad)[0]
+   right_stick = gamepad.find_button("rstick")
    if right_stick.pressed:
        # Do whatever you want when this button is pressed
 
@@ -88,7 +88,7 @@ Alternatively you can also add this line somewhere in your application
 
 .. code-block:: python
 
-   messenger.toggleVerbose()
+   messenger.toggle_verbose()
 
 Axes
 ----
@@ -105,8 +105,8 @@ device
 
 .. code-block:: python
 
-   gamepad = base.devices.getDevices(InputDevice.DeviceClass.gamepad)[0]
-   left_x = gamepad.findAxis(InputDevice.Axis.left_x)
+   gamepad = base.devices.get_devices(InputDevice.DeviceClass.gamepad)[0]
+   left_x = gamepad.find_axis(InputDevice.Axis.left_x)
 
    # Access and use the value for whatever you need it
    left_x.value

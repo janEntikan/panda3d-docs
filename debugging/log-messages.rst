@@ -71,7 +71,7 @@ In Python this would look something like this:
 
    from direct.directnotify.DirectNotify import DirectNotify
    (...)
-   notify = DirectNotify().newCategory("MyCategory")
+   notify = DirectNotify().new_category("MyCategory")
    (...)
    notify.warning("Put some informational text here.")
 
@@ -91,8 +91,8 @@ following snippet will do the trick:
 .. code-block:: python
 
    nout = MultiplexStream()
-   Notify.ptr().setOstreamPtr(nout, 0)
-   nout.addFile(Filename("out.txt"))
+   Notify.ptr().set_ostream_ptr(nout, 0)
+   nout.add_file(Filename("out.txt"))
 
 Alternatively you may want to use the notify-output prc option, which expects a
 filename as argument::

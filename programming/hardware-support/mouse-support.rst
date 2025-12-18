@@ -12,7 +12,7 @@ Panda3D has mouse support built in.
 
    .. code-block:: python
 
-      base.disableMouse()
+      base.disable_mouse()
 
    This function's name is slightly misleading. It only disables the task that
    drives the camera around, it doesn't disable the mouse itself. You can still
@@ -37,15 +37,15 @@ To get the position:
 
    .. code-block:: python
 
-      if base.mouseWatcherNode.hasMouse():
-        x = base.mouseWatcherNode.getMouseX()
-        y = base.mouseWatcherNode.getMouseY()
+      if base.mouse_watcher_node.has_mouse():
+        x = base.mouse_watcher_node.get_mouse_x()
+        y = base.mouse_watcher_node.get_mouse_y()
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      if (mouseWatcher->has_mouse()) {
+      if (mouse_watcher->has_mouse()) {
         if (window->get_graphics_window()) {
           int x = window->get_graphics_window()->get_pointer(0).get_x();
           int y = window->get_graphics_window()->get_pointer(0).get_y();
@@ -77,23 +77,23 @@ in your :ref:`Config.prc <configuring-panda3d>` or this section of code:
 
       from pandac.PandaModules import WindowProperties
       props = WindowProperties()
-      props.setCursorHidden(True)
-      base.win.requestProperties(props)
+      props.set_cursor_hidden(True)
+      base.win.request_properties(props)
 
 Re-enabling mouse control
 -------------------------
 
 If you need to re-enable the mouse control of the camera, you have to adjust
-mouseInterfaceNode to the current camera transformation:
+mouse_interface_node to the current camera transformation:
 
 .. only:: python
 
    .. code-block:: python
 
-      mat = Mat4(camera.getMat())
-      mat.invertInPlace()
-      base.mouseInterfaceNode.setMat(mat)
-      base.enableMouse()
+      mat = Mat4(camera.get_mat())
+      mat.invert_in_place()
+      base.mouse_interface_node.set_mat(mat)
+      base.enable_mouse()
 
 Otherwise the camera would be placed back to the last position when the mouse
 control was enabled.
@@ -147,15 +147,15 @@ distractingly "sticks" to the center of the window.
 
       # To set relative mode and hide the cursor:
       props = WindowProperties()
-      props.setCursorHidden(True)
-      props.setMouseMode(WindowProperties.M_relative)
-      self.base.win.requestProperties(props)
+      props.set_cursor_hidden(True)
+      props.set_mouse_mode(WindowProperties.M_relative)
+      self.base.win.request_properties(props)
 
       # To revert to normal mode:
       props = WindowProperties()
-      props.setCursorHidden(False)
-      props.setMouseMode(WindowProperties.M_absolute)
-      self.base.win.requestProperties(props)
+      props.set_cursor_hidden(False)
+      props.set_mouse_mode(WindowProperties.M_absolute)
+      self.base.win.request_properties(props)
 
 Confined mouse mode
 ^^^^^^^^^^^^^^^^^^^
@@ -181,17 +181,17 @@ For example:
 
    .. code-block:: python
 
-      mw = base.mouseWatcherNode
+      mw = base.mouse_watcher_node
 
-      if mw.hasMouse():
+      if mw.has_mouse():
           # get the position, which at center is (0, 0)
-          x, y = mw.getMouseX(), mw.getMouseY()
+          x, y = mw.get_mouse_x(), mw.get_mouse_y()
 
           # move mouse back to center
-          props = base.win.getProperties()
-          base.win.movePointer(0,
-                               props.getXSize() // 2,
-                               props.getYSize() // 2)
+          props = base.win.get_properties()
+          base.win.move_pointer(0,
+                               props.get_x_size() // 2,
+                               props.get_y_size() // 2)
           # now, x and y can be considered relative movements
 
 Of course, the mouse must initially be centered, or else the first event will
@@ -216,17 +216,17 @@ events have been processed, using the TaskManager method
 
    .. code-block:: python
 
-      def setMouseMode(...):
+      def set_mouse_mode(...):
           ...
-          base.win.requestProperties(props)
-          base.taskMgr.doMethodLater(0, resolveMouse, "Resolve mouse setting")
+          base.win.request_properties(props)
+          base.task_mgr.do_method_later(0, resolve_mouse, "Resolve mouse setting")
           ...
 
-      def resolveMouse(task):
-          props = base.win.getProperties()
+      def resolve_mouse(task):
+          props = base.win.get_properties()
 
-          actualMode = props.getMouseMode()
-          if actualMode != WindowProperties.M_relative:
+          actual_mode = props.get_mouse_mode()
+          if actual_mode != WindowProperties.M_relative:
               # did not get requested mode... perhaps try another.
 
 Multiple Mice
@@ -247,13 +247,13 @@ property. That window property, in turn, causes the window to track and store
 the positions and buttons of the raw mice. Then, that data is extracted from
 the main window by objects of class :class:`.MouseWatcher`. The application program can
 fetch the mouse data from the MouseWatchers. The global variable
-``base.pointerWatcherNodes`` contains the ``MouseWatcher`` s.
+``base.pointer_watcher_nodes`` contains the ``MouseWatcher`` s.
 
 The first MouseWatcher on the list always represents the system mouse pointer
 - a virtual mouse that moves around whenever any of the physical mice do.
 Usually, you do not want to use this virtual mouse. If you're accessing raw
 mice, you usually want to access the real, physical mice. The list
-``base.pointerWatcherNodes`` always contains the
+``base.pointer_watcher_nodes`` always contains the
 virtual system mouse first, followed by all the physical mice.
 
 So to print out the positions of the mice, use this:
@@ -262,10 +262,10 @@ So to print out the positions of the mice, use this:
 
    .. code-block:: python
 
-      for mouse in base.pointerWatcherNodes:
-        print("NAME=", mouse.getName())
-        print("X=", mouse.getMouseX())
-        print("Y=", mouse.getMouseY())
+      for mouse in base.pointer_watcher_nodes:
+        print("NAME=", mouse.get_name())
+        print("X=", mouse.get_mouse_x())
+        print("Y=", mouse.get_mouse_y())
 
 Each mouse will have a name-string, which might be something along the lines
 of "Micrologic High-Precision Gaming Mouse 2.0 #20245/405". The name is the
@@ -279,10 +279,10 @@ will have a new name. For all practical purposes, that means that you will
 need to store a config file that maps mouse name to intended purpose.
 
 Raw mouse buttons generate events. The event names are similar to the ones for
-the system mouse, except that they have a "mousedevX" prefix. Ie, an example
+the system mouse, except that they have a "mousedev_x" prefix. Ie, an example
 event might be ``mousedev3-mouse1-up``. In this
 example, the "mousedev3" specifier means that the mouse sending the event is
-``base.pointerWatcherNode[3]``.
+``base.pointer_watcher_node[3]``.
 
 Multiple Mice under Linux
 ^^^^^^^^^^^^^^^^^^^^^^^^^

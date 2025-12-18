@@ -28,8 +28,8 @@ added to. The direction of this force is relative to the orientation of the
    .. code-block:: python
 
       lvf = LinearVectorForce(1, 0, 0)  # Push 1 newton in the positive-x direction
-      forceNode.addForce(lvf)  # Determine coordinate space of this force node
-      actorNode.getPhysical(0).addLinearForce(lvf) # Add the force to the object
+      force_node.add_force(lvf)  # Determine coordinate space of this force node
+      actor_node.get_physical(0).add_linear_force(lvf) # Add the force to the object
 
 .. only:: cpp
 
@@ -49,7 +49,7 @@ as :class:`~panda3d.physics.LinearVectorForce`. There are, however, some minor
 differences that that should be taken into account.
 
 :class:`~panda3d.physics.AngularVectorForce` does not have a
-``.setDependantMass()``. The reason for this is simple: mass **must** be used in
+``.set_dependant_mass()``. The reason for this is simple: mass **must** be used in
 the torque calculations. As such, you will want to make sure your forces are
 sufficiently small or your masses are sufficiently large to keep your rotational
 velocity sane.
@@ -61,8 +61,8 @@ velocity sane.
    .. code-block:: python
 
       avf = AngularVectorForce(1, 0, 0) # Spin around the positive-x axis
-      forceNode.addForce(avf) # Determine which positive-x axis we use for calculation
-      actorNode.getPhysical(0).addAngularForce(avf) # Add the force to the object
+      force_node.add_force(avf) # Determine which positive-x axis we use for calculation
+      actor_node.get_physical(0).add_angular_force(avf) # Add the force to the object
 
 .. only:: cpp
 
@@ -86,7 +86,7 @@ forces will not be processed on your object until an
       from panda3d.physics import AngularEulerIntegrator
 
       # Instantiate an AngleIntegrator()
-      angleInt = AngularEulerIntegrator()
+      angle_int = AngularEulerIntegrator()
 
       # Attach the AngleIntegrator to the PhysicsManager
-      base.physicsMgr.attachAngularIntegrator(angleInt)
+      base.physics_mgr.attach_angular_integrator(angle_int)

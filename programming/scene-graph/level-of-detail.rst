@@ -34,7 +34,7 @@ To create an :class:`.LODNode` and :class:`.NodePath`:
 
       lod = LODNode('my LOD node')
       lod_np = NodePath(lod)
-      lod_np.reparentTo(render)
+      lod_np.reparent_to(render)
 
 .. only:: cpp
 
@@ -50,8 +50,8 @@ To add a level of detail to the LODNode:
 
    .. code-block:: python
 
-      lod.addSwitch(50.0, 0.0)
-      my_model.reparentTo(lod_np)
+      lod.add_switch(50.0, 0.0)
+      my_model.reparent_to(lod_np)
 
 .. only:: cpp
 

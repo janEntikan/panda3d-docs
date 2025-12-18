@@ -28,19 +28,19 @@ for creating such a card automatically.
    .. code-block:: python
 
       from direct.gui.OnscreenImage import OnscreenImage
-      imageObject = OnscreenImage(image='myImage.jpg', pos=(-0.5, 0, 0.02))
+      image_object = OnscreenImage(image='my_image.jpg', pos=(-0.5, 0, 0.02))
 
-   If you want, you can change the image into another one using setImage():
+   If you want, you can change the image into another one using set_image():
 
    .. code-block:: python
 
-      imageObject.setImage('myImage2.jpg')
+      image_object.set_image('my_image2.jpg')
 
    When you want to take the image away, use:
 
    .. code-block:: python
 
-      imageObject.destroy()
+      image_object.destroy()
 
    A full list of arguments that can be passed to the constructor is available
    on the :py:class:`~.direct.gui.OnscreenText.OnscreenText` page of the API
@@ -59,10 +59,10 @@ card:
    .. code-block:: python
 
       cm = CardMaker('card')
-      card = render2d.attachNewNode(cm.generate())
+      card = render2d.attach_new_node(cm.generate())
 
-      tex = loader.loadTexture('maps/noise.rgb')
-      card.setTexture(tex)
+      tex = loader.load_texture('maps/noise.rgb')
+      card.set_texture(tex)
 
 .. only:: cpp
 
@@ -96,8 +96,8 @@ black. This can be done using the following code:
 
       from panda3d.core import TransparencyAttrib
 
-      image = OnscreenImage(image='myImage.png', pos=(0, 0, 0))
-      image.setTransparency(TransparencyAttrib.MAlpha)
+      image = OnscreenImage(image='my_image.png', pos=(0, 0, 0))
+      image.set_transparency(TransparencyAttrib.MAlpha)
 
 .. only:: cpp
 

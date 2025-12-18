@@ -33,7 +33,7 @@ Or, if you want to have it set at run-time:
 
    .. code-block:: python
 
-      base.setFrameRateMeter(True)
+      base.set_frame_rate_meter(True)
 
 .. only:: cpp
 

@@ -20,23 +20,23 @@ DistributedObject.
 
 .. code-block:: python
 
-   distributedObject = DGameObject()
-   cr.createDistributedObject(
-       distObj = distributedObject,
-       zoneId = 2)
+   distributed_object = DGameObject()
+   cr.create_distributed_object(
+       dist_obj = distributed_object,
+       zone_id = 2)
 
 This example creates a DGameObject only from the name as defined in the DC
 definition files.
 
 .. code-block:: python
 
-   self.gameDistObject = self.createDistributedObject(
-       className = 'DGameObject',
-       zoneId = 2)
+   self.game_dist_object = self.create_distributed_object(
+       class_name = 'DGameObject',
+       zone_id = 2)
 
-As you have seen we’ve set the zoneId to 2. This tells the object to live in
+As you have seen we’ve set the zone_id to 2. This tells the object to live in
 this specific zone and all clients that have defined an interest in this zone
-with :meth:`.ClientRepository.setInterestZones()` will automatically “see” this
+with :meth:`.ClientRepository.set_interest_zones()` will automatically “see” this
 object.
 
 Further details about distributed objects and their usage will be shown in

@@ -35,9 +35,9 @@ The simplest possible code that uses the FilterManager looks like this:
 
    manager = FilterManager(base.win, base.cam)
    tex = Texture()
-   quad = manager.renderSceneInto(colortex=tex)
-   quad.setShader(Shader.load("myfilter.sha"))
-   quad.setShaderInput("tex", tex)
+   quad = manager.render_scene_into(colortex=tex)
+   quad.set_shader(Shader.load("myfilter.sha"))
+   quad.set_shader_input("tex", tex)
 
 The first line creates an object of class FilterManager. We have told it that we
 want to apply filtering to the contents of the main window. We have also told it
@@ -106,7 +106,7 @@ depth buffer:
    manager = FilterManager(base.win, base.cam)
    tex = Texture()
    dtex = Texture()
-   quad = manager.renderSceneInto(colortex=tex, depthtex=dtex)
+   quad = manager.render_scene_into(colortex=tex, depthtex=dtex)
 
 The depth buffer is particularly useful for filters like depth-of-field. You
 can pass the depth-texture to the shader too.
@@ -119,7 +119,7 @@ buffer, but also an auxiliary buffer. If so, you can fetch that too:
    manager = FilterManager(base.win, base.cam)
    tex = Texture()
    atex = Texture()
-   quad = manager.renderSceneInto(colortex=tex, auxtex=atex)
+   quad = manager.render_scene_into(colortex=tex, auxtex=atex)
 
 Doing this would really only make sense if you've asked the renderer to put
 something of interest into the auxiliary buffer. To do this, see
@@ -132,9 +132,9 @@ The setup shown above works for any filter that can be computed in one stage.
 However, for certain filters, you want to perform intermediate computations
 before putting the output into the window.
 
-The method ``renderQuadInto`` creates a quad, and then causes that quad to be
+The method ``render_quad_into`` creates a quad, and then causes that quad to be
 rendered into a texture. This is the classic intermediate processing step for
-image postprocessing. Using ``renderQuadInto``, we can create a simple two-stage
+image postprocessing. Using ``render_quad_into``, we can create a simple two-stage
 filter:
 
 .. code-block:: python
@@ -142,18 +142,18 @@ filter:
    manager = FilterManager(base.win, base.cam)
    tex1 = Texture()
    tex2 = Texture()
-   finalquad = manager.renderSceneInto(colortex=tex1)
-   interquad = manager.renderQuadInto(colortex=tex2)
-   interquad.setShader(Shader.load("stage1.sha"))
-   interquad.setShaderInput("tex1", tex1)
-   finalquad.setShader(Shader.load("stage2.sha"))
-   finalquad.setShaderInput("tex2", tex2)
+   finalquad = manager.render_scene_into(colortex=tex1)
+   interquad = manager.render_quad_into(colortex=tex2)
+   interquad.set_shader(Shader.load("stage1.sha"))
+   interquad.set_shader_input("tex1", tex1)
+   finalquad.set_shader(Shader.load("stage2.sha"))
+   finalquad.set_shader_input("tex2", tex2)
 
 So tex1 will contain the raw, unfitered scene. Tex2 will contain a scene that
 has been filtered through stage1.sha. The window will contain a scene that has
 been filtered through both stage1.sha and stage2.sha.
 
-The function 'renderQuadInto' accepts the keywords 'colortex', 'auxtex0', and
+The function 'render_quad_into' accepts the keywords 'colortex', 'auxtex0', and
 'auxtex1'. It does not accept 'depthtex,' since no depth buffer is used when
 rendering a quad.
 
@@ -164,7 +164,7 @@ Unless you specify otherwise, all textures will be the same resolution as the
 window. The FilterManager will preserve this condition - it will automatically
 resize the offscreen textures if the window gets resized.
 
-The intermediate stages created by ``renderQuadInto`` can be the same size as
+The intermediate stages created by ``render_quad_into`` can be the same size as
 the window, but they can also be larger or smaller by a constant factor. The
 function takes the following keyword arguments:
 

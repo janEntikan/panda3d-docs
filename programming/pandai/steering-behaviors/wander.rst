@@ -13,7 +13,7 @@ In PandAI, 'Wander' is defined as :
 
 .. code-block:: python
 
-   aiBehaviors.wander(double wander_radius, int flag, double aoe, float priority)
+   ai_behaviors.wander(double wander_radius, int flag, double aoe, float priority)
 
 where :
 
@@ -54,34 +54,34 @@ The full working code for this in Panda3D :
    class World(DirectObject):
 
        def __init__(self):
-           base.disableMouse()
-           base.cam.setPosHpr(0,0,55,0,-90,0)
+           base.disable_mouse()
+           base.cam.set_pos_hpr(0,0,55,0,-90,0)
 
-           self.loadModels()
-           self.setAI()
+           self.load_models()
+           self.set_ai()
 
-       def loadModels(self):
+       def load_models(self):
            # Seeker
-           ralphStartPos = Vec3(0, 0, 0)
+           ralph_start_pos = Vec3(0, 0, 0)
            self.wanderer = Actor("models/ralph",
                                     {"run":"models/ralph-run"})
-           self.wanderer.reparentTo(render)
-           self.wanderer.setScale(0.5)
-           self.wanderer.setPos(ralphStartPos)
+           self.wanderer.reparent_to(render)
+           self.wanderer.set_scale(0.5)
+           self.wanderer.set_pos(ralph_start_pos)
 
-       def setAI(self):
+       def set_ai(self):
            #Creating AI World
            self.AIworld = AIWorld(render)
 
            self.AIchar = AICharacter("wanderer",self.wanderer, 100, 0.05, 5)
-           self.AIworld.addAiChar(self.AIchar)
-           self.AIbehaviors = self.AIchar.getAiBehaviors()
+           self.AIworld.add_ai_char(self.AIchar)
+           self.AIbehaviors = self.AIchar.get_ai_behaviors()
 
            self.AIbehaviors.wander(5, 0, 10, 1.0)
            self.wanderer.loop("run")
 
            #AI World update
-           taskMgr.add(self.AIUpdate,"AIUpdate")
+           task_mgr.add(self.AIUpdate,"AIUpdate")
 
        #to update the AIWorld
        def AIUpdate(self,task):

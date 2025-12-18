@@ -38,7 +38,7 @@ even one node). To do this, parent them all to the same node, and use:
 
    .. code-block:: python
 
-      node.flattenStrong()
+      node.flatten_strong()
 
 .. only:: cpp
 
@@ -94,8 +94,8 @@ Terrain
 
 If you are using the :ref:`GeoMipTerrain <geometrical-mipmapping>` for terrain
 rendering, that might also result in a large mesh count. (You can check the
-block count by calling ``terrain.getRoot().analyze()``.) If it is too high,
+block count by calling ``terrain.get_root().analyze()``.) If it is too high,
 try increasing the block size, or enable AutoFlattening, which will reduce the
 block count to only one. The autoflatten function was created because normally
-you can't flatten a terrain using the normal flattenX methods, because this
+you can't flatten a terrain using the normal flatten_x methods, because this
 will interfere with the GeoMipTerrain's updating system.

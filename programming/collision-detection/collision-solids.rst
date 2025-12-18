@@ -29,8 +29,8 @@ have several solids that always move together as a unit.
    .. code-block:: python
 
       cs = CollisionSphere(0, 0, 0, 1)
-      cnodePath = avatar.attachNewNode(CollisionNode('cnode'))
-      cnodePath.node().addSolid(cs)
+      cnode_path = avatar.attach_new_node(CollisionNode('cnode'))
+      cnode_path.node().add_solid(cs)
 
 .. only:: cpp
 
@@ -47,7 +47,7 @@ purposes:
 
    .. code-block:: python
 
-      cnodePath.show()
+      cnode_path.show()
 
 .. only:: cpp
 

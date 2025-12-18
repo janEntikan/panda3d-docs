@@ -17,7 +17,7 @@ called.
 
 :meth:`.DistributedSmoothNode.activateSmoothing(smoothing, prediction)`
 
-The activateSmoothing method will tell the instance of the SmoothNode to
+The activate_smoothing method will tell the instance of the SmoothNode to
 enable or disable smoothing of the movement on other connected clients. They
 will see the player move rather seamlessly instead of a choppy placement every
 few frames, dependent on how fast the network connection is. Though, even if
@@ -44,6 +44,6 @@ call the following method.
 
 Finally, having all that set and done, one last call is needed to propagate the
 location and rotation of the node. While the other methods handle the local
-smoothing on the other connected clients, the startPosHprBroadcast method will
+smoothing on the other connected clients, the start_pos_hpr_broadcast method will
 handle the distribution of the transformations from the source node to the
 connected target clients.

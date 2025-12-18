@@ -16,7 +16,7 @@ When I say "transfer" the contents of a window into a texture, I don't
 necessarily mean "copy." There are other ways to transfer the contents of a
 window into a texture that may be faster. For example, if the OpenGL
 implementation supports the ARB_pbuffers extension, then the transfer might be
-achieved using wglBindTexImageARB. The Panda user does not need to worry about
+achieved using wgl_bind_tex_image_arb. The Panda user does not need to worry about
 how the transfer is done. It is only important that you know that Panda will use
 the fastest means available to transfer the contents of the window into the
 texture.
@@ -39,12 +39,12 @@ that renders into that window, and creates a scene graph for that camera:
 
    .. code-block:: python
 
-      mybuffer = base.win.makeTextureBuffer("My Buffer", 512, 512)
-      mytexture = mybuffer.getTexture()
-      mybuffer.setSort(-100)
-      mycamera = base.makeCamera(mybuffer)
+      mybuffer = base.win.make_texture_buffer("My Buffer", 512, 512)
+      mytexture = mybuffer.get_texture()
+      mybuffer.set_sort(-100)
+      mycamera = base.make_camera(mybuffer)
       myscene = NodePath("My Scene")
-      mycamera.reparentTo(myscene)
+      mycamera.reparent_to(myscene)
 
 .. only:: cpp
 
@@ -54,18 +54,18 @@ that renders into that window, and creates a scene graph for that camera:
       PT(Texture) mytexture;
       PT(Camera) mycamera;
       PT(DisplayRegion) region;
-      NodePath mycameraNP;
+      NodePath mycamera_np;
       NodePath myscene;
 
       mybuffer = window->get_graphics_output()->make_texture_buffer("My Buffer", 512, 512);
       mytexture = mybuffer->get_texture();
       mybuffer->set_sort(-100);
       mycamera = new Camera("my camera");
-      mycameraNP = window->get_render().attach_new_node(mycamera);
+      mycamera_np = window->get_render().attach_new_node(mycamera);
       region = mybuffer->make_display_region();
-      region->set_camera(mycameraNP);
+      region->set_camera(mycamera_np);
       myscene = NodePath("My Scene");
-      mycameraNP.reparent_to(myscene)
+      mycamera_np.reparent_to(myscene)
 
 The :meth:`~.GraphicsOutput.make_texture_buffer()` is the simple interface to
 the render-to-texture functionality. It creates a new hidden window (usually a
@@ -131,9 +131,9 @@ is :meth:`~.GraphicsEngine.make_output()` on the :class:`.GraphicsEngine` class.
 
       # Request 8 RGB bits, no alpha bits, and a depth buffer.
       fb_prop = FrameBufferProperties()
-      fb_prop.setRgbColor(True)
-      fb_prop.setRgbaBits(8, 8, 8, 0)
-      fb_prop.setDepthBits(16)
+      fb_prop.set_rgb_color(True)
+      fb_prop.set_rgba_bits(8, 8, 8, 0)
+      fb_prop.set_depth_bits(16)
 
       # Create a WindowProperties object set to 512x512 size.
       win_prop = WindowProperties(size=(512, 512))
@@ -141,7 +141,7 @@ is :meth:`~.GraphicsEngine.make_output()` on the :class:`.GraphicsEngine` class.
       # Don't open a window - force it to be an offscreen buffer.
       flags = GraphicsPipe.BF_refuse_window
 
-      base.graphicsEngine.make_output(base.pipe, "My Buffer", -100, fb_prop, win_prop, flags, base.win.getGsg(), base.win)
+      base.graphics_engine.make_output(base.pipe, "My Buffer", -100, fb_prop, win_prop, flags, base.win.get_gsg(), base.win)
 
 .. only:: cpp
 

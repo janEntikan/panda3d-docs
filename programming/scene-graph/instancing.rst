@@ -13,8 +13,8 @@ this:
    for i in range(50):
        dancer = Actor.Actor("chorus-line-dancer.egg", {"kick":"kick.egg"})
        dancer.loop("kick")
-       dancer.setPos(i*5,0,0)
-       dancer.reparentTo(render)
+       dancer.set_pos(i*5,0,0)
+       dancer.reparent_to(render)
 
 Here is the scene graph that we just created:
 
@@ -36,11 +36,11 @@ different places. Here is how it is done:
 
    dancer = Actor.Actor("chorus-line-dancer.egg", {"kick":"kick.egg"})
    dancer.loop("kick")
-   dancer.setPos(0,0,0)
+   dancer.set_pos(0,0,0)
    for i in range(50):
-       placeholder = render.attachNewNode("Dancer-Placeholder")
-       placeholder.setPos(i*5, 0, 0)
-       dancer.instanceTo(placeholder)
+       placeholder = render.attach_new_node("Dancer-Placeholder")
+       placeholder.set_pos(i*5, 0, 0)
+       dancer.instance_to(placeholder)
 
 Here is a diagram of the scene graph we just created:
 
@@ -84,12 +84,12 @@ Now, let's go a step further:
 
    dancer = Actor.Actor("chorus-line-dancer.egg", {"kick":"kick.egg"})
    dancer.loop("kick")
-   dancer.setPos(0,0,0)
+   dancer.set_pos(0,0,0)
    chorusline = NodePath('chorusline')
    for i in range(50):
-       placeholder = chorusline.attachNewNode("Dancer-Placeholder")
-       placeholder.setPos(i*5,0,0)
-       dancer.instanceTo(placeholder)
+       placeholder = chorusline.attach_new_node("Dancer-Placeholder")
+       placeholder.set_pos(i*5,0,0)
+       dancer.instance_to(placeholder)
 
 This is the exact same code as before, except that instead of putting the 50
 placeholders beneath ``render``, I
@@ -100,9 +100,9 @@ is not part of the scene graph yet. Now, I can do this:
 .. code-block:: python
 
    for i in range(3):
-       placeholder = render.attachNewNode("Line-Placeholder")
-       placeholder.setPos(0,i*10,0)
-       chorusline.instanceTo(placeholder)
+       placeholder = render.attach_new_node("Line-Placeholder")
+       placeholder.set_pos(0,i*10,0)
+       chorusline.instance_to(placeholder)
 
 Here is the scene graph I just created:
 

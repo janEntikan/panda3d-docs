@@ -11,7 +11,7 @@ GraphicsEngine in an application, and its job is to keep all of the pointers to
 your open windows and buffers, and also to manage the task of doing the
 rendering, for all of the open windows and buffers. Panda normally creates a
 GraphicsEngine for you at startup, which is available as
-``base.graphicsEngine``. There is usually no reason to create a second
+``base.graphics_engine``. There is usually no reason to create a second
 GraphicsEngine.
 
 GraphicsPipe

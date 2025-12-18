@@ -11,23 +11,23 @@ objects bounce back on a collision, and the kind that instead of making the
 objects bounce back immediately creates control joints instead. The latter is
 the method the Open Dynamics Engine uses. Normally, you would use near callbacks
 to make the control joints and have the objects bounce back. However, Panda3D
-has an autoCollide feature that automatically does these things for you.
+has an auto_collide feature that automatically does these things for you.
 
 These are the steps needed to have your objects collide with each other:
 
--  Create an OdeSpace (explained below). Use ``setAutoCollideWorld(world)`` to
+-  Create an OdeSpace (explained below). Use ``set_auto_collide_world(world)`` to
    let the OdeSpace know in which world you want to collide things.
 -  Create an OdeJointGroup() to hold the contact joints. Use
-   ``space.setAutoCollideJointGroup`` to let the space know in which
+   ``space.set_auto_collide_joint_group`` to let the space know in which
    OdeJointGroup you would like to store the contact joints.
 -  Configure the surface table for the world.
 -  Create ODE collision geometry for your bodies, e.g. OdeBoxGeom, OdePlaneGeom,
    etc. Be sure to set collide and category :ref:`bitmasks <collision-bitmasks>`
-   on it using the ``setCollideBits`` and ``setCategoryBits`` methods. Assign it
-   to your body using ``geom.setBody(body)``.
--  In your simulation loop, call ``space.autoCollide()`` before you call
-   ``world.quickStep``.
--  After using quickStep, you need to empty your OdeJointGroup using the
+   on it using the ``set_collide_bits`` and ``set_category_bits`` methods. Assign it
+   to your body using ``geom.set_body(body)``.
+-  In your simulation loop, call ``space.auto_collide()`` before you call
+   ``world.quick_step``.
+-  After using quick_step, you need to empty your OdeJointGroup using the
    ``empty()`` method.
 
 Spaces
@@ -49,8 +49,8 @@ will work but each one is more optimized for a special kind of simulation.
    records how each geom overlaps cells in one of several three dimensional
    grids. Each grid has cubical cells of side lengths 2**i, where i is an
    integer that ranges from a minimum to a maximum value. You can set this
-   minimum and maximum value using the ``setMinLevel`` and ``setMaxLevel``
-   functions respectively, or you can use ``setLevels`` to set them all in one
+   minimum and maximum value using the ``set_min_level`` and ``set_max_level``
+   functions respectively, or you can use ``set_levels`` to set them all in one
    call.
 
 Geometry
@@ -89,18 +89,18 @@ from a model requires two steps:
 
    .. code-block:: python
 
-      modelTrimesh = OdeTriMeshData(modelNodePath, True)
-      modelGeom = OdeTriMeshGeom(space, modelTrimesh)
+      model_trimesh = OdeTriMeshData(model_node_path, True)
+      model_geom = OdeTriMeshGeom(space, model_trimesh)
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      PT(OdeTriMeshData) modelTrimesh = new OdeTriMeshData(modelNodePath, true);
-      OdeTriMeshGeom modelGeom (space, modelTrimesh);
+      PT(OdeTriMeshData) model_trimesh = new OdeTriMeshData(model_node_path, true);
+      OdeTriMeshGeom model_geom (space, model_trimesh);
 
 If a geometry represents a physically dynamic object you can associate it with
-the dynamic body using ``odeGeom.setBody(body)``. This will automatically
+the dynamic body using ``ode_geom.set_body(body)``. This will automatically
 reposition the geometry with regard to the position of the related body in the
 OdeWorld.
 
@@ -110,11 +110,11 @@ Surfaces
 Sufaces define the material a geometry is made of and the Surface Table defines
 how materials react with each other setting the bounce, friction etc. To set up
 the surface system, you must first initialize the surface table which is done
-with ``odeWorld.initSurfaceTable(numberOfSurfaces)``
+with ``ode_world.init_surface_table(number_of_surfaces)``
 
 Once you have done that, you have to setup the parameters for collisions between
 two surfaces using
-``odeWorld.setSurfaceEntry(surfaceId1, surfaceId2, mu, bounce, bounce_vel, soft_erp, soft_cfm, slip, dampen)``.
+``ode_world.set_surface_entry(surface_id1, surface_id2, mu, bounce, bounce_vel, soft_erp, soft_cfm, slip, dampen)``.
 The surface identifiers start from 0 so if you initialized your surface table
 with 3 surfaces, the surface IDs are 0, 1, 2.
 
@@ -123,7 +123,7 @@ These are what the rest of the parameters mean:
 mu
    This is the `Coulomb friction coefficient <https://en.wikipedia.org/wiki/Coefficient_of_friction>`__.
    It means how much friction the contact has, a value of 0.0 means there will
-   be no friction at all, while a value of ``OdeUtil.getInfinity()`` means the
+   be no friction at all, while a value of ``OdeUtil.get_infinity()`` means the
    contact will never slip.
 bounce
    This is how bouncy the surface is. A value of 0.0 means it is not bouncy, a
@@ -146,7 +146,7 @@ dampen
 
 If you have multiple surfaces, you need to tell ODE which surface belongs to
 which geometry. You can assign surfaces to your geometry using
-``odeSpace.setSurfaceType(geometry, surfaceId)``
+``ode_space.set_surface_type(geometry, surface_id)``
 
 Collision Events
 ----------------
@@ -158,13 +158,13 @@ the name of the event by doing:
 
    .. code-block:: python
 
-      space.setCollisionEvent("yourCollision")
+      space.set_collision_event("your_collision")
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      space.set_collision_event("yourCollision");
+      space.set_collision_event("your_collision");
 
 You can then use this event name in an ``accept()`` call. The parameter passed
 to the event is an OdeCollisionEntry, which holds all the geoms and contacts in
@@ -176,18 +176,18 @@ The following code shows how it works (the methods used are not real):
 .. code-block:: python
 
    # Setup collision event
-   def onCollision(entry):
-       geom1 = entry.getGeom1()
-       geom2 = entry.getGeom2()
-       body1 = entry.getBody1()
-       body2 = entry.getBody2()
+   def on_collision(entry):
+       geom1 = entry.get_geom1()
+       geom2 = entry.get_geom2()
+       body1 = entry.get_body1()
+       body2 = entry.get_body2()
        if (body1 and body1 == spear) or (body2 and body2 == spear):
            # Must have hit someone
-           for p in entry.getContactPoints()
-               particleSystem.drawBlood(p)
+           for p in entry.get_contact_points()
+               particle_system.draw_blood(p)
 
-   space.setCollisionEvent("ode-collision")
-   base.accept("ode-collision", onCollision)
+   space.set_collision_event("ode-collision")
+   base.accept("ode-collision", on_collision)
 
 Example
 -------
@@ -205,73 +205,73 @@ floor.
 
    # Setup our physics world
    world = OdeWorld()
-   world.setGravity(0, 0, -9.81)
+   world.set_gravity(0, 0, -9.81)
 
-   # The surface table is needed for autoCollide
-   world.initSurfaceTable(1)
-   world.setSurfaceEntry(0, 0, 150, 0.0, 9.1, 0.9, 0.00001, 0.0, 0.002)
+   # The surface table is needed for auto_collide
+   world.init_surface_table(1)
+   world.set_surface_entry(0, 0, 150, 0.0, 9.1, 0.9, 0.00001, 0.0, 0.002)
 
    # Create a space and add a contactgroup to it to add the contact joints
    space = OdeSimpleSpace()
-   space.setAutoCollideWorld(world)
+   space.set_auto_collide_world(world)
    contactgroup = OdeJointGroup()
-   space.setAutoCollideJointGroup(contactgroup)
+   space.set_auto_collide_joint_group(contactgroup)
 
    # Load the box
-   box = loader.loadModel("box")
+   box = loader.load_model("box")
    # Make sure its center is at 0, 0, 0 like OdeBoxGeom
-   box.setPos(-.5, -.5, -.5)
-   box.flattenLight() # Apply transform
-   box.setTextureOff()
+   box.set_pos(-.5, -.5, -.5)
+   box.flatten_light() # Apply transform
+   box.set_texture_off()
 
    # Add a random amount of boxes
    boxes = []
    for i in range(randint(15, 30)):
        # Setup the geometry
-       boxNP = box.copyTo(render)
-       boxNP.setPos(randint(-10, 10), randint(-10, 10), 10 + random())
-       boxNP.setColor(random(), random(), random(), 1)
-       boxNP.setHpr(randint(-45, 45), randint(-45, 45), randint(-45, 45))
+       box_np = box.copy_to(render)
+       box_np.set_pos(randint(-10, 10), randint(-10, 10), 10 + random())
+       box_np.set_color(random(), random(), random(), 1)
+       box_np.set_hpr(randint(-45, 45), randint(-45, 45), randint(-45, 45))
        # Create the body and set the mass
-       boxBody = OdeBody(world)
+       box_body = OdeBody(world)
        M = OdeMass()
-       M.setBox(50, 1, 1, 1)
-       boxBody.setMass(M)
-       boxBody.setPosition(boxNP.getPos(render))
-       boxBody.setQuaternion(boxNP.getQuat(render))
+       M.set_box(50, 1, 1, 1)
+       box_body.set_mass(M)
+       box_body.set_position(box_np.get_pos(render))
+       box_body.set_quaternion(box_np.get_quat(render))
        # Create a BoxGeom
-       boxGeom = OdeBoxGeom(space, 1, 1, 1)
-       boxGeom.setCollideBits(BitMask32(0x00000002))
-       boxGeom.setCategoryBits(BitMask32(0x00000001))
-       boxGeom.setBody(boxBody)
-       boxes.append((boxNP, boxBody))
+       box_geom = OdeBoxGeom(space, 1, 1, 1)
+       box_geom.set_collide_bits(BitMask32(0x00000002))
+       box_geom.set_category_bits(BitMask32(0x00000001))
+       box_geom.set_body(box_body)
+       boxes.append((box_np, box_body))
 
    # Add a plane to collide with
    cm = CardMaker("ground")
-   cm.setFrame(-20, 20, -20, 20)
-   ground = render.attachNewNode(cm.generate())
-   ground.setPos(0, 0, 0); ground.lookAt(0, 0, -1)
-   groundGeom = OdePlaneGeom(space, Vec4(0, 0, 1, 0))
-   groundGeom.setCollideBits(BitMask32(0x00000001))
-   groundGeom.setCategoryBits(BitMask32(0x00000002))
+   cm.set_frame(-20, 20, -20, 20)
+   ground = render.attach_new_node(cm.generate())
+   ground.set_pos(0, 0, 0); ground.look_at(0, 0, -1)
+   ground_geom = OdePlaneGeom(space, Vec4(0, 0, 1, 0))
+   ground_geom.set_collide_bits(BitMask32(0x00000001))
+   ground_geom.set_category_bits(BitMask32(0x00000002))
 
    # Set the camera position
-   base.disableMouse()
-   base.camera.setPos(40, 40, 20)
-   base.camera.lookAt(0, 0, 0)
+   base.disable_mouse()
+   base.camera.set_pos(40, 40, 20)
+   base.camera.look_at(0, 0, 0)
 
    # The task for our simulation
-   def simulationTask(task):
-       space.autoCollide() # Setup the contact joints
+   def simulation_task(task):
+       space.auto_collide() # Setup the contact joints
        # Step the simulation and set the new positions
-       world.quickStep(base.clock.dt)
+       world.quick_step(base.clock.dt)
        for np, body in boxes:
-           np.setPosQuat(render, body.getPosition(), Quat(body.getQuaternion()))
+           np.set_pos_quat(render, body.get_position(), Quat(body.get_quaternion()))
        contactgroup.empty() # Clear the contact joints
        return task.cont
 
    # Wait a split second, then start the simulation
-   taskMgr.doMethodLater(0.5, simulationTask, "Physics Simulation")
+   task_mgr.do_method_later(0.5, simulation_task, "Physics Simulation")
 
    base.run()
 

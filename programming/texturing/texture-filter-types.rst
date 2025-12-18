@@ -20,8 +20,8 @@ setting its filter type.
 
    .. code-block:: python
 
-      texture.setMagfilter(type)
-      texture.setMinfilter(type)
+      texture.set_magfilter(type)
+      texture.set_minfilter(type)
 
 .. only:: cpp
 
@@ -67,8 +67,8 @@ FT_nearest
 
    .. code-block:: python
 
-      texture.setMagfilter(SamplerState.FT_nearest)
-      texture.setMinfilter(SamplerState.FT_nearest)
+      texture.set_magfilter(SamplerState.FT_nearest)
+      texture.set_minfilter(SamplerState.FT_nearest)
 
 .. only:: cpp
 
@@ -88,8 +88,8 @@ FT_linear
 
    .. code-block:: python
 
-      texture.setMagfilter(SamplerState.FT_linear)
-      texture.setMinfilter(SamplerState.FT_linear)
+      texture.set_magfilter(SamplerState.FT_linear)
+      texture.set_minfilter(SamplerState.FT_linear)
 
 .. only:: cpp
 
@@ -131,7 +131,7 @@ the description in the table above, it's not worth worrying about.
 
    .. code-block:: python
 
-      texture.setMinfilter(SamplerState.FT_linear_mipmap_linear)
+      texture.set_minfilter(SamplerState.FT_linear_mipmap_linear)
 
 .. only:: cpp
 
@@ -157,7 +157,7 @@ To enable anisotropic filtering, you specify the degree:
 
    .. code-block:: python
 
-      texture.setAnisotropicDegree(degree)
+      texture.set_anisotropic_degree(degree)
 
 .. only:: cpp
 
@@ -175,7 +175,7 @@ graphics cards support up to 16x anisotropic filtering.
 
    .. code-block:: python
 
-      texture.setAnisotropicDegree(2)
+      texture.set_anisotropic_degree(2)
 
 .. only:: cpp
 

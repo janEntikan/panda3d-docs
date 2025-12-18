@@ -38,9 +38,9 @@ of the following:
 
    .. code-block:: python
 
-      np.setAttrib(LightRampAttrib.makeHdr0())
-      np.setAttrib(LightRampAttrib.makeHdr1())
-      np.setAttrib(LightRampAttrib.makeHdr2())
+      np.set_attrib(LightRampAttrib.make_hdr0())
+      np.set_attrib(LightRampAttrib.make_hdr1())
+      np.set_attrib(LightRampAttrib.make_hdr2())
 
 .. only:: cpp
 
@@ -81,8 +81,8 @@ To enable quantized lighting, use one of these:
 
    .. code-block:: python
 
-      np.setAttrib(LightRampAttrib.makeSingleThreshold(t0, l0))
-      np.setAttrib(LightRampAttrib.makeDoubleThreshold(t0, l0, t1, l1))
+      np.set_attrib(LightRampAttrib.make_single_threshold(t0, l0))
+      np.set_attrib(LightRampAttrib.make_double_threshold(t0, l0, t1, l1))
 
 .. only:: cpp
 

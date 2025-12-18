@@ -23,7 +23,7 @@ methods, below, specifies the effect of the alpha channel.
 
    .. code-block:: python
 
-      ts.setCombineRgb(TextureStage.CMReplace, source, operand)
+      ts.set_combine_rgb(TextureStage.CMReplace, source, operand)
 
 .. only:: cpp
 
@@ -38,7 +38,7 @@ and operand becomes the new color.
 
    .. code-block:: python
 
-      ts.setCombineRgb(TextureStage.CMModulate, source0, operand0, source1, operand1)
+      ts.set_combine_rgb(TextureStage.CMModulate, source0, operand0, source1, operand1)
 
 .. only:: cpp
 
@@ -53,7 +53,7 @@ multiplied by the color from source1/operand1.
 
    .. code-block:: python
 
-      ts.setCombineRgb(TextureStage.CMAdd, source0, operand0, source1, operand1)
+      ts.set_combine_rgb(TextureStage.CMAdd, source0, operand0, source1, operand1)
 
 .. only:: cpp
 
@@ -68,7 +68,7 @@ the color from source1/operand1, and the result is clamped to 1 (white).
 
    .. code-block:: python
 
-      ts.setCombineRgb(TextureStage.CMAddSigned, source0, operand0, source1, operand1)
+      ts.set_combine_rgb(TextureStage.CMAddSigned, source0, operand0, source1, operand1)
 
 .. only:: cpp
 
@@ -82,7 +82,7 @@ In this mode, the colors are added as signed numbers, and the result wraps.
 
    .. code-block:: python
 
-      ts.setCombineRgb(TextureStage.CMSubtract, source0, operand0, source1, operand1)
+      ts.set_combine_rgb(TextureStage.CMSubtract, source0, operand0, source1, operand1)
 
 .. only:: cpp
 
@@ -96,7 +96,7 @@ In this mode, source1/operand1 is subtracted from source0/operand0.
 
    .. code-block:: python
 
-      ts.setCombineRgb(TextureStage.CMInterpolate,
+      ts.set_combine_rgb(TextureStage.CMInterpolate,
                        source0, operand0, source1, operand1, source2, operand2)
 
 
@@ -125,12 +125,12 @@ alpha cutout in the resulting object.
 
    .. code-block:: python
 
-      ts.setCombineAlpha(TextureStage.CMReplace, source, operand)
-      ts.setCombineAlpha(TextureStage.CMModulate, source0, operand0, source1, operand1)
-      ts.setCombineAlpha(TextureStage.CMAdd, source0, operand0, source1, operand1)
-      ts.setCombineAlpha(TextureStage.CMAddSigned, source0, operand0, source1, operand1)
-      ts.setCombineAlpha(TextureStage.CMSubtract, source0, operand0, source1, operand1)
-      ts.setCombineAlpha(TextureStage.CMInterpolate, source0, operand0, source1, operand1,
+      ts.set_combine_alpha(TextureStage.CMReplace, source, operand)
+      ts.set_combine_alpha(TextureStage.CMModulate, source0, operand0, source1, operand1)
+      ts.set_combine_alpha(TextureStage.CMAdd, source0, operand0, source1, operand1)
+      ts.set_combine_alpha(TextureStage.CMAddSigned, source0, operand0, source1, operand1)
+      ts.set_combine_alpha(TextureStage.CMSubtract, source0, operand0, source1, operand1)
+      ts.set_combine_alpha(TextureStage.CMInterpolate, source0, operand0, source1, operand1,
                          source2, operand2)
 
 .. only:: cpp

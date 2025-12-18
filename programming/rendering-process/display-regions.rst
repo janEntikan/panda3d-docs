@@ -32,8 +32,8 @@ You can create a DisplayRegion with the
 
    .. code-block:: python
 
-      region = win.makeDisplayRegion()
-      region = win.makeDisplayRegion(left, right, bottom, top)
+      region = win.make_display_region()
+      region = win.make_display_region(left, right, bottom, top)
 
 .. only:: cpp
 
@@ -48,7 +48,7 @@ the window. The ranges of left, right, bottom, top are from 0 to 1, where 0 is
 the left and bottom of the window, and 1 is the right and top of the window.
 (Note that this is different from the range of the render2d screen coordinates,
 which ranges from -1 to 1 instead of 0 to 1.) For instance, the right panel of
-the second example above was created with the call ``win.makeDisplayRegion(0.5,
+the second example above was created with the call ``win.make_display_region(0.5,
 1, 0, 1)``.
 
 A new DisplayRegion won't render anything until it has been associated with a
@@ -62,17 +62,17 @@ one and wrap a :class:`.NodePath` around it:
 
    .. code-block:: python
 
-      camNode = Camera('cam')
-      camNP = NodePath(camNode)
-      region.setCamera(camNP)
+      cam_node = Camera('cam')
+      cam_np = NodePath(cam_node)
+      region.set_camera(cam_np)
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      PT(Camera) camNode = new Camera("cam");
-      NodePath camNP(camNode);
-      region->set_camera(camNP);
+      PT(Camera) cam_node = new Camera("cam");
+      NodePath cam_np(cam_node);
+      region->set_camera(cam_np);
 
 Once you have a Camera, you need to decide where to attach it to the scene
 graph. If you parent it to base.camera, it will inherit the transform of that
@@ -85,14 +85,14 @@ default Camera that Panda creates is attached to base.camera.
    .. code-block:: python
 
       # View render, as seen by the default camera
-      camNP.reparentTo(base.camera)
+      cam_np.reparent_to(base.camera)
 
 .. only:: cpp
 
    .. code-block:: cpp
 
       // View render, as seen by the default camera
-      camNP.reparent_to(windowFramework->get_camera_group());
+      cam_np.reparent_to(window_framework->get_camera_group());
 
 If you wish your new Camera to view a completely different scene, you can set up
 a new scene graph simply by creating a new NodePath to be the root, and then
@@ -107,9 +107,9 @@ camera and the models correctly relative to each other.
 
       # View some other scene, unrelated to render
       render2 = NodePath('render2')  # the string parameter is important
-      camNP.reparentTo(render2)
-      env = loader.loadModel('environment.egg')
-      env.reparentTo(render2)
+      cam_np.reparent_to(render2)
+      env = loader.load_model('environment.egg')
+      env.reparent_to(render2)
 
 .. only:: cpp
 
@@ -117,5 +117,5 @@ camera and the models correctly relative to each other.
 
       // View some other scene, unrelated to render
       NodePath render2("render2");  // the string parameter is important
-      camNP.reparent_to(render2);
-      NodePath env = windowFramework->load_model(render2, "environment.egg");
+      cam_np.reparent_to(render2);
+      NodePath env = window_framework->load_model(render2, "environment.egg");

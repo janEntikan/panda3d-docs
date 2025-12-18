@@ -57,7 +57,7 @@ or an Actor or even an Empty NodePath.
 Step 6:
 
 Get a reference to the AIBehaviors object of your previously created AICharacter
-class via the 'getAiBehaviors' function().
+class via the 'get_ai_behaviors' function().
 
 Step 7:
 
@@ -87,40 +87,40 @@ The actual code:
    class World(DirectObject):
 
        def __init__(self):
-           base.disableMouse()
-           base.cam.setPosHpr(0, 0, 55, 0, -90, 0)
+           base.disable_mouse()
+           base.cam.set_pos_hpr(0, 0, 55, 0, -90, 0)
 
-           self.loadModels()
-           self.setAI()
+           self.load_models()
+           self.set_ai()
 
-       def loadModels(self):
+       def load_models(self):
            # Seeker
-           ralphStartPos = Vec3(-10, 0, 0)
+           ralph_start_pos = Vec3(-10, 0, 0)
            self.seeker = Actor("models/ralph",
                                {"run":"models/ralph-run"})
-           self.seeker.reparentTo(render)
-           self.seeker.setScale(0.5)
-           self.seeker.setPos(ralphStartPos)
+           self.seeker.reparent_to(render)
+           self.seeker.set_scale(0.5)
+           self.seeker.set_pos(ralph_start_pos)
            # Target
-           self.target = loader.loadModel("models/arrow")
-           self.target.setColor(1, 0, 0)
-           self.target.setPos(5, 0, 0)
-           self.target.setScale(1)
-           self.target.reparentTo(render)
+           self.target = loader.load_model("models/arrow")
+           self.target.set_color(1, 0, 0)
+           self.target.set_pos(5, 0, 0)
+           self.target.set_scale(1)
+           self.target.reparent_to(render)
 
-       def setAI(self):
+       def set_ai(self):
            #Creating AI World
            self.AIworld = AIWorld(render)
 
            self.AIchar = AICharacter("seeker",self.seeker, 100, 0.05, 5)
-           self.AIworld.addAiChar(self.AIchar)
-           self.AIbehaviors = self.AIchar.getAiBehaviors()
+           self.AIworld.add_ai_char(self.AIchar)
+           self.AIbehaviors = self.AIchar.get_ai_behaviors()
 
            self.AIbehaviors.seek(self.target)
            self.seeker.loop("run")
 
            #AI World update
-           taskMgr.add(self.AIUpdate,"AIUpdate")
+           task_mgr.add(self.AIUpdate,"AIUpdate")
 
        #to update the AIWorld
        def AIUpdate(self,task):

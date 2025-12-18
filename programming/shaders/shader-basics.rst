@@ -124,7 +124,7 @@ To load the above shader and apply it to a model, we can use the following code:
       shader = Shader.load(Shader.SL_GLSL,
                            vertex="myshader.vert",
                            fragment="myshader.frag")
-      model.setShader(shader)
+      model.set_shader(shader)
 
 .. only:: cpp
 
@@ -193,7 +193,7 @@ The following is an example of using this procedure:
       from panda3d.core import Shader
 
       shader = Shader.load("myshader.sha", Shader.SL_Cg)
-      model.setShader(shader)
+      model.set_shader(shader)
 
 .. only:: cpp
 
@@ -217,7 +217,7 @@ shaders respectively. Here is an example:
                            vertex="myvertexshader.sha",
                            fragment="myfragmentshader.sha",
                            geometry="mygeometryshader.sha")
-      model.setShader(shader)
+      model.set_shader(shader)
 
 .. only:: cpp
 
@@ -273,13 +273,13 @@ necessary to supply some user-provided data to the shader. For this, you need
 
    .. code-block:: python
 
-      myModel.setShaderInput("tint", (1.0, 0.5, 0.5, 1.0))
+      my_model.set_shader_input("tint", (1.0, 0.5, 0.5, 1.0))
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      myModel.set_shader_input("tint", LVector4(1.0, 0.5, 0.5, 1.0));
+      my_model.set_shader_input("tint", LVector4(1.0, 0.5, 0.5, 1.0));
 
 The method :meth:`.NodePath.set_shader_input()` stores data that can be accessed
 by the shader. It is possible to store data of type :class:`.Texture`,
@@ -322,9 +322,9 @@ the child, then the child will contain a "w" value of 1, because the priority
 
    .. code-block:: python
 
-      myModel.setShaderInputs(
+      my_model.set_shader_inputs(
           tint=(1.0, 0.5, 0.5, 1.0),
-          tex=myTexture,
+          tex=my_texture,
       )
 
 Shader Render Attributes
@@ -344,9 +344,9 @@ explicitly. As an example, the code below shows how to create a
    .. code-block:: python
 
       attrib = ShaderAttrib.make()
-      attrib = attrib.setShader(Shader.load("myshader.sha"))
-      attrib = attrib.setShaderInput("tint", (1.0, 0.5, 0.5, 1.0))
-      base.cam.node().setInitialState(attrib)
+      attrib = attrib.set_shader(Shader.load("myshader.sha"))
+      attrib = attrib.set_shader_input("tint", (1.0, 0.5, 0.5, 1.0))
+      base.cam.node().set_initial_state(attrib)
 
 .. only:: cpp
 

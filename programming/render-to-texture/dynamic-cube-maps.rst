@@ -20,10 +20,10 @@ Dynamic Cube Maps
    .. code-block:: python
 
       rig = NodePath('rig')
-      buffer = base.win.makeCubeMap(name, size, rig)
+      buffer = base.win.make_cube_map(name, size, rig)
 
    This will return an offscreen ``GraphicsBuffer`` that will be used to render
-   the cube map. The three required parameters to ``makeCubeMap()`` are:
+   the cube map. The three required parameters to ``make_cube_map()`` are:
 
    name
       An arbitrary name to assign to the cube map and its associated
@@ -36,21 +36,21 @@ Dynamic Cube Maps
       The camera rig node. This should be a new ``NodePath``. It will be filled
       in with six cameras. See below.
 
-   There are also additional, optional parameters to ``makeCubeMap()``:
+   There are also additional, optional parameters to ``make_cube_map()``:
 
-   cameraMask
+   camera_mask
       This specifies the ``DrawMask`` that is associated with the cube map’s
       cameras. This is an advanced Panda3D feature that can be used to hide or
       show certain objects specifically for the cube map cameras.
-   toRam
+   to_ram
       This is a boolean flag that, when True, indicates the texture image will
       be made available in system RAM, instead of leaving it only in texture
       memory. The default is False. Setting it True is slower, but may be
       necessary if you want to write out the generated cube map image to disk.
 
    Note that we passed a new ``NodePath``, called ``rig`` in the above example,
-   to the ``makeCubeMap()`` call. This ``NodePath`` serves as the "camera rig";
-   the ``makeCubeMap()`` method will create six cameras facing in six different
+   to the ``make_cube_map()`` call. This ``NodePath`` serves as the "camera rig";
+   the ``make_cube_map()`` method will create six cameras facing in six different
    directions, and attach them all to the camera rig. Thus, you can parent this
    rig into your scene and move it around as if it were a six-eyed camera.
    Normally, for environment maps, you would parent the rig somewhere within
@@ -61,7 +61,7 @@ Dynamic Cube Maps
 
    .. code-block:: python
 
-      tex = buffer.getTexture()
+      tex = buffer.get_texture()
 
    You can apply the texture to geometry as in the
    :ref:`previous example <environment-mapping-with-cube-maps>`. You should use
@@ -74,7 +74,7 @@ Dynamic Cube Maps
 
    .. code-block:: python
 
-      base.graphicsEngine.removeWindow(buffer)
+      base.graphics_engine.remove_window(buffer)
 
    As a complete example, here is how we might load up a dynamic cube map
    environment on our teapot and move the teapot down the street to show off the
@@ -82,21 +82,21 @@ Dynamic Cube Maps
 
    .. code-block:: python
 
-      scene = loader.loadModel('bvw-f2004--streetscene/street-scene.egg')
-      scene.reparentTo(render)
-      scene.setZ(-2)
+      scene = loader.load_model('bvw-f2004--streetscene/street-scene.egg')
+      scene.reparent_to(render)
+      scene.set_z(-2)
 
-      teapot = loader.loadModel('teapot.egg')
-      teapot.reparentTo(render)
+      teapot = loader.load_model('teapot.egg')
+      teapot.reparent_to(render)
 
       rig = NodePath('rig')
-      buffer = base.win.makeCubeMap('env', 64, rig)
-      rig.reparentTo(teapot)
+      buffer = base.win.make_cube_map('env', 64, rig)
+      rig.reparent_to(teapot)
 
-      teapot.setTexGen(TextureStage.getDefault(), TexGenAttrib.MWorldCubeMap)
-      teapot.setTexture(buffer.getTexture())
+      teapot.set_tex_gen(TextureStage.get_default(), TexGenAttrib.MWorldCubeMap)
+      teapot.set_texture(buffer.get_texture())
 
-      zoom = teapot.posInterval(5, VBase3(20, 0, 0), startPos=VBase3(-20, 0, 0))
+      zoom = teapot.pos_interval(5, VBase3(20, 0, 0), start_pos=VBase3(-20, 0, 0))
       zoom.loop()
 
    .. warning::
@@ -115,8 +115,8 @@ Dynamic Cube Maps
 
       .. code-block:: python
 
-         lens = rig.find('**/+Camera').node().getLens()
-         lens.setNearFar(1, 100)
+         lens = rig.find('**/+Camera').node().get_lens()
+         lens.set_near_far(1, 100)
 
       It is especially important when you are using cube maps that you structure
       your scene graph hierarchically and divide it up spatially so that Panda3D's
@@ -126,7 +126,7 @@ Dynamic Cube Maps
       example performs very poorly on all but the highest-end hardware.)
 
       It's also usually a good idea to keep the cube map size (the ``size``
-      parameter to ``makeCubeMap()``) no larger than it absolutely has to be to get
+      parameter to ``make_cube_map()``) no larger than it absolutely has to be to get
       the look you want.
 
       You can also take advantage of the ``DrawMask`` to hide things from the cube
@@ -138,7 +138,7 @@ Dynamic Cube Maps
       Finally, you can temporarily disable the cube map rendering from time to time
       if you know the environment won't be changing for a little while. The cube
       map will retain its last-rendered image. You can do this with
-      ``buffer.setActive(0)``. Use ``buffer.setActive(1)`` to re-activate it.
+      ``buffer.set_active(0)``. Use ``buffer.set_active(1)`` to re-activate it.
 
 .. only:: cpp
 

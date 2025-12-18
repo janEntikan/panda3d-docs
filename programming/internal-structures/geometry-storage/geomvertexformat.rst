@@ -88,13 +88,13 @@ different arrays, might look like this:
 
 Each GeomVertexColumn has a number of properties:
 
-getNumComponents()
+get_num_components()
    This defines the number of numeric components of the data in the column. For
    instance, the vertex position, which is typically an (X, Y, Z) triple, has
    three components: X, Y, and Z. A texture coordinate usually has two components
    (U, V), but sometimes has three components (U, V, W).
 
-getNumericType()
+get_numeric_type()
    This defines the kind of numeric data that is stored in each component. It
    must be one of the following symbols:
 
@@ -136,7 +136,7 @@ getNumericType()
       floats and one 10-bit float. Only supported in newer OpenGL versions
       from Panda3D 1.10 onward. Can only encode values between 0 and 64512.
 
-getContents()
+get_contents()
    This defines, in a general way, the semantic meaning of the data in the
    column. It is used by Panda to decide how the data should be modified when
    a transform matrix or texture matrix is applied; it also controls the
@@ -196,7 +196,7 @@ getContents()
    Geom.C_other
       The data has some other, custom meaning; do not attempt to transform it.
 
-getName()
+get_name()
    The column name is the most important single piece of information to Panda.
    The column name tells Panda the specific meaning of the data in the column.
    The name is also a unique handle to the column; within a given format,
@@ -262,7 +262,7 @@ getName()
       \
    aspect_ratio
       These three columns are used when rendering sprites (that is, GeomPoints
-      with :meth:`nodePath.setRenderModeThickness() <.NodePath.setRenderModeThickness>`
+      with :meth:`node_path.set_render_mode_thickness() <.NodePath.set_render_mode_thickness>`
       in effect).
       If present, they control the rotation counterclockwise in degrees, the
       per-vertex thickness, and the aspect ratio of the square, respectively.

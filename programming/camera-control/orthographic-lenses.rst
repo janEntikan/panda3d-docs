@@ -49,8 +49,8 @@ with something like this:
    .. code-block:: python
 
       lens = OrthographicLens()
-      lens.setFilmSize(20, 15)  # Or whatever is appropriate for your scene
-      base.cam.node().setLens(lens)
+      lens.set_film_size(20, 15)  # Or whatever is appropriate for your scene
+      base.cam.node().set_lens(lens)
 
 .. only:: cpp
 

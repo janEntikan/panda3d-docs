@@ -27,13 +27,13 @@ It is possible to create these attributes and assign them to a node directly:
 
    .. code-block:: python
 
-      nodePath.node().setAttrib(attributeObject)
+      node_path.node().set_attrib(attribute_object)
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      node_path.node()->set_attrib(attributeObject);
+      node_path.node()->set_attrib(attribute_object);
 
 But in many cases, especially with the most commonly-modified attributes, you
 don't need to create the attributes directly as there is a convenience function

@@ -50,40 +50,40 @@ A fully working flee demo :
    class World(DirectObject):
 
        def __init__(self):
-           base.disableMouse()
-           base.cam.setPosHpr(0,0,55,0,-90,0)
+           base.disable_mouse()
+           base.cam.set_pos_hpr(0,0,55,0,-90,0)
 
-           self.loadModels()
-           self.setAI()
+           self.load_models()
+           self.set_ai()
 
-       def loadModels(self):
+       def load_models(self):
            # Seeker
-           ralphStartPos = Vec3(2, 0, 0)
+           ralph_start_pos = Vec3(2, 0, 0)
            self.fleer = Actor("models/ralph",
                                     {"run":"models/ralph-run"})
-           self.fleer.reparentTo(render)
-           self.fleer.setScale(0.5)
-           self.fleer.setPos(ralphStartPos)
+           self.fleer.reparent_to(render)
+           self.fleer.set_scale(0.5)
+           self.fleer.set_pos(ralph_start_pos)
            # Target
-           self.target = loader.loadModel("models/arrow")
-           self.target.setColor(1,0,0)
-           self.target.setPos(5,0,0)
-           self.target.setScale(1)
-           self.target.reparentTo(render)
+           self.target = loader.load_model("models/arrow")
+           self.target.set_color(1,0,0)
+           self.target.set_pos(5,0,0)
+           self.target.set_scale(1)
+           self.target.reparent_to(render)
 
-       def setAI(self):
+       def set_ai(self):
            #Creating AI World
            self.AIworld = AIWorld(render)
 
            self.AIchar = AICharacter("fleer",self.fleer, 100, 0.05, 5)
-           self.AIworld.addAiChar(self.AIchar)
-           self.AIbehaviors = self.AIchar.getAiBehaviors()
+           self.AIworld.add_ai_char(self.AIchar)
+           self.AIbehaviors = self.AIchar.get_ai_behaviors()
 
            self.AIbehaviors.flee(self.target, 5, 5)
            self.fleer.loop("run")
 
            #AI World update
-           taskMgr.add(self.AIUpdate,"AIUpdate")
+           task_mgr.add(self.AIUpdate,"AIUpdate")
 
        #to update the AIWorld
        def AIUpdate(self,task):

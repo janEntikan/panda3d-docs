@@ -20,8 +20,8 @@ of the next frame. That creates a feedback loop.
 
 The basic steps are: create a texture that will hold the contents of the main
 window. Tell the main window to copy is output into this texture using
-setupRenderTexture. Obtain a full-screen quad containing this texture using
-getTextureCard. Position this quad in the scene.
+setup_render_texture. Obtain a full-screen quad containing this texture using
+get_texture_card. Position this quad in the scene.
 
 You can get a lot of different effects by simply moving the quad a little bit.
 By putting it behind the actor, the actor is fully visible, and surrounded by

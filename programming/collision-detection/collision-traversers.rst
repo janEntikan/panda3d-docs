@@ -5,7 +5,7 @@ Collision Traversers
 
 A :class:`.CollisionTraverser` object performs the actual work of checking all
 solid objects for collisions. Normally, you will create a single
-CollisionTraverser object and assign it to ``base.cTrav``; this traverser will
+CollisionTraverser object and assign it to ``base.c_trav``; this traverser will
 automatically be run every frame. It is also possible to create additional
 CollisionTraversers if you have unusual needs; for instance, to run a second
 pass over a subset of the geometry. If you create additional
@@ -43,8 +43,8 @@ CollisionHandler, to :meth:`~.CollisionTraverser.add_collider()`.
    .. code-block:: python
 
       traverser = CollisionTraverser('traverser name')
-      base.cTrav = traverser
-      traverser.addCollider(fromObject, handler)
+      base.c_trav = traverser
+      traverser.add_collider(from_object, handler)
 
 You only need to add the "from" objects to your traverser! Don't try to add
 the "into" objects to the CollisionTraverser. Adding an object to a
@@ -64,7 +64,7 @@ using the following line of code:
 
    .. code-block:: python
 
-      trav.showCollisions(render)
+      trav.show_collisions(render)
 
 .. only:: cpp
 

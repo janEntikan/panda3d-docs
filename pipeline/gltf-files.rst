@@ -142,7 +142,7 @@ Distributing glTF Models
    appended after the existing extension, like ``model.gltf.bam``. This will
    allow the model loader to automatically look for ``model.gltf.bam`` when
    trying to load ``model.gltf``, so that you do not need to change your calls
-   to :py:meth:`loader.loadModel() <direct.showbase.Loader.Loader.loadModel>`.
+   to :py:meth:`loader.load_model() <direct.showbase.Loader.Loader.load_model>`.
 
 .. only:: cpp
 

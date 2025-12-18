@@ -25,8 +25,8 @@ to setup this sphere, and a CCD motion threshold:
 
    .. code-block:: python
 
-      bodyNP.node().setCcdMotionThreshold(1e-7)
-      bodyNP.node().setCcdSweptSphereRadius(0.50)
+      body_np.node().set_ccd_motion_threshold(1e-7)
+      body_np.node().set_ccd_swept_sphere_radius(0.50)
 
 .. only:: cpp
 
@@ -47,48 +47,48 @@ is a sample showing one way to implement shooting bullets.
 
       bullets = []
 
-      def removeBullet(task):
+      def remove_bullet(task):
         if len(bullets) < 1: return
 
-        bulletNP = bullets.pop(0)
-        world.removeRigidBody(bulletNP.node())
+        bullet_np = bullets.pop(0)
+        world.remove_rigid_body(bullet_np.node())
 
         return task.done
 
-      def shootBullet(ccd):
+      def shoot_bullet(ccd):
         # Get from/to points from mouse click
-        pMouse = base.mouseWatcherNode.getMouse()
-        pFrom = Point3()
-        pTo = Point3()
-        base.camLens.extrude(pMouse, pFrom, pTo)
+        p_mouse = base.mouse_watcher_node.get_mouse()
+        p_from = Point3()
+        p_to = Point3()
+        base.cam_lens.extrude(p_mouse, p_from, p_to)
 
-        pFrom = render.getRelativePoint(base.cam, pFrom)
-        pTo = render.getRelativePoint(base.cam, pTo)
+        p_from = render.get_relative_point(base.cam, p_from)
+        p_to = render.get_relative_point(base.cam, p_to)
 
         # Calculate initial velocity
-        v = pTo - pFrom
+        v = p_to - p_from
         v.normalize()
         v *= 10000.0
 
         # Create bullet
         shape = BulletBoxShape(Vec3(0.5, 0.5, 0.5))
         body = BulletRigidBodyNode('Bullet')
-        bodyNP = render.attachNewNode(body)
-        bodyNP.node().addShape(shape)
-        bodyNP.node().setMass(2.0)
-        bodyNP.node().setLinearVelocity(v)
-        bodyNP.setPos(pFrom)
-        bodyNP.setCollideMask(BitMask32.allOn())
+        body_np = render.attach_new_node(body)
+        body_np.node().add_shape(shape)
+        body_np.node().set_mass(2.0)
+        body_np.node().set_linear_velocity(v)
+        body_np.set_pos(p_from)
+        body_np.set_collide_mask(BitMask32.all_on())
 
         # Enable CCD
-        bodyNP.node().setCcdMotionThreshold(1e-7)
-        bodyNP.node().setCcdSweptSphereRadius(0.50)
+        body_np.node().set_ccd_motion_threshold(1e-7)
+        body_np.node().set_ccd_swept_sphere_radius(0.50)
 
-        world.attachRigidBody(bodyNP.node())
+        world.attach_rigid_body(body_np.node())
 
         # Remove the bullet again after 1 second
-        bullets.append(bodyNP)
-        taskMgr.doMethodLater(1, removeBullet, 'removeBullet')
+        bullets.append(body_np)
+        task_mgr.do_method_later(1, remove_bullet, 'remove_bullet')
 
 .. only:: cpp
 

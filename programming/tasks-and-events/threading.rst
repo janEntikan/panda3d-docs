@@ -31,7 +31,7 @@ following program:
    .. code-block:: python
 
       from panda3d.core import Thread
-      print(Thread.isThreadingSupported())
+      print(Thread.is_threading_supported())
 
 .. only:: cpp
 

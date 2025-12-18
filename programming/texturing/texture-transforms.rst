@@ -11,16 +11,16 @@ Use the following :class:`.NodePath` methods to do this:
 
 .. code-block:: python
 
-   nodePath.setTexOffset(TextureStage, uOffset, vOffset)
-   nodePath.setTexScale(TextureStage, uScale, vScale)
-   nodePath.setTexRotate(TextureStage, degrees)
+   node_path.set_tex_offset(TextureStage, u_offset, v_offset)
+   node_path.set_tex_scale(TextureStage, u_scale, v_scale)
+   node_path.set_tex_rotate(TextureStage, degrees)
 
 If you don't have a particular TextureStage, use
 :meth:`.TextureStage.get_default()` as the first parameter.
 
 Note that the operation in each case is applied to the (u, v) texture
 coordinates, not to the texture; so it will have the opposite effect on the
-texture. For instance, the call :meth:`nodePath.set_tex_scale(ts, 2, 2)
+texture. For instance, the call :meth:`node_path.set_tex_scale(ts, 2, 2)
 <.NodePath.set_tex_scale>` will effectively double the values of the texture
 coordinates on the model, which doubles the space over which the texture is
 applied, and thus makes the texture appear half as large.
@@ -33,15 +33,15 @@ following methods:
 
 .. code-block:: python
 
-   nodePath.setTexPos(TextureStage, uOffset, vOffset, wOffset)
-   nodePath.setTexScale(TextureStage, uScale, vScale, wScale)
-   nodePath.setTexHpr(TextureStage, h, p, r)
+   node_path.set_tex_pos(TextureStage, u_offset, v_offset, w_offset)
+   node_path.set_tex_scale(TextureStage, u_scale, v_scale, w_scale)
+   node_path.set_tex_hpr(TextureStage, h, p, r)
 
 And there is also one generic form:
 
 .. code-block:: python
 
-   nodePath.setTexTransform(TextureStage, transform);
+   node_path.set_tex_transform(TextureStage, transform);
 
 This last method sets a generic TransformState object. This is the same kind of
 4x4 transform matrix object that you can get from a NodePath via e.g.,
@@ -64,12 +64,12 @@ was used to place this sample texture (excerpted):
 
 .. code-block:: python
 
-   smiley = loader.loadModel('smiley.egg')
+   smiley = loader.load_model('smiley.egg')
    ts = TextureStage('ts')
-   pattern = loader.loadTexture('color_pattern.png')
-   smiley.setTexture(ts, pattern)
-   smiley.setTexScale(ts, 8, 4)
-   smiley.setTexOffset(ts, -4, -2)
+   pattern = loader.load_texture('color_pattern.png')
+   smiley.set_texture(ts, pattern)
+   smiley.set_tex_scale(ts, 8, 4)
+   smiley.set_tex_offset(ts, -4, -2)
 
 and the resulting texture:
 

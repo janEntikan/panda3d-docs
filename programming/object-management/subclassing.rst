@@ -78,19 +78,19 @@ Let's first see an example of what **doesn't** work:
    # Here we define the new class, subclassing PandaNode
    # and adding a new variable to it.
    class MyNewNode(PandaNode):
-       def __init__(self, aName):
-           PandaNode.__init__(self, aName)
-           self.aVariable = "A value"
+       def __init__(self, a_name):
+           PandaNode.__init__(self, a_name)
+           self.a_variable = "A value"
 
    # Here we are creating a new node and we -think-
    # we are placing it in the scene graph:
-   myNewNode = MyNewNode("MyNewNode")
-   aNodePath = aspect2d.attachNewNode(myNewNode)
+   my_new_node = MyNewNode("MyNewNode")
+   a_node_path = aspect2d.attach_new_node(my_new_node)
 
    # Here we -attempt- to fetch the stored variable,
-   # but we'll get an error because aNodePath.node()
-   # returns a PandaNode, not myNewNode!
-   print(aNodePath.node().aVariable)
+   # but we'll get an error because a_node_path.node()
+   # returns a PandaNode, not my_new_node!
+   print(a_node_path.node().a_variable)
 
 The workaround is for an instance of the new node class to store itself on the
 PandaNode, as a Python tag:
@@ -104,25 +104,25 @@ PandaNode, as a Python tag:
    # storing its own instance as a python tag and
    # initializing a new variable.
    class MyNewNode(PandaNode):
-       def __init__(self, aName):
-           PandaNode.__init__(self, aName)
-           PandaNode.setPythonTag(self, "subclass", self)
-           self.aVariable = "A value"
+       def __init__(self, a_name):
+           PandaNode.__init__(self, a_name)
+           PandaNode.set_python_tag(self, "subclass", self)
+           self.a_variable = "A value"
 
    # Here we create a new node and we are aware we are
    # placing its -PandaNode- in the scene graph.
-   myNewNode = MyNewNode("MyNewNode")
-   aNodePath = aspect2d.attachNewNode(myNewNode)
+   my_new_node = MyNewNode("MyNewNode")
+   a_node_path = aspect2d.attach_new_node(my_new_node)
 
    # Now, first we fetch the panda node:
-   thePandaNode = aNodePath.node()
+   the_panda_node = a_node_path.node()
 
    # then we fetch the instance of MyNewNode stored on it:
-   theInstanceOfMyNewNode = thePandaNode.getPythonTag("subclass")
+   the_instance_of_my_new_node = the_panda_node.get_python_tag("subclass")
 
    # and finally we fetch the variable we were
    # interested in all along:
-   print(theInstanceOfMyNewNode.aVariable)
+   print(the_instance_of_my_new_node.a_variable)
 
 In the real world
 ~~~~~~~~~~~~~~~~~
@@ -140,28 +140,28 @@ For example:
 .. code-block:: python
 
    # here we setup the scene
-   aNodePath = render.attachNewNode(anInstanceOfMyNewSubclass)
-   aPandaNode = aNodePath.node()
+   a_node_path = render.attach_new_node(an_instance_of_my_new_subclass)
+   a_panda_node = a_node_path.node()
 
    # here we loop over all nodes under render,
    # to find the one we are interested in:
-   for child in render.getChildren()
-       if child.hasPythonTag("subclass"):
-           theInstanceOfASubclass = child.getPythonTag("subclass")
+   for child in render.get_children()
+       if child.has_python_tag("subclass"):
+           the_instance_of_a_subclass = child.get_python_tag("subclass")
 
            # here we test for its type, which is safe
            # but doesn't catch subclasses of the subclass
            # or simply other objects that have the same
            # interface and would work just as well:
-           if type(theInstanceOfASubclass) == type(MyNewSubclass):
-               theInstanceOfASubclass.aVariable = "a new value"
+           if type(the_instance_of_a_subclass) == type(MyNewSubclass):
+               the_instance_of_a_subclass.a_variable = "a new value"
                continue
 
            # here instead we test for the presence of an
            # attribute, which mean that all compatible
            # objects get modified:
-           if hasattr(theInstanceOfASubclass, "aVariable"):
-               theInstanceOfASubclass.aVariable = "a new value"
+           if hasattr(the_instance_of_a_subclass, "a_variable"):
+               the_instance_of_a_subclass.a_variable = "a new value"
                continue
 
 Conclusion

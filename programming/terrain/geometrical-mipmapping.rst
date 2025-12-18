@@ -23,18 +23,18 @@ complicated calculations:
 
    .. code-block:: python
 
-      terrain = GeoMipTerrain("mySimpleTerrain")
-      terrain.setHeightfield("yourHeightField.png")
-      #terrain.setBruteforce(True)
-      terrain.getRoot().reparentTo(render)
+      terrain = GeoMipTerrain("my_simple_terrain")
+      terrain.set_heightfield("your_height_field.png")
+      #terrain.set_bruteforce(True)
+      terrain.get_root().reparent_to(render)
       terrain.generate()
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      GeoMipTerrain terrain("mySimpleTerrain");
-      terrain.set_heightfield(Filename("maps/yourHeightField.png"));
+      GeoMipTerrain terrain("my_simple_terrain");
+      terrain.set_heightfield(Filename("maps/your_height_field.png"));
       terrain.set_bruteforce(true);
       terrain.get_root().reparent_to(window->get_render());
       terrain.generate();
@@ -65,7 +65,7 @@ generating it, otherwise it might require you to regenerate it):
 
    .. code-block:: python
 
-      terrain.getRoot().setSz(100)
+      terrain.get_root().set_sz(100)
 
 .. only:: cpp
 
@@ -83,37 +83,37 @@ This code shows a dynamically updated terrain with LOD:
    .. code-block:: python
 
       # Set up the GeoMipTerrain
-      terrain = GeoMipTerrain("myDynamicTerrain")
-      terrain.setHeightfield("yourHeightField.png")
+      terrain = GeoMipTerrain("my_dynamic_terrain")
+      terrain.set_heightfield("your_height_field.png")
 
       # Set terrain properties
-      terrain.setBlockSize(32)
-      terrain.setNear(40)
-      terrain.setFar(100)
-      terrain.setFocalPoint(base.camera)
+      terrain.set_block_size(32)
+      terrain.set_near(40)
+      terrain.set_far(100)
+      terrain.set_focal_point(base.camera)
 
       # Store the root NodePath for convenience
-      root = terrain.getRoot()
-      root.reparentTo(render)
-      root.setSz(100)
+      root = terrain.get_root()
+      root.reparent_to(render)
+      root.set_sz(100)
 
       # Generate it.
       terrain.generate()
 
       # Add a task to keep updating the terrain
-      def updateTask(task):
+      def update_task(task):
           terrain.update()
           return task.cont
 
-      taskMgr.add(updateTask, "update")
+      task_mgr.add(update_task, "update")
 
 .. only:: cpp
 
    .. code-block:: cpp
 
       // Set up the GeoMipTerrain
-      GeoMipTerrain terrain("myDynamicTerrain");
-      terrain.set_heightfield(Filename("maps/yourHeightField.png"));
+      GeoMipTerrain terrain("my_dynamic_terrain");
+      terrain.set_heightfield(Filename("maps/your_height_field.png"));
 
       // Set terrain properties
       terrain.set_block_size(32);
@@ -130,7 +130,7 @@ This code shows a dynamically updated terrain with LOD:
       terrain.generate();
 
       // Add a task to keep updating the terrain
-      taskMgr->add("update", [&](AsyncTask *task) {
+      task_mgr->add("update", [&](AsyncTask *task) {
         terrain.update();
         return AsyncTask::DS_cont;
       });
@@ -172,7 +172,7 @@ force the chunks to have a minimum level of detail:
 
    .. code-block:: python
 
-      terrain.setMinLevel(2)
+      terrain.set_min_level(2)
 
 .. only:: cpp
 
@@ -197,7 +197,7 @@ restored from a backup node:
 
    .. code-block:: python
 
-      terrain.setAutoFlatten(GeoMipTerrain.AFMStrong)
+      terrain.set_auto_flatten(GeoMipTerrain.AFMStrong)
 
 .. only:: cpp
 

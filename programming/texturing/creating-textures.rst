@@ -16,17 +16,17 @@ from scratch, by passing the x, y size to the constructor.
 
    .. code-block:: python
 
-      myImage = PNMImage()
-      myImage.read("testImg.png")
+      my_image = PNMImage()
+      my_image.read("test_img.png")
 
-      myEmptyImage = PNMImage(256, 256)
+      my_empty_image = PNMImage(256, 256)
 
 .. only:: cpp
 
    .. code-block:: cpp
 
       PNMImage my_image;
-      my_image.read(Filename("testImg.png"));
+      my_image.read(Filename("test_img.png"));
 
       PNMImage my_empty_image(256, 256);
 
@@ -39,15 +39,15 @@ image by filtering it into a larger or smaller PNMImage:
 
    .. code-block:: python
 
-      fullSize = PNMImage(Filename("testImg.png"))
+      full_size = PNMImage(Filename("test_img.png"))
       reduced = PNMImage(256, 256)
-      reduced.gaussianFilterFrom(1.0, fullSize)
+      reduced.gaussian_filter_from(1.0, full_size)
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      PNMImage full_size(Filename("testImg.png"));
+      PNMImage full_size(Filename("test_img.png"));
       PNMImage reduced(256, 256);
       reduced.gaussian_filter_from(1.0, full_size);
 
@@ -75,11 +75,11 @@ vector containing the red, green and blue channels, respectively.
    .. code-block:: python
 
       # The pixel at 0,0 is red and we're using 8-bit color
-      myImage.getRedVal(0, 0) # Returns 255
-      myImage.getRed(0, 0) # Returns 1
+      my_image.get_red_val(0, 0) # Returns 255
+      my_image.get_red(0, 0) # Returns 1
 
-      colors = myImage.getXelVal(0,0) # Returns (255,0,0)
-      colorVal = myImage.getXel(0,0) # Returns (1,0,0)
+      colors = my_image.get_xel_val(0,0) # Returns (255,0,0)
+      color_val = my_image.get_xel(0,0) # Returns (1,0,0)
 
 The methods for setting pixel information are
 :meth:`set_red(x, y, value) <.PNMImage.set_red>`,
@@ -99,19 +99,19 @@ and the ones marked with "val". You can also fill an image with a color by using
 
    .. code-block:: python
 
-      myImage.setGreenVal(0, 0, 255) # If pixel (0, 0) was red before, now it is yellow
-      myImage.setBlue(0, 0, 1) # Pixel (0, 0) is now white
+      my_image.set_green_val(0, 0, 255) # If pixel (0, 0) was red before, now it is yellow
+      my_image.set_blue(0, 0, 1) # Pixel (0, 0) is now white
 
       gray = Vec3(0.5, 0.5, 0.5)
 
       # Both of these set the origin to gray
-      myImage.setXelVal(0, 0, gray * 255)
-      myImage.setXel(0, 0, gray)
+      my_image.set_xel_val(0, 0, gray * 255)
+      my_image.set_xel(0, 0, gray)
 
       # Makes every pixel red
-      myImage.fillVal(255, 0, 0)
+      my_image.fill_val(255, 0, 0)
       # Makes every pixel green
-      myImage.fill(0, 1, 0)
+      my_image.fill(0, 1, 0)
 
 There are also gets and sets for the alpha channel using the same interface as
 above. However, if you use them on an image that doesn't have an alpha channel
@@ -146,38 +146,38 @@ which saves the image of the texture into the given image object.
 
    .. code-block:: python
 
-      myImage = PNMImage()
-      myTexture = loader.loadTexture("myTex.jpg")
+      my_image = PNMImage()
+      my_texture = loader.load_texture("my_tex.jpg")
 
-      # After this call, myImage now holds the same image as the texture
-      myTexture.store(myImage)
+      # After this call, my_image now holds the same image as the texture
+      my_texture.store(my_image)
 
 Loading a PNMImage into a Texture
 ---------------------------------
 
 Once you have changed all the data in the image you can now load it into a
-texture using the texture's :meth:`load(myImage) <.Texture.load>` method, where
-``myImage`` is the PNMImage to make the texture from.
+texture using the texture's :meth:`load(my_image) <.Texture.load>` method, where
+``my_image`` is the PNMImage to make the texture from.
 
 .. only:: python
 
    .. code-block:: python
 
-      # Assume we already have myImage which is our modified PNMImage
-      myTexture = Texture("texture name")
+      # Assume we already have my_image which is our modified PNMImage
+      my_texture = Texture("texture name")
 
-      # This texture now contains the data from myImage
-      myTexture.load(myImage)
+      # This texture now contains the data from my_image
+      my_texture.load(my_image)
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      // Assume we already have myImage which is our modified PNMImage
+      // Assume we already have my_image which is our modified PNMImage
       PT(Texture) my_texture = new Texture("texture name");
 
-      // This texture now contains the data from myImage
-      my_texture->load(myImage);
+      // This texture now contains the data from my_image
+      my_texture->load(my_image);
 
 Remember however, that most graphics cards require that the dimensions of
 texture have to be a power of two. :class:`.PNMImage` does not have this

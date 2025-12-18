@@ -12,14 +12,14 @@ intervals also have volume and start time parameters.
 
 .. code-block:: python
 
-   mySound = loader.loadSfx("mySound.wav")
+   my_sound = loader.load_sfx("my_sound.wav")
 
-   myInterval = SoundInterval(
-       mySound,
+   my_interval = SoundInterval(
+       my_sound,
        loop = 0 or 1,
-       duration = myDuration,
-       volume = myVolume,
-       startTime = myStartTime
+       duration = my_duration,
+       volume = my_volume,
+       start_time = my_start_time
    )
 
 The looping provided by the sound interval is not clean. There will be a pause

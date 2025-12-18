@@ -12,7 +12,7 @@ should also contain a bone "waist". You can then attach them together:
 
 .. code-block:: python
 
-   nodePath = Actor.Actor(
+   node_path = Actor.Actor(
        {
            'legs':'RobotLegs.egg',
            'torso':'RobotTorso1.egg',
@@ -20,7 +20,7 @@ should also contain a bone "waist". You can then attach them together:
            'legs':{'dance':'RobotLegs-Dance.egg'},
            'torso':{'dance':'RobotTorso1-Dance.egg'},
        })
-   nodePath.attach('torso','legs','waist')
+   node_path.attach('torso','legs','waist')
 
 Multi-part actors are fairly complicated. Each part is loaded from a separate
 egg file, and each part has its own set of animations that are applied to it.
@@ -93,28 +93,28 @@ partname, like this:
 
 If you want to use AnimControl, as explained in
 :ref:`this section <actor-animations>`, you must supply the part name as second
-parameter in :py:meth:`~direct.actor.Actor.Actor.getAnimControl()`:
+parameter in :py:meth:`~direct.actor.Actor.Actor.get_anim_control()`:
 
 .. code-block:: python
 
    # you can see you just need to call
-   # actor.getAnimControl('Animation Name', 'Part Name')
+   # actor.get_anim_control('Animation Name', 'Part Name')
    # to get access to the AnimControl of that part.
 
-   ac = actor.getAnimControl('Animation Name', 'Part Name')
-   ac.isPlaying() # Returns a boolean whether the animation is playing or not
-   ac.getFrame() # Returns the current frame number
-   ac.getFrameRate() # Returns the speed of the animation, in frames per second
-   ac.getFullFframe() # Returns a floating-point frame number.
-   ac.getFullFrame() # Returns an integer frame number.
-   ac.getNextFrame() # Returns the number of the next frame on the queue.
-   ac.getNumFrames() # Returns the total number of frames
-   ac.getPlayRate() # Returns the playrate. explained further below
+   ac = actor.get_anim_control('Animation Name', 'Part Name')
+   ac.is_playing() # Returns a boolean whether the animation is playing or not
+   ac.get_frame() # Returns the current frame number
+   ac.get_frame_rate() # Returns the speed of the animation, in frames per second
+   ac.get_full_fframe() # Returns a floating-point frame number.
+   ac.get_full_frame() # Returns an integer frame number.
+   ac.get_next_frame() # Returns the number of the next frame on the queue.
+   ac.get_num_frames() # Returns the total number of frames
+   ac.get_play_rate() # Returns the playrate. explained further below
    ac.loop() # Starts playing the animation in a loop
    ac.play() # Starts playing the animation
    ac.pose(frame) # Poses at frame frame
-   ac.setPlayRate(rate) # Sets the playrate.  explained further below
+   ac.set_play_rate(rate) # Sets the playrate.  explained further below
    ac.stop() # Stops the animation
 
-   # Note: the numbers returned by getFullFrame and getFullFframe keep counting
+   # Note: the numbers returned by get_full_frame and get_full_fframe keep counting
    # and may exceed the total number of frames.

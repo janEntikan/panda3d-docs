@@ -31,8 +31,8 @@ refer to the manual page on :ref:`collision-bitmasks`.
 
       from panda3d.core import BitMask32
 
-      mask1 = BitMask32.allOn()
-      mask2 = BitMask32.allOff()
+      mask1 = BitMask32.all_on()
+      mask2 = BitMask32.all_off()
       mask3 = BitMask32.bit(2)
       mask4 = BitMask32.bit(5)
       mask5 = BitMask32(0x3)
@@ -41,7 +41,7 @@ refer to the manual page on :ref:`collision-bitmasks`.
 
    .. code-block:: cpp
 
-      #include "panda3d/bitMask.h"
+      #include "panda3d/bit_mask.h"
 
       BitMask32 mask1 = BitMask32::all_on();
       BitMask32 mask2 = BitMask32::all_off();
@@ -96,16 +96,16 @@ The following code segment shows how this matrix is represented in code.
    .. code-block:: python
 
       # Group 0 never collides
-      world.setGroupCollisionFlag(0, 0, False)
-      world.setGroupCollisionFlag(0, 1, False)
-      world.setGroupCollisionFlag(0, 2, False)
+      world.set_group_collision_flag(0, 0, False)
+      world.set_group_collision_flag(0, 1, False)
+      world.set_group_collision_flag(0, 2, False)
 
       # Group 1 only collides with Group 2
-      world.setGroupCollisionFlag(1, 1, False)
-      world.setGroupCollisionFlag(1, 2, True)
+      world.set_group_collision_flag(1, 1, False)
+      world.set_group_collision_flag(1, 2, True)
 
       # Group 2 only collides with itself
-      world.setGroupCollisionFlag(2, 2, True)
+      world.set_group_collision_flag(2, 2, True)
 
 .. only:: cpp
 
@@ -140,15 +140,15 @@ collision groups the object belongs to.
       shape = shape = BulletBoxShape(Vec3(0.5, 0.5, 0.5))
 
       body = BulletRigidBodyNode('Body')
-      body.addShape(shape)
+      body.add_shape(shape)
 
-      world.attachRigidBody(body)
+      world.attach_rigid_body(body)
 
-      bodyNP = self.worldNP.attachNewNode(body)
-      bodyNP.setPos(0, 0, -1)
+      body_np = self.world_np.attach_new_node(body)
+      body_np.set_pos(0, 0, -1)
 
       # Set it to be a part of group 0
-      bodyNP.setCollideMask(BitMask32.bit(0))
+      body_np.set_collide_mask(BitMask32.bit(0))
 
 .. only:: cpp
 
@@ -174,7 +174,7 @@ following line is an alternate way to set the collide mask:
 
    .. code-block:: python
 
-      bodyNP.node().setIntoCollideMask(mask)
+      body_np.node().set_into_collide_mask(mask)
 
 .. only:: cpp
 
@@ -202,7 +202,7 @@ combine multiple bitmasks.
    .. code-block:: python
 
       # Set it to be a part of groups 0 and 2
-      bodyNP.setCollideMask(BitMask32.bit(0) | BitMask32.bit(2))
+      body_np.set_collide_mask(BitMask32.bit(0) | BitMask32.bit(2))
 
 .. only:: cpp
 

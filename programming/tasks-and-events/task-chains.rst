@@ -55,19 +55,19 @@ To set up a new task chain, you simply call:
 
    .. code-block:: python
 
-      taskMgr.setupTaskChain('chain_name', numThreads = None, tickClock = None,
-                             threadPriority = None, frameBudget = None,
-                             frameSync = None, timeslicePriority = None)
+      task_mgr.setup_task_chain('chain_name', num_threads = None, tick_clock = None,
+                             thread_priority = None, frame_budget = None,
+                             frame_sync = None, timeslice_priority = None)
 
    Task chains are identified by their unique name. Repeated calls to
-   setupTaskChain() with the same task chain name will reconfigure the same task
+   setup_task_chain() with the same task chain name will reconfigure the same task
    chain.
 
 The task chain parameters are:
 
 .. only:: python
 
-   numThreads
+   num_threads
       Specifies the number of threads that will service this task chain. The
       default is zero, which means the task chain will be handled by the main
       thread. If you set this to 1, then a single thread will be spawned to
@@ -77,24 +77,24 @@ The task chain parameters are:
       tasks may be run in parallel with each other, and task ordering is
       difficult to guarantee.
 
-   tickClock
+   tick_clock
       If this is true, then this task chain will be responsible for ticking the
       global clock each frame (and thereby incrementing the frame counter).
       There should be just one task chain responsible for ticking the clock, and
       usually it is the default task chain.
 
-   threadPriority
+   thread_priority
       This specifies the priority level to assign to threads on this task chain.
       It may be one of TP_low, TP_normal, TP_high, or TP_urgent. This is passed
       to the underlying threading system to control the way the threads are
       scheduled. It only has meaning for a threaded task chain, of course.
 
-   frameBudget
+   frame_budget
       This is the maximum amount of time (in seconds) to allow this task chain
       to run per frame. Set it to -1 to mean no limit (the default). It's not
-      directly related to threadPriority.
+      directly related to thread_priority.
 
-   frameSync
+   frame_sync
       Set this true to force the task chain to sync to the clock. When this flag
       is false, the default, the task chain will finish all of its tasks and
       then immediately start from the first task again, regardless of the clock
@@ -103,7 +103,7 @@ The task chain parameters are:
       first task. This only makes sense for threaded tasks chains; non-threaded
       task chains are automatically synchronous.
 
-   timeslicePriority
+   timeslice_priority
       This is false in the default mode, in which each task runs exactly once
       each frame, round-robin style, regardless of the task's priority value.
       Set it to true to change the meaning of priority so that certain tasks are
@@ -137,7 +137,7 @@ The task chain parameters are:
    set_frame_budget()
       This is the maximum amount of time (in seconds) to allow this task chain
       to run per frame. Set it to -1 to mean no limit (the default). It's not
-      directly related to threadPriority.
+      directly related to thread_priority.
 
    set_frame_sync()
       Set this true to force the task chain to sync to the clock. When this flag
@@ -161,14 +161,14 @@ Using task chains
 .. only:: python
 
    You may add any tasks to the task chain of your choosing with the optional
-   taskChain parameter to :py:meth:`taskMgr.add()` or
+   task_chain parameter to :py:meth:`task_mgr.add()` or
    :py:meth:`taskMgr.doMethodLater()`. This parameter should receive the name of
    the task chain to add the task to; this is the 'chain_name' you specified in
-   the above call to :py:meth:`taskMgr.setupTaskChain()`. For example:
+   the above call to :py:meth:`task_mgr.setup_task_chain()`. For example:
 
    .. code-block:: python
 
-      taskMgr.add(self.myTaskFunc, 'myTaskName', taskChain = 'myChain')
+      task_mgr.add(self.my_task_func, 'my_task_name', task_chain = 'my_chain')
 
 .. only:: cpp
 
@@ -180,7 +180,7 @@ Using task chains
 
    .. code-block:: cpp
 
-      PT(AsyncTask) task = new GenericAsyncTask("myTaskName");
+      PT(AsyncTask) task = new GenericAsyncTask("my_task_name");
       task->set_function(my_task_func);
-      task->set_task_chain("myChain");
+      task->set_task_chain("my_chain");
       task_mgr->add(task);

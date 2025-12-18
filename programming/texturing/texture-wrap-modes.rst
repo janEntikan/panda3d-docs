@@ -18,8 +18,8 @@ wrap mode**.
 
    .. code-block:: python
 
-      texture.setWrapU(wrap_mode)
-      texture.setWrapV(wrap_mode)
+      texture.set_wrap_u(wrap_mode)
+      texture.set_wrap_v(wrap_mode)
 
 .. only:: cpp
 
@@ -65,8 +65,8 @@ WM_repeat
 
    .. code-block:: python
 
-      texture.setWrapU(Texture.WM_repeat)
-      texture.setWrapV(Texture.WM_repeat)
+      texture.set_wrap_u(Texture.WM_repeat)
+      texture.set_wrap_v(Texture.WM_repeat)
 
 .. only:: cpp
 
@@ -87,8 +87,8 @@ WM_clamp
 
    .. code-block:: python
 
-      texture.setWrapU(Texture.WM_clamp)
-      texture.setWrapV(Texture.WM_clamp)
+      texture.set_wrap_u(Texture.WM_clamp)
+      texture.set_wrap_v(Texture.WM_clamp)
 
 .. only:: cpp
 
@@ -111,9 +111,9 @@ WM_border_color
 
    .. code-block:: python
 
-      texture.setWrapU(Texture.WM_border_color)
-      texture.setWrapV(Texture.WM_border_color)
-      texture.setBorderColor((0.4, 0.5, 1, 1))
+      texture.set_wrap_u(Texture.WM_border_color)
+      texture.set_wrap_v(Texture.WM_border_color)
+      texture.set_border_color((0.4, 0.5, 1, 1))
 
 .. only:: cpp
 
@@ -135,8 +135,8 @@ texture as the border color, like this:
 
    .. code-block:: python
 
-      texture.setWrapU(Texture.WMBorderColor)
-      texture.setWrapV(Texture.WMBorderColor)
+      texture.set_wrap_u(Texture.WMBorderColor)
+      texture.set_wrap_v(Texture.WMBorderColor)
 
 .. only:: cpp
 
@@ -160,8 +160,8 @@ WM_mirror
 
    .. code-block:: python
 
-      texture.setWrapU(Texture.WM_mirror)
-      texture.setWrapV(Texture.WM_mirror)
+      texture.set_wrap_u(Texture.WM_mirror)
+      texture.set_wrap_v(Texture.WM_mirror)
 
 .. only:: cpp
 
@@ -182,9 +182,9 @@ WM_mirror_once
 
    .. code-block:: python
 
-      texture.setWrapU(Texture.WM_mirror_once)
-      texture.setWrapV(Texture.WM_mirror_once)
-      texture.setBorderColor((0.4, 0.5, 1, 1))
+      texture.set_wrap_u(Texture.WM_mirror_once)
+      texture.set_wrap_v(Texture.WM_mirror_once)
+      texture.set_border_color((0.4, 0.5, 1, 1))
 
 .. only:: cpp
 
@@ -208,8 +208,8 @@ It is possible to set different wrap modes in the *u* and *v* directions:
 
    .. code-block:: python
 
-      texture.setWrapU(Texture.WM_repeat)
-      texture.setWrapV(Texture.WM_clamp)
+      texture.set_wrap_u(Texture.WM_repeat)
+      texture.set_wrap_v(Texture.WM_clamp)
 
 .. only:: cpp
 

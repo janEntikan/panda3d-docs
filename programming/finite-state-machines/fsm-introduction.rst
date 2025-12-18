@@ -44,7 +44,7 @@ FSM Introduction
 
    To implement this as a Panda3D FSM, you would declare an new class that
    inherits from FSM, and within this class you would define four methods:
-   ``enterWalk()``, ``exitWalk()``, ``enterSwim()``, and ``exitSwim()``. This
+   ``enter_walk()``, ``exit_walk()``, ``enter_swim()``, and ``exit_swim()``. This
    might look something like this:
 
    .. code-block:: python
@@ -57,27 +57,27 @@ FSM Introduction
               FSM.__init__(self, 'AvatarFSM')
               ##do your init code here
 
-          def enterWalk(self):
+          def enter_walk(self):
               avatar.loop('walk')
-              footstepsSound.play()
-              enableDoorCollisions()
+              footsteps_sound.play()
+              enable_door_collisions()
 
-          def exitWalk(self):
+          def exit_walk(self):
               avatar.stop()
-              footstepsSound.stop()
-              disableDoorCollisions()
+              footsteps_sound.stop()
+              disable_door_collisions()
 
-          def enterSwim(self):
+          def enter_swim(self):
               avatar.loop('swim')
-              underwaterSound.play()
-              render.setFog(underwaterFog)
-              startAirTimer()
+              underwater_sound.play()
+              render.set_fog(underwater_fog)
+              start_air_timer()
 
-          def exitSwim(self):
+          def exit_swim(self):
               avatar.stop()
-              underwaterSound.stop()
-              render.clearFog()
-              stopAirTimer()
+              underwater_sound.stop()
+              render.clear_fog()
+              stop_air_timer()
 
       myfsm = AvatarFSM()
 

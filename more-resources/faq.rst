@@ -69,9 +69,9 @@ If you'll run this example code you might not see the position interval.
    import direct.directbase.DirectStart
    from direct.interval.IntervalGlobal import *
 
-   env = loader.loadModel('environment')
-   env.reparentTo(render)
-   env.setZ(-4)
+   env = loader.load_model('environment')
+   env.reparent_to(render)
+   env.set_z(-4)
 
    def func():
        # something heavy on the CPU
@@ -80,7 +80,7 @@ If you'll run this example code you might not see the position interval.
        # run the interval after
        posival.start()
 
-   posival = LerpPosInterval(base.cam, 0.4, (0,base.cam.getY()-12,0), base.cam.getPos())
+   posival = LerpPosInterval(base.cam, 0.4, (0,base.cam.get_y()-12,0), base.cam.get_pos())
 
    func()
 
@@ -124,12 +124,12 @@ that one frame, but in this case that's what you want to happen.
 
 Another approach, that doesn't involve explicitly munging the clock, would be
 simply to wait to start the interval until the next frame, for instance with a
-doMethodLater().
+do_method_later().
 
 .. code-block:: python
 
-   taskMgr.doMethodLater(0, lambda task, posival=posival: posival.start(),
-                         'startInterval')
+   task_mgr.do_method_later(0, lambda task, posival=posival: posival.start(),
+                         'start_interval')
 
 I have a bunch of Maya Animations of one model in different mb files. I used maya2egg to port them into panda, but only one of the animations work.
 ---------------------------------------------------------------------------------------------------------------------------------------------------
@@ -157,16 +157,16 @@ using the exact same rig:
    maya2egg6 dog-sit.mb -a chan -cn dog -o dog-sit.egg
    maya2egg6 dog-run.mb -a chan -cn dog -o dog-run.egg
 
-I'm using the ``lookAt()`` method on a NodePath to point it at another object. It works fine until I point upwards, and then it starts to spin my object around randomly
+I'm using the ``look_at()`` method on a NodePath to point it at another object. It works fine until I point upwards, and then it starts to spin my object around randomly
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-``lookAt()`` works as long as you aren't telling it to look in the direction of
+``look_at()`` works as long as you aren't telling it to look in the direction of
 its up vector. The up vector can be specified as the second argument of
-``lookAt()``.
+``look_at()``.
 
 .. code-block:: python
 
-   lookAt(object, Vec3(0, 0, 1))
+   look_at(object, Vec3(0, 0, 1))
 
 I'm building a 3D game, and I have a huge world. When my world starts up, the program hangs for a few seconds the first time I look around. Is there any way to avoid this?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -178,10 +178,10 @@ offload the wait time to the beginning by calling:
 
 .. code-block:: python
 
-   # self.myWorld is a NodePath that contains a ton of objects
-   self.myWorld.prepareScene(base.win.getGsg())
+   # self.my_world is a NodePath that contains a ton of objects
+   self.my_world.prepare_scene(base.win.get_gsg())
 
-This will walk through the scene graph, starting at ``self.myWorld``, and
+This will walk through the scene graph, starting at ``self.my_world``, and
 prepare each object for rendering.
 
 Is there a way to hide the mouse pointer so that it doesn't show up on my screen?
@@ -193,8 +193,8 @@ cursor.
 .. code-block:: python
 
    props = WindowProperties()
-   props.setCursorHidden(True)
-   base.win.requestProperties(props)
+   props.set_cursor_hidden(True)
+   base.win.request_properties(props)
 
 If a model has an animation, then is that animation necessarily represented by an additional .egg file?
 -------------------------------------------------------------------------------------------------------
@@ -219,30 +219,30 @@ only the geometry was used to make the egg file, you will have problems when you
 try to play animations. Look at the manual for more details about exporting
 models as eggs.
 
-I called ``setTexture('tex.png')`` and it didn't change or send an error. Why?
+I called ``set_texture('tex.png')`` and it didn't change or send an error. Why?
 ------------------------------------------------------------------------------
 
 To override an existing texture, you need to specify a priority. The
-``setTexture()`` call includes an optional priority parameter, and if the
+``set_texture()`` call includes an optional priority parameter, and if the
 priority is less than 1 the texture will not change.
 
 .. code-block:: python
 
-   setTexture('tex.png', 1)
+   set_texture('tex.png', 1)
 
 Why do I get sometimes get an AssertionError when instantiating Sequence?
 -------------------------------------------------------------------------
 
 Specifically, I get the following error::
 
-   assert(self.validateComponents(self.ivals))
+   assert(self.validate_components(self.ivals))
    AssertionError
 
 It happens at this line of code:
 
 .. code-block:: python
 
-   move = Sequence(obj.setX(5))
+   move = Sequence(obj.set_x(5))
 
 Sequences and Parallels are a way to combine intervals. You can't put anything
 inside them that isn't an interval. The following would have the same effect and
@@ -250,7 +250,7 @@ work:
 
 .. code-block:: python
 
-   move = Sequence(Func(obj.setX, 5))
+   move = Sequence(Func(obj.set_x, 5))
 
 This will start the execution of the function, but not wait for it to finish.
 
@@ -288,10 +288,10 @@ flag, you will also need to empty your modelcache folder.
 
 Actually, it is not recommended to use interpolate-frames; it is a global
 setting. It's better to achieve the same effect via
-``actor.setBlend(frameBlend=True)``, which is a per-actor setting (and doesn't
+``actor.set_blend(frame_blend=True)``, which is a per-actor setting (and doesn't
 get baked into the model cache).
 
-I'm trying to redirect the output of some commands like ``myNode.ls()`` to a file, but the usual method ``python >> file, myNode.ls()`` doesn't work. What's the alternative?
+I'm trying to redirect the output of some commands like ``my_node.ls()`` to a file, but the usual method ``python >> file, my_node.ls()`` doesn't work. What's the alternative?
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 There are several alternative approaches. One approach using StringStream is
@@ -301,22 +301,22 @@ this:
 
    strm = StringStream()
    render.ls(strm)
-   open('out.txt', 'w').write(strm.getData())
+   open('out.txt', 'w').write(strm.get_data())
 
 The following is another approach using StringStream:
 
 .. code-block:: python
 
    strm = StringStream()
-   cvMgr.write(strm)
-   open('out.txt', 'w').write(strm.getData())
+   cv_mgr.write(strm)
+   open('out.txt', 'w').write(strm.get_data())
 
 If you don't want to use a StringStream you can do this:
 
 .. code-block:: python
 
    strm = MultiplexStream()
-   strm.addFile(Filename('out.txt'))
+   strm.add_file(Filename('out.txt'))
    render.ls(strm)
 
 There is also a way to specify the output file in the config file.
@@ -333,8 +333,8 @@ Use the EggData class.
 .. code-block:: python
 
    egg = EggData()
-   egg.read(StringStream(eggText))
-   model = NodePath(loadEggData(egg))
+   egg.read(StringStream(egg_text))
+   model = NodePath(load_egg_data(egg))
 
 How can I know which letter is below the pointer when I click on a TextNode?
 ----------------------------------------------------------------------------
@@ -344,12 +344,12 @@ Use the TextAssembler class.
 .. code-block:: python
 
    tn = TextNode('tn')
-   tn.setText('abcdef\nghi')
+   tn.set_text('abcdef\nghi')
    ta = TextAssembler(tn)
-   ta.setWtext(tn.getWtext())
-   for ri in range(ta.getNumRows()):
-       for ci in range(ta.getNumCols(ri)):
+   ta.set_wtext(tn.get_wtext())
+   for ri in range(ta.get_num_rows()):
+       for ci in range(ta.get_num_cols(ri)):
            print("ri = %s, ci = %s, char = %s, pos = %s, %s" %
-                 (ri, ci, chr(ta.getCharacter(ri, ci)),
-                              ta.getXpos(ri, ci),
-                              ta.getYpos(ri, ci)))
+                 (ri, ci, chr(ta.get_character(ri, ci)),
+                              ta.get_xpos(ri, ci),
+                              ta.get_ypos(ri, ci)))

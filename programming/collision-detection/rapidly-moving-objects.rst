@@ -26,7 +26,7 @@ this mode, call:
 
    .. code-block:: python
 
-      base.cTrav.setRespectPrevTransform(True)
+      base.c_trav.set_respect_prev_transform(True)
 
 .. only:: cpp
 
@@ -57,7 +57,7 @@ when you put it into your scene the first time), instead of using:
 
    .. code-block:: python
 
-      object.setPos(newPos)
+      object.set_pos(new_pos)
 
 .. only:: cpp
 
@@ -71,7 +71,7 @@ You should use:
 
    .. code-block:: python
 
-      object.setFluidPos(newPos)
+      object.set_fluid_pos(new_pos)
 
 .. only:: cpp
 

@@ -36,12 +36,12 @@ The first step is to instantiate these four classes.
    from panda3d.core import QueuedConnectionReader
    from panda3d.core import ConnectionWriter
 
-   cManager = QueuedConnectionManager()
-   cListener = QueuedConnectionListener(cManager, 0)
-   cReader = QueuedConnectionReader(cManager, 0)
-   cWriter = ConnectionWriter(cManager, 0)
+   c_manager = QueuedConnectionManager()
+   c_listener = QueuedConnectionListener(c_manager, 0)
+   c_reader = QueuedConnectionReader(c_manager, 0)
+   c_writer = ConnectionWriter(c_manager, 0)
 
-   activeConnections = [] # We'll want to keep track of these later
+   active_connections = [] # We'll want to keep track of these later
 
 This method of instantiation prepares the classes in single-thread mode, which
 that realtime communication requires them to be polled periodically.
@@ -58,19 +58,19 @@ poll the listener.
 
    port_address = 9099 #No-other TCP/IP services are using this port
    backlog = 1000 #If we ignore 1,000 connection attempts, something is wrong!
-   tcpSocket = cManager.openTCPServerRendezvous(port_address,backlog)
+   tcp_socket = c_manager.open_tcp_server_rendezvous(port_address,backlog)
 
-   cListener.addConnection(tcpSocket)
+   c_listener.add_connection(tcp_socket)
 
 Since the network handlers we instantiated are polled, we'll create some tasks
 to do the polling.
 
 .. code-block:: python
 
-   taskMgr.add(tskListenerPolling, "Poll the connection listener", -39)
-   taskMgr.add(tskReaderPolling, "Poll the connection reader", -40)
+   task_mgr.add(tsk_listener_polling, "Poll the connection listener", -39)
+   task_mgr.add(tsk_reader_polling, "Poll the connection reader", -40)
 
-When a connection comes in, the tskListenerPolling function below handles the
+When a connection comes in, the tsk_listener_polling function below handles the
 incoming connection and hands it to the QueuedConnectionReader. The connection
 is now established.
 
@@ -79,17 +79,17 @@ is now established.
    from panda3d.core import PointerToConnection
    from panda3d.core import NetAddress
 
-   def tskListenerPolling(taskdata):
-       if cListener.newConnectionAvailable():
+   def tsk_listener_polling(taskdata):
+       if c_listener.new_connection_available():
 
            rendezvous = PointerToConnection()
-           netAddress = NetAddress()
-           newConnection = PointerToConnection()
+           net_address = NetAddress()
+           new_connection = PointerToConnection()
 
-           if cListener.getNewConnection(rendezvous,netAddress,newConnection):
-               newConnection = newConnection.p()
-               activeConnections.append(newConnection) # Remember connection
-               cReader.addConnection(newConnection)     # Begin reading connection
+           if c_listener.get_new_connection(rendezvous,net_address,new_connection):
+               new_connection = new_connection.p()
+               active_connections.append(new_connection) # Remember connection
+               c_reader.add_connection(new_connection)     # Begin reading connection
        return Task.cont
 
 Once a connection has been opened, the QueuedConnectionReader may begin
@@ -100,17 +100,17 @@ but it is up to the server code to handle the incoming data.
 
    from panda3d.core import NetDatagram
 
-   def tskReaderPolling(taskdata):
-       if cReader.dataAvailable():
+   def tsk_reader_polling(taskdata):
+       if c_reader.data_available():
            datagram = NetDatagram()  # catch the incoming data in this instance
            # Check the return value; if we were threaded, someone else could have
            # snagged this data before we did
-           if cReader.getData(datagram):
-               myProcessDataFunction(datagram)
+           if c_reader.get_data(datagram):
+               my_process_data_function(datagram)
        return Task.cont
 
 Note that the QueuedConnectionReader retrieves data from all clients connected
-to the server. The NetDatagram can be queried using NetDatagram.getConnection to
+to the server. The NetDatagram can be queried using NetDatagram.get_connection to
 determine which client sent the message.
 
 If the server wishes to send data to the client, it can use the ConnectionWriter
@@ -119,9 +119,9 @@ to transmit back along the connection.
 .. code-block:: python
 
    # broadcast a message to all clients
-   myPyDatagram = myNewPyDatagram()  # build a datagram to send
-   for aClient in activeConnections:
-       cWriter.send(myPyDatagram,aClient)
+   my_py_datagram = my_new_py_datagram()  # build a datagram to send
+   for a_client in active_connections:
+       c_writer.send(my_py_datagram,a_client)
 
 Finally, the server may terminate a connection by removing it from the
 QueuedConnectionReader's responsibility. It may also deactivate its listener so
@@ -131,12 +131,12 @@ that no more connections are received.
 
    # terminate connection to all clients
 
-   for aClient in activeConnections:
-       cReader.removeConnection(aClient)
-   activeConnections = []
+   for a_client in active_connections:
+       c_reader.remove_connection(a_client)
+   active_connections = []
 
    # close down our listener
-   cManager.closeConnection(tcpSocket)
+   c_manager.close_connection(tcp_socket)
 
 Connecting with a client
 ------------------------
@@ -161,13 +161,13 @@ and the correct socket ID.
    # How long, in milliseconds, until we give up trying to reach the server?
    timeout = 3000  # 3 seconds
 
-   myConnection = cManager.openTCPClientConnection(ip_address, port_address, timeout)
-   if myConnection:
-       cReader.addConnection(myConnection)  # receive messages from server
+   my_connection = c_manager.open_tcp_client_connection(ip_address, port_address, timeout)
+   if my_connection:
+       c_reader.add_connection(my_connection)  # receive messages from server
 
 When the client has finished communicating with the server, it can close the
 connection.
 
 .. code-block:: python
 
-   cManager.closeConnection(myConnection)
+   c_manager.close_connection(my_connection)

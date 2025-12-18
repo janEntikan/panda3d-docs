@@ -40,7 +40,7 @@ Client-side DGameObject.py:
            for distributed """
 
            # send the message to the server
-           self.sendUpdate('sendGameData', [('ValueA', 123, 1.25)])
+           self.send_update('send_game_data', [('ValueA', 123, 1.25)])
 
 AI Server side DGameObjectAI.py
 
@@ -49,11 +49,11 @@ AI Server side DGameObjectAI.py
    from direct.distributed.DistributedObjectAI import DistributedObjectAI
 
    class DGameObjectAI(DistributedObjectAI):
-       def __init__(self, aiRepository):
-           DistributedObjectAI.__init__(self, aiRepository)
+       def __init__(self, ai_repository):
+           DistributedObjectAI.__init__(self, ai_repository)
 
-       def sendGameData(self, data):
-           """ Method that can be called from the clients with an sendUpdate call """
+       def send_game_data(self, data):
+           """ Method that can be called from the clients with an send_update call """
            print(data)
 
 Here we see that a new object derives from :class:`.DistributedObject` and
@@ -64,7 +64,7 @@ The foo method is the one that will have an effect locally.
 
 The d_foo (d\_ stands for distributed) method will send a message to the server
 and hence to other clients as needed and will update them. As you see, you can
-simply send data to the server with a self.sendUpdate call.
+simply send data to the server with a self.send_update call.
 There is also another method called
 :meth:`.DistributedObjectAI.sendUpdateToAvatarId` which accepts a :term:`doId`
 of a client and will send the message directly to it. This method is only
@@ -89,12 +89,12 @@ objects. For example:
 
 .. code-block:: python
 
-   def announceGenerate(self):
+   def announce_generate(self):
 
-       base.messenger.send(self.cr.uniqueName('myObject-generated'), [self.doId])
+       base.messenger.send(self.cr.unique_name('my_object-generated'), [self.do_id])
 
        # call the base class method
-       DistributedObject.announceGenerate(self)
+       DistributedObject.announce_generate(self)
 
 :meth:`~.DistributedObject.disable`: This method will be called when the object gets disabled. This
 usually comes prior to a delete call.

@@ -60,7 +60,7 @@ You can load a model file using the following code:
 
    .. code-block:: python
 
-      myNodePath = loader.loadModel("path/to/models/myModel.egg")
+      my_node_path = loader.load_model("path/to/models/my_model.egg")
 
    This call can take an absolute or relative path, although it is strongly
    recommended to use relative paths only. These relative paths are resolved
@@ -72,8 +72,8 @@ You can load a model file using the following code:
 
    .. code-block:: cpp
 
-      NodePath myNodePath =
-        window->load_model(framework.get_models(), "path/to/models/myModel.egg");
+      NodePath my_node_path =
+        window->load_model(framework.get_models(), "path/to/models/my_model.egg");
 
    This call can take an absolute or relative path, although it is strongly
    recommended to use relative paths only. These relative paths are resolved
@@ -109,13 +109,13 @@ reparent the model to this scene graph:
 
    .. code-block:: python
 
-      myModel.reparentTo(render)
+      my_model.reparent_to(render)
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      myModel.reparent_to(window->get_render());
+      my_model.reparent_to(window->get_render());
 
 It is possible to reparent the model to any node (even to another model, or to
 a sub-part of a different model), not just to :obj:`~builtins.render`!
@@ -130,13 +130,13 @@ follows:
 
    .. code-block:: python
 
-      myModel.detachNode()
+      my_model.detach_node()
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      myModel.detach_node();
+      my_model.detach_node();
 
 The Model Cache
 ---------------
@@ -158,7 +158,7 @@ variable to an empty string.
 .. only:: python
 
    You can alternatively force a model to bypass the model cache by passing the
-   ``noCache=True`` argument to the ``loader.loadModel`` call.
+   ``no_cache=True`` argument to the ``loader.load_model`` call.
 
 Compressed Models
 -----------------

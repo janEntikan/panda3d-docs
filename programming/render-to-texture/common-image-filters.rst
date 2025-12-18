@@ -68,12 +68,12 @@ The Bloom Filter
 ----------------
 
 The bloom filter causes bright objects to have a glowing halo around them. To
-enable a bloom filter, use ``setBloom``. To disable, use ``delBloom``:
+enable a bloom filter, use ``set_bloom``. To disable, use ``del_bloom``:
 
 .. code-block:: python
 
-   filters.setBloom( ... options ...)
-   filters.delBloom()
+   filters.set_bloom( ... options ...)
+   filters.del_bloom()
 
 The bloom filter works as follows. First, it renders the scene into a texture.
 It also asks the renderer to render any glow-maps into the alpha channel of the
@@ -118,13 +118,13 @@ The Cartoon Inking Filter
 -------------------------
 
 The cartoon inking filter causes objects to have black lines around them. To
-enable a cartoon inking filter, use ``setCartoonInk``. To disable, use
-``delCartoonInk``:
+enable a cartoon inking filter, use ``set_cartoon_ink``. To disable, use
+``del_cartoon_ink``:
 
 .. code-block:: python
 
-   filters.setCartoonInk( ... options ...)
-   filters.delCartoonInk()
+   filters.set_cartoon_ink( ... options ...)
+   filters.del_cartoon_ink()
 
 The cartoon inking filter works by rendering a camera-space normal into an
 texture. Then, a postprocessing filter does an edge-detect algorithm on the
@@ -146,8 +146,8 @@ geometry. This is an easy way to easily create nice-looking light/sun effects.
 
 .. code-block:: python
 
-   filters.setVolumetricLighting( ... options ...)
-   filters.delVolumetricLighting()
+   filters.set_volumetric_lighting( ... options ...)
+   filters.del_volumetric_lighting()
 
 The filter has the following keyword parameters:
 
@@ -179,8 +179,8 @@ This filter simply inverts the colors of the image.
 
 .. code-block:: python
 
-   filters.setInverted()
-   filters.delInverted()
+   filters.set_inverted()
+   filters.del_inverted()
 
 This filter has no parameters.
 
@@ -191,8 +191,8 @@ This filter can apply a blur or sharpen effect to the image.
 
 .. code-block:: python
 
-   filters.setBlurSharpen( ... options ...)
-   filters.delBlurSharpen()
+   filters.set_blur_sharpen( ... options ...)
+   filters.del_blur_sharpen()
 
 The filter has the following keyword parameters:
 
@@ -209,8 +209,8 @@ This filter adds a simple screen-space ambient occlusion effect to the scene.
 
 .. code-block:: python
 
-   filters.setAmbientOcclusion( ... options ...)
-   filters.delAmbientOcclusion()
+   filters.set_ambient_occlusion( ... options ...)
+   filters.del_ambient_occlusion()
 
 It is important that the viewing frustrum's near and far values fit the scene as
 tightly as possible. Note that you need to do lots of tweaking to the parameters
@@ -239,8 +239,8 @@ see the below filter.
 
 .. code-block:: python
 
-   filters.setGammaAdjust(1.5)
-   filters.delGammaAdjust()
+   filters.set_gamma_adjust(1.5)
+   filters.del_gamma_adjust()
 
 The sRGB Encode Filter
 ----------------------
@@ -264,8 +264,8 @@ to prevent double-applying the sRGB transformation.
 
 .. code-block:: python
 
-   filters.setSrgbEncode()
-   filters.delSrgbEncode()
+   filters.set_srgb_encode()
+   filters.del_srgb_encode()
 
 This filter is available as of Panda3D 1.10.7.
 
@@ -283,14 +283,14 @@ Depending on the brightness of your lights, it may be necessary to use the
 Exposure Adjust filter in order to prevent an oversaturated image.
 
 It is recommended to set your lights to use an inverse square falloff
-attenuation (using ``setAttenuation(0, 0, 1)``), enable the sRGB Encode filter,
+attenuation (using ``set_attenuation(0, 0, 1)``), enable the sRGB Encode filter,
 and use realistically bright values for your light colors to achieve the most
 realistic effect.
 
 .. code-block:: python
 
-   filters.setHighDynamicRange()
-   filters.delHighDynamicRange()
+   filters.set_high_dynamic_range()
+   filters.del_high_dynamic_range()
 
 This filter is available as of Panda3D 1.10.7.
 
@@ -310,8 +310,8 @@ halves it.
 
 .. code-block:: python
 
-   filters.setExposureAdjust(0)
-   filters.delExposureAdjust()
+   filters.set_exposure_adjust(0)
+   filters.del_exposure_adjust()
 
 This filter is available as of Panda3D 1.10.7.
 

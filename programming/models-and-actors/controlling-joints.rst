@@ -8,11 +8,11 @@ Controlling a Joint Procedurally
    Sometimes one wishes to procedurally take control of a model's joint. For
    example, if you wish to force a character model's eyes to follow the mouse,
    you will need to procedurally take control of the neck and head. To achieve
-   this, use :py:meth:`~direct.actor.Actor.Actor.controlJoint()`.
+   this, use :py:meth:`~direct.actor.Actor.Actor.control_joint()`.
 
    .. code-block:: python
 
-      dummy = actor.controlJoint(None, "modelRoot", "Joint Name")
+      dummy = actor.control_joint(None, "model_root", "Joint Name")
 
 .. only:: cpp
 
@@ -41,8 +41,8 @@ relative to the upper arm.
 
 .. only:: python
 
-   The string "modelRoot" represents the name of the model node - the string
-   "modelRoot" is usually the correct value.
+   The string "model_root" represents the name of the model node - the string
+   "model_root" is usually the correct value.
 
    The string "Joint Name" represents the name of the joint. Typically it would
    be something like "Femur", or "Neck", or "L Finger1". This is usually set
@@ -50,17 +50,17 @@ relative to the upper arm.
    has a name, including the bones. If necessary, you can determine the joint
    names by scanning the egg file for strings like ``<Joint> Femur`` or, in the
    case of a glTF file, by looking at the "name" property in the "nodes" array.
-   The call :py:meth:`actor.listJoints() <direct.actor.Actor.Actor.listJoints>`
+   The call :py:meth:`actor.list_joints() <direct.actor.Actor.Actor.list_joints>`
    can also be used to show the complete hierarchy of joints.
 
 .. only:: python
 
-   To undo a previous :py:meth:`~direct.actor.Actor.Actor.controlJoint()` call,
-   use the :py:meth:`~direct.actor.Actor.Actor.releaseJoint()` method:
+   To undo a previous :py:meth:`~direct.actor.Actor.Actor.control_joint()` call,
+   use the :py:meth:`~direct.actor.Actor.Actor.release_joint()` method:
 
    .. code-block:: python
 
-      actor.releaseJoint("modelRoot", "Joint Name")
+      actor.release_joint("model_root", "Joint Name")
 
 .. only:: cpp
 

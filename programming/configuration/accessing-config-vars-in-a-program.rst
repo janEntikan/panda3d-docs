@@ -42,13 +42,13 @@ manipulates it using the methods :meth:`~.ConfigVariableString.set_value()` and
 
       from panda3d.core import ConfigVariableString
 
-      myGameServer = ConfigVariableString('my-game-server', '127.0.0.1')
-      print('Server specified in config file: ', myGameServer.getValue())
+      my_game_server = ConfigVariableString('my-game-server', '127.0.0.1')
+      print('Server specified in config file: ', my_game_server.get_value())
 
       # Allow the user to change servers on the command-line.
       if (sys.argv[1] == '--server'):
-          myGameServer.setValue(sys.argv[2])
-      print('Server that we will use: ', myGameServer.getValue())
+          my_game_server.set_value(sys.argv[2])
+      print('Server that we will use: ', my_game_server.get_value())
 
 The second parameter to the ConfigVariableString constructor is the default
 value that should be returned, in case the line "my-game-server" does not
@@ -58,7 +58,7 @@ which is a description of the purpose of the variable.
 .. only:: python
 
    This string will be displayed when the user executes the command
-   ``print(cvMgr)``.
+   ``print(cv_mgr)``.
 
 The types of configuration variable are:
 
@@ -96,7 +96,7 @@ directory at start-up.
 
    .. code-block:: python
 
-      print(cpMgr)
+      print(cp_mgr)
 
    It is helpful
    to do this to ensure that you are editing the correct Config.prc file.
@@ -109,9 +109,9 @@ that :ref:`filename-syntax` uses a forward slash even under Windows.
 
    .. code-block:: python
 
-      from panda3d.core import loadPrcFile
+      from panda3d.core import load_prc_file
 
-      loadPrcFile("config/Config.prc")
+      load_prc_file("config/Config.prc")
 
 .. only:: cpp
 
@@ -159,9 +159,9 @@ the fullscreen-flag to true, and your program will run in fullscreen.
 
    .. code-block:: python
 
-      from panda3d.core import loadPrcFileData
+      from panda3d.core import load_prc_file_data
 
-      loadPrcFileData('', 'fullscreen true')
+      load_prc_file_data('', 'fullscreen true')
 
 .. only:: cpp
 
@@ -181,8 +181,8 @@ with the :meth:`~.ConfigVariableManager.list_variables()` method:
 
    .. code-block:: python
 
-      cvMgr = ConfigVariableManager.getGlobalPtr()
-      cvMgr.listVariables()
+      cv_mgr = ConfigVariableManager.get_global_ptr()
+      cv_mgr.list_variables()
 
 .. only:: cpp
 

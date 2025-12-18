@@ -21,15 +21,15 @@ texture coordinates:
 
    .. code-block:: python
 
-      nodePath.setTexGen(textureStage, texGenMode)
+      node_path.set_tex_gen(texture_stage, tex_gen_mode)
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      nodePath.set_tex_gen(textureStage, texGenMode);
+      node_path.set_tex_gen(texture_stage, tex_gen_mode);
 
-The texGenMode parameter specifies how the texture coordinates are to be
+The tex_gen_mode parameter specifies how the texture coordinates are to be
 computed, and may be any of the following options. In the list below, "eye"
 means the coordinate space of the observing camera, and "world" means world
 coordinates, e.g. the coordinate space of render, the root of the scene graph.
@@ -100,10 +100,10 @@ texture:
 
    .. code-block:: python
 
-      teapot = loader.loadModel('teapot.egg')
-      tex = loader.loadTexture('maps/color-grid.rgb')
-      teapot.setTexGen(TextureStage.getDefault(), TexGenAttrib.MWorldPosition)
-      teapot.setTexture(tex)
+      teapot = loader.load_model('teapot.egg')
+      tex = loader.load_texture('maps/color-grid.rgb')
+      teapot.set_tex_gen(TextureStage.get_default(), TexGenAttrib.MWorldPosition)
+      teapot.set_texture(tex)
 
 .. only:: cpp
 
@@ -126,7 +126,7 @@ could do something like this:
 
    .. code-block:: python
 
-      teapot.setTexTransform(TextureStage.getDefault(), TransformState.makeHpr((0, 90, 0)))
+      teapot.set_tex_transform(TextureStage.get_default(), TransformState.make_hpr((0, 90, 0)))
 
 .. only:: cpp
 
@@ -162,8 +162,8 @@ space to teapot space, like this:
 
    .. code-block:: python
 
-      teapot.setTexGen(TextureStage.getDefault(), TexGenAttrib.MWorldPosition)
-      teapot.setTexProjector(TextureStage.getDefault(), render, teapot)
+      teapot.set_tex_gen(TextureStage.get_default(), TexGenAttrib.MWorldPosition)
+      teapot.set_tex_projector(TextureStage.get_default(), render, teapot)
 
 .. only:: cpp
 

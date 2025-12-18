@@ -7,16 +7,16 @@ Simulating the physics scene
 ----------------------------
 
 Now, we've only had some theory so far, but haven't seen any simulation yet. To
-simulate, we will need to keep calling the ``quickStep(stepSize)`` function on
-the OdeWorld instance. stepSize is how much time should be simulated in one
-step. To get the most stable simulation, it is recommended that the stepSize be
+simulate, we will need to keep calling the ``quick_step(step_size)`` function on
+the OdeWorld instance. step_size is how much time should be simulated in one
+step. To get the most stable simulation, it is recommended that the step_size be
 kept constant.
 
 The problem with using the delta time of a task to step the simulation is that
-the time between tasks might not be consistent. To get around this, a deltaTime
+the time between tasks might not be consistent. To get around this, a delta_time
 accumulator is used to figure out how many steps must be taken. When a step is
 performed, the world is iterated a few times, you can specify how much times the
-world is being iterated by calling the ``setQuickStepNumIterations(num)``
+world is being iterated by calling the ``set_quick_step_num_iterations(num)``
 function on the OdeWorld instance.
 
 Here's a small example showing a simple simulation showing an iron ball falling
@@ -31,56 +31,56 @@ from a ridge:
       from panda3d.core import Quat
 
       # Load the cube where the ball will fall from
-      cube = loader.loadModel("box.egg")
-      cube.reparentTo(render)
-      cube.setColor(0.2, 0, 0.7)
-      cube.setScale(20)
+      cube = loader.load_model("box.egg")
+      cube.reparent_to(render)
+      cube.set_color(0.2, 0, 0.7)
+      cube.set_scale(20)
 
       # Load the smiley model which will act as our iron ball
-      sphere = loader.loadModel("smiley.egg")
-      sphere.reparentTo(render)
-      sphere.setPos(10, 1, 21)
-      sphere.setColor(0.7, 0.4, 0.4)
+      sphere = loader.load_model("smiley.egg")
+      sphere.reparent_to(render)
+      sphere.set_pos(10, 1, 21)
+      sphere.set_color(0.7, 0.4, 0.4)
 
       # Setup our physics world and the body
       world = OdeWorld()
-      world.setGravity(0, 0, -9.81)
+      world.set_gravity(0, 0, -9.81)
       body = OdeBody(world)
       M = OdeMass()
-      M.setSphere(7874, 1.0)
-      body.setMass(M)
-      body.setPosition(sphere.getPos(render))
-      body.setQuaternion(sphere.getQuat(render))
+      M.set_sphere(7874, 1.0)
+      body.set_mass(M)
+      body.set_position(sphere.get_pos(render))
+      body.set_quaternion(sphere.get_quat(render))
 
       # Set the camera position
-      base.disableMouse()
-      base.camera.setPos(80, -20, 40)
-      base.camera.lookAt(0, 0, 10)
+      base.disable_mouse()
+      base.camera.set_pos(80, -20, 40)
+      base.camera.look_at(0, 0, 10)
 
       # Create an accumulator to track the time since the sim
       # has been running
-      deltaTimeAccumulator = 0.0
-      # This stepSize makes the simulation run at 90 frames per second
-      stepSize = 1.0 / 90.0
+      delta_time_accumulator = 0.0
+      # This step_size makes the simulation run at 90 frames per second
+      step_size = 1.0 / 90.0
 
       # The task for our simulation
-      def simulationTask(task):
-          global deltaTimeAccumulator
+      def simulation_task(task):
+          global delta_time_accumulator
           # Set the force on the body to push it off the ridge
-          body.setForce(0, min(task.time**4 * 500000 - 500000, 0), 0)
-          # Add the deltaTime for the task to the accumulator
-          deltaTimeAccumulator += base.clock.dt
-          while deltaTimeAccumulator > stepSize:
-              # Remove a stepSize from the accumulator until
+          body.set_force(0, min(task.time**4 * 500000 - 500000, 0), 0)
+          # Add the delta_time for the task to the accumulator
+          delta_time_accumulator += base.clock.dt
+          while delta_time_accumulator > step_size:
+              # Remove a step_size from the accumulator until
               # the accumulated time is less than the stepsize
-              deltaTimeAccumulator -= stepSize
+              delta_time_accumulator -= step_size
               # Step the simulation
-              world.quickStep(stepSize)
+              world.quick_step(step_size)
           # set the new positions
-          sphere.setPosQuat(render, body.getPosition(), Quat(body.getQuaternion()))
+          sphere.set_pos_quat(render, body.get_position(), Quat(body.get_quaternion()))
           return task.cont
 
-      taskMgr.doMethodLater(1.0, simulationTask, "Physics Simulation")
+      task_mgr.do_method_later(1.0, simulation_task, "Physics Simulation")
 
       base.run()
 
@@ -106,12 +106,12 @@ from a ridge:
 
       // Create an accumulator to track the time since the sim
       // has been running
-      float deltaTimeAccumulator = 0.0f;
+      float delta_time_accumulator = 0.0f;
 
-      // This stepSize makes the simulation run at 90 frames per second
-      float stepSize = 1.0f / 90.0f;
+      // This step_size makes the simulation run at 90 frames per second
+      float step_size = 1.0f / 90.0f;
 
-      AsyncTask::DoneStatus simulationTask(GenericAsyncTask *task, void *data);
+      AsyncTask::DoneStatus simulation_task(GenericAsyncTask *task, void *data);
 
       void simulation() {
         // Load the cube where the ball will fall from
@@ -139,24 +139,24 @@ from a ridge:
         camera.set_pos(80, -20, 40);
         camera.look_at(0, 0, 0);
 
-        PT(GenericAsyncTask) simulationTaskObject =
-          new GenericAsyncTask("startup task", &simulationTask, nullptr);
-        simulationTaskObject->set_delay(2);
-        taskMgr->add(simulationTaskObject);
+        PT(GenericAsyncTask) simulation_task_object =
+          new GenericAsyncTask("startup task", &simulation_task, nullptr);
+        simulation_task_object->set_delay(2);
+        task_mgr->add(simulation_task_object);
       }
 
       // The task for our simulation
-      AsyncTask::DoneStatus simulationTask (GenericAsyncTask *task, void *data) {
+      AsyncTask::DoneStatus simulation_task (GenericAsyncTask *task, void *data) {
         // Set the force on the body to push it off the ridge
         body->set_force(0, min(pow(task->get_elapsed_time(),4) * 500000 - 500000, 0), 0);
-        // Add the deltaTime for the task to the accumulator
-        deltaTimeAccumulator += clock->get_dt();
-        while (deltaTimeAccumulator > stepSize ) {
-          // Remove a stepSize from the accumulator until
+        // Add the delta_time for the task to the accumulator
+        delta_time_accumulator += clock->get_dt();
+        while (delta_time_accumulator > step_size ) {
+          // Remove a step_size from the accumulator until
           // the accumulated time is less than the stepsize
-          deltaTimeAccumulator -= stepSize;
+          delta_time_accumulator -= step_size;
           // Step the simulation
-          world.quick_step(stepSize);
+          world.quick_step(step_size);
         }
         // set the new positions
         sphere.set_pos_quat(window->get_render(),

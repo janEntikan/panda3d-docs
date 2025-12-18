@@ -25,23 +25,23 @@ area which triggers some event if the player moves through the area.
       shape = BulletBoxShape(Vec3(1, 1, 1))
 
       ghost = BulletGhostNode('Ghost')
-      ghost.addShape(shape)
-      ghostNP = render.attachNewNode(ghost)
-      ghostNP.setPos(0, 0, 0)
-      ghostNP.setCollideMask(BitMask32(0x0f))
+      ghost.add_shape(shape)
+      ghost_np = render.attach_new_node(ghost)
+      ghost_np.set_pos(0, 0, 0)
+      ghost_np.set_collide_mask(BitMask32(0x0f))
 
-      world.attachGhost(ghost)
+      world.attach_ghost(ghost)
 
    Example for how to get overlapping objects:
 
    .. code-block:: python
 
-      def checkGhost(self, task):
-          ghost = ghostNP.node()
-          print(ghost.getNumOverlappingNodes())
-          for node in ghost.getOverlappingNodes():
+      def check_ghost(self, task):
+          ghost = ghost_np.node()
+          print(ghost.get_num_overlapping_nodes())
+          for node in ghost.get_overlapping_nodes():
               print(node)
 
           return task.cont
 
-      taskMgr.add(checkGhost, 'checkGhost')
+      task_mgr.add(check_ghost, 'check_ghost')

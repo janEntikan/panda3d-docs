@@ -50,13 +50,13 @@ sides are visible, without hassling with attribs:
 
    .. code-block:: python
 
-      nodePath.setTwoSided(True)
+      node_path.set_two_sided(True)
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      nodePath.set_two_sided(true);
+      node_path.set_two_sided(true);
 
 If you want more advanced control over the culling you might want to look at the
 :class:`.CullFaceAttrib`:
@@ -70,19 +70,19 @@ There are three valid settings for culling:
 
    .. code-block:: python
 
-      nodePath.setAttrib(CullFaceAttrib.make(CullFaceAttrib.MCullNone))
-      nodePath.setAttrib(CullFaceAttrib.make(CullFaceAttrib.MCullClockwise))
-      nodePath.setAttrib(CullFaceAttrib.make(CullFaceAttrib.MCullCounterClockwise))
+      node_path.set_attrib(CullFaceAttrib.make(CullFaceAttrib.MCullNone))
+      node_path.set_attrib(CullFaceAttrib.make(CullFaceAttrib.MCullClockwise))
+      node_path.set_attrib(CullFaceAttrib.make(CullFaceAttrib.MCullCounterClockwise))
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      // Includes: "cullFaceAttrib.h"
+      // Includes: "cull_face_attrib.h"
 
-      nodePath.set_attrib(CullFaceAttrib::make(CullFaceAttrib::M_cull_none));
-      nodePath.set_attrib(CullFaceAttrib::make(CullFaceAttrib::M_cull_clockwise));
-      nodePath.set_attrib(CullFaceAttrib::make(CullFaceAttrib::M_cull_counter_clockwise));
+      node_path.set_attrib(CullFaceAttrib::make(CullFaceAttrib::M_cull_none));
+      node_path.set_attrib(CullFaceAttrib::make(CullFaceAttrib::M_cull_clockwise));
+      node_path.set_attrib(CullFaceAttrib::make(CullFaceAttrib::M_cull_counter_clockwise));
 
 None means that all faces are visible, both back and front. Clockwise is the
 default setting, it causes backfaces to be culled. Counter-clockwise is the

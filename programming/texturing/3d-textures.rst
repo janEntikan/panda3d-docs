@@ -37,15 +37,15 @@ teapot, you might do something like this:
 
 .. code-block:: python
 
-   teapot = loader.loadModel('teapot.egg')
-   teapot.setTexGen(TextureStage.getDefault(), TexGenAttrib.MWorldPosition)
-   teapot.setTexProjector(TextureStage.getDefault(), render, teapot)
-   teapot.setTexPos(TextureStage.getDefault(), 0.44, 0.5, 0.2)
-   teapot.setTexScale(TextureStage.getDefault(), 0.2)
+   teapot = loader.load_model('teapot.egg')
+   teapot.set_tex_gen(TextureStage.get_default(), TexGenAttrib.MWorldPosition)
+   teapot.set_tex_projector(TextureStage.get_default(), render, teapot)
+   teapot.set_tex_pos(TextureStage.get_default(), 0.44, 0.5, 0.2)
+   teapot.set_tex_scale(TextureStage.get_default(), 0.2)
 
 The above assigns 3-D texture coordinates to the teapot based on the (x, y, z)
 positions of its vertices, which is a common way to assign 3-D texture
-coordinates. The ``setTexPos()`` and ``setTexScale()`` calls in the above are
+coordinates. The ``set_tex_pos()`` and ``set_tex_scale()`` calls in the above are
 particular to the teapot model; these numbers are chosen to scale the texture so
 that its unit cube covers the teapot.
 
@@ -72,10 +72,10 @@ followed this convention, then you can load a 3-D texture with a call like this:
 
 .. code-block:: python
 
-   tex = loader.load3DTexture("grid_#.png")
+   tex = loader.load_3d_texture("grid_#.png")
 
-The hash sign ("#") in the filename passed to :meth:`loader.load3DTexture()
-<direct.showbase.Loader.Loader.load3DTexture>` will be filled in with the
+The hash sign ("#") in the filename passed to :meth:`loader.load_3d_texture()
+<direct.showbase.Loader.Loader.load_3d_texture>` will be filled in with the
 sequence number of each slice, so the above loads files named "grid_0.png",
 "grid_1.png", "grid_2.png", and so on. If you prefer to pad the slice number
 with zeros to a certain number of digits, repeat the hash sign; for instance,
@@ -117,14 +117,14 @@ of wood:
 
 .. code-block:: python
 
-   teapot = loader.loadModel('teapot.egg')
-   teapot.setTexGen(TextureStage.getDefault(), TexGenAttrib.MWorldPosition)
-   teapot.setTexProjector(TextureStage.getDefault(), render, teapot)
-   teapot.setTexPos(TextureStage.getDefault(), 0.44, 0.5, 0.2)
-   teapot.setTexScale(TextureStage.getDefault(), 0.2)
+   teapot = loader.load_model('teapot.egg')
+   teapot.set_tex_gen(TextureStage.get_default(), TexGenAttrib.MWorldPosition)
+   teapot.set_tex_projector(TextureStage.get_default(), render, teapot)
+   teapot.set_tex_pos(TextureStage.get_default(), 0.44, 0.5, 0.2)
+   teapot.set_tex_scale(TextureStage.get_default(), 0.2)
 
-   tex = loader.load3DTexture('woodgrain-#.png')
-   teapot.setTexture(tex)
+   tex = loader.load_3d_Texture('woodgrain-#.png')
+   teapot.set_texture(tex)
 
 |A wooden teapot.|
 

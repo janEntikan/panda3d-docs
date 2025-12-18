@@ -23,10 +23,10 @@ specify which set a particular texture should use by calling
 
 .. warning::
 
-   ``TextureStage.setTexcoordName("texcoord.name")`` will cause the default
+   ``TextureStage.set_texcoord_name("texcoord.name")`` will cause the default
    unnamed texcoord to be used.
 
-   ``TextureStage.setTexcoordName("name")`` is correct.
+   ``TextureStage.set_texcoord_name("name")`` is correct.
 
 Remember, a :class:`.TextureStage` is used to apply a texture to a model, and so
 every texture will have an associated TextureStage (though most textures just

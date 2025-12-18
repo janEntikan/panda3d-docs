@@ -41,8 +41,8 @@ DisplayRegions and GraphicsOutputs:
 
    .. code-block:: python
 
-      win.setClearColorActive(flag)
-      win.setClearColor((r, g, b, a))
+      win.set_clear_color_active(flag)
+      win.set_clear_color((r, g, b, a))
 
 .. only:: cpp
 
@@ -66,17 +66,17 @@ similar interface:
 
    .. code-block:: python
 
-      win.setClearDepthActive(flag)
-      win.setClearDepth(depthValue)
+      win.set_clear_depth_active(flag)
+      win.set_clear_depth(depth_value)
 
 .. only:: cpp
 
    .. code-block:: cpp
 
       win->set_clear_depth_active(flag);
-      win->set_clear_depth(depthValue);
+      win->set_clear_depth(depth_value);
 
-The depthValue should almost always be 1.0, which is the default.
+The depth_value should almost always be 1.0, which is the default.
 
 It is also possible to selectively clear the stencil buffer, and other auxiliary
 buffers, in a similar way. See the generated API docs for
@@ -93,15 +93,15 @@ specify the order in which the DisplayRegions should be drawn. To do this, use
 
    .. code-block:: python
 
-      dr.setSort(sortValue)
+      dr.set_sort(sort_value)
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      dr->set_sort(sortValue);
+      dr->set_sort(sort_value);
 
-The sortValue can be any integer number; the default is zero. All DisplayRegions
+The sort_value can be any integer number; the default is zero. All DisplayRegions
 for a particular window will be drawn in order from smallest sort first to
 largest sort last. If two DisplayRegions have the same sort value, the order in
 which they are drawn is undefined.

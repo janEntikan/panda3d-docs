@@ -61,14 +61,14 @@ different states like this:
 
 .. code-block:: python
 
-   maps = loader.loadModel('button_maps')
+   maps = loader.load_model('button_maps')
    b = DirectButton(geom=(maps.find('**/button_ready'),
                           maps.find('**/button_click'),
                           maps.find('**/button_rollover'),
                           maps.find('**/button_disabled')))
 
 You can also access one of the state-specific NodePaths after the button has
-been created with the interface ``myButton.stateNodePath[stateNumber]``.
+been created with the interface ``my_button.state_node_path[state_number]``.
 Normally, however, you should not need to access these NodePaths directly.
 
 The following are the DirectGui keywords that are specific to a DirectButton.
@@ -79,11 +79,11 @@ The following are the DirectGui keywords that are specific to a DirectButton.
 Keyword        Definition                                           Value
 ============== ==================================================== ==========================
 command        Command the button performs when clicked             Function
-extraArgs      Extra arguments to the function specified in command [Extra Arguments]
-commandButtons Which mouse button must be clicked to do the command LMB, MMB, or RMB
-rolloverSound  The sound made when the cursor rolls over the button AudioSound instance
-clickSound     The sound made when the cursor clicks on the button  AudioSound instance
-pressEffect    Whether or not the button sinks in when clicked      <0 or 1>
+extra_args      Extra arguments to the function specified in command [Extra Arguments]
+command_buttons Which mouse button must be clicked to do the command LMB, MMB, or RMB
+rollover_sound  The sound made when the cursor rolls over the button AudioSound instance
+click_sound     The sound made when the cursor clicks on the button  AudioSound instance
+press_effect    Whether or not the button sinks in when clicked      <0 or 1>
 state          Whether or not the button is disabled                DGG.NORMAL or DGG.DISABLED
 ============== ==================================================== ==========================
 
@@ -107,23 +107,23 @@ Example
 
    # Add some text
    bk_text = "This is my Demo"
-   textObject = OnscreenText(text=bk_text, pos=(0.95,-0.95), scale=0.07,
+   text_object = OnscreenText(text=bk_text, pos=(0.95,-0.95), scale=0.07,
                              fg=(1, 0.5, 0.5, 1), align=TextNode.ACenter,
-                             mayChange=1)
+                             may_change=1)
 
    # Callback function to set  text
-   def setText():
+   def set_text():
            bk_text = "Button Clicked"
-           textObject.setText(bk_text)
+           text_object.set_text(bk_text)
 
    # Add button
    b = DirectButton(text=("OK", "click!", "rolling over", "disabled"),
-                    scale=.05, command=setText)
+                    scale=.05, command=set_text)
 
    # Run the tutorial
    base.run()
 
-Note that you will not be able to set the text unless the mayChange flag is 1.
+Note that you will not be able to set the text unless the may_change flag is 1.
 This is an optimization, which is easily missed by newcomers.
 
 When you are positioning your button, keep in mind that the button's vertical

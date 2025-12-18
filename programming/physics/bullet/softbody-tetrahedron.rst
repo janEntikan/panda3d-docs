@@ -33,7 +33,7 @@ tetrahedron).
       points = [Point3(x,y,z) * 3 for x,y,z in nodes]
       indices = sum([list(x) for x in elements], [])
 
-      bodyNode = BulletSoftBodyNode.makeTetMesh(info, points, indices, True)
+      body_node = BulletSoftBodyNode.make_tet_mesh(info, points, indices, True)
 
 .. only:: cpp
 
@@ -59,7 +59,7 @@ setting up soft bodies directly from tetgen mesh files:
       face = file('models/tetra.1.face', 'r').read()
       node = file('models/tetra.1.node', 'r').read()
 
-      bodyNode = BulletSoftBodyNode.makeTetMesh(info, ele, face, node)
+      body_node = BulletSoftBodyNode.make_tet_mesh(info, ele, face, node)
 
 .. only:: cpp
 
@@ -74,20 +74,20 @@ code snippet shows how to do so:
 
    .. code-block:: python
 
-      bodyNode.setName('Tetra')
-      bodyNode.setVolumeMass(300)
-      bodyNode.getShape(0).setMargin(0.01)
-      bodyNode.getMaterial(0).setLinearStiffness(0.1)
-      bodyNode.getCfg().setPositionsSolverIterations(1)
-      bodyNode.getCfg().clearAllCollisionFlags()
-      bodyNode.getCfg().setCollisionFlag(BulletSoftBodyConfig.CFClusterSoftSoft, True)
-      bodyNode.getCfg().setCollisionFlag(BulletSoftBodyConfig.CFClusterRigidSoft, True)
-      bodyNode.generateClusters(6)
+      body_node.set_name('Tetra')
+      body_node.set_volume_mass(300)
+      body_node.get_shape(0).set_margin(0.01)
+      body_node.get_material(0).set_linear_stiffness(0.1)
+      body_node.get_cfg().set_positions_solver_iterations(1)
+      body_node.get_cfg().clear_all_collision_flags()
+      body_node.get_cfg().set_collision_flag(BulletSoftBodyConfig.CFClusterSoftSoft, True)
+      body_node.get_cfg().set_collision_flag(BulletSoftBodyConfig.CFClusterRigidSoft, True)
+      body_node.generate_clusters(6)
 
-      bodyNP = self.worldNP.attachNewNode(bodyNode)
-      bodyNP.setPos(0, 0, 8)
-      bodyNP.setHpr(45, 0, 0)
-      world.attachSoftBody(bodyNode)
+      body_np = self.world_np.attach_new_node(body_node)
+      body_np.set_pos(0, 0, 8)
+      body_np.set_hpr(45, 0, 0)
+      world.attach_soft_body(body_node)
 
 .. only:: cpp
 
@@ -95,7 +95,7 @@ code snippet shows how to do so:
 
       TODO
 
-The method ``generateClusters`` is new. We didn't use this method so far when
+The method ``generate_clusters`` is new. We didn't use this method so far when
 setting up non-volume soft bodies. It splits the soft body volume up into the
 given number of small, convex clusters, which consecutively will be used for
 collision detection with other soft bodies or rigid bodies.
@@ -111,11 +111,11 @@ manual pages. The following code shows how to do this:
 
    .. code-block:: python
 
-      geom = BulletHelper.makeGeomFromFaces(node)
-      visNode = GeomNode('TetraVisual')
-      visNode.addGeom(geom)
-      visNP = softNP.attachNewNode(visNode)
-      bodyNode.linkGeom(geom)
+      geom = BulletHelper.make_geom_from_faces(node)
+      vis_node = GeomNode('TetraVisual')
+      vis_node.add_geom(geom)
+      vis_np = soft_np.attach_new_node(vis_node)
+      body_node.link_geom(geom)
 
 .. only:: cpp
 
@@ -133,13 +133,13 @@ body node.
 
    .. code-block:: python
 
-      visNP = loader.loadModel('models/cube.egg')
-      visNP.reparentTo(softNP)
+      vis_np = loader.load_model('models/cube.egg')
+      vis_np.reparent_to(soft_np)
 
-      geom = visNP \
-          .findAllMatches('**/+GeomNode').getPath(0).node() \
-          .modifyGeom(0)
-      bodyNode.linkGeom(geom)
+      geom = vis_np \
+          .find_all_matches('**/+GeomNode').get_path(0).node() \
+          .modify_geom(0)
+      body_node.link_geom(geom)
 
 .. only:: cpp
 

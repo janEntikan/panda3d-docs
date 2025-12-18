@@ -19,7 +19,7 @@ To build up your custom format, you need to first create an empty
    .. code-block:: python
 
       array = GeomVertexArrayFormat()
-      array.addColumn("vertex", 3, Geom.NTFloat32, Geom.CPoint)
+      array.add_column("vertex", 3, Geom.NTFloat32, Geom.CPoint)
 
 .. only:: cpp
 
@@ -60,8 +60,8 @@ For instance, to define a vertex format that includes a vertex position and a
    .. code-block:: python
 
       array = GeomVertexArrayFormat()
-      array.addColumn("vertex", 3, Geom.NTFloat32, Geom.CPoint)
-      array.addColumn("texcoord", 2, Geom.NTFloat32, Geom.CTexcoord)
+      array.add_column("vertex", 3, Geom.NTFloat32, Geom.CPoint)
+      array.add_column("texcoord", 2, Geom.NTFloat32, Geom.CTexcoord)
 
 .. only:: cpp
 
@@ -82,7 +82,7 @@ Once you have defined the columns of your array, you should create a
    .. code-block:: python
 
       format = GeomVertexFormat()
-      format.addArray(array)
+      format.add_array(array)
 
 .. only:: cpp
 
@@ -106,7 +106,7 @@ format after this point, you'll have to start over with a new
 
    .. code-block:: python
 
-      format = GeomVertexFormat.registerFormat(format)
+      format = GeomVertexFormat.register_format(format)
 
 .. only:: cpp
 
@@ -116,7 +116,7 @@ format after this point, you'll have to start over with a new
       format = GeomVertexFormat::register_format(unregistered_format);
 
 You should always register a format with a syntax similar to the above: that
-is, you should use the return value of registerFormat as your new, registered
+is, you should use the return value of register_format as your new, registered
 format object, and discard the original format object. (The returned format
 object may be the same format object you started with, or it may be a
 different object with an equivalent meaning. Either way, the format object you

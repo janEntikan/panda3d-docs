@@ -120,12 +120,12 @@ your script. Then creating Materials is a matter of creating instances of the
       import direct.directbase.DirectStart
       from panda3d.core import Material
 
-      myMaterial = Material()
-      myMaterial.setShininess(5.0) # Make this material shiny
-      myMaterial.setAmbient((0, 0, 1, 1)) # Make this material blue
+      my_material = Material()
+      my_material.set_shininess(5.0) # Make this material shiny
+      my_material.set_ambient((0, 0, 1, 1)) # Make this material blue
 
-      myNode = loader.loadModel("panda") # Load the model to apply the material to
-      myNode.setMaterial(myMaterial) # Apply the material to this nodePath
+      my_node = loader.load_model("panda") # Load the model to apply the material to
+      my_node.set_material(my_material) # Apply the material to this node_path
 
 .. only:: cpp
 
@@ -136,7 +136,7 @@ your script. Then creating Materials is a matter of creating instances of the
       mat->set_ambient(LColor(0, 0, 1, 1)); // Make this material blue
 
       NodePath model = window->load_model(window->get_render(), "panda"); // Load the model to apply the material to
-      model.set_material(mat); // Apply the material to this nodePath
+      model.set_material(mat); // Apply the material to this node_path
 
 Material Properties
 -------------------
@@ -189,13 +189,13 @@ object that represents the model to which the materials are applied.
    .. code-block:: python
 
       # Find all materials
-      mats = car.findAllMaterials()
+      mats = car.find_all_materials()
 
       # Find a specific material by name (wildcards allowed)
-      blue = car.findMaterial("blueMetal")
+      blue = car.find_material("blue_metal")
 
       # Find all materials whose name end in Metal
-      coloredMetals = car.findAllMaterials("*Metal")
+      colored_metals = car.find_all_materials("*Metal")
 
 .. only:: cpp
 
@@ -205,7 +205,7 @@ object that represents the model to which the materials are applied.
       MaterialCollection mats = car.find_all_materials();
 
       // Find a specific material by name (wildcards allowed)
-      PT(Material) blue = car.find_material("blueMetal");
+      PT(Material) blue = car.find_material("blue_metal");
 
       // Find all materials whose name end in Metal
       MaterialCollection colored_metals = car.find_all_materials("*Metal");
@@ -220,7 +220,7 @@ meaning it takes precedence over a material applied to any node below it:
 
       red = Material()
       #...set up red material
-      car.setMaterial(red, 1)
+      car.set_material(red, 1)
 
 .. only:: cpp
 
@@ -238,17 +238,17 @@ an easy way to replace all instances of a specific material only:
 
    .. code-block:: python
 
-      blue = car.findMaterial("blueMetal")
+      blue = car.find_material("blue_metal")
       red = Material()
       #...set up red material
 
-      car.replaceMaterial(blue, red)
+      car.replace_material(blue, red)
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      PT(Material) blue = car.find_material("blueMetal");
+      PT(Material) blue = car.find_material("blue_metal");
       PT(Material) red = new Material;
       //...set up red material
 

@@ -20,8 +20,8 @@ DirectFrame
       DirectFrame(keyword=value, keyword=value, ...)
 
    For a basic frame, the most used keywords are
-   ``frameSize``,
-   ``frameColor`` and
+   ``frame_size``,
+   ``frame_color`` and
    ``pos``. For a full list of
    keywords available for this object you can click, see the :ref:`directgui`
    page.
@@ -31,8 +31,8 @@ DirectFrame
    ========== ==================================== =======================
    Keyword    Definition                           Value
    ========== ==================================== =======================
-   frameSize  Sets the size of the frame           (Left,Right,Bottom,Top)
-   frameColor sets the color of the object’s frame (R,G,B,A)
+   frame_size  Sets the size of the frame           (Left,Right,Bottom,Top)
+   frame_color sets the color of the object’s frame (R,G,B,A)
    pos        sets the position of the object      (X,Y,Z)
    ========== ==================================== =======================
 
@@ -43,8 +43,8 @@ DirectFrame
 
       from direct.gui.DirectGui import DirectFrame
 
-      myFrame = DirectFrame(frameColor=(0, 0, 0, 1),
-                            frameSize=(-1, 1, -1, 1),
+      my_frame = DirectFrame(frame_color=(0, 0, 0, 1),
+                            frame_size=(-1, 1, -1, 1),
                             pos=(1, -1, -1))
 
    This will give you a black frame appearing at the lower right section of the
@@ -60,7 +60,7 @@ DirectFrame
    change it manually.
 
    Additionally you can position the frame using
-   ``setPos()``. This works with other
+   ``set_pos()``. This works with other
    aspects like scale as well.
 
    The example above would change as follows:
@@ -69,9 +69,9 @@ DirectFrame
 
       from direct.gui.DirectGui import DirectFrame
 
-      myFrame = DirectFrame(frameColor=(0, 0, 0, 1),
-                            frameSize=(-1, 1, -1, 1))
-      myFrame.setPos(-0.5, 0, -0.5)
+      my_frame = DirectFrame(frame_color=(0, 0, 0, 1),
+                            frame_size=(-1, 1, -1, 1))
+      my_frame.set_pos(-0.5, 0, -0.5)
 
    This will give us a black frame that is located at the lower left side of the
    screen.
@@ -82,4 +82,4 @@ DirectFrame
 
    .. code-block:: python
 
-      myDirectobject["yourKeyword"] = value
+      my_directobject["your_keyword"] = value

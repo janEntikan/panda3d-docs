@@ -20,21 +20,21 @@ explained later on this page.
 
       from panda3d.bullet import BulletSoftBodyNode
 
-      info = self.world.getWorldInfo()
-      info.setAirDensity(1.2)
-      info.setWaterDensity(0)
-      info.setWaterOffset(0)
-      info.setWaterNormal(Vec3(0, 0, 0))
+      info = self.world.get_world_info()
+      info.set_air_density(1.2)
+      info.set_water_density(0)
+      info.set_water_offset(0)
+      info.set_water_normal(Vec3(0, 0, 0))
 
       res = 8
       p1 = Point3(0, 0, 4)
       p2 = Point3(10, 0, 4)
       fixeds = 0
 
-      bodyNode = BulletSoftBodyNode.makeRope(info, p1, p2, res, fixeds)
-      bodyNode.setTotalMass(50.0)
-      bodyNP = worldNP.attachNewNode(bodyNode)
-      world.attachSoftBody(bodyNode)
+      body_node = BulletSoftBodyNode.make_rope(info, p1, p2, res, fixeds)
+      body_node.set_total_mass(50.0)
+      body_np = world_np.attach_new_node(body_node)
+      world.attach_soft_body(body_node)
 
 .. only:: cpp
 
@@ -59,13 +59,13 @@ at how to render the rope using geom lines.
 
       from panda3d.core import GeomNode
 
-      geom = BulletHelper.makeGeomFromLinks(bodyNode)
+      geom = BulletHelper.make_geom_from_links(body_node)
 
-      visNode = GeomNode('')
-      visNode.addGeom(geom)
-      visNP = bodyNP.attachNewNode(visNode)
+      vis_node = GeomNode('')
+      vis_node.add_geom(geom)
+      vis_np = body_np.attach_new_node(vis_node)
 
-      bodyNode.linkGeom(geom)
+      body_node.link_geom(geom)
 
 .. only:: cpp
 
@@ -100,17 +100,17 @@ above code we can use a NURBS curve for visualization.
       curve = NurbsCurveEvaluator()
       curve.reset(res + 2)
 
-      bodyNode.linkCurve(curve)
+      body_node.link_curve(curve)
 
-      visNode = RopeNode('')
-      visNode.setCurve(curve)
-      visNode.setRenderMode(RopeNode.RMTube)
-      visNode.setUvMode(RopeNode.UVParametric)
-      visNode.setNumSubdiv(4)
-      visNode.setNumSlices(8)
-      visNode.setThickness(0.4)
-      visNP = self.worldNP.attachNewNode(visNode)
-      visNP.setTexture(loader.loadTexture('some_texture.jpg'))
+      vis_node = RopeNode('')
+      vis_node.set_curve(curve)
+      vis_node.set_render_mode(RopeNode.RMTube)
+      vis_node.set_uv_mode(RopeNode.UVParametric)
+      vis_node.set_num_subdiv(4)
+      vis_node.set_num_slices(8)
+      vis_node.set_thickness(0.4)
+      vis_np = self.world_np.attach_new_node(vis_node)
+      vis_np.set_texture(loader.load_texture('some_texture.jpg'))
 
 .. only:: cpp
 
@@ -153,16 +153,16 @@ snippet the last node/vertex of a soft body rope is attached to a rigid body.
    .. code-block:: python
 
       # NodePath for some BulletSoftBody "rope"
-      softNP = ...
+      soft_np = ...
 
       # NodePath for some BulletRigidBody
-      rigidNP = ...
+      rigid_np = ...
 
       # Index of the last node of the rope
-      idx = softNP.node().getNumNodes() - 1
+      idx = soft_np.node().get_num_nodes() - 1
 
       # Attach the last node of the rope with the rigid body
-      softNP.node().appendAnchor(idx, rigidNP.node())
+      soft_np.node().append_anchor(idx, rigid_np.node())
 
 .. only:: cpp
 

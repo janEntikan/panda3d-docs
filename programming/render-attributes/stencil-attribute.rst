@@ -40,7 +40,7 @@ attribute which tells an object to render only if the stencil buffer is exactly
 
 .. code-block:: python
 
-   stencilReader =
+   stencil_reader =
        StencilAttrib.make(1, StencilAttrib.SCFEqual,StencilAttrib.SOKeep,
                              StencilAttrib.SOKeep,StencilAttrib.SOKeep,1,1,0)
 
@@ -60,7 +60,7 @@ Presumably, these two functions will work in tandem to create an effect.
 
 .. code-block:: python
 
-   constantOneStencil =
+   constant_one_stencil =
        StencilAttrib.make(1, StencilAttrib.SCFAlways,StencilAttrib.SOZero,
                              StencilAttrib.SOReplace,StencilAttrib.SOReplace,1,0,1)
 
@@ -83,37 +83,37 @@ Here is the entire script.
    from panda3d.core import *
 
    # Do this before the next import:
-   loadPrcFileData("", "framebuffer-stencil #t")
+   load_prc_file_data("", "framebuffer-stencil #t")
 
    import direct.directbase.DirectStart
 
-   constantOneStencil = StencilAttrib.make(1,StencilAttrib.SCFAlways,
+   constant_one_stencil = StencilAttrib.make(1,StencilAttrib.SCFAlways,
    StencilAttrib.SOZero,StencilAttrib.SOReplace,
    StencilAttrib.SOReplace,1,0,1)
 
-   stencilReader = StencilAttrib.make(1,StencilAttrib.SCFEqual,
+   stencil_reader = StencilAttrib.make(1,StencilAttrib.SCFEqual,
    StencilAttrib.SOKeep, StencilAttrib.SOKeep,
    StencilAttrib.SOKeep,1,1,0)
 
    cm = CardMaker("cardmaker")
-   cm.setFrame(-.5,.5,-.5,.5)
+   cm.set_frame(-.5,.5,-.5,.5)
 
    # To rotate the card to face the camera, we create
    # it and then parent it to the camera.
-   viewingSquare = render.attachNewNode(cm.generate())
-   viewingSquare.reparentTo(base.camera)
-   viewingSquare.setPos(0, 5, 0)
+   viewing_square = render.attach_new_node(cm.generate())
+   viewing_square.reparent_to(base.camera)
+   viewing_square.set_pos(0, 5, 0)
 
-   viewingSquare.node().setAttrib(constantOneStencil)
-   viewingSquare.node().setAttrib(ColorWriteAttrib.make(0))
-   viewingSquare.setBin('background',0)
-   viewingSquare.setDepthWrite(0)
+   viewing_square.node().set_attrib(constant_one_stencil)
+   viewing_square.node().set_attrib(ColorWriteAttrib.make(0))
+   viewing_square.set_bin('background',0)
+   viewing_square.set_depth_write(0)
 
-   view = loader.loadModel("panda")
-   view.reparentTo(render)
-   view.setScale(3)
-   view.setY(150)
-   view.node().setAttrib(stencilReader)
+   view = loader.load_model("panda")
+   view.reparent_to(render)
+   view.set_scale(3)
+   view.set_y(150)
+   view.node().set_attrib(stencil_reader)
 
    base.run()
 

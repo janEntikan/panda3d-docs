@@ -101,32 +101,32 @@ some assorted examples:
    .. code-block:: python
 
       # NODEPATH METHODS:
-      myNodePath.setPos(x, y, z)
-      myNodePath.setColor(banana)
+      my_node_path.set_pos(x, y, z)
+      my_node_path.set_color(banana)
 
       # LODNODE METHODS:
-      myNodePath.node().addSwitch(1000, 100)
-      myNodePath.node().setCenter(Point3(0, 5, 0))
+      my_node_path.node().add_switch(1000, 100)
+      my_node_path.node().set_center(Point3(0, 5, 0))
 
       # CAMERA NODE METHODS:
-      myNodePath.node().setLens(PerspectiveLens())
-      myNodePath.node().getCameraMask()
+      my_node_path.node().set_lens(PerspectiveLens())
+      my_node_path.node().get_camera_mask()
 
 .. only:: cpp
 
    .. code-block:: cpp
 
       // NODEPATH METHODS:
-      myNodePath.set_pos(x, y, z);
-      myNodePath.set_color(banana);
+      my_node_path.set_pos(x, y, z);
+      my_node_path.set_color(banana);
 
       // LODNODE METHODS:
-      myNodePath.node()->add_switch(1000, 100);
-      myNodePath.node()->set_center(LPoint3(0, 5, 0));
+      my_node_path.node()->add_switch(1000, 100);
+      my_node_path.node()->set_center(LPoint3(0, 5, 0));
 
       // CAMERA NODE METHODS:
-      myNodePath.node()->set_lens(new PerspectiveLens());
-      myNodePath.node()->get_camera_mask();
+      my_node_path.node()->set_lens(new PerspectiveLens());
+      my_node_path.node()->get_camera_mask();
 
 Always remember: when you invoke a method of :class:`~.NodePath`, you are
 actually performing an operation on the node to which it points.

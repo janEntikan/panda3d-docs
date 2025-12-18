@@ -16,7 +16,7 @@ StereoDisplayRegion for both eyes at the same time is often more convenient.
 When you call :meth:`window.make_display_region()
 <.GraphicsOutput.make_display_region>`, it will implicitly return a
 StereoDisplayRegion instead of a regular DisplayRegion if your window or buffer
-indicates that it supports stereo output (that is, if window.isStereo() returns
+indicates that it supports stereo output (that is, if window.is_stereo() returns
 true). There are four ways that you can have a graphics output that supports
 stereo output:
 

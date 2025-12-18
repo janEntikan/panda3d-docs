@@ -16,14 +16,14 @@ in a basic form is very easy.
 
    class GameServerRepository(ServerRepository):
        def __init__(self):
-           tcpPort = ConfigVariableInt('server-port', 4400).getValue()
-           dcFileNames = ['direct.dc', 'yourOwnDCFile.dc']
-           ServerRepository.__init__(self, tcpPort, dcFileNames=dcFileNames, threadedNet=True)
+           tcp_port = ConfigVariableInt('server-port', 4400).get_value()
+           dc_file_names = ['direct.dc', 'your_own_dc_file.dc']
+           ServerRepository.__init__(self, tcp_port, dc_file_names=dc_file_names, threaded_net=True)
 
 As you see in the example above, we simply have to gather the port and a list
 of DC files, which we will take a closer look in a later section, and pass all
 of that to the :class:`.ServerRepository` constructor.
 
-The threadedNet parameter if true, tells the underlying networking system to
+The threaded_net parameter if true, tells the underlying networking system to
 use threads to listen for incoming data. It has a subtle effect on performance,
 but can also occasionally cause problems.

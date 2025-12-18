@@ -58,8 +58,8 @@ All constraints can be created and used in similar ways, so we will explain
 only one constraint in detail, the :class:`.BulletConeTwistConstraint`.
 For other constraints, please refer to the API documentation.
 
-We assume that we already have created two rigid body nodes, and ``npA`` and
-``npB`` are NodePaths for these rigid body nodes. For example like the two boxes
+We assume that we already have created two rigid body nodes, and ``np_a`` and
+``np_b`` are NodePaths for these rigid body nodes. For example like the two boxes
 created in the following snippet
 
 .. only:: python
@@ -68,16 +68,16 @@ created in the following snippet
 
       shape = BulletBoxShape(Vec3(0.5, 0.5, 0.5))
 
-      npA = self.worldNP.attachNewNode(BulletRigidBodyNode('A'))
-      npA.node().setMass(1.0)
-      npA.node().addShape(shape)
-      npA.setPos(10, 0, 5)
-      world.attachRigidBody(npA.node())
+      np_a = self.world_np.attach_new_node(BulletRigidBodyNode('A'))
+      np_a.node().set_mass(1.0)
+      np_a.node().add_shape(shape)
+      np_a.set_pos(10, 0, 5)
+      world.attach_rigid_body(np_a.node())
 
-      npB = self.worldNP.attachNewNode(BulletRigidBodyNode('B'))
-      npB.node().addShape(shape)
-      npB.setPos(10, 0, -5)
-      self.world.attachRigidBody(npB.node())
+      np_b = self.world_np.attach_new_node(BulletRigidBodyNode('B'))
+      np_b.node().add_shape(shape)
+      np_b.set_pos(10, 0, -5)
+      self.world.attach_rigid_body(np_b.node())
 
 .. only:: cpp
 
@@ -116,17 +116,17 @@ as well as limits. Finally, we add the new constraint to the physics world.
 
    .. code-block:: python
 
-      frameA = TransformState.makePosHpr(Point3(0, 0, -5), Vec3(0, 0, -90))
-      frameB = TransformState.makePosHpr(Point3(0, 0, 5), Vec3(0, 0, -90))
+      frame_a = TransformState.make_pos_hpr(Point3(0, 0, -5), Vec3(0, 0, -90))
+      frame_b = TransformState.make_pos_hpr(Point3(0, 0, 5), Vec3(0, 0, -90))
 
       swing1 = 60 # degrees
       swing2 = 36 # degrees
       twist = 120 # degrees
 
-      cs = BulletConeTwistConstraint(npA.node(), npB.node(), frameA, frameB)
-      cs.setDebugDrawSize(2.0)
-      cs.setLimit(swing1, swing2, twist)
-      world.attachConstraint(cs)
+      cs = BulletConeTwistConstraint(np_a.node(), np_b.node(), frame_a, frame_b)
+      cs.set_debug_draw_size(2.0)
+      cs.set_limit(swing1, swing2, twist)
+      world.attach_constraint(cs)
 
 In this case we have set the following limits:
 
@@ -152,10 +152,10 @@ the constraint, for example like in the following snippet
 
    .. code-block:: python
 
-      frameA = TransformState.makePosHpr(Point3(0, 0, -5), Vec3(0, 0, -90))
+      frame_a = TransformState.make_pos_hpr(Point3(0, 0, -5), Vec3(0, 0, -90))
 
-      cs = BulletConeTwistConstraint(npA.node(), frameA)
-      world.attachConstraint(cs)
+      cs = BulletConeTwistConstraint(np_a.node(), frame_a)
+      world.attach_constraint(cs)
 
 .. only:: cpp
 

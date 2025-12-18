@@ -45,7 +45,7 @@ The following code inserts a directional light into the scene:
    .. code-block:: python
 
       dlight = DirectionalLight('my dlight')
-      dlnp = render.attachNewNode(dlight)
+      dlnp = render.attach_new_node(dlight)
 
 .. only:: cpp
 
@@ -74,7 +74,7 @@ can, so you turn them on at render, the top of the scene graph:
 
    .. code-block:: python
 
-      render.setLight(plnp)
+      render.set_light(plnp)
 
 .. only:: cpp
 
@@ -88,7 +88,7 @@ You can remove the light setting from render:
 
    .. code-block:: python
 
-      render.clearLight(plnp)
+      render.clear_light(plnp)
 
 .. only:: cpp
 
@@ -104,7 +104,7 @@ of objects:
 
    .. code-block:: python
 
-      sofa.setLight(plnp)
+      sofa.set_light(plnp)
 
 .. only:: cpp
 
@@ -197,10 +197,10 @@ important, but its orientation doesn't matter.
    .. code-block:: python
 
       plight = PointLight('plight')
-      plight.setColor((0.2, 0.2, 0.2, 1))
-      plnp = render.attachNewNode(plight)
-      plnp.setPos(10, 20, 0)
-      render.setLight(plnp)
+      plight.set_color((0.2, 0.2, 0.2, 1))
+      plnp = render.attach_new_node(plight)
+      plnp.set_pos(10, 20, 0)
+      render.set_light(plnp)
 
 .. only:: cpp
 
@@ -285,10 +285,10 @@ forward (+Y) axis; you can use :meth:`.NodePath.set_hpr()` or
    .. code-block:: python
 
       dlight = DirectionalLight('dlight')
-      dlight.setColor((0.8, 0.8, 0.5, 1))
-      dlnp = render.attachNewNode(dlight)
-      dlnp.setHpr(0, -60, 0)
-      render.setLight(dlnp)
+      dlight.set_color((0.8, 0.8, 0.5, 1))
+      dlnp = render.attach_new_node(dlight)
+      dlnp.set_hpr(0, -60, 0)
+      render.set_light(dlnp)
 
 .. only:: cpp
 
@@ -318,9 +318,9 @@ overpower the other lights in the scene.
 .. code-block:: python
 
    alight = AmbientLight('alight')
-   alight.setColor((0.2, 0.2, 0.2, 1))
-   alnp = render.attachNewNode(alight)
-   render.setLight(alnp)
+   alight.set_color((0.2, 0.2, 0.2, 1))
+   alnp = render.attach_new_node(alight)
+   render.set_light(alnp)
 
 Spotlights
 ----------
@@ -338,13 +338,13 @@ kinds of lights, which are two words. Thus, the class name is correctly spelled
 .. code-block:: python
 
    slight = Spotlight('slight')
-   slight.setColor((1, 1, 1, 1))
+   slight.set_color((1, 1, 1, 1))
    lens = PerspectiveLens()
-   slight.setLens(lens)
-   slnp = render.attachNewNode(slight)
-   slnp.setPos(10, 20, 0)
-   slnp.lookAt(myObject)
-   render.setLight(slnp)
+   slight.set_lens(lens)
+   slnp = render.attach_new_node(slight)
+   slnp.set_pos(10, 20, 0)
+   slnp.look_at(my_object)
+   render.set_light(slnp)
 
 Putting it all Together
 -----------------------
@@ -359,52 +359,52 @@ the pandas.
    from panda3d.core import *
 
    # Put two pandas in the scene, panda x and panda y.
-   x = loader.loadModel('panda')
-   x.reparentTo(render)
-   x.setPos(10,0,-6)
+   x = loader.load_model('panda')
+   x.reparent_to(render)
+   x.set_pos(10,0,-6)
 
-   y = loader.loadModel('panda')
-   y.reparentTo(render)
-   y.setPos(-10,0,-6)
+   y = loader.load_model('panda')
+   y.reparent_to(render)
+   y.set_pos(-10,0,-6)
 
    # Position the camera to view the two pandas.
-   base.trackball.node().setPos(0, 60, 0)
+   base.trackball.node().set_pos(0, 60, 0)
 
    # Now create some lights to apply to everything in the scene.
 
    # Create Ambient Light
-   ambientLight = AmbientLight('ambientLight')
-   ambientLight.setColor((0.1, 0.1, 0.1, 1))
-   ambientLightNP = render.attachNewNode(ambientLight)
-   render.setLight(ambientLightNP)
+   ambient_light = AmbientLight('ambient_light')
+   ambient_light.set_color((0.1, 0.1, 0.1, 1))
+   ambient_light_np = render.attach_new_node(ambient_light)
+   render.set_light(ambient_light_np)
 
    # Directional light 01
-   directionalLight = DirectionalLight('directionalLight')
-   directionalLight.setColor((0.8, 0.2, 0.2, 1))
-   directionalLightNP = render.attachNewNode(directionalLight)
+   directional_light = DirectionalLight('directional_light')
+   directional_light.set_color((0.8, 0.2, 0.2, 1))
+   directional_light_np = render.attach_new_node(directional_light)
    # This light is facing backwards, towards the camera.
-   directionalLightNP.setHpr(180, -20, 0)
-   render.setLight(directionalLightNP)
+   directional_light_np.set_hpr(180, -20, 0)
+   render.set_light(directional_light_np)
 
    # Directional light 02
-   directionalLight = DirectionalLight('directionalLight')
-   directionalLight.setColor((0.2, 0.2, 0.8, 1))
-   directionalLightNP = render.attachNewNode(directionalLight)
+   directional_light = DirectionalLight('directional_light')
+   directional_light.set_color((0.2, 0.2, 0.8, 1))
+   directional_light_np = render.attach_new_node(directional_light)
    # This light is facing forwards, away from the camera.
-   directionalLightNP.setHpr(0, -20, 0)
-   render.setLight(directionalLightNP)
+   directional_light_np.set_hpr(0, -20, 0)
+   render.set_light(directional_light_np)
 
    # Now attach a green light only to object x.
    ambient = AmbientLight('ambient')
-   ambient.setColor((0.5, 1, 0.5, 1))
-   ambientNP = x.attachNewNode(ambient)
+   ambient.set_color((0.5, 1, 0.5, 1))
+   ambient_np = x.attach_new_node(ambient)
 
-   # If we did not call setLightOff() first, the green light would add to
+   # If we did not call set_light_off() first, the green light would add to
    # the total set of lights on this object. Since we do call
-   # setLightOff(), we are turning off all the other lights on this
+   # set_light_off(), we are turning off all the other lights on this
    # object first, and then turning on only the green light.
-   x.setLightOff()
-   x.setLight(ambientNP)
+   x.set_light_off()
+   x.set_light(ambient_np)
 
    base.run()
 
@@ -422,9 +422,9 @@ otherwise no shadows will appear.
    .. code-block:: python
 
       # Use a 512x512 resolution shadow map
-      light.setShadowCaster(True, 512, 512)
+      light.set_shadow_caster(True, 512, 512)
       # Enable the shader generator for the receiving nodes
-      render.setShaderAuto()
+      render.set_shader_auto()
 
 .. only:: cpp
 
@@ -457,7 +457,7 @@ on the NodePath or use the ``depth-offset`` scalar in the .egg file.
 
    .. code-block:: python
 
-      leaves.setDepthOffset(1)
+      leaves.set_depth_offset(1)
 
 .. only:: cpp
 

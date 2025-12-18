@@ -24,20 +24,20 @@ similar to render2d. Some sample code to do so is shown here:
 
    .. code-block:: python
 
-      dr = win.makeDisplayRegion()
+      dr = win.make_display_region()
       dr.sort = 20
 
-      myCamera2d = NodePath(Camera('myCam2d'))
+      my_camera2d = NodePath(Camera('my_cam2d'))
       lens = OrthographicLens()
-      lens.setFilmSize(2, 2)
-      lens.setNearFar(-1000, 1000)
-      myCamera2d.node().setLens(lens)
+      lens.set_film_size(2, 2)
+      lens.set_near_far(-1000, 1000)
+      my_camera2d.node().set_lens(lens)
 
-      myRender2d = NodePath('myRender2d')
-      myRender2d.setDepthTest(False)
-      myRender2d.setDepthWrite(False)
-      myCamera2d.reparentTo(myRender2d)
-      dr.setCamera(myCamera2d)
+      my_render2d = NodePath('my_render2d')
+      my_render2d.set_depth_test(False)
+      my_render2d.set_depth_write(False)
+      my_camera2d.reparent_to(my_render2d)
+      dr.set_camera(my_camera2d)
 
 .. only:: cpp
 
@@ -46,17 +46,17 @@ similar to render2d. Some sample code to do so is shown here:
       PT(DisplayRegion) dr = win->make_display_region();
       dr->set_sort(20);
 
-      NodePath myCamera2d(new Camera("myCam2d"));
+      NodePath my_camera2d(new Camera("my_cam2d"));
       PT(OrthographicLens) lens = new OrthographicLens;
       lens->set_film_size(2, 2);
       lens->set_near_far(-1000, 1000)
-      ((Camera *)myCamera2d.node())->set_lens(lens);
+      ((Camera *)my_camera2d.node())->set_lens(lens);
 
-      NodePath myRender2d("myRender2d");
-      myRender2d.set_depth_test(false);
-      myRender2d.set_depth_write(false);
-      myCamera2d.reparent_to(myRender2d);
-      dr->set_camera(myCamera2d)
+      NodePath my_render2d("my_render2d");
+      my_render2d.set_depth_test(false);
+      my_render2d.set_depth_write(false);
+      my_camera2d.reparent_to(my_render2d);
+      dr->set_camera(my_camera2d)
 
 The first group of commands creates a new DisplayRegion on the window and sets
 its sort value to 20, so that it will be drawn after the main DisplayRegion has
@@ -69,7 +69,7 @@ probably doesn't matter too much since we expect that everything we parent to
 this scene graph will have a Y value of 0 (which is easily between -1000 and
 1000), but this allows us to accept a wide range of Y values.
 
-The third group of commands sets up the myRender2d scene graph. It is just an
+The third group of commands sets up the my_render2d scene graph. It is just an
 ordinary node, with a few properties set on it, and the 2-D camera we have just
 created attached to it. We turn off the depth test and depth write properties
 because these are not important for a 2-D scene graph, and we don't want them
@@ -93,12 +93,12 @@ to get in the way of our gui elements.
 
    .. code-block:: python
 
-      aspectRatio = base.getAspectRatio()
-      myAspect2d = myRender2d.attachNewNode(PGTop('myAspect2d'))
-      myAspect2d.setScale(1.0 / aspectRatio, 1.0, 1.0)
-      myAspect2d.node().setMouseWatcher(base.mouseWatcherNode)
+      aspect_ratio = base.get_aspect_ratio()
+      my_aspect2d = my_render2d.attach_new_node(PGTop('my_aspect2d'))
+      my_aspect2d.set_scale(1.0 / aspect_ratio, 1.0, 1.0)
+      my_aspect2d.node().set_mouse_watcher(base.mouse_watcher_node)
 
    If this is for a different window than base.win, you will probably need to
-   also create your own MouseWatcher, other than base.mouseWatcherNode, to
+   also create your own MouseWatcher, other than base.mouse_watcher_node, to
    manage the mouse associated with your new window. See elsewhere for more
    information about this.

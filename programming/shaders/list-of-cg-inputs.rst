@@ -157,8 +157,8 @@ The following table describes the inputs that can be used in Cg shaders.
    Inverse Transposed ModelProj Matrix
 
 ``uniform float4 anything``
-   A constant vector that was stored using ``setShaderInput``. Parameter
-   anything would match data supplied by the call ``setShaderInput("anything",
+   A constant vector that was stored using ``set_shader_input``. Parameter
+   anything would match data supplied by the call ``set_shader_input("anything",
    Vec4(x,y,z,w))``
 
 ``uniform sampler2D anything``
@@ -167,22 +167,22 @@ The following table describes the inputs that can be used in Cg shaders.
    \
 ``uniform sampler2DArray anything``
    \
-   A constant texture that was stored using ``setShaderInput``. Parameter
+   A constant texture that was stored using ``set_shader_input``. Parameter
    *anything* would match data supplied by the call
-   ``setShaderInput("anything", myTex)``
+   ``set_shader_input("anything", my_tex)``
 
 ``uniform float4x4 anything``
-   A constant matrix that was stored using ``setShaderInput``. Parameter
-   anything would match data supplied by the call setShaderInput("anything",
-   myNodePath). The matrix supplied is the nodepath's local transform.
+   A constant matrix that was stored using ``set_shader_input``. Parameter
+   anything would match data supplied by the call set_shader_input("anything",
+   my_node_path). The matrix supplied is the nodepath's local transform.
 
 ``uniform float4 texpad_x``
-   X must be the name of a texture specified via shaderInput. Contains the U,V
+   X must be the name of a texture specified via shader_input. Contains the U,V
    coordinates of the center of the texture. This will be (0.5,0.5) if the
    texture is not padded, but it will be less if the texture is padded.
 
 ``uniform float4 texpix_x``
-   X must be the name of a texture specified via shaderInput. Contains the U,V
+   X must be the name of a texture specified via shader_input. Contains the U,V
    offset of a single pixel in the texture (ie, the reciprocal of the texture
    size).
 
@@ -196,7 +196,7 @@ The following table describes the inputs that can be used in Cg shaders.
 
 ``uniform float4 attr_colorscale``
    The contents of the color scale attribute. This is white unless the model has
-   a color scale applied using nodePath.setColorScale.
+   a color scale applied using node_path.set_color_scale.
 
 ``uniform float4 attr_fog``
    The fog parameters, where applicable. The values are in order: density,
@@ -207,16 +207,16 @@ The following table describes the inputs that can be used in Cg shaders.
    The fog color, if applicable.
 
 ``uniform float4 alight_x``
-   X must be an AmbientLight specified via a shaderInput. Contains the color of
+   X must be an AmbientLight specified via a shader_input. Contains the color of
    the light.
 
 ``uniform float4x4 dlight_x``
-   X must be an DirectionalLight specified via a shaderInput. Row 0 is color,
+   X must be an DirectionalLight specified via a shader_input. Row 0 is color,
    row 1 is specular, row 2 is model-space direction, row 3 is model-space
    pseudo half-angle.
 
 ``uniform float4 plane_x``
-   X must be an PlaneNode specified via a shaderInput. Contains the four terms
+   X must be an PlaneNode specified via a shader_input. Contains the four terms
    of the plane equation.
 
 ``uniform float4 clipplane_0``
@@ -282,7 +282,7 @@ type float and format Mat3 (meaning it can hold 9 elements)
 
 The main concept of the shader inputs is that the Cg input format and type is
 independent to the Panda3D input. The only condition is that the number of
-elements passed by the user through the setShaderInput() function of Panda3D
+elements passed by the user through the set_shader_input() function of Panda3D
 and the number of elements expected by the shader input should be the same.
 For example, a parameter uniform float4x4 mat[4] (total of 16*4 elements) could
 be set with: (the below list is just a sample and there are more ways to
@@ -290,10 +290,10 @@ represent it)
 
 .. code-block:: python
 
-   setShaderInput("input_name",PTALMat4f[4])
-   setShaderInput(PTALVecBase4f[16])
-   setShaderInput(PTAFloat[16*4])
-   setShaderInput(PTADouble[16*4])
+   set_shader_input("input_name",PTALMat4f[4])
+   set_shader_input(PTALVecBase4f[16])
+   set_shader_input(PTAFloat[16*4])
+   set_shader_input(PTADouble[16*4])
 
 But for some Cg input types there is no corresponding Panda3D type such as
 float3x2(Panda3D does not have a corresponding Mat3x2 class) Hence these input
@@ -309,10 +309,10 @@ represent it)
 
 .. code-block:: python
 
-   setShaderInput(PTAFloat[6])
-   setShaderInput(PTADouble[6])
-   setShaderInput(PTALVecBase3f[2])
-   setShaderInput(PTALVecBase2f[3])
+   set_shader_input(PTAFloat[6])
+   set_shader_input(PTADouble[6])
+   set_shader_input(PTALVecBase3f[2])
+   set_shader_input(PTALVecBase2f[3])
 
 Now, the issue of common input types such as float, double, int, long. The GPU
 registers generally can handle only floats. Hence even if we do send a double
@@ -335,8 +335,8 @@ there are more ways to represent it)
 
 .. code-block:: python
 
-   setShaderInput(PTAFloat[3])
-   setShaderInput(PTADouble[3])
+   set_shader_input(PTAFloat[3])
+   set_shader_input(PTADouble[3])
 
 Below is a sample code snippet that shows how you can use the new shader inputs.
 
@@ -344,7 +344,7 @@ Below is a sample code snippet that shows how you can use the new shader inputs.
 
    from panda3d.core import Vec4
    vec4 = Vec4(0.0,1.0,0.0,1.0)
-   myModel.setShaderInput("Inputs.vec4",vec4)
+   my_model.set_shader_input("Inputs.vec4",vec4)
 
 First import the necessary header to use the type of input. In our case it's
 :class:`.Vec4`. The next statement shows a Vec4 input type. Then set the Vec4 as

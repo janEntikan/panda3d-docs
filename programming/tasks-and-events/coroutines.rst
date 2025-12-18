@@ -39,7 +39,7 @@ Coroutines
       import time
 
 
-      def launchRocket(countdown):
+      def launch_rocket(countdown):
           print("Beginning countdown…")
 
           while countdown > 0:
@@ -51,7 +51,7 @@ Coroutines
 
           print("Launch!")
 
-      launchRocket(countdown=3)
+      launch_rocket(countdown=3)
 
    The problem with the above code is that :py:func:`time.sleep()` will block
    the main thread while it is waiting, meaning that other tasks (including
@@ -70,7 +70,7 @@ Coroutines
       from direct.task.Task import Task
 
 
-      async def launchRocket(countdown):
+      async def launch_rocket(countdown):
           print("Beginning countdown…")
 
           while countdown > 0:
@@ -82,7 +82,7 @@ Coroutines
 
           print("Launch!")
 
-      taskMgr.add(launchRocket(countdown=3))
+      task_mgr.add(launch_rocket(countdown=3))
 
    The moment we use ``await`` in the above code, the function is paused until
    the given operation completes. We use ``Task.pause(1.0)`` here, which creates
@@ -103,7 +103,7 @@ Coroutines
       from direct.task.Task import Task
 
 
-      async def damageTask(task):
+      async def damage_task(task):
           if player just collided with invincibility item:
               # Suspend damage task until invincibility is no longer active
               await Task.pause(10.0)
@@ -111,7 +111,7 @@ Coroutines
           return task.cont
 
       # Note the lack of parentheses here!
-      taskMgr.add(damageTask)
+      task_mgr.add(damage_task)
 
    This behaves identically to a regular task, except that it permits use of the
    ``await`` keyword.

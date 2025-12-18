@@ -13,7 +13,7 @@ In PandAI, use it via:
 
 .. code-block:: python
 
-   addDynamicObstacle(NodePath obstacle);
+   add_dynamic_obstacle(NodePath obstacle);
 
 --------------
 

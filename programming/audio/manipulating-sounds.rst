@@ -13,15 +13,15 @@ do the following:
 
    .. code-block:: python
 
-      mySound.setLoop(True)
-      mySound.play()
+      my_sound.set_loop(True)
+      my_sound.play()
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      mySound->set_loop(true);
-      mySound->play();
+      my_sound->set_loop(true);
+      my_sound->play();
 
 To stop a sound from looping pass False in the :meth:`~.AudioSound.set_loop()`
 function.
@@ -30,13 +30,13 @@ function.
 
    .. code-block:: python
 
-      mySound.setLoop(False)
+      my_sound.set_loop(False)
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      mySound->set_loop(false);
+      my_sound->set_loop(false);
 
 Sounds can also be looped for a certain number of times:
 
@@ -44,13 +44,13 @@ Sounds can also be looped for a certain number of times:
 
    .. code-block:: python
 
-      mySound.setLoopCount(n)
+      my_sound.set_loop_count(n)
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      mySound->set_loop_count(n);
+      my_sound->set_loop_count(n);
 
 Where 'n' can be any positive integer. 0 will cause a sound to loop forever. 1
 will cause a sound to play only once. >1 will cause a sound to loop that many
@@ -93,13 +93,13 @@ length. All these are in seconds.
 
    .. code-block:: python
 
-      mySound.length()
+      my_sound.length()
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      mySound->length();
+      my_sound->length();
 
 will return the length of a sound file in seconds.
 
@@ -107,13 +107,13 @@ will return the length of a sound file in seconds.
 
    .. code-block:: python
 
-      mySound.getTime()
+      my_sound.get_time()
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      mySound->get_time();
+      my_sound->get_time();
 
 will get the current time the 'playback head' of a sound is at in seconds.
 
@@ -121,13 +121,13 @@ will get the current time the 'playback head' of a sound is at in seconds.
 
    .. code-block:: python
 
-      mySound.setTime(n)
+      my_sound.set_time(n)
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      mySound->set_time(n);
+      my_sound->set_time(n);
 
 will set the 'playhead head' of a sound to n (where is seconds).
 
@@ -146,13 +146,13 @@ To change a sound's playback speed, use:
 
    .. code-block:: python
 
-      mySound.setPlayRate(n)
+      my_sound.set_play_rate(n)
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      mySound->set_play_rate(n);
+      my_sound->set_play_rate(n);
 
 Where ``n`` is any float.
 
@@ -165,10 +165,10 @@ You can also get a sound's play rate with:
 
    .. code-block:: python
 
-      mySound.getPlayRate()
+      my_sound.get_play_rate()
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      mySound->get_play_rate();
+      my_sound->get_play_rate();

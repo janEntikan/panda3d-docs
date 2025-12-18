@@ -171,7 +171,7 @@ triangles. Each line has exactly two vertices.
 .. image:: geomlines.png
 
 By default, line segments are one pixel wide, no matter how far away they are
-from the camera. You can use nodePath.setRenderModeThickness() to change this;
+from the camera. You can use node_path.set_render_mode_thickness() to change this;
 if you specify a thickness greater than 1, this will make the lines render as
 thick lines, the specified number of pixels wide. However, the lines will
 always be the same width in pixels, regardless of how far away from the camera
@@ -231,5 +231,5 @@ sprite, apply :ref:`automatic-texture-coordinates` using
 :meth:`nodePath.set_tex_gen(stage, TexGenAttrib.M_point_sprite)`; this will
 generate texture coordinates on each polygon in the range (0, 0) to (1, 1). You
 can then transform the texture coordinates, if you wish, using one of the
-methods like :meth:`nodePath.set_tex_offset() <.NodePath.set_tex_offset>`,
+methods like :meth:`node_path.set_tex_offset() <.NodePath.set_tex_offset>`,
 :meth:`set_tex_scale() <.NodePath.set_tex_scale>`, etc.

@@ -31,68 +31,68 @@ To explain how joints work, look at the following example:
    from panda3d.ode import *
 
    # Load the smiley and frowney models
-   smiley = loader.loadModel("smiley.egg")
-   smiley.reparentTo(render)
-   smiley.setPos(-5, 0, -5)
-   frowney = loader.loadModel("frowney.egg")
-   frowney.reparentTo(render)
-   frowney.setPos(-12.5, 0, -7.5)
+   smiley = loader.load_model("smiley.egg")
+   smiley.reparent_to(render)
+   smiley.set_pos(-5, 0, -5)
+   frowney = loader.load_model("frowney.egg")
+   frowney.reparent_to(render)
+   frowney.set_pos(-12.5, 0, -7.5)
 
    # Setup our physics world
    world = OdeWorld()
-   world.setGravity(0, 0, -9.81)
+   world.set_gravity(0, 0, -9.81)
 
    # Setup the body for the smiley
-   smileyBody = OdeBody(world)
+   smiley_body = OdeBody(world)
    M = OdeMass()
-   M.setSphere(5000, 1.0)
-   smileyBody.setMass(M)
-   smileyBody.setPosition(smiley.getPos(render))
-   smileyBody.setQuaternion(smiley.getQuat(render))
+   M.set_sphere(5000, 1.0)
+   smiley_body.set_mass(M)
+   smiley_body.set_position(smiley.get_pos(render))
+   smiley_body.set_quaternion(smiley.get_quat(render))
 
    # Now, the body for the frowney
-   frowneyBody = OdeBody(world)
+   frowney_body = OdeBody(world)
    M = OdeMass()
-   M.setSphere(5000, 1.0)
-   frowneyBody.setMass(M)
-   frowneyBody.setPosition(frowney.getPos(render))
-   frowneyBody.setQuaternion(frowney.getQuat(render))
+   M.set_sphere(5000, 1.0)
+   frowney_body.set_mass(M)
+   frowney_body.set_position(frowney.get_pos(render))
+   frowney_body.set_quaternion(frowney.get_quat(render))
 
    # Create the joints
-   smileyJoint = OdeBallJoint(world)
-   smileyJoint.attach(smileyBody, None) # Attach it to the environment
-   smileyJoint.setAnchor(0, 0, 0)
-   frowneyJoint = OdeBallJoint(world)
-   frowneyJoint.attach(smileyBody, frowneyBody)
-   frowneyJoint.setAnchor(-5, 0, -5)
+   smiley_joint = OdeBallJoint(world)
+   smiley_joint.attach(smiley_body, None) # Attach it to the environment
+   smiley_joint.set_anchor(0, 0, 0)
+   frowney_joint = OdeBallJoint(world)
+   frowney_joint.attach(smiley_body, frowney_body)
+   frowney_joint.set_anchor(-5, 0, -5)
 
    # Set the camera position
-   base.disableMouse()
-   base.camera.setPos(0, 50, -7.5)
-   base.camera.lookAt(0, 0, -7.5)
+   base.disable_mouse()
+   base.camera.set_pos(0, 50, -7.5)
+   base.camera.look_at(0, 0, -7.5)
 
    # We are going to be drawing some lines between the anchor points and the joints
-   lines = LineNodePath(parent=render, thickness=3.0, colorVec=(1, 0, 0, 1))
-   def drawLines():
+   lines = LineNodePath(parent=render, thickness=3.0, color_vec=(1, 0, 0, 1))
+   def draw_lines():
        # Draws lines between the smiley and frowney.
        lines.reset()
-       lines.drawLines([((frowney.getX(), frowney.getY(), frowney.getZ()),
-                         (smiley.getX(), smiley.getY(), smiley.getZ())),
-                        ((smiley.getX(), smiley.getY(), smiley.getZ()),
+       lines.draw_lines([((frowney.get_x(), frowney.get_y(), frowney.get_z()),
+                         (smiley.get_x(), smiley.get_y(), smiley.get_z())),
+                        ((smiley.get_x(), smiley.get_y(), smiley.get_z()),
                          (0, 0, 0))])
        lines.create()
 
    # The task for our simulation
-   def simulationTask(task):
+   def simulation_task(task):
        # Step the simulation and set the new positions
-       world.quickStep(base.clock.dt)
-       frowney.setPosQuat(render, frowneyBody.getPosition(), frowneyBody.getQuaternion())
-       smiley.setPosQuat(render, smileyBody.getPosition(), smileyBody.getQuaternion())
-       drawLines()
+       world.quick_step(base.clock.dt)
+       frowney.set_pos_quat(render, frowney_body.get_position(), frowney_body.get_quaternion())
+       smiley.set_pos_quat(render, smiley_body.get_position(), smiley_body.get_quaternion())
+       draw_lines()
        return task.cont
 
-   drawLines()
-   taskMgr.doMethodLater(0.5, simulationTask, "Physics Simulation")
+   draw_lines()
+   task_mgr.do_method_later(0.5, simulation_task, "Physics Simulation")
 
    base.run()
 
@@ -101,17 +101,17 @@ The part of the code that does the magic is this:
 .. code-block:: python
 
    # Create the joints
-   smileyJoint = OdeBallJoint(world)
-   smileyJoint.attach(smileyBody, None) # Attach it to the environment
-   smileyJoint.setAnchor(0, 0, 0)
-   frowneyJoint = OdeBallJoint(world)
-   frowneyJoint.attach(smileyBody, frowneyBody)
-   frowneyJoint.setAnchor(-5, 0, -5)
+   smiley_joint = OdeBallJoint(world)
+   smiley_joint.attach(smiley_body, None) # Attach it to the environment
+   smiley_joint.set_anchor(0, 0, 0)
+   frowney_joint = OdeBallJoint(world)
+   frowney_joint.attach(smiley_body, frowney_body)
+   frowney_joint.set_anchor(-5, 0, -5)
 
 This creates two joints, the first to attach the smiley to the environment, and
 the second to attach the frowney to the smiley. The ``attach()`` method on the
 joint is used to set the two bodies that are attached; you can replace either
-argument with None to attach them to the environment. The ``setAnchor`` method
+argument with None to attach them to the environment. The ``set_anchor`` method
 is used to set the anchor point for the joints.
 
 In this image you can see how the joints are set up:

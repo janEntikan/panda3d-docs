@@ -24,8 +24,8 @@ motion path, and then the file is loaded.
 
 .. code-block:: python
 
-   myMotionPathName = Mopath.Mopath()
-   myMotionPathName.loadFile("File Path")
+   my_motion_path_name = Mopath.Mopath()
+   my_motion_path_name.load_file("File Path")
 
 Finally, the motion path interval may be created, and played like any interval
 can. The interval requires not only the name of the motion path, but also the
@@ -33,5 +33,5 @@ NodePath that will be affected by it.
 
 .. code-block:: python
 
-   myInterval = MopathInterval(myMotionPathName, myNodePath, name = "Name")
-   myInterval.start()
+   my_interval = MopathInterval(my_motion_path_name, my_node_path, name = "Name")
+   my_interval.start()

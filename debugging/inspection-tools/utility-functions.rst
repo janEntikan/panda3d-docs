@@ -22,11 +22,11 @@ While the directtools suite calls upon a number of tools, if the suite is
 disabled, the user may activate certain panels of the suite. The ``place()``
 command opens the object placer console. The ``explore()`` opens the scene graph
 explorer, which allows you to inspect the hierarchy of a NodePath. Finally, in
-order to change the color of a NodePath, the ``rgbPanel()`` command opens color
+order to change the color of a NodePath, the ``rgb_panel()`` command opens color
 panel.
 
 .. code-block:: python
 
    camera.place()
    render.explore()
-   panda.rgbPanel()
+   panda.rgb_panel()

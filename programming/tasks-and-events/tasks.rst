@@ -55,7 +55,7 @@ the function returns.
       from direct.task import Task
 
       # This task runs for two seconds, then prints done
-      def exampleTask(task):
+      def example_task(task):
           if task.time < 2.0:
               return Task.cont
 
@@ -118,7 +118,7 @@ The Do-Later Task
 .. only:: cpp
 
    If you have used Panda3D in Python, you might be familiar with the Python
-   function ``taskMgr.doMethodLater()``, which lets you schedule a task to be
+   function ``task_mgr.do_method_later()``, which lets you schedule a task to be
    started after a certain delay. This isn't needed in C++, because you can set
    a delay on a task directly with ``task->set_delay()``. An example will be
    provided below in the task manager section.
@@ -135,48 +135,48 @@ The Do-Later Task
 
    .. code-block:: python
 
-      taskMgr.doMethodLater(delayTime, myFunction, 'Task Name')
+      task_mgr.do_method_later(delay_time, my_function, 'Task Name')
 
-   In this example myFunction must accept a task variable. If you wish to use a
+   In this example my_function must accept a task variable. If you wish to use a
    function that does not accept a task variable:
 
    .. code-block:: python
 
-      taskMgr.doMethodLater(delayTime, myFunction, 'Task Name', extraArgs = [variables])
+      task_mgr.do_method_later(delay_time, my_function, 'Task Name', extra_args = [variables])
 
    Note: if you wish to call a function which takes no variables simply pass
-   ``extraArgs = []``
+   ``extra_args = []``
 
    Do-Later tasks can be repeated from the task function by returning
    ``Task.again``. You can also change the delay of the Do-Later task by
-   changing ``task.delayTime``, but changing this will not have any effect on
+   changing ``task.delay_time``, but changing this will not have any effect on
    the task's actual delay time until the next time it gets added to the do-
    later list, for instance by returning ``Task.again``.
 
    .. code-block:: python
 
       # This task increments itself so that the delay between task executions
-      # gradually increases over time. If you do not change task.delayTime
+      # gradually increases over time. If you do not change task.delay_time
       # the task will simply repeat itself every 2 seconds
-      def myFunction(task):
-          print("Delay: %s" % task.delayTime)
+      def my_function(task):
+          print("Delay: %s" % task.delay_time)
           print("Frame: %s" % task.frame)
-          task.delayTime += 1
+          task.delay_time += 1
           return task.again
 
-      myTask = taskMgr.doMethodLater(2, myFunction, 'tickTask')
+      my_task = task_mgr.do_method_later(2, my_function, 'tick_task')
 
-   If you wish to change the delayTime outside of the task function itself, and
+   If you wish to change the delay_time outside of the task function itself, and
    have it make an immediate effect, you can remove and re-add the task by hand,
    for instance:
 
    .. code-block:: python
 
-      taskMgr.remove(task)
-      task.delayTime += 1
-      taskMgr.add(task)
+      task_mgr.remove(task)
+      task.delay_time += 1
+      task_mgr.add(task)
 
-   There is a read-only public member ``task.wakeTime`` which stores the time at
+   There is a read-only public member ``task.wake_time`` which stores the time at
    which the task should wake up, should you desire to query this.
 
 The Task Object
@@ -216,7 +216,7 @@ The Task Manager
 .. only:: python
 
    All tasks are handled through the global Task Manager object, called
-   ``taskMgr`` in Panda3D.
+   ``task_mgr`` in Panda3D.
 
 .. only:: cpp
 
@@ -233,22 +233,22 @@ The Task Manager keeps a list of all currently-running tasks.
 
 .. only:: python
 
-   To add your task function to the task list, call ``taskMgr.add()`` with your
-   function and an arbitrary name for the task. ``taskMgr.add()`` returns a Task
+   To add your task function to the task list, call ``task_mgr.add()`` with your
+   function and an arbitrary name for the task. ``task_mgr.add()`` returns a Task
    which can be used to remove the task later on.
 
    .. code-block:: python
 
-      taskMgr.add(exampleTask, 'MyTaskName')
+      task_mgr.add(example_task, 'MyTaskName')
 
-   You can add extra arguments to the call through the ``extraArgs`` parameter.
+   You can add extra arguments to the call through the ``extra_args`` parameter.
    When you do this, the task parameter is no longer sent to your function  by
-   default. If you still want it, make sure to set ``appendTask=True``, which
+   default. If you still want it, make sure to set ``append_task=True``, which
    makes the task the last argument sent to the function.
 
    .. code-block:: python
 
-      taskMgr.add(exampleTask, 'MyTaskName', extraArgs=[a,b,c], appendTask=True)
+      task_mgr.add(example_task, 'MyTaskName', extra_args=[a,b,c], append_task=True)
 
 .. only:: cpp
 
@@ -283,13 +283,13 @@ returning a "done" status will not affect any other task functions.
 
 .. only:: python
 
-   To remove the task and stop it from executing, call ``taskMgr.remove()``. You
+   To remove the task and stop it from executing, call ``task_mgr.remove()``. You
    can pass in either the name of the task, or the task object (which was
-   returned by ``taskMgr.add()``, above).
+   returned by ``task_mgr.add()``, above).
 
    .. code-block:: python
 
-      taskMgr.remove('MyTaskName')
+      task_mgr.remove('MyTaskName')
 
 .. only:: cpp
 
@@ -328,15 +328,15 @@ returning a "done" status will not affect any other task functions.
 
 .. only:: python
 
-   You may add a cleanup function to the task function with the uponDeath
-   parameter. Similar to task functions, the uponDeath function has a task
+   You may add a cleanup function to the task function with the upon_death
+   parameter. Similar to task functions, the upon_death function has a task
    object as a parameter. The cleanup function is called whenever the task
    finishes, for instance by ``return Task.done``, or when it is explicitly
-   removed via ``taskMgr.remove()``.
+   removed via ``task_mgr.remove()``.
 
    .. code-block:: python
 
-      taskMgr.add(exampleTask, 'TaskName', uponDeath=cleanupFunc)
+      task_mgr.add(example_task, 'TaskName', upon_death=cleanup_func)
 
 .. only:: cpp
 
@@ -348,7 +348,7 @@ returning a "done" status will not affect any other task functions.
 
    .. code-block:: cpp
 
-      task->set_upon_death(&cleanupFunc);
+      task->set_upon_death(&cleanup_func);
 
 To control order in which tasks are executed, you can use sort or priority
 argument. If you use only sort or only priority, tasks given lesser value will
@@ -358,15 +358,15 @@ execute sooner.
 
    .. code-block:: python
 
-      taskMgr.add(task2, "second", sort=2)
-      taskMgr.add(task1, "first", sort=1)
+      task_mgr.add(task2, "second", sort=2)
+      task_mgr.add(task1, "first", sort=1)
 
    or
 
    .. code-block:: python
 
-      taskMgr.add(task2, "second", priority=2)
-      taskMgr.add(task1, "first", priority=1)
+      task_mgr.add(task2, "second", priority=2)
+      task_mgr.add(task1, "first", priority=1)
 
    In both cases, task1 given name "first" will be executed before task2
    ("second").
@@ -383,13 +383,13 @@ that ones with HIGHER priority value will be executed first.
 
    .. code-block:: python
 
-      taskMgr.add(task1, "first", sort=1, priority=2)
-      taskMgr.add(task2, "second", sort=1, priority=1)
-      taskMgr.add(task3, "third", sort=2, priority=1)
-      taskMgr.add(task4, "fourth", sort=3, priority=13)
-      taskMgr.add(task5, "fifth", sort=3, priority=4)
+      task_mgr.add(task1, "first", sort=1, priority=2)
+      task_mgr.add(task2, "second", sort=1, priority=1)
+      task_mgr.add(task3, "third", sort=2, priority=1)
+      task_mgr.add(task4, "fourth", sort=3, priority=13)
+      task_mgr.add(task5, "fifth", sort=3, priority=4)
 
-   To print the list of tasks currently running, simply print out ``taskMgr``.
+   To print the list of tasks currently running, simply print out ``task_mgr``.
    Among your own tasks, you may see the following system tasks listed:
 
    dataloop
@@ -398,7 +398,7 @@ that ones with HIGHER priority value will be executed first.
    tkloop
       Processes Tk GUI events
 
-   eventManager
+   event_manager
       Processes events generated by C++ code, such as collision events
 
    igloop
@@ -409,7 +409,7 @@ that ones with HIGHER priority value will be executed first.
 
    .. code-block:: python
 
-      taskMgr.popupControls()
+      task_mgr.popup_controls()
 
 .. only:: cpp
 
@@ -421,7 +421,7 @@ Task timing
 
 .. only:: python
 
-   To see the specific timing information for each task when you print taskMgr,
+   To see the specific timing information for each task when you print task_mgr,
    add the following line to your Config.prc file::
 
       task-timer-verbose #t
@@ -433,31 +433,31 @@ Examples
 
 .. only:: python
 
-   uponDeath
+   upon_death
 
    .. code-block:: python
 
-      taskAccumulator = 0
+      task_accumulator = 0
 
-      def cleanUp(task):
-          global taskAccumulator
-          print("Task func has accumulated %d" % taskAccumulator)
+      def clean_up(task):
+          global task_accumulator
+          print("Task func has accumulated %d" % task_accumulator)
           # Reset the accumulator
-          taskAccumulator = 0
+          task_accumulator = 0
 
       # A task that runs forever
-      def taskFunc(task):
-          global taskAccumulator
-          taskAccumulator += 1
+      def task_func(task):
+          global task_accumulator
+          task_accumulator += 1
           return task.cont
 
-      def taskStop(task):
-          taskMgr.remove('Accumulator')
+      def task_stop(task):
+          task_mgr.remove('Accumulator')
 
-      # Add the taskFunc function with an uponDeath argument
-      taskMgr.add(taskFunc, 'Accumulator', uponDeath=cleanUp)
+      # Add the task_func function with an upon_death argument
+      task_mgr.add(task_func, 'Accumulator', upon_death=clean_up)
       # Stops the task 2 seconds later
-      taskMgr.doMethodLater(2, taskStop, 'Task Stop')
+      task_mgr.do_method_later(2, task_stop, 'Task Stop')
 
 .. only:: cpp
 

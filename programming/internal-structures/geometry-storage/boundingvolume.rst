@@ -40,7 +40,7 @@ Further tweaking of the bounding volume used must be done manually
 
       .. code-block:: python
 
-         node.setBounds(BoundingVolume(...))
+         node.set_bounds(BoundingVolume(...))
          node.final = True
 
    .. only:: cpp

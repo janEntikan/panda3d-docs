@@ -13,20 +13,20 @@ Function Intervals
 
    .. code-block:: python
 
-      intervalName = Func(myFunction)
+      interval_name = Func(my_function)
 
    You pass the function without parentheses (i.e. you pass
    ``Func``- a function pointer)
-   as the parameter. If ``myFunction``
+   as the parameter. If ``my_function``
    takes arguments, then pass them as parameters to
    ``Func`` as follows:
 
    .. code-block:: python
 
-      def myFunction(arg1, arg2):
+      def my_function(arg1, arg2):
          # Do something.
 
-      intervalName = Func(myFunction, arg1, arg2)
+      interval_name = Func(my_function, arg1, arg2)
 
    Functions cannot be called on their own in sequences and parallels, so it is
    necessary to wrap them in an interval in order to call them. Since function

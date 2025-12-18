@@ -73,7 +73,7 @@ degrees, which is usually a pretty comfortable viewing angle.
 
 There is actually a separate horizontal field of view and vertical field of
 view, both of which may be independently controlled with the two-parameter form
-of :meth:`~.Lens.set_fov`: :meth:`lens.set_fov(horizontalAngle, verticalAngle)
+of :meth:`~.Lens.set_fov`: :meth:`lens.set_fov(horizontal_angle, vertical_angle)
 <.Lens.set_fov>`. Using the two-parameter form will change the aspect ratio of
 the lens (see below). Normally, you would set the field of view using only the
 one-parameter form, which sets the horizontal field of view directly, and

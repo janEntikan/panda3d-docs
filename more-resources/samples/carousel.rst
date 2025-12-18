@@ -19,8 +19,8 @@ in your panda world.
 Intervals are built in Panda3D functions that will let you change an attribute
 over time. In this tutorial, the position and texture attributes of various
 objects will be altered over time to give life to a carousel. The most common
-intervals for doing simple movement of objects are the posInterval and
-hprInterval. These intervals will change the position/orientation of an object
+intervals for doing simple movement of objects are the pos_interval and
+hpr_interval. These intervals will change the position/orientation of an object
 (or node) over a given time and given displacement/rotation, respectively.
 Another interval we will look at is the LerpFunc interval. LerpFunc will call a
 function and give it a linearly interpolated value range over a specified time

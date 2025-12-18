@@ -14,14 +14,14 @@ Client Repository.
 .. code-block:: python
 
    # Use the client repositories manager
-   cr.relatedObjectMgr.requestObjects(
+   cr.related_object_mgr.request_objects(
        [
-        playerDoId,
-        levelDoId,
-        someOtherObjectDoId
+        player_do_id,
+        level_do_id,
+        some_other_object_do_id
        ],
-       allCallback = self.allObjectsManifested)
+       all_callback = self.all_objects_manifested)
 
-   def allObjectsManifested(self, allObjects):
-       # allObjects now contains the DOs for the player, level
-       # and someOtherObject
+   def all_objects_manifested(self, all_objects):
+       # all_objects now contains the DOs for the player, level
+       # and some_other_object

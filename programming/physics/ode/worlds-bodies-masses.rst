@@ -15,8 +15,8 @@ joints, and controls global parameters, such as gravity, for the scene.
    .. code-block:: python
 
       from panda3d.ode import OdeWorld
-      myWorld = OdeWorld()
-      myWorld.setGravity(0, 0, -9.81)
+      my_world = OdeWorld()
+      my_world.set_gravity(0, 0, -9.81)
 
 .. only:: cpp
 
@@ -24,8 +24,8 @@ joints, and controls global parameters, such as gravity, for the scene.
 
       #include "odeWorld.h"
 
-      OdeWorld myWorld;
-      myWorld.set_gravity(0, 0, -9.81);
+      OdeWorld my_world;
+      my_world.set_gravity(0, 0, -9.81);
 
 As you can see, the gravity is set to a downward vector with length 9.81. This
 value is the average gravity acceleration on Earth. If you want objects to fall
@@ -52,12 +52,12 @@ of lead, and the box has a width, length and height of 1 meter.
    .. code-block:: python
 
       from panda3d.ode import OdeBody, OdeMass
-      myBody = OdeBody(myWorld)
-      myBody.setPosition(somePandaObject.getPos(render))
-      myBody.setQuaternion(somePandaObject.getQuat(render))
-      myMass = OdeMass()
-      myMass.setBox(11340, 1, 1, 1)
-      myBody.setMass(myMass)
+      my_body = OdeBody(my_world)
+      my_body.set_position(some_panda_object.get_pos(render))
+      my_body.set_quaternion(some_panda_object.get_quat(render))
+      my_mass = OdeMass()
+      my_mass.set_box(11340, 1, 1, 1)
+      my_body.set_mass(my_mass)
 
 .. only:: cpp
 
@@ -66,19 +66,19 @@ of lead, and the box has a width, length and height of 1 meter.
       #include "odeBody.h"
       #include "odeMass.h"
 
-      OdeBody myBody (myWorld);
-      myBody.set_position(somePandaObject.get_pos(render));
-      myBody.set_quaternion(somePandaObject.get_quat(render));
-      OdeMass myMass;
-      myMass.set_box(11340, 1, 1, 1);
-      myBody.set_mass(myMass);
+      OdeBody my_body (my_world);
+      my_body.set_position(some_panda_object.get_pos(render));
+      my_body.set_quaternion(some_panda_object.get_quat(render));
+      OdeMass my_mass;
+      my_mass.set_box(11340, 1, 1, 1);
+      my_body.set_mass(my_mass);
 
 First, the position and quaternion are set of the body, this is directly copied
-from the NodePath's pos and quat; do note that when using getPos and getQuat,
+from the NodePath's pos and quat; do note that when using get_pos and get_quat,
 you need to get them in global coordinate space, this is done here by specifying
 ``render`` as first argument.
 
-Then, a mass is set for the body. The first argument specified in the setBox
+Then, a mass is set for the body. The first argument specified in the set_box
 call is the `density <https://en.wikipedia.org/wiki/Density>`__ of the object,
 the second is the dimensions (lx, ly, lz) of the box. Each material has it's own
 density, for example, water has a density of 1000 kg/m³, copper usually between
@@ -91,48 +91,48 @@ provides the following methods:
 
 .. currentmodule:: panda3d.core
 
-.. py:method:: OdeMass.setZero()
+.. py:method:: OdeMass.set_zero()
    :noindex:
 
    Sets all the mass parameters to 0, meaning it will have no mass at all.
 
-.. py:method:: OdeMass.setSphere(density, radius)
+.. py:method:: OdeMass.set_sphere(density, radius)
    :noindex:
 
    This specifies that the object's mass is spherical with the given radius.
 
-.. py:method:: OdeMass.setSphereTotal(total_mass, radius)
+.. py:method:: OdeMass.set_sphere_total(total_mass, radius)
    :noindex:
 
    Use this if you don't know the density but do know the total mass of the
    object.
 
-.. py:method:: OdeMass.setBox(density, lx, ly, lz)
+.. py:method:: OdeMass.set_box(density, lx, ly, lz)
    :noindex:
 
    Use this for box-shaped objects.
 
-.. py:method:: OdeMass.setBoxTotal(total_mass, lx, ly, lz)
+.. py:method:: OdeMass.set_box_total(total_mass, lx, ly, lz)
    :noindex:
 
    The same as the former, but specifies the total mass instead of the density.
 
-.. py:method:: OdeMass.setCylinder(density, direction, radius, length)
+.. py:method:: OdeMass.set_cylinder(density, direction, radius, length)
    :noindex:
 
    To be used for objects shaped like a cylinder.
 
-.. py:method:: OdeMass.setCylinderTotal(total_mass, direction, radius, length)
+.. py:method:: OdeMass.set_cylinder_total(total_mass, direction, radius, length)
    :noindex:
 
    Again the same cylinder, but specifies the mass instead of the density.
 
-.. py:method:: OdeMass.setCapsule(density, direction, radius, length)
+.. py:method:: OdeMass.set_capsule(density, direction, radius, length)
    :noindex:
 
    A capsule is similar to a cylinder, but has capped edges.
 
-.. py:method:: OdeMass.setCapsuleTotal(total_mass, direction, radius, length)
+.. py:method:: OdeMass.set_capsule_total(total_mass, direction, radius, length)
    :noindex:
 
    Use this if you only have a mass and not the density.
@@ -158,7 +158,7 @@ Reference.
 For more complex shapes, you might want to decompose the object into several
 simple ones, and use the ``add(other)`` method to add the masses together. If
 that still isn't enough, you might want to set the individual parameters of the
-mass using ``setParameters``, which is not explained here because it that goes
+mass using ``set_parameters``, which is not explained here because it that goes
 beyond the scope of this manual page. Note that the shape you set is not
 actually used for collisions: it's just used to roughly determine how the mass
 is divided in the object.

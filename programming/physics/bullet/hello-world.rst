@@ -71,7 +71,7 @@ value to the :meth:`~.BulletWorld.do_physics()` method.
           world.do_physics(dt)
           return task.cont
 
-      taskMgr.add(update, 'update')
+      task_mgr.add(update, 'update')
 
 .. only:: cpp
 
@@ -272,7 +272,7 @@ archive: https://www.panda3d.org/download/noversion/bullet-samples.zip
           world.do_physics(dt)
           return task.cont
 
-      taskMgr.add(update, 'update')
+      task_mgr.add(update, 'update')
       base.run()
 
 .. only:: cpp

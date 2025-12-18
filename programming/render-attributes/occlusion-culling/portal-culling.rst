@@ -46,6 +46,6 @@ enabled, and render the objects that can be seen through the portal into its
 specified "out" cell. If another portal is visible through the previous one, the
 process continues. If multiple cameras are used, for example to do split screen
 play, hide the cells using the same mask set on the camera using
-camera.setCameraMask(mask).
+camera.set_camera_mask(mask).
 
 

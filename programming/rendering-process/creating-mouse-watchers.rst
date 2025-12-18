@@ -4,15 +4,15 @@ Creating New MouseWatchers for Display Regions
 ==============================================
 
 When working with multiple display regions in a single window, it can be
-difficult to get accurate mouse interaction. base.mouseWatcherNode, the default
+difficult to get accurate mouse interaction. base.mouse_watcher_node, the default
 MouseWatcher in Panda3D, reports the mouse coordinates for the entire window. To
 get mouse coordinates relative to a specific display region the MouseWatcher
-needs to be restricted to that region with the setDisplayRegion() method.
+needs to be restricted to that region with the set_display_region() method.
 
 .. code-block:: python
 
-   myDR = base.win.makeDisplayRegion(0, 1, 0, 1)
-   base.mouseWatcherNode.setDisplayRegion(myDR)
+   my_dr = base.win.make_display_region(0, 1, 0, 1)
+   base.mouse_watcher_node.set_display_region(my_dr)
 
 However, restricting the default MouseWatcher to a display region will prevent
 the mouse from being used outside of that region. For example, the image below
@@ -21,7 +21,7 @@ bottom portion.
 
 .. image:: displayregionmousewatcher.png
 
-If base.mouseWatcherNode is restricted to the 3D view display region, the mouse
+If base.mouse_watcher_node is restricted to the 3D view display region, the mouse
 won't interact with the menu buttons.
 
 One way to get around this problem is to create a new MouseWatcher to handle the
@@ -35,29 +35,29 @@ process. First, the new MouseWatcher has to be created.
 
 .. code-block:: python
 
-   myMouseWatcher = MouseWatcher()
+   my_mouse_watcher = MouseWatcher()
    # Creates a new mouse watcher
 
 In order for the new MouseWatcher to do its job, it needs to receive information
 about the mouse from the system. This information comes from the
 MouseAndKeyboard object. To get the information, our new MouseWatcher needs to
-be a child of MouseAndKeyboard. We know that base.mouseWatcherNode is already a
+be a child of MouseAndKeyboard. We know that base.mouse_watcher_node is already a
 child of MouseAndKeyboard, so we can use that to our advantage to make our new
 MouseWatcher a child of it as well.
 
 .. code-block:: python
 
-   base.mouseWatcher.getParent().attachNewNode(myMouseWatcher)
-   # Gets MouseAndKeyboard, the parent of base.mouseWatcherNode
+   base.mouse_watcher.get_parent().attach_new_node(my_mouse_watcher)
+   # Gets MouseAndKeyboard, the parent of base.mouse_watcher_node
    # that passes mouse data into MouseWatchers,
-   # and attaches myMouseWatcher to it.
+   # and attaches my_mouse_watcher to it.
 
 Now that our MouseWatcher is getting mouse information from the system, we just
 need to set it to the display region we want it to monitor.
 
 .. code-block:: python
 
-   myMouseWatcher.setDisplayRegion(myDisplayRegion)
+   my_mouse_watcher.set_display_region(my_display_region)
    # Restricts my MouseWatcher to my intended display region.
 
 With that done, we can get accurate mouse coordinates within the display
@@ -65,5 +65,5 @@ region from our new MouseWatcher.
 
 .. code-block:: python
 
-   if myMouseWatcher.hasMouse():
-       mpos = myMouseWatcher.getMouse()
+   if my_mouse_watcher.has_mouse():
+       mpos = my_mouse_watcher.get_mouse()

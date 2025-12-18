@@ -23,7 +23,7 @@ setting an :class:`.AuxBitplaneAttrib`:
 
    .. code-block:: python
 
-      np.setAttrib(AuxBitplaneAttrib.make(bits))
+      np.set_attrib(AuxBitplaneAttrib.make(bits))
 
 .. only:: cpp
 

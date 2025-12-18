@@ -15,20 +15,20 @@ You create a MeshDrawer like this:
    .. code-block:: python
 
       generator = MeshDrawer()
-      generator.setBudget(1000)
-      generatorNode = generator.getRoot()
-      generatorNode.reparentTo(render)
+      generator.set_budget(1000)
+      generator_node = generator.get_root()
+      generator_node.reparent_to(render)
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      #include "meshDrawer.h"
+      #include "mesh_drawer.h"
       ...
       MeshDrawer generator = MeshDrawer();
       generator.set_budget(1000);
-      NodePath generatorNode = generator.get_root();
-      generatorNode.reparent_to(window->get_render());
+      NodePath generator_node = generator.get_root();
+      generator_node.reparent_to(window->get_render());
 
 Basically this creates a MeshDrawer that will draw at most 1000 triangles or
 500 billboarded quads on screen. Then it gets the root node inside the
@@ -43,23 +43,23 @@ you probably had to do this to the special FX node's you have any ways.
 
    .. code-block:: python
 
-      generatorNode.setDepthWrite(False)
-      generatorNode.setTransparency(True)
-      generatorNode.setTwoSided(True)
-      generatorNode.setTexture(loader.loadTexture("radarplate.png"))
-      generatorNode.setBin("fixed",0)
-      generatorNode.setLightOff(True)
+      generator_node.set_depth_write(False)
+      generator_node.set_transparency(True)
+      generator_node.set_two_sided(True)
+      generator_node.set_texture(loader.load_texture("radarplate.png"))
+      generator_node.set_bin("fixed",0)
+      generator_node.set_light_off(True)
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      generatorNode.set_depth_write(false);
-      generatorNode.set_transparency(TransparencyAttrib::M_alpha);
-      generatorNode.set_two_sided(true);
-      generatorNode.set_texture(TexturePool::load_texture("radarplate.png"));
-      generatorNode.set_bin("fixed",0);
-      generatorNode.set_light_off();
+      generator_node.set_depth_write(false);
+      generator_node.set_transparency(TransparencyAttrib::M_alpha);
+      generator_node.set_two_sided(true);
+      generator_node.set_texture(TexturePool::load_texture("radarplate.png"));
+      generator_node.set_bin("fixed",0);
+      generator_node.set_light_off();
 
 The MeshDrawer is used in kind of an old style draw loop. I recommend creating
 a specific task for MeshDrawer so that you can see how much time it eats up
@@ -80,13 +80,13 @@ at the start.
           generator.end()
           return task.cont
 
-      taskMgr.add(drawtask, "meshdrawer task")
+      task_mgr.add(drawtask, "meshdrawer task")
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      void drawTask() {
+      void draw_task() {
         // You'll need access to the window and the generator
         // Call this method in your update or use a task.
         generator.begin(window->get_camera_group(), window->get_render());
@@ -123,7 +123,7 @@ You can also take a look at :class:`~panda3d.core.MeshDrawer2D`.
 
 It follows a similar pattern as MeshDrawer but has stuff that is useful to
 draw in 2d. Major differences is that its begin() takes no arguments and it
-deals mostly with rectangles and borders around them. It also has a setClip
+deals mostly with rectangles and borders around them. It also has a set_clip
 function which clips rectangles as they are drawn. This is very useful to draw
 rectangles that appear to be inside other rectangles and be clipped by their
 parents. It has only the low level abstraction on which you would have to

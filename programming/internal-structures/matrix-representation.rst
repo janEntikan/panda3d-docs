@@ -187,7 +187,7 @@ Interoperability with OpenGL and DirectX
 
 Panda is code-compatible with both OpenGL and DirectX. All three use the same
 storage format: derivatives wrt :math:`x_i` first. You can pass a panda matrix
-directly to OpenGL's "glLoadMatrixf" or DirectX's "SetTransform".
+directly to OpenGL's "gl_load_matrixf" or DirectX's "SetTransform".
 
 However, remember that typesetting format and data storage format are
 independent choices. Even though two engines are interoperable at the code

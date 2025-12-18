@@ -14,21 +14,21 @@ popup. Make sure to specify the items option or it may crash.
 ================== =============================================================================== =======================================================
 Keyword            Definition                                                                      Value
 ================== =============================================================================== =======================================================
-textMayChange      Whether the text on the menu changes with the selection                         0 or 1
+text_may_change      Whether the text on the menu changes with the selection                         0 or 1
 initialitem        The index of the item that appears next to the cursor when the popup appears    Number
 items              List of items in the popup menu                                                 [Strings]
 command            Function called when an item is selected (the item is passed in as a parameter) Function
-commandButtons     Which mouse button must be clicked to open the popup                            LMB, MMB, or RMB
-extraArgs          Extra arguments to the function specified in command                            [Extra Arguments]
-highlightColor     Color of highlighted text                                                       (R,G,B,A)
-highlightScale     Scale of highlighted text                                                       (Width,Height)
-rolloverSound      The sound made when the cursor rolls over the button                            Sound File Path
-clickSound         The sound made when the cursor clicks on the button                             Sound File Path
-popupMarkerBorder  Use width to change the size of the border around the popup marker              (Width,Height)
-popupMarker_image  Set the state images of the popupMarker                                         (see directButton: image)
-popupMarker_scale  Set the scale of the popupMarker                                                scale=x or scale=(x,y,z)
-popupMarker_pos    Set the position of the popupMarker relative to the parent optionMenu           pos=(x,y,z)
-popupMarker_relief Set the relief value of the popupMarker, the depth of the beveled edge          relief=x (for int value) or relief=None (for no relief)
+command_buttons     Which mouse button must be clicked to open the popup                            LMB, MMB, or RMB
+extra_args          Extra arguments to the function specified in command                            [Extra Arguments]
+highlight_color     Color of highlighted text                                                       (R,G,B,A)
+highlight_scale     Scale of highlighted text                                                       (Width,Height)
+rollover_sound      The sound made when the cursor rolls over the button                            Sound File Path
+click_sound         The sound made when the cursor clicks on the button                             Sound File Path
+popup_marker_border  Use width to change the size of the border around the popup marker              (Width,Height)
+popupMarker_image  Set the state images of the popup_marker                                         (see direct_button: image)
+popupMarker_scale  Set the scale of the popup_marker                                                scale=x or scale=(x,y,z)
+popupMarker_pos    Set the position of the popup_marker relative to the parent option_menu           pos=(x,y,z)
+popupMarker_relief Set the relief value of the popup_marker, the depth of the beveled edge          relief=x (for int value) or relief=None (for no relief)
 ================== =============================================================================== =======================================================
 
 Example
@@ -43,25 +43,25 @@ Example
 
    # Add some text
    bk_text = "DirectOptionMenu Demo"
-   textObject = OnscreenText(text=bk_text, pos=(0.85, 0.85), scale=0.07,
+   text_object = OnscreenText(text=bk_text, pos=(0.85, 0.85), scale=0.07,
                              fg=(1, 0.5, 0.5, 1), align=TextNode.ACenter,
-                             mayChange=1)
+                             may_change=1)
 
    # Add some text
    output = ""
-   textObject = OnscreenText(text=output, pos=(0.95, -0.95), scale=0.07,
+   text_object = OnscreenText(text=output, pos=(0.95, -0.95), scale=0.07,
                              fg=(1, 0.5, 0.5, 1), align=TextNode.ACenter,
-                             mayChange=1)
+                             may_change=1)
 
    # Callback function to set  text
-   def itemSel(arg):
+   def item_sel(arg):
        output = "Item Selected is: " + arg
-       textObject.setText(output)
+       text_object.set_text(output)
 
    # Create a frame
-   menu = DirectOptionMenu(text="options", scale=0.1, command=itemSel,
+   menu = DirectOptionMenu(text="options", scale=0.1, command=item_sel,
                            items=["item1", "item2", "item3"], initialitem=2,
-                           highlightColor=(0.65, 0.65, 0.65, 1))
+                           highlight_color=(0.65, 0.65, 0.65, 1))
 
    # Run the tutorial
    base.run()
@@ -80,22 +80,22 @@ Dynamic Updating of a Menu
 
    # Add some text
    bk_text = "DirectOptionMenu Demo"
-   textObject = OnscreenText(text=bk_text, pos=(0.85, 0.85), scale=0.07,
+   text_object = OnscreenText(text=bk_text, pos=(0.85, 0.85), scale=0.07,
                              fg=(1, 0.5, 0.5, 1), align=TextNode.ACenter,
-                             mayChange=1)
+                             may_change=1)
 
    # Add some text
    output = ""
-   textObject = OnscreenText(text=output, pos=(0.95, -0.95), scale=0.07,
+   text_object = OnscreenText(text=output, pos=(0.95, -0.95), scale=0.07,
                              fg=(1, 0.5, 0.5, 1), align=TextNode.ACenter,
-                             mayChange=1)
+                             may_change=1)
 
    # Callback function to set text
-   def itemSel(arg):
+   def item_sel(arg):
        if arg != "Add":
            # No need to add an element
            output = "Item Selected is: " + arg
-           textObject.setText(output)
+           text_object.set_text(output)
        else:
            # Add an element
            tmp_menu = menu['items']
@@ -104,13 +104,13 @@ Dynamic Updating of a Menu
            menu['items'] = tmp_menu
            # Set the status message
            output = "Item Added is: " + new_item
-           textObject.setText(output)
+           text_object.set_text(output)
 
    # Create a frame
    menu = DirectOptionMenu(text="options", scale=0.1, initialitem=2,
                            items=["item1", "item2", "item3", "Add"],
-                           highlightColor=(0.65, 0.65, 0.65, 1),
-                           command=itemSel, textMayChange=1)
+                           highlight_color=(0.65, 0.65, 0.65, 1),
+                           command=item_sel, text_may_change=1)
 
    # Procedurally select a item
    menu.set(0)

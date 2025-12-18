@@ -122,7 +122,7 @@ they are supported by the underlying format.
 
       .. code-block:: python
 
-         model.setP(90)
+         model.set_p(90)
 
    .. only:: cpp
 

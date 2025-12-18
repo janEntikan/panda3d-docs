@@ -35,10 +35,10 @@ with the following code:
 
 .. code-block:: python
 
-   scene = loader.loadModel('bvw-f2004--streetscene/street-scene.egg')
-   scene.reparentTo(render)
-   scene.setZ(-2)
-   base.saveSphereMap('streetscene_env.jpg', size = 256)
+   scene = loader.load_model('bvw-f2004--streetscene/street-scene.egg')
+   scene.reparent_to(render)
+   scene.set_z(-2)
+   base.save_sphere_map('streetscene_env.jpg', size = 256)
 
 The idea is simply to put the camera in the middle of your environment,
 approximately where your shiny object would be. Then just call
@@ -50,9 +50,9 @@ instance, the teapot:
 
 .. code-block:: python
 
-   tex = loader.loadTexture('streetscene_env.jpg')
-   teapot.setTexGen(TextureStage.getDefault(), TexGenAttrib.MEyeSphereMap)
-   teapot.setTexture(tex)
+   tex = loader.load_texture('streetscene_env.jpg')
+   teapot.set_tex_gen(TextureStage.get_default(), TexGenAttrib.MEyeSphereMap)
+   teapot.set_texture(tex)
 
 |The teapot with sphere map|
 
@@ -69,10 +69,10 @@ environment map we'll end up with a chrome car:
 
 .. code-block:: python
 
-   car = loader.loadModel('bvw-f2004--carnsx/carnsx.egg')
-   tex = loader.loadTexture('streetscene_env.jpg')
-   car.setTexGen(TextureStage.getDefault(), TexGenAttrib.MEyeSphereMap)
-   car.setTexture(tex, 1)
+   car = loader.load_model('bvw-f2004--carnsx/carnsx.egg')
+   tex = loader.load_texture('streetscene_env.jpg')
+   car.set_tex_gen(TextureStage.get_default(), TexGenAttrib.MEyeSphereMap)
+   car.set_texture(tex, 1)
 
 |The car with sphere map|
 
@@ -97,19 +97,19 @@ can assign the shine just to the metal and glass body of the car:
 
 .. code-block:: python
 
-   car = loader.loadModel('bvw-f2004--carnsx/carnsx.egg')
+   car = loader.load_model('bvw-f2004--carnsx/carnsx.egg')
    body = car.find('**/body')
-   body.findAllMatches('**/FL_wheel*').reparentTo(car)
+   body.find_all_matches('**/FL_wheel*').reparent_to(car)
 
 And now the shine is applied like this:
 
 .. code-block:: python
 
-   tex = loader.loadTexture('streetscene_env_dark.jpg')
+   tex = loader.load_texture('streetscene_env_dark.jpg')
    ts = TextureStage('env')
-   ts.setMode(TextureStage.MAdd)
-   body.setTexGen(ts, TexGenAttrib.MEyeSphereMap)
-   body.setTexture(ts, tex)
+   ts.set_mode(TextureStage.MAdd)
+   body.set_tex_gen(ts, TexGenAttrib.MEyeSphereMap)
+   body.set_texture(ts, tex)
 
 |The car with color and shine together|
 

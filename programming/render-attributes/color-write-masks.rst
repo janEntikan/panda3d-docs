@@ -36,13 +36,13 @@ To enable writes to all the channels of the framebuffer, use this:
 
    .. code-block:: python
 
-      nodePath.setAttrib(ColorWriteAttrib.make(ColorWriteAttrib.CAll))
+      node_path.set_attrib(ColorWriteAttrib.make(ColorWriteAttrib.CAll))
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      nodePath.set_attrib(ColorWriteAttrib::make(ColorWriteAttrib::C_all));
+      node_path.set_attrib(ColorWriteAttrib::make(ColorWriteAttrib::C_all));
 
 This can also be done by combining separate attributes for individual channels,
 like the following:
@@ -55,7 +55,7 @@ like the following:
       bits |= ColorWriteAttrib.CRed
       bits |= ColorWriteAttrib.CGreen
       bits |= ColorWriteAttrib.CBlue
-      nodePath.setAttrib(ColorWriteAttrib.make(bits))
+      node_path.set_attrib(ColorWriteAttrib.make(bits))
 
 .. only:: cpp
 
@@ -65,6 +65,6 @@ like the following:
       bits |= ColorWriteAttrib::C_red;
       bits |= ColorWriteAttrib::C_green;
       bits |= ColorWriteAttrib::C_blue;
-      nodePath.set_attrib(ColorWriteAttrib::make(bits));
+      node_path.set_attrib(ColorWriteAttrib::make(bits));
 
 To disable writes to one or more channels, omit that bit in the code above.

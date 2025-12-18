@@ -19,10 +19,10 @@ library function, or one of the panda utility programs:
    .. code-block:: python
 
       # WRONG:
-      loader.loadModel("c:\\Program Files\\My Game\\Models\\Model1.egg")
+      loader.load_model("c:\\Program Files\\My Game\\Models\\Model1.egg")
 
       # RIGHT:
-      loader.loadModel("/c/Program Files/My Game/Models/Model1.egg")
+      loader.load_model("/c/Program Files/My Game/Models/Model1.egg")
 
 .. only:: cpp
 
@@ -55,7 +55,7 @@ following:
 
       from panda3d.core import Filename
       winfile = "c:\\MyGame\\Model1.egg"
-      pandafile = Filename.fromOsSpecific(winfile)
+      pandafile = Filename.from_os_specific(winfile)
       print(pandafile)
 
 .. only:: cpp
@@ -76,7 +76,7 @@ To convert a Panda filename into a Windows filename, use code like this:
 
       from panda3d.core import Filename
       pandafile = Filename("/c/MyGame/Model1.egg")
-      winfile = pandafile.toOsSpecific()
+      winfile = pandafile.to_os_specific()
       print(winfile)
 
 .. only:: cpp
@@ -113,17 +113,17 @@ Here is how you would load the model:
       mydir = os.path.dirname(os.path.abspath(__file__))
 
       # Convert that to panda's unix-style notation.
-      mydir = Filename.fromOsSpecific(mydir)
+      mydir = Filename.from_os_specific(mydir)
 
       # Now load the model:
-      model = loader.loadModel(mydir / "models/mymodel.egg")
+      model = loader.load_model(mydir / "models/mymodel.egg")
 
 .. only:: cpp
 
    .. code-block:: cpp
 
       #include "filename.h"
-      #include "executionEnvironment.h"
+      #include "execution_environment.h"
 
       // Get the location of the executable file I'm running:
       Filename mydir = ExecutionEnvironment::get_binary_name();

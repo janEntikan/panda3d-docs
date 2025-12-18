@@ -13,12 +13,12 @@ rendered.
    .. code-block:: python
 
       geom = Geom(vdata)
-      geom.addPrimitive(prim)
+      geom.add_primitive(prim)
 
       node = GeomNode('gnode')
-      node.addGeom(geom)
+      node.add_geom(geom)
 
-      nodePath = render.attachNewNode(node)
+      node_path = render.attach_new_node(node)
 
 .. only:: cpp
 
@@ -32,12 +32,12 @@ rendered.
       node = new GeomNode("gnode");
       node->add_geom(geom);
 
-      NodePath nodePath = window->get_render().attach_new_node(node);
+      NodePath node_path = window->get_render().attach_new_node(node);
 
 The Geom constructor requires a pointer to the GeomVertexData object you will
 be using. There is only one GeomVertexData associated with any particular
 Geom. You can reset the Geom to use a different GeomVertexData later, if you
-like, by calling :meth:`geom.setVertexData() <.Geom.set_vertex_data>`.
+like, by calling :meth:`geom.set_vertex_data() <.Geom.set_vertex_data>`.
 
 The GeomNode constructor requires a name, which is the name of the node and
 will be visible in the scene graph. It can be any name you like that means
@@ -56,4 +56,4 @@ It is important that the range of vertex index numbers used by your
 GeomPrimitives is consistent with the number of vertices in your
 GeomVertexData (for instance, if you have 100 vertices in your GeomVertexData,
 your GeomPrimitives must only reference vertices numbered 0 through 99). If
-this is not the case, you will get an exception when you call addPrimitive().
+this is not the case, you will get an exception when you call add_primitive().

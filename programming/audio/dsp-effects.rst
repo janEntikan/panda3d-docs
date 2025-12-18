@@ -43,18 +43,18 @@ like. To stay consistent with the example below, we'll add a reverb effect.
 
 .. code-block:: python
 
-   fp.addReverb(0.6, 0.5, 0.1, 0.1, 0.1)
+   fp.add_reverb(0.6, 0.5, 0.1, 0.1, 0.1)
 
 All this really does is add this particular reverb to our filter list - sound is
 not yet affected. To apply these filters to our audio output, use:
 
 .. code-block:: python
 
-   audioMgr.configureFilters(fp)
+   audio_mgr.configure_filters(fp)
 
-where ``audioMgr`` is an :class:`.AudioManager` object, most likely
+where ``audio_mgr`` is an :class:`.AudioManager` object, most likely
 :py:obj:`base.sfxManagerList <direct.showbase.ShowBase.ShowBase.sfxManagerList>`
-or :py:obj:`base.musicManager <direct.showbase.ShowBase.ShowBase.musicManager>`.
+or :py:obj:`base.music_manager <direct.showbase.ShowBase.ShowBase.music_manager>`.
 
 Depending on the sound you use, reverb may be very or only slightly noticeable;
 try using a quick sound at first, like a clap.
@@ -70,20 +70,20 @@ Below is a sample program for adding a reverb effect:
 
    # This is just to ensure that we are using FMOD. In your application,
    # please edit the Config.prc file that you distribute
-   from panda3d.core import loadPrcFileData
-   loadPrcFileData("", "audio-library-name p3fmod_audio")
+   from panda3d.core import load_prc_file_data
+   load_prc_file_data("", "audio-library-name p3fmod_audio")
 
    from direct.showbase.ShowBase import ShowBase
    from panda3d.core import FilterProperties
 
    base = ShowBase()
 
-   mySound = loader.loadSfx("models/audio/sfx/GUI_rollover.wav")
-   mySound.setLoop(True)
-   mySound.play()
+   my_sound = loader.load_sfx("models/audio/sfx/GUI_rollover.wav")
+   my_sound.set_loop(True)
+   my_sound.play()
 
    fp = FilterProperties()
-   fp.addReverb(0.6, 0.5, 0.1, 0.1, 0.1)
-   base.sfxManagerList[0].configureFilters(fp)
+   fp.add_reverb(0.6, 0.5, 0.1, 0.1, 0.1)
+   base.sfx_manager_list[0].configure_filters(fp)
 
    base.run()

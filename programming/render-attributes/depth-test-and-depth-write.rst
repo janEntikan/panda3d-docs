@@ -25,15 +25,15 @@ particles that are transparent. To disable or enable the depth-write, use:
 
    .. code-block:: python
 
-      nodePath.setDepthWrite(False)  # Disable
-      nodePath.setDepthWrite(True)   # Enable
+      node_path.set_depth_write(False)  # Disable
+      node_path.set_depth_write(True)   # Enable
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      nodePath.set_depth_write(false);  // Disable
-      nodePath.set_depth_write(true);   // Enable
+      node_path.set_depth_write(false);  // Disable
+      node_path.set_depth_write(true);   // Enable
 
 It may also be desirable to disable the depth-test. This means that the geometry
 pays no attention whatsoever to the contents of the depth-buffer. This is often
@@ -44,15 +44,15 @@ used for rendering things like heads-up displays, which have no relation to the
 
    .. code-block:: python
 
-      nodePath.setDepthTest(False)  # Disable
-      nodePath.setDepthTest(True)   # Enable
+      node_path.set_depth_test(False)  # Disable
+      node_path.set_depth_test(True)   # Enable
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      nodePath.set_depth_test(false);  // Disable
-      nodePath.set_depth_test(true);   // Enable
+      node_path.set_depth_test(false);  // Disable
+      node_path.set_depth_test(true);   // Enable
 
 One can remove these settings using :meth:`~.NodePath.clear_depth_test()` and
 :meth:`~.NodePath.clear_depth_write()`.
@@ -72,29 +72,29 @@ the following variants:
 
    .. code-block:: python
 
-      nodePath.setAttrib(DepthTestAttrib.make(RenderAttrib.MNone))
-      nodePath.setAttrib(DepthTestAttrib.make(RenderAttrib.MNever))
-      nodePath.setAttrib(DepthTestAttrib.make(RenderAttrib.MLess))
-      nodePath.setAttrib(DepthTestAttrib.make(RenderAttrib.MEqual))
-      nodePath.setAttrib(DepthTestAttrib.make(RenderAttrib.MLessEqual))
-      nodePath.setAttrib(DepthTestAttrib.make(RenderAttrib.MGreater))
-      nodePath.setAttrib(DepthTestAttrib.make(RenderAttrib.MGreaterEqual))
-      nodePath.setAttrib(DepthTestAttrib.make(RenderAttrib.MNotEqual))
-      nodePath.setAttrib(DepthTestAttrib.make(RenderAttrib.MAlways))
+      node_path.set_attrib(DepthTestAttrib.make(RenderAttrib.MNone))
+      node_path.set_attrib(DepthTestAttrib.make(RenderAttrib.MNever))
+      node_path.set_attrib(DepthTestAttrib.make(RenderAttrib.MLess))
+      node_path.set_attrib(DepthTestAttrib.make(RenderAttrib.MEqual))
+      node_path.set_attrib(DepthTestAttrib.make(RenderAttrib.MLessEqual))
+      node_path.set_attrib(DepthTestAttrib.make(RenderAttrib.MGreater))
+      node_path.set_attrib(DepthTestAttrib.make(RenderAttrib.MGreaterEqual))
+      node_path.set_attrib(DepthTestAttrib.make(RenderAttrib.MNotEqual))
+      node_path.set_attrib(DepthTestAttrib.make(RenderAttrib.MAlways))
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      nodePath.set_attrib(DepthTestAttrib::make(RenderAttrib::M_none));
-      nodePath.set_attrib(DepthTestAttrib::make(RenderAttrib::M_never));
-      nodePath.set_attrib(DepthTestAttrib::make(RenderAttrib::M_less));
-      nodePath.set_attrib(DepthTestAttrib::make(RenderAttrib::M_equal));
-      nodePath.set_attrib(DepthTestAttrib::make(RenderAttrib::M_less_equal));
-      nodePath.set_attrib(DepthTestAttrib::make(RenderAttrib::M_greater));
-      nodePath.set_attrib(DepthTestAttrib::make(RenderAttrib::M_greater_equal));
-      nodePath.set_attrib(DepthTestAttrib::make(RenderAttrib::M_not_equal));
-      nodePath.set_attrib(DepthTestAttrib::make(RenderAttrib::M_always));
+      node_path.set_attrib(DepthTestAttrib::make(RenderAttrib::M_none));
+      node_path.set_attrib(DepthTestAttrib::make(RenderAttrib::M_never));
+      node_path.set_attrib(DepthTestAttrib::make(RenderAttrib::M_less));
+      node_path.set_attrib(DepthTestAttrib::make(RenderAttrib::M_equal));
+      node_path.set_attrib(DepthTestAttrib::make(RenderAttrib::M_less_equal));
+      node_path.set_attrib(DepthTestAttrib::make(RenderAttrib::M_greater));
+      node_path.set_attrib(DepthTestAttrib::make(RenderAttrib::M_greater_equal));
+      node_path.set_attrib(DepthTestAttrib::make(RenderAttrib::M_not_equal));
+      node_path.set_attrib(DepthTestAttrib::make(RenderAttrib::M_always));
 
 Depth Sorting
 -------------

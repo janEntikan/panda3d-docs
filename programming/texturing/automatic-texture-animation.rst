@@ -25,9 +25,9 @@ use something like this:
 
 .. code-block:: python
 
-   flip = loader.loadModel('flip.egg')
-   flip.find('**/+SequenceNode').node().pose(startFrame)
-   flip.reparentTo(render)
+   flip = loader.load_model('flip.egg')
+   flip.find('**/+SequenceNode').node().pose(start_frame)
+   flip.reparent_to(render)
 
 By default, all of the polygons created by ``egg-texture-cards`` will have the
 same size. This means that all of your textures must be the same size as well.

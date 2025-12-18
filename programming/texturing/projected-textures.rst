@@ -12,20 +12,20 @@ transform between any two nodes.
 
 .. code-block:: python
 
-   nodePath.setTexProjector(textureStage, fromNodePath, toNodePath)
+   node_path.set_tex_projector(texture_stage, from_node_path, to_node_path)
 
 When you have enabled this mode, the relative scene-graph transform from
-``fromNodePath`` to ``toNodePath``--that is, the result of
-``fromNodePath.getTransform(toNodePath)``--is automatically applied as a
-texture-coordinate transform to the indicated textureStage. The result is
+``from_node_path`` to ``to_node_path``--that is, the result of
+``from_node_path.get_transform(to_node_path)``--is automatically applied as a
+texture-coordinate transform to the indicated texture_stage. The result is
 more-or-less as if you executed the following command every frame:
 
 .. code-block:: python
 
-   nodePath.setTexTransform(textureStage, fromNodePath.getTransform(toNodePath))
+   node_path.set_tex_transform(texture_stage, from_node_path.get_transform(to_node_path))
 
-There is no need for either ``fromNodePath`` or ``toNodePath`` to have any
-relation to the nodePath that is receiving the
+There is no need for either ``from_node_path`` or ``to_node_path`` to have any
+relation to the node_path that is receiving the
 :meth:`~.NodePath.set_tex_projector()` call; they can be any two arbitrary
 NodePaths. If either of them is just ``NodePath()``, it stands for the top of
 the graph.
@@ -46,10 +46,10 @@ follow that NodePath. For example:
 
 .. code-block:: python
 
-   smiley = loader.loadModel('smiley.egg')
+   smiley = loader.load_model('smiley.egg')
    lerper = NodePath('lerper')
-   smiley.setTexProjector(TextureStage.getDefault(), NodePath(), lerper)
-   i = lerper.posInterval(5, VBase3(0, 1, 0))
+   smiley.set_tex_projector(TextureStage.get_default(), NodePath(), lerper)
+   i = lerper.pos_interval(5, VBase3(0, 1, 0))
    i.loop()
 
 Note that you don't even have to parent the animated NodePath into the scene
@@ -84,7 +84,7 @@ To implement projected textures, you need to do three steps:
 2. Put the ``MWorldPosition`` TexGen mode on the model. This copies the model's
    vertex positions into its texture coordinates, for your texture's TextureStage.
 
-3. Call :meth:`model.set_tex_projector(textureStage, NodePath(), projector)
+3. Call :meth:`model.set_tex_projector(texture_stage, NodePath(), projector)
    <.NodePath.set_tex_projector>`, where ``projector`` is the NodePath to the
    LensNode you want to project from.
 
@@ -95,13 +95,13 @@ performs these three steps at once:
 
    .. code-block:: python
 
-      nodePath.projectTexture(textureStage, texture, lensNodePath)
+      node_path.project_texture(texture_stage, texture, lens_node_path)
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      nodePath.project_texture(textureStage, texture, lensNodePath);
+      node_path.project_texture(texture_stage, texture, lens_node_path);
 
 For instance, we could use it to project the bamboo texture ("envir-reeds.png")
 onto the ripple.egg model, like this:
@@ -121,42 +121,42 @@ This image was generated with the following code:
    from direct.actor import Actor
    from panda3d.core import *
 
-   base.setBackgroundColor(1, 1, 1, 1)
+   base.set_background_color(1, 1, 1, 1)
 
    ripple = Actor.Actor('ripple.egg')
-   ripple.reparentTo(render)
-   ripple.setScale(10)
+   ripple.reparent_to(render)
+   ripple.set_scale(10)
    ripple.pose('animation', 17)
 
    dl = DirectionalLight('dl')
-   dlnp = camera.attachNewNode(dl)
-   ripple.setLight(dlnp)
+   dlnp = camera.attach_new_node(dl)
+   ripple.set_light(dlnp)
 
-   proj = render.attachNewNode(LensNode('proj'))
+   proj = render.attach_new_node(LensNode('proj'))
    lens = PerspectiveLens()
-   proj.node().setLens(lens)
-   proj.node().showFrustum()
-   proj.find('frustum').setColor(1, 0, 0, 1)
-   camModel = loader.loadModel('camera.egg')
-   camModel.reparentTo(proj)
-   proj.reparentTo(render)
-   proj.setPos(1.5, -7.3, 2.9)
-   proj.setHpr(22, -15, 0)
+   proj.node().set_lens(lens)
+   proj.node().show_frustum()
+   proj.find('frustum').set_color(1, 0, 0, 1)
+   cam_model = loader.load_model('camera.egg')
+   cam_model.reparent_to(proj)
+   proj.reparent_to(render)
+   proj.set_pos(1.5, -7.3, 2.9)
+   proj.set_hpr(22, -15, 0)
 
-   tex = loader.loadTexture('maps/envir-reeds.png')
-   tex.setWrapU(SamplerState.WMBorderColor)
-   tex.setWrapV(SamplerState.WMBorderColor)
-   tex.setBorderColor((1, 1, 1, 0))
+   tex = loader.load_texture('maps/envir-reeds.png')
+   tex.set_wrap_u(SamplerState.WMBorderColor)
+   tex.set_wrap_v(SamplerState.WMBorderColor)
+   tex.set_border_color((1, 1, 1, 0))
    ts = TextureStage('ts')
-   ts.setSort(1)
-   ts.setMode(TextureStage.MDecal)
-   ripple.projectTexture(ts, tex, proj)
+   ts.set_sort(1)
+   ts.set_mode(TextureStage.MDecal)
+   ripple.project_texture(ts, tex, proj)
 
-   base.disableMouse()
-   camera.setPos(-7.8, -22.4, 0)
-   camera.setHpr(-21, 0, 0)
+   base.disable_mouse()
+   camera.set_pos(-7.8, -22.4, 0)
+   camera.set_hpr(-21, 0, 0)
 
-   base.graphicsEngine.renderFrame()
-   base.screenshot('projected_bamboo.jpg', defaultFilename=0)
+   base.graphics_engine.render_frame()
+   base.screenshot('projected_bamboo.jpg', default_filename=0)
 
 .. |Bamboo projected onto ripple| image:: projected-bamboo.jpg

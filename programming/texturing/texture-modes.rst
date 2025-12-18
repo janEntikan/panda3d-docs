@@ -49,8 +49,8 @@ the original texture colors.
    .. code-block:: python
 
       ts = TextureStage('ts')
-      ts.setMode(TextureStage.MModulate)
-      smiley.setTexture(ts, tex)
+      ts.set_mode(TextureStage.MModulate)
+      smiley.set_texture(ts, tex)
 
 .. only:: cpp
 
@@ -77,8 +77,8 @@ clamped to 1 (white). This means the resulting texture color will be brighter
    .. code-block:: python
 
       ts = TextureStage('ts')
-      ts.setMode(TextureStage.MAdd)
-      smiley.setTexture(ts, tex)
+      ts.set_mode(TextureStage.MAdd)
+      smiley.set_texture(ts, tex)
 
 .. only:: cpp
 
@@ -106,8 +106,8 @@ is not often used.
    .. code-block:: python
 
       ts = TextureStage('ts')
-      ts.setMode(TextureStage.MReplace)
-      smiley.setTexture(ts, tex)
+      ts.set_mode(TextureStage.MReplace)
+      smiley.set_texture(ts, tex)
 
 .. only:: cpp
 
@@ -134,8 +134,8 @@ through, and there is a smooth blending for alpha values between 0 and 1.
    .. code-block:: python
 
       ts = TextureStage('ts')
-      ts.setMode(TextureStage.MDecal)
-      smiley.setTexture(ts, tex)
+      ts.set_mode(TextureStage.MDecal)
+      smiley.set_texture(ts, tex)
 
 .. only:: cpp
 
@@ -173,7 +173,7 @@ different texture for this example:
 This texture does not have an alpha channel; it is simply a grayscale image with
 a large white "A" on a field of black. Blend mode will produce the original
 color where the image is black, and the color we specify with
-``TextureStage.setColor()`` where the image is white. Where the image is shades
+``TextureStage.set_color()`` where the image is white. Where the image is shades
 of gray, there will be a smooth blending between the colors.
 
 .. only:: python
@@ -181,9 +181,9 @@ of gray, there will be a smooth blending between the colors.
    .. code-block:: python
 
       ts = TextureStage('ts')
-      ts.setMode(TextureStage.MBlend)
-      ts.setColor((1, 0, 0, 1))
-      smiley.setTexture(ts, tex)
+      ts.set_mode(TextureStage.MBlend)
+      ts.set_color((1, 0, 0, 1))
+      smiley.set_texture(ts, tex)
 
 .. only:: cpp
 
@@ -202,7 +202,7 @@ And we can change the color of the decal at will, simply with:
 
    .. code-block:: python
 
-      ts.setColor((0, 0, 1, 1))
+      ts.set_color((0, 0, 1, 1))
 
 .. only:: cpp
 
@@ -231,8 +231,8 @@ only allows one normal map per polygon, additional normal maps will be ignored.
    .. code-block:: python
 
       ts = TextureStage('ts')
-      ts.setMode(TextureStage.MNormal)
-      smiley.setTexture(ts, tex)
+      ts.set_mode(TextureStage.MNormal)
+      smiley.set_texture(ts, tex)
 
 .. only:: cpp
 
@@ -265,8 +265,8 @@ additional height maps will be ignored.
    .. code-block:: python
 
       ts = TextureStage('ts')
-      ts.setMode(TextureStage.MHeight)
-      smiley.setTexture(ts, tex)
+      ts.set_mode(TextureStage.MHeight)
+      smiley.set_texture(ts, tex)
 
 .. only:: cpp
 
@@ -285,12 +285,12 @@ packed normal/height map, you need to use the MNormalHeight mode in Panda:
 
    .. code-block:: python
 
-      # The second parameter to loadTexture will be stored in the texture's alpha channel.
-      tex = loader.loadTexture("normalmap.png", "heightmap.png")
+      # The second parameter to load_texture will be stored in the texture's alpha channel.
+      tex = loader.load_texture("normalmap.png", "heightmap.png")
 
       ts = TextureStage('ts')
-      ts.setMode(TextureStage.MNormalHeight)
-      smiley.setTexture(ts, tex)
+      ts.set_mode(TextureStage.MNormalHeight)
+      smiley.set_texture(ts, tex)
 
 .. only:: cpp
 
@@ -342,8 +342,8 @@ A gloss map must be an alpha-texture:
    .. code-block:: python
 
       ts = TextureStage('ts')
-      ts.setMode(TextureStage.MGloss)
-      smiley.setTexture(ts, tex)
+      ts.set_mode(TextureStage.MGloss)
+      smiley.set_texture(ts, tex)
 
 .. only:: cpp
 
@@ -362,8 +362,8 @@ that are modulated onto the model, and the A controls gloss:
    .. code-block:: python
 
       ts = TextureStage('ts')
-      ts.setMode(TextureStage.MModulateGloss)
-      smiley.setTexture(ts, tex)
+      ts.set_mode(TextureStage.MModulateGloss)
+      smiley.set_texture(ts, tex)
 
 .. only:: cpp
 
@@ -400,8 +400,8 @@ A glow map must be an alpha-texture:
    .. code-block:: python
 
       ts = TextureStage('ts')
-      ts.setMode(TextureStage.MGlow)
-      smiley.setTexture(ts, tex)
+      ts.set_mode(TextureStage.MGlow)
+      smiley.set_texture(ts, tex)
 
 .. only:: cpp
 
@@ -420,8 +420,8 @@ modulated onto the model, and the A controls glow:
    .. code-block:: python
 
       ts = TextureStage('ts')
-      ts.setMode(TextureStage.MModulateGlow)
-      smiley.setTexture(ts, tex)
+      ts.set_mode(TextureStage.MModulateGlow)
+      smiley.set_texture(ts, tex)
 
 .. only:: cpp
 

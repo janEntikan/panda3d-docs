@@ -28,19 +28,19 @@ documentation of the PyDatagram class for more details.
    # only one way to tackle the problem
    PRINT_MESSAGE = 1
 
-   def myNewPyDatagram(self):
+   def my_new_py_datagram(self):
        # Send a test message
-       myPyDatagram = PyDatagram()
-       myPyDatagram.addUint8(PRINT_MESSAGE)
-       myPyDatagram.addString("Hello, world!")
-       return myPyDatagram
+       my_py_datagram = PyDatagram()
+       my_py_datagram.add_uint8(PRINT_MESSAGE)
+       my_py_datagram.add_string("Hello, world!")
+       return my_py_datagram
 
 As shown in the previous section, once the datagram is constructed you may then
 send it using a ConnectionWriter.
 
 .. code-block:: python
 
-   cWriter.send(myPyDatagram, aConnection)
+   c_writer.send(my_py_datagram, a_connection)
 
 Receiving a message
 -------------------
@@ -51,17 +51,17 @@ QueuedConnectionReader, it can be retrieved into a NetDatagram:
 .. code-block:: python
 
    datagram = NetDatagram()
-   if cReader.getData(datagram):
-       myProcessDataFunction(datagram)
+   if c_reader.get_data(datagram):
+       my_process_data_function(datagram)
 
 A NetDatagram contains the original information that was stored in the
 transmitted PyDatagram. It also contains knowledge of the connection over which
 it was received and the address of the connection. To retrieve the connection,
-use the getConnection method:
+use the get_connection method:
 
 .. code-block:: python
 
-   sourceOfMessage = datagram.getConnection()
+   source_of_message = datagram.get_connection()
 
 To retrieve the contents of the message, use the PyDatagramIterator. The
 iterator class acts as the complement of the PyDatagram class; its methods can
@@ -69,12 +69,12 @@ be used to retrieve the content that was encoded using PyDatagram.
 
 .. code-block:: python
 
-   def myProcessDataFunction(netDatagram):
-       myIterator = PyDatagramIterator(netDatagram)
-       msgID = myIterator.getUint8()
-       if msgID == PRINT_MESSAGE:
-           messageToPrint = myIterator.getString()
-           print(messageToPrint)
+   def my_process_data_function(net_datagram):
+       my_iterator = PyDatagramIterator(net_datagram)
+       msg_id = my_iterator.get_uint8()
+       if msg_id == PRINT_MESSAGE:
+           message_to_print = my_iterator.get_string()
+           print(message_to_print)
 
 .. note::
 

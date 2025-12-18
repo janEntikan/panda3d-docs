@@ -39,28 +39,28 @@ they will register support for the kind of GraphicsPipe they implement.
 
 You can create additional graphics pipes, for instance to provide an in-game
 interface to switch between OpenGL and DirectX rendering. The easiest way to do
-this is to call ``base.makeAllPipes()``. Then you can walk through the list of
-GraphicsPipes in ``base.pipeList`` to see all of the available GraphicsPipes
+this is to call ``base.make_all_pipes()``. Then you can walk through the list of
+GraphicsPipes in ``base.pipe_list`` to see all of the available GraphicsPipes
 available in particular environment.
 
-When you walk through the GraphicsPipes in base.pipeList, you can call the
+When you walk through the GraphicsPipes in base.pipe_list, you can call the
 following interface methods on each one:
 
-pipe.isValid()
+pipe.is_valid()
    Returns True if the pipe is available for rendering, False if it can’t be
    used.
 
-pipe.getDisplayWidth()
+pipe.get_display_width()
    Returns the width of the desktop, or the maximum width of any buffer for an
    offscreen-only GraphicsPipe.
 
-pipe.getDisplayHeight()
+pipe.get_display_height()
    Returns the height of the desktop, or the maximum height of any buffer for an
    offscreen-only GraphicsPipe.
 
-pipe.getInterfaceName()
+pipe.get_interface_name()
    Returns the name of the API that this GraphicsPipe impements, e.g. “OpenGL”
    or “DirectX8”.
 
-pipe.getType()
+pipe.get_type()
    Returns a unique TypeHandle object for each kind of pipe.

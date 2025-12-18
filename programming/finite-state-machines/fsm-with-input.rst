@@ -46,8 +46,8 @@ FSM with input
    transition to next, if any, on receipt of a particular input.
 
    A filter function is created by defining a python method named
-   ``filterStateName()``, where StateName is the name of the FSM state to which
-   this filter function applies. The filterStateName method receives two
+   ``filter_state_name()``, where StateName is the name of the FSM state to which
+   this filter function applies. The filter_state_name method receives two
    parameters, a string and a tuple of arguments (the arguments contain the
    optional additional arguments that might have been passed to the
    ``fsm.request()`` call; it's usually an empty tuple). The filter function
@@ -59,7 +59,7 @@ FSM with input
 
       class CompassDir(FSM):
 
-          def filterNorth(self, request, args):
+          def filter_north(self, request, args):
               if request == 'straight':
                   return 'North'
               elif request == 'left':
@@ -67,7 +67,7 @@ FSM with input
               else:
                   return None
 
-          def filterWest(self, request, args):
+          def filter_west(self, request, args):
               if request == 'straight':
                   return 'West'
               elif request == 'left':
@@ -75,7 +75,7 @@ FSM with input
               else:
                   return None
 
-          def filterSouth(self, request, args):
+          def filter_south(self, request, args):
               if request == 'straight':
                   return 'South'
               elif request == 'left':
@@ -83,7 +83,7 @@ FSM with input
               else:
                   return None
 
-          def filterEast(self, request, args):
+          def filter_east(self, request, args):
               if request == 'straight':
                   return 'East'
               elif request == 'left':
@@ -107,23 +107,23 @@ FSM with input
    If the FSM had been in state North originally, after the above sequence of
    operations it would now be in state East.
 
-   The defaultFilter method
+   The default_filter method
    ------------------------
 
    Although defining a series of individual filter methods gives you the most
    flexibility, for many FSM's you may not need this much explicit control. For
-   these cases, you can simply define a defaultFilter method that does
-   everything you need. If a particular ``filterStateName()`` method does not
-   exist, then the FSM will call the method named ``defaultFilter()`` instead;
+   these cases, you can simply define a default_filter method that does
+   everything you need. If a particular ``filter_state_name()`` method does not
+   exist, then the FSM will call the method named ``default_filter()`` instead;
    you can put any logic here that handles the general case.
 
    For instance, we could have defined the above FSM using just the
-   defaultFilter method, and a lookup table:
+   default_filter method, and a lookup table:
 
    .. code-block:: python
 
       class CompassDir(FSM):
-          nextState = {
+          next_state = {
               ('North', 'straight') : 'North',
               ('North', 'left') : 'West',
               ('West', 'straight') : 'West',
@@ -134,22 +134,22 @@ FSM with input
               ('East', 'left') : 'North',
           }
 
-          def defaultFilter(self, request, args):
+          def default_filter(self, request, args):
               key = (self.state, request)
-              return self.nextState.get(key)
+              return self.next_state.get(key)
 
-   The base FSM class defines a :py:meth:`~direct.fsm.FSM.FSM.defaultFilter()`
+   The base FSM class defines a :py:meth:`~direct.fsm.FSM.FSM.default_filter()`
    method that implements the default FSM transition rules (that is, allow all
    direct-to-state (uppercase) transition requests unless
-   ``self.defaultTransitions`` is defined; in either case, quietly ignore input
+   ``self.default_transitions`` is defined; in either case, quietly ignore input
    (lowercase) requests).
 
-   In practice, you can mix- and-match the use of the defaultFilter method and
-   your own custom methods. The defaultFilter method will be called only if a
+   In practice, you can mix- and-match the use of the default_filter method and
+   your own custom methods. The default_filter method will be called only if a
    particular state's custom filter method does not exist. If a particular
-   state's filterStateName method is defined, that method will be called upon a
+   state's filter_state_name method is defined, that method will be called upon a
    new request; it can do any custom logic you require (and it can call up to
-   the defaultFilter method if you like).
+   the default_filter method if you like).
 
 .. only:: cpp
 

@@ -19,8 +19,8 @@ The events can be accepted with the following code:
 
       self.accept(<event name>, <function>)
       self.accept(<event name>, <function>, <parameters list>)
-      self.acceptOnce(<event name>, <function>)
-      self.acceptOnce(<event name>, <function>, <parameters list>)
+      self.accept_once(<event name>, <function>)
+      self.accept_once(<event name>, <function>, <parameters list>)
 
 .. only:: cpp
 
@@ -36,7 +36,7 @@ parameters to use to call <function>.
 .. only:: python
 
    If you're wondering which events are being fired for certain keyboard
-   activity, it is advised to call ``base.messenger.toggleVerbose()``. This will
+   activity, it is advised to call ``base.messenger.toggle_verbose()``. This will
    cause Panda3D to print out all the events that are being sent to the command-
    line prompt. This way, you can find out which keyboard key corresponds to
    which event name.
@@ -69,9 +69,9 @@ Here is an example of time reading in code:
 
    class ReadKeys(DirectObject.DirectObject):
        def __init__(self):
-           self.accept('time-a-repeat', self.printRepeat)
+           self.accept('time-a-repeat', self.print_repeat)
 
-       def printRepeat(self, when):
+       def print_repeat(self, when):
            print("repeat a", when)
 
 6. Keys that don't type a character are labeled as follows::
@@ -110,28 +110,28 @@ Here are some examples in code:
       # Exit on pressing the escape button.
       self.accept('escape', sys.exit)
 
-      # Call spamAndEggs when up is pressed and at autorepeat if held.
-      self.accept('arrow_up', self.spamAndEggs)
-      self.accept('arrow_up-repeat', self.spamAndEggs)
+      # Call spam_and_eggs when up is pressed and at autorepeat if held.
+      self.accept('arrow_up', self.spam_and_eggs)
+      self.accept('arrow_up-repeat', self.spam_and_eggs)
 
       # Calls when the up arrow key is released.
-      self.accept('arrow_up-up', self.spamAndEggs)
+      self.accept('arrow_up-up', self.spam_and_eggs)
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      // Calls the function __spam(const Event* eventPtr, void* dataPtr) on the k key event.
+      // Calls the function __spam(const Event* event_ptr, void* data_ptr) on the k key event.
       framework->define_key("k", "call k", __spam, nullptr);
       framework->define_key("k", "call k", __spam, &data);
 
-      // Call spamAndEggs(const Event* eventPtr, void* dataPtr) when up is pressed
+      // Call spam_and_eggs(const Event* event_ptr, void* data_ptr) when up is pressed
       // and at autorepeat if held.
-      framework->define_key("arrow_up", "spam and egg", spamAndEggs, nullptr);
-      framework->define_key("arrow_up-repeat", "spam and egg", spamAndEggs, nullptr);
+      framework->define_key("arrow_up", "spam and egg", spam_and_eggs, nullptr);
+      framework->define_key("arrow_up-repeat", "spam and egg", spam_and_eggs, nullptr);
 
       // Calls when the up arrow key is released
-      framework->define_key("arrow_up-up", "spam and egg", spamAndEggs, nullptr);
+      framework->define_key("arrow_up-up", "spam and egg", spam_and_eggs, nullptr);
 
 .. note::
 
@@ -159,8 +159,8 @@ event and the "shift" event will be sent separately:
 
    .. code-block:: python
 
-      base.mouseWatcherNode.set_modifier_buttons(ModifierButtons())
-      base.buttonThrowers[0].node().set_modifier_buttons(ModifierButtons())
+      base.mouse_watcher_node.set_modifier_buttons(ModifierButtons())
+      base.button_throwers[0].node().set_modifier_buttons(ModifierButtons())
 
 .. only:: cpp
 
@@ -202,7 +202,7 @@ well.)
           speed = 0.0
 
           # Check if the player is holding W or S
-          is_down = base.mouseWatcherNode.is_button_down
+          is_down = base.mouse_watcher_node.is_button_down
 
           if is_down(forward_button):
               speed += forward_speed
@@ -233,10 +233,10 @@ as you would with any other event:
 
 .. code-block:: python
 
-   base.buttonThrowers[0].node().setKeystrokeEvent('keystroke')
-   self.accept('keystroke', self.myFunc)
+   base.button_throwers[0].node().set_keystroke_event('keystroke')
+   self.accept('keystroke', self.my_func)
 
-   def myFunc(self, keyname):
+   def my_func(self, keyname):
        print(keyname)
 
 Raw keyboard events
@@ -295,7 +295,7 @@ keyboard button:
    self.tutorial_text = "Press %s to move forward." % (w_label)
 
    # Poll to check if the button is pressed...
-   if base.mouseWatcherNode.is_button_down(w_button):
+   if base.mouse_watcher_node.is_button_down(w_button):
        print("%s is currently pressed" % (w_label))
 
    # ...or register event handlers

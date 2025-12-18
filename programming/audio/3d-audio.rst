@@ -15,7 +15,7 @@ not be able to be spatialized and hence can't be used for 3D audio.
 .. code-block:: python
 
    from direct.showbase import Audio3DManager
-   audio3d = Audio3DManager.Audio3DManager(base.sfxManagerList[0], camera)
+   audio3d = Audio3DManager.Audio3DManager(base.sfx_manager_list[0], camera)
 
 To create a sound that is positional, you need to use the
 :py:meth:`~direct.showbase.Audio3DManager.Audio3DManager.loadSfx()` function on
@@ -25,14 +25,14 @@ non-positional sounds. e.g.
 
 .. code-block:: python
 
-   mySound = audio3d.loadSfx('blue.wav')
+   my_sound = audio3d.load_sfx('blue.wav')
 
 Sounds can be attached to objects such that when they move, the sound source
 will move along with them.
 
 .. code-block:: python
 
-   audio3d.attachSoundToObject(mySound, teapot)
+   audio3d.attach_sound_to_object(my_sound, teapot)
 
 You can use the manager's
 :py:meth:`~direct.showbase.Audio3DManager.Audio3DManager.setSoundVelocity()` and
@@ -48,15 +48,15 @@ like this:
 
 .. code-block:: python
 
-   audio3d.setSoundVelocity(sound, velocityVector)
-   audio3d.setListenerVelocity(velocityVector)
+   audio3d.set_sound_velocity(sound, velocity_vector)
+   audio3d.set_listener_velocity(velocity_vector)
 
-   base.cTrav = CollisionTraverser()
-   audio3d.setSoundVelocityAuto(sound)
-   audio3d.setListenerVelocityAuto()
+   base.c_trav = CollisionTraverser()
+   audio3d.set_sound_velocity_auto(sound)
+   audio3d.set_listener_velocity_auto()
 
 Currently, for the latter to work, a :class:`.CollisionTraverser` must be attached to
-base.cTrav as you see in the example. If you already have one assigned to do
+base.c_trav as you see in the example. If you already have one assigned to do
 collision detection that will be sufficient.
 Read more about :ref:`collision-traversers`.
 
@@ -68,7 +68,7 @@ adjust the scale.
 
 .. code-block:: python
 
-   audio3d.setDistanceFactor(scale)
+   audio3d.set_distance_factor(scale)
 
 You can adjust the rate that sounds attenuate by distance. If you want to
 position the sounds but don't want the volume to be effected by their
@@ -76,4 +76,4 @@ distance, you can set the drop off factor to 0.
 
 .. code-block:: python
 
-   audio3d.setDropOffFactor(scale)
+   audio3d.set_drop_off_factor(scale)

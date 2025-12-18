@@ -54,15 +54,15 @@ Update your code as follows:
       :language: cpp
       :linenos:
 
-The procedure ``taskMgr.add()`` tells Panda3D's task manager to call the
-procedure ``spinCameraTask()`` every frame. This is a procedure that we have
-written to control the camera. As long as the procedure ``spinCameraTask()``
+The procedure ``task_mgr.add()`` tells Panda3D's task manager to call the
+procedure ``spin_camera_task()`` every frame. This is a procedure that we have
+written to control the camera. As long as the procedure ``spin_camera_task()``
 returns the constant ``AsyncTask.DS_cont``, the task manager will continue to
 call it every frame.
 
 .. only:: cpp
 
-   The object passed to :meth:`taskMgr->add() <.AsyncTaskManager.add>` is a
+   The object passed to :meth:`task_mgr->add() <.AsyncTaskManager.add>` is a
    C++ ``std::function`` object, which can be a lambda or separate function.
    If defined as a separate function, it should look like this:
 
@@ -79,7 +79,7 @@ call it every frame.
    For more advanced usage, you can also subclass AsyncTask and override the
    ``do_task`` method to make it do what you want.
 
-In our code, the procedure ``spinCameraTask()`` calculates the desired position
+In our code, the procedure ``spin_camera_task()`` calculates the desired position
 of the camera based on how much time has elapsed. The camera rotates 6 degrees
 every second. The first two lines compute the desired orientation of the camera;
 first in degrees, and then in radians. The :meth:`~.NodePath.set_pos()` call

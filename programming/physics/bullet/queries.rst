@@ -16,10 +16,10 @@ position (the to-position). Both the from-position and the to-position have to
 be specified in global coordinates. The ray test methods will then return a
 result object which contains information about which objects the ray has hit.
 
-There are two different ray test method: The first method (``rayTestAll``)
+There are two different ray test method: The first method (``ray_test_all``)
 returns all collision objects hit by the ray. But sometimes we are only
 interested in the first collision object hit by the ray. Then we can use the
-second ray test method (``rayTestClosest``).
+second ray test method (``ray_test_closest``).
 
 Example for closest hit:
 
@@ -27,24 +27,24 @@ Example for closest hit:
 
    .. code-block:: python
 
-      pFrom = Point3(0, 0, 0)
-      pTo = Point3(10, 0, 0)
+      p_from = Point3(0, 0, 0)
+      p_to = Point3(10, 0, 0)
 
-      result = world.rayTestClosest(pFrom, pTo)
+      result = world.ray_test_closest(p_from, p_to)
 
-      print(result.hasHit())
-      print(result.getHitPos())
-      print(result.getHitNormal())
-      print(result.getHitFraction())
-      print(result.getNode())
+      print(result.has_hit())
+      print(result.get_hit_pos())
+      print(result.get_hit_normal())
+      print(result.get_hit_fraction())
+      print(result.get_node())
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      LPoint3 pFrom(0, 0, 0);
-      LPoint3 pTo(10, 0, 0);
-      BulletAllHitsRayResult result = world->ray_test_closest(pFrom, pTo);
+      LPoint3 p_from(0, 0, 0);
+      LPoint3 p_to(10, 0, 0);
+      BulletAllHitsRayResult result = world->ray_test_closest(p_from, p_to);
 
 Example for all hits:
 
@@ -52,31 +52,31 @@ Example for all hits:
 
    .. code-block:: python
 
-      pFrom = Point3(0, 0, 0)
-      pTo = pFrom + Vec3(1, 0, 0) * 99999
+      p_from = Point3(0, 0, 0)
+      p_to = p_from + Vec3(1, 0, 0) * 99999
 
-      result = world.rayTestAll(pFrom, pTo)
+      result = world.ray_test_all(p_from, p_to)
 
-      print(result.hasHits())
-      print(result.getClosestHitFraction())
-      print(result.getNumHits())
+      print(result.has_hits())
+      print(result.get_closest_hit_fraction())
+      print(result.get_num_hits())
 
-      for hit in result.getHits():
-          print(hit.getHitPos())
-          print(hit.getHitNormal())
-          print(hit.getHitFraction())
-          print(hit.getNode())
+      for hit in result.get_hits():
+          print(hit.get_hit_pos())
+          print(hit.get_hit_normal())
+          print(hit.get_hit_fraction())
+          print(hit.get_node())
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      LPoint3 pFrom = LPoint3(0, 0, 0);
-      LPoint3 pTo = pFrom + LVector3d(1, 0, 0) * 99999;
-      BulletAllHitsRayResult result = world->ray_test_all(pFrom, pTo);
+      LPoint3 p_from = LPoint3(0, 0, 0);
+      LPoint3 p_to = p_from + LVector3d(1, 0, 0) * 99999;
+      BulletAllHitsRayResult result = world->ray_test_all(p_from, p_to);
 
 Often users want to pick or select an object by clicking on it with the mouse.
-We can use the ``rayTestClosest`` to find the collision object which is "under"
+We can use the ``ray_test_closest`` to find the collision object which is "under"
 the mouse pointer, but we have to convert the coordinates in camera space to
 global coordinates world space. The following example shows how this can be
 done.
@@ -86,14 +86,14 @@ done.
    .. code-block:: python
 
       # Get to and from pos in camera coordinates
-      pMouse = base.mouseWatcherNode.getMouse()
-      pFrom = Point3()
-      pTo = Point3()
-      base.camLens.extrude(pMouse, pFrom, pTo)
+      p_mouse = base.mouse_watcher_node.get_mouse()
+      p_from = Point3()
+      p_to = Point3()
+      base.cam_lens.extrude(p_mouse, p_from, p_to)
 
       # Transform to global coordinates
-      pFrom = render.getRelativePoint(base.cam, pFrom)
-      pTo = render.getRelativePoint(base.cam, pTo)
+      p_from = render.get_relative_point(base.cam, p_from)
+      p_to = render.get_relative_point(base.cam, p_to)
 
 .. only:: cpp
 
@@ -123,19 +123,19 @@ instead of a BulletTriangleMeshShape.)
 
    .. code-block:: python
 
-      tsFrom = TransformState.makePos(Point3(0, 0, 0))
-      tsTo = TransformState.makePos(Point3(10, 0, 0))
+      ts_from = TransformState.make_pos(Point3(0, 0, 0))
+      ts_to = TransformState.make_pos(Point3(10, 0, 0))
 
       shape = BulletSphereShape(0.5)
       penetration = 0.0
 
-      result = world.sweepTestClosest(shape, tsFrom, tsTo, penetration)
+      result = world.sweep_test_closest(shape, ts_from, ts_to, penetration)
 
-      print(result.hasHit())
-      print(result.getHitPos())
-      print(result.getHitNormal())
-      print(result.getHitFraction())
-      print(result.getNode())
+      print(result.has_hit())
+      print(result.get_hit_pos())
+      print(result.get_hit_normal())
+      print(result.get_hit_fraction())
+      print(result.get_node())
 
 Contact Test
 ------------
@@ -156,22 +156,22 @@ collision objects if they are in contact.
       body2 = BulletRigidBodyNode("body2")
       ...
 
-      result = world.contactTest(node1)
-      result = world.contactTestPair(node1, node2)
+      result = world.contact_test(node1)
+      result = world.contact_test_pair(node1, node2)
 
-      print(result.getNumContacts())
+      print(result.get_num_contacts())
 
-      for contact in result.getContacts():
-        print(contact.getNode0())
-        print(contact.getNode1())
+      for contact in result.get_contacts():
+        print(contact.get_node0())
+        print(contact.get_node1())
 
-        mpoint = contact.getManifoldPoint()
-        print(mpoint.getDistance())
-        print(mpoint.getAppliedImpulse())
-        print(mpoint.getPositionWorldOnA())
-        print(mpoint.getPositionWorldOnB())
-        print(mpoint.getLocalPointA())
-        print(mpoint.getLocalPointB())
+        mpoint = contact.get_manifold_point()
+        print(mpoint.get_distance())
+        print(mpoint.get_applied_impulse())
+        print(mpoint.get_position_world_on_a())
+        print(mpoint.get_position_world_on_b())
+        print(mpoint.get_local_point_a())
+        print(mpoint.get_local_point_b())
 
 Filtering
 ---------
@@ -179,7 +179,7 @@ Filtering
 The test methods on BulletWorld also take an optional ``mask`` argument that can
 be used to limit which groups are matched against (see
 :ref:`collision-filtering` for information about collision groups). The default
-is ``BitMask32.allOn()``, which indicates that bodies in all groups are
+is ``BitMask32.all_on()``, which indicates that bodies in all groups are
 considered for the test.
 
 For example, the following query will consider object A and C, but ignore
@@ -188,14 +188,14 @@ object B:
 .. code-block:: python
 
    # These three bodies are in different groups
-   objA.setCollideMask(BitMask32.bit(0))
-   objB.setCollideMask(BitMask32.bit(1))
-   objC.setCollideMask(BitMask32.bit(2))
+   obj_a.set_collide_mask(BitMask32.bit(0))
+   obj_b.set_collide_mask(BitMask32.bit(1))
+   obj_c.set_collide_mask(BitMask32.bit(2))
 
    fro = (0, 0, 0)
    to = (1, 0, 0)
    mask = BitMask32.bit(0) | BitMask32.bit(2)
-   result = world.rayTestClosest(fro, to, mask)
+   result = world.ray_test_closest(fro, to, mask)
 
 Of particular note if you are using the ``groups-mask`` filter algorithm is that
 the mask matches directly against the collide mask of the bodies, ignoring the

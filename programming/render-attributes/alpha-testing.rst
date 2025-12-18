@@ -22,7 +22,7 @@ value is below one quarter intensity.
 
    .. code-block:: python
 
-      lowPassFilter = AlphaTestAttrib.make(RenderAttrib.MLess,0.25)
+      low_pass_filter = AlphaTestAttrib.make(RenderAttrib.MLess,0.25)
 
 .. only:: cpp
 
@@ -36,12 +36,12 @@ And now, this attribute can be added to a node to enable the action.
 
    .. code-block:: python
 
-      nodePath.setAttrib(lowPassFilter)
+      node_path.set_attrib(low_pass_filter)
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      nodePath.set_attrib(low_pass_filter);
+      node_path.set_attrib(low_pass_filter);
 
 

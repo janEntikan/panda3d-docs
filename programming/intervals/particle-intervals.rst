@@ -8,11 +8,11 @@ Particle effects can be run from inside intervals as well, using the
 
 .. code-block:: python
 
-   intervalName = ParticleInterval(
-       particleEffect,
+   interval_name = ParticleInterval(
+       particle_effect,
        parent,
-       worldRelative=True,
-       duration=myDuration
+       world_relative=True,
+       duration=my_duration
    )
 
 Read more about :ref:`particle-effects`.

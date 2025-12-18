@@ -16,15 +16,15 @@ formats, and every kind of interval may be used.
 
 .. code-block:: python
 
-   mySequence = Sequence(myInterval1, ..., myIntervaln, name="Sequence Name")
-   myParallel = Parallel(myInterval1, ..., myIntervaln, name="Parallel Name")
+   my_sequence = Sequence(my_interval1, ..., my_intervaln, name="Sequence Name")
+   my_parallel = Parallel(my_interval1, ..., my_intervaln, name="Parallel Name")
 
 To add to sequences or parallels after creating them, use the ``append`` method.
 
 .. code-block:: python
 
-   mySequence.append(myInterval)
-   myParallel.append(myInterval)
+   my_sequence.append(my_interval)
+   my_parallel.append(my_interval)
 
 Sequences and Parallels may also be combined for even greater control. Also,
 there is a wait interval that can add a delay to Sequences. While it can be
@@ -33,18 +33,18 @@ defined beforehand, it does not have to be.
 .. code-block:: python
 
    delay = Wait(2.5)
-   pandaWalkSeq =
+   panda_walk_seq =
        Sequence(
-           Parallel(pandaWalk, pandaWalkAnim),
+           Parallel(panda_walk, panda_walk_anim),
            delay,
-           Parallel(pandaWalkBack, pandaWalkAnim),
+           Parallel(panda_walk_back, panda_walk_anim),
            Wait(1.0),
-           Func(myFunction, arg1)
+           Func(my_function, arg1)
        )
 
 In the above example, a wait interval is generated. After that, a Sequence is
 made that uses a Parallel, the defined wait interval, another Parallel, and a
-wait interval, and a call to the function function myFunction is generated in
+wait interval, and a call to the function function my_function is generated in
 the Sequence. Such Sequences can get very long very quick, so it may be prudent
 to define the internal Parallels and Sequences before creating the master
 Sequence.
@@ -55,16 +55,16 @@ Sequence:
 .. code-block:: python
 
    s = OnscreenImage('wav_is_playing.png')
-   s.reparentTo(aspect2d)
-   s.setTransparency(1)
-   fadeIn = s.colorScaleInterval(3, (1, 1, 1, 1), (1, 1, 1, 0))
-   fadeOut = s.colorScaleInterval(3, (1, 1, 1, 0))
-   sound = loader.loadSfx('sound.wav')
+   s.reparent_to(aspect2d)
+   s.set_transparency(1)
+   fade_in = s.color_scale_interval(3, (1, 1, 1, 1), (1, 1, 1, 0))
+   fade_out = s.color_scale_interval(3, (1, 1, 1, 0))
+   sound = loader.load_sfx('sound.wav')
 
    Sequence(
-       fadeIn,
+       fade_in,
        SoundInterval(sound),
-       fadeOut
+       fade_out
    ).start()
 
    base.run()

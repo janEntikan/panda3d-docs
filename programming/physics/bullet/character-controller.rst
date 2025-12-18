@@ -38,13 +38,13 @@ shape.
       radius = 0.4
       shape = BulletCapsuleShape(radius, height - 2*radius, ZUp)
 
-      playerNode = BulletCharacterControllerNode(shape, 0.4, 'Player')
-      playerNP = self.worldNP.attachNewNode(playerNode)
-      playerNP.setPos(-2, 0, 14)
-      playerNP.setH(45)
-      playerNP.setCollideMask(BitMask32.allOn())
+      player_node = BulletCharacterControllerNode(shape, 0.4, 'Player')
+      player_np = self.world_np.attach_new_node(player_node)
+      player_np.set_pos(-2, 0, 14)
+      player_np.set_h(45)
+      player_np.set_collide_mask(BitMask32.all_on())
 
-      world.attachCharacter(playerNP.node())
+      world.attach_character(player_np.node())
 
 .. only:: cpp
 
@@ -56,7 +56,7 @@ shape.
       PT(BulletCapsuleShape) c_shape = new BulletCapsuleShape(radius, height -2 * radius);
       PT(BulletCharacterControllerNode) controller;
       controller = new BulletCharacterControllerNode(c_shape, 0.4f, name.c_str());
-      physicsWorld->attach_character(controller);
+      physics_world->attach_character(controller);
 
       NodePath cha_np = window->get_render().attach_new_node(controller);
       cha_np.set_pos(-2, 0, 14);
@@ -77,25 +77,25 @@ computed by some kind of AI algorithm.
 
    .. code-block:: python
 
-      def processInput(self):
+      def process_input(self):
           speed = Vec3(0, 0, 0)
           omega = 0.0
 
-          if inputState.isSet('forward'): speed.setY( 3.0)
-          if inputState.isSet('reverse'): speed.setY(-3.0)
-          if inputState.isSet('left'):    speed.setX(-3.0)
-          if inputState.isSet('right'):   speed.setX( 3.0)
-          if inputState.isSet('turnLeft'):  omega =  120.0
-          if inputState.isSet('turnRight'): omega = -120.0
+          if input_state.is_set('forward'): speed.set_y( 3.0)
+          if input_state.is_set('reverse'): speed.set_y(-3.0)
+          if input_state.is_set('left'):    speed.set_x(-3.0)
+          if input_state.is_set('right'):   speed.set_x( 3.0)
+          if input_state.is_set('turn_left'):  omega =  120.0
+          if input_state.is_set('turn_right'): omega = -120.0
 
-          self.player.setAngularMovement(omega)
-          self.player.setLinearMovement(speed, True)
+          self.player.set_angular_movement(omega)
+          self.player.set_linear_movement(speed, True)
 
 .. only:: cpp
 
    .. code-block:: cpp
 
-      void characterMove (std::vector<bool> *KeyMap) {
+      void character_move (std::vector<bool> *KeyMap) {
               LVecBase3 speed = LVecBase3(0, 0, 0);
               float omega = 0.0;
 
@@ -103,8 +103,8 @@ computed by some kind of AI algorithm.
               if (KeyMap->at(MOVE_REVERSE)) { speed.set_y (-3.0); }
               if (KeyMap->at(MOVE_LEFT)) { speed.set_x (-3.0); }
               if (KeyMap->at(MOVE_RIGHT)) { speed.set_x (3.0); }
-              if (keyMap->at(TURN_LEFT)) { omege = 120.0; }
-              if (keyMap->at(TURN_RIGHT)) { omega = -120.0 }
+              if (key_map->at(TURN_LEFT)) { omege = 120.0; }
+              if (key_map->at(TURN_RIGHT)) { omega = -120.0 }
 
               controller->set_linear_movement(speed, true);
               controller->set_angular_movement(omega);
@@ -125,10 +125,10 @@ trigger the jump using the
 
    .. code-block:: python
 
-      def doJump(self):
-          self.player.setMaxJumpHeight(5.0)
-          self.player.setJumpSpeed(8.0)
-          self.player.doJump()
+      def do_jump(self):
+          self.player.set_max_jump_height(5.0)
+          self.player.set_jump_speed(8.0)
+          self.player.do_jump()
 
 .. only:: cpp
 
@@ -161,11 +161,11 @@ controller node it will automatically change its scale to match the player.
 
       self.crouching = False
 
-      def doCrouch(self):
+      def do_crouch(self):
           self.crouching = not self.crouching
           sz = self.crouching and 0.6 or 1.0
 
-          self.player.getShape().setLocalScale(Vec3(1, 1, sz))
+          self.player.get_shape().set_local_scale(Vec3(1, 1, sz))
 
-          self.playerNP.setScale(Vec3(1, 1, sz) * 0.3048)
-          self.playerNP.setPos(0, 0, -1 * sz)
+          self.player_np.set_scale(Vec3(1, 1, sz) * 0.3048)
+          self.player_np.set_pos(0, 0, -1 * sz)
