@@ -16,10 +16,11 @@ the Scene Graph.
    You can get the NodePath of `render` by calling
    :cpp:func:`window->get_render() <WindowFramework::get_render>`.
 
-To install the grassy scenery model into the Scene Graph, we use the method
-:meth:`~.NodePath.reparent_to()`. This sets the parent of the model, thereby
+To copy the grassy scenery model into the Scene Graph, we use the method
+:meth:`~.NodePath.copy_to()`. This also sets the parent of the model, thereby
 giving it a place in the Scene Graph. Doing so makes the model visible in the
-scene.
+scene. We can also change its parent to another NodePaths using
+:meth:`~.NodePath.reparent_to()`
 
 Finally, we adjust the position and scale of the model. In this particular case,
 the environment model is a little too large and somewhat offset for our

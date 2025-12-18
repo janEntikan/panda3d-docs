@@ -80,13 +80,15 @@ call it every frame.
    ``do_task`` method to make it do what you want.
 
 In our code, the procedure ``spin_camera_task()`` calculates the desired position
-of the camera based on how much time has elapsed. The camera rotates 6 degrees
-every second. The first two lines compute the desired orientation of the camera;
-first in degrees, and then in radians. The :meth:`~.NodePath.set_pos()` call
-actually sets the position of the camera. (Remember that Y is horizontal and Z
-is vertical, so the position is changed by animating X and Y while Z is left
-fixed at 3 units above ground level.) The :meth:`~.NodePath.set_hpr()` call
-actually sets the orientation.
+of the camera based on how much time has elapsed.
+There is some NodePath power on display here. We calculate the desired orientation
+of the camera using relativity. The camera rotates 6 degrees every second.
+When the first argument to the :meth:`~.NodePath.set_pos()` call is another NodePath
+it will be positioned relative to the NodePath. The same goes for :meth:`~.NodePath.set_hpr()`
+The first line places the camera to render's center, without rotating it.
+Then it rotates relative to itself. Then it takes a "step back", meaning it points at where it was.
+This is an incredibly useful and a powerful way of easily making very complicated transformations.
+
 
 Run the Program
 ~~~~~~~~~~~~~~~

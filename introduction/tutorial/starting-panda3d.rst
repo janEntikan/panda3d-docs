@@ -20,18 +20,12 @@ Starting Panda3D
       from direct.showbase.ShowBase import ShowBase
 
 
-      class MyApp(ShowBase):
-
-          def __init__(self):
-              ShowBase.__init__(self)
+      base = ShowBase()
+      base.run()
 
 
-      app = MyApp()
-      app.run()
-
-   Here we made our main class inherit from
-   :py:class:`~direct.showbase.ShowBase.ShowBase`. This class loads most of the
-   other Panda3D modules, and causes the 3D window to appear.
+   Here we import and instantiate :py:class:`~direct.showbase.ShowBase.ShowBase`.
+   This class loads most of the other Panda3D modules, and causes the 3D window to appear.
    The :py:meth:`~direct.showbase.ShowBase.ShowBase.run()` method contains the
    Panda3D main loop. It renders a frame, handles the background tasks, and then
    repeats. It does not normally return, so it needs to be called only once and
