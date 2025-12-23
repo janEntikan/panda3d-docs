@@ -55,8 +55,8 @@ Update your code as follows:
       :linenos:
 
 The procedure ``task_mgr.add()`` tells Panda3D's task manager to call the
-procedure ``spin_camera_task()`` every frame. This is a procedure that we have
-written to control the camera. As long as the procedure ``spin_camera_task()``
+procedure ``spin_pivot_task()`` every frame. This is a procedure that we have
+written to control the camera. As long as the procedure ``spin_pivot_task()``
 returns the constant ``AsyncTask.DS_cont``, the task manager will continue to
 call it every frame.
 
@@ -79,15 +79,12 @@ call it every frame.
    For more advanced usage, you can also subclass AsyncTask and override the
    ``do_task`` method to make it do what you want.
 
-In our code, the procedure ``spin_camera_task()`` calculates the desired position
-of the camera based on how much time has elapsed.
-There is some NodePath power on display here. We calculate the desired orientation
-of the camera using relativity. The camera rotates 6 degrees every second.
-When the first argument to the :meth:`~.NodePath.set_pos()` call is another NodePath
-it will be positioned relative to the NodePath. The same goes for :meth:`~.NodePath.set_hpr()`
-The first line places the camera to render's center, without rotating it.
-Then it rotates relative to itself. Then it takes a "step back", meaning it points at where it was.
-This is an incredibly useful and a powerful way of easily making very complicated transformations.
+In our code, the procedure ``spin_pivot_task()`` calculates the desired position
+of the camera based on how much time has elapsed. There is some NodePath power on display here. We reparent the camera to a new NodePath we will call a pivot (but you can call it anything you want). We rotate this new parent instead. Because the camera is parented to it will rotate along with it. By then offsetting the camera position it will rotate around the pivot.
+
+You can imagine the pivot as being a large rotating disk that you stand in the middle of, then you walk to a different position on the disk. Can you imagine how you are now rotating around the center of the disk? Don't get dizzy! This is one of the advantages of using a SceneGraph and allows you to do very complicated transformations without having to resort to complex math.
+
+When the first argument to the :meth:`~.NodePath.set_pos()` (or any other transformation) call is another NodePath, it will be transformed relative to that NodePath. We rotate the pivot relative to itself in this case, meaning it will be spinning.
 
 
 Run the Program

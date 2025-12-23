@@ -41,14 +41,13 @@ code to the following:
       :language: cpp
       :linenos:
 
-When the ``pandaPosInterval1`` interval is started, it will gradually adjust the
-position of the panda from (0, 10, 0) to (0, -10, 0) over a period of 13
-seconds. Similarly, when the ``pandaHprInterval1`` interval is started, the
-heading of the panda will rotate 180 degrees over a period of 3 seconds.
+When one of the ``LerpPosInterval`` is started, it will gradually adjust the
+position of the panda from (0, 10, 0) to (0, -10, 0) and back, each time over a period of 13
+seconds. Similarly, when one of the ``LerpHprInterval`` is started, the heading of the panda will rotate 180 degrees over a period of 3 seconds.
 
-The ``pandaPace`` sequence above causes the panda to move in a straight line,
+The ``panda_pace`` sequence above causes the panda to move in a straight line,
 turn, move in the opposite straight line, and finally turn again. The code
-``pandaPace.loop()`` causes the Sequence to be started in looping mode.
+``panda_pace.loop()`` causes the Sequence to be started in looping mode.
 
 Run the Program
 ~~~~~~~~~~~~~~~

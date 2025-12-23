@@ -19,13 +19,12 @@ the Scene Graph.
 To copy the grassy scenery model into the Scene Graph, we use the method
 :meth:`~.NodePath.copy_to()`. This also sets the parent of the model, thereby
 giving it a place in the Scene Graph. Doing so makes the model visible in the
-scene. We can also change its parent to another NodePaths using
-:meth:`~.NodePath.reparent_to()`
+scene. We can also change its parent to another NodePath using
+:meth:`~.NodePath.reparent_to()`.
 
 Finally, we adjust the position and scale of the model. In this particular case,
 the environment model is a little too large and somewhat offset for our
-purposes. The :meth:`~.NodePath.set_scale()` and :meth:`~.NodePath.set_pos()`
-procedures rescale and center the model.
+purposes. We can use :meth:`~.NodePath.set_pos_hpr_scale()` to set all of the NodePath's transfroms, rescaling and centering the model. The same result could have been achieved using :meth:`~.NodePath.set_pos()`, :meth:`~.NodePath.set_hpr()` and :meth:`~.NodePath.set_scale()` individually.
 
 Panda3D uses the "geographical" coordinate system where position (-8, 42, 0)
 means map coordinates (8, 42) and height 0. If you are used to OpenGL/Direct3D
@@ -77,4 +76,4 @@ Go ahead and run the program. You should see this:
 
 The rock and tree appear to be hovering. The camera is slightly below ground,
 and back-face culling is making the ground invisible to us. If we reposition the
-camera, the terrain will look better.
+camera, the terrain will look better. We will do this next.
